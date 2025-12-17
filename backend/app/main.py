@@ -65,8 +65,20 @@ class Level(BaseModel):
 from app.data.levels import LEVELS
 from app.data.a1_lessons import A1_LESSONS
 
+# Check for static directory at startup
+STATIC_DIR = None
+for dir_path in ["/app/static", os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")]:
+    if os.path.exists(dir_path) and os.path.isdir(dir_path):
+        STATIC_DIR = dir_path
+        break
+
 @app.get("/")
 def read_root():
+    # Serve frontend if static files exist
+    if STATIC_DIR:
+        index_path = os.path.join(STATIC_DIR, "index.html")
+        if os.path.exists(index_path):
+            return FileResponse(index_path)
     return {"message": "Dobrodošli! Welcome to Bosnian Language Learning API"}
 
 @app.get("/api/levels", response_model=List[Level])
@@ -101,21 +113,8 @@ def check_answer(data: dict):
     }
 
 # Serve static frontend files (for production deployment)
-# Try multiple possible static directories
-possible_static_dirs = [
-    "/app/static",  # Docker production path
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "static"),  # Relative path
-    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "static"),  # Alternative
-]
-
-static_dir = None
-for dir_path in possible_static_dirs:
-    if os.path.exists(dir_path) and os.path.isdir(dir_path):
-        static_dir = dir_path
-        break
-
-if static_dir:
-    assets_dir = os.path.join(static_dir, "assets")
+if STATIC_DIR:
+    assets_dir = os.path.join(STATIC_DIR, "assets")
     if os.path.exists(assets_dir):
         app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
     
@@ -124,10 +123,10 @@ if static_dir:
         # Don't serve frontend for API routes
         if full_path.startswith("api/"):
             return {"error": "Not found"}
-        file_path = os.path.join(static_dir, full_path)
+        file_path = os.path.join(STATIC_DIR, full_path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
             return FileResponse(file_path)
-        index_path = os.path.join(static_dir, "index.html")
+        index_path = os.path.join(STATIC_DIR, "index.html")
         if os.path.exists(index_path):
             return FileResponse(index_path)
         return {"error": "Frontend not found"}
