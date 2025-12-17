@@ -62,13 +62,14 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 """,
         "cultural_note": "U Bosni i Hercegovini, ljudi se često pozdravljaju sa 'Merhaba' (iz turskog) ili 'Selam' u neformalnim situacijama. 'Vi' forma se koristi za starije osobe i u formalnim situacijama kao znak poštovanja.",
         "cultural_comic": {
-            "title": "Selam u Sarajevu",
-            "image": "https://images.unsplash.com/photo-1592425104520-196dedfd6277?w=800",
+            "title": "Kod Sebilj fontane u Baščaršiji",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Sarajevo_City_Panorama.JPG/1280px-Sarajevo_City_Panorama.JPG",
             "panels": [
-                {"character": "🧔🏻", "name": "Ahmed", "text": "Selam, brate! Kako si?", "translation": "Hi brother! How are you?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
-                {"character": "👨🏻", "name": "Emir", "text": "Selam! Evo, dobro sam, hvala Bogu.", "translation": "Hi! I'm good, thank God.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"},
-                {"character": "🧔🏻", "name": "Ahmed", "text": "Hajde na kafu?", "translation": "Let's go for coffee?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
-                {"character": "👨🏻", "name": "Emir", "text": "Može! Idemo u Baščaršiju.", "translation": "Sure! Let's go to Baščaršija.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"}
+                {"character": "🧔🏻", "name": "Ahmed", "text": "Selam, brate! Ja sam Ahmed.", "translation": "Hi brother! I am Ahmed.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👨🏻", "name": "Emir", "text": "Selam! Ja sam Emir. Drago mi je!", "translation": "Hi! I am Emir. Nice to meet you!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"},
+                {"character": "🧔🏻", "name": "Ahmed", "text": "Odakle si ti?", "translation": "Where are you from?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👨🏻", "name": "Emir", "text": "Ja sam iz Mostara. A ti si iz Sarajeva?", "translation": "I am from Mostar. And you are from Sarajevo?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"},
+                {"character": "🧔🏻", "name": "Ahmed", "text": "Da, ja sam Sarajlija. Mi smo sada prijatelji!", "translation": "Yes, I am from Sarajevo. We are now friends!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
@@ -180,13 +181,14 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 """,
         "cultural_note": "U Bosni i Hercegovini koristi se konvertibilna marka (KM) kao valuta. Kada kupujete na pijaci, često ćete čuti cijene u markama. Pregovaranje o cijeni je uobičajeno na tradicionalnim pijacama.",
         "cultural_comic": {
-            "title": "Na Markale pijaci",
-            "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+            "title": "Na Baščaršiji - kupovina u dućanu",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bascarsija_Sarajevo.JPG/1280px-Bascarsija_Sarajevo.JPG",
             "panels": [
-                {"character": "👩", "name": "Fatima", "text": "Dobar dan! Koliko koštaju jabuke?", "translation": "Good day! How much are the apples?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👨‍🌾", "name": "Prodavač", "text": "Tri marke kilogram, hanuma.", "translation": "Three marks per kilo, ma'am.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
-                {"character": "👩", "name": "Fatima", "text": "Dajte mi dva kilograma, molim.", "translation": "Give me two kilos, please.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👨‍🌾", "name": "Prodavač", "text": "To je šest maraka. Hvala vam!", "translation": "That's six marks. Thank you!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"}
+                {"character": "👩", "name": "Amra", "text": "Dobar dan! Ovo je moja prva posjeta Baščaršiji.", "translation": "Good day! This is my first visit to Baščaršija.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨‍🌾", "name": "Dućandžija", "text": "Dobrodošli! Imam lijepe ćilime. Ovaj je prvi put na prodaju.", "translation": "Welcome! I have nice carpets. This one is for sale for the first time.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Amra", "text": "Koliko košta? Imam dvadeset maraka.", "translation": "How much? I have twenty marks.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨‍🌾", "name": "Dućandžija", "text": "Petnaest maraka. To je druga cijena danas!", "translation": "Fifteen marks. That's the second price today!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Amra", "text": "Odlično! Kupujem tri komada za moje tri sestre.", "translation": "Excellent! I'm buying three pieces for my three sisters.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"}
             ]
         },
         "dialogue": [
@@ -268,13 +270,14 @@ Pridjevi za boje se mijenjaju prema rodu imenice:
 """,
         "cultural_note": "Bosna i Hercegovina ima zastavu sa plavom bojom i žutim trokutom sa bijelim zvijezdama. Plava i žuta su nacionalne boje. Tradicionalna bosanska ćilimska umjetnost koristi živopisne crvene, plave i zelene boje.",
         "cultural_comic": {
-            "title": "U Baščaršiji - kupovina ćilima",
-            "image": "https://images.unsplash.com/photo-1596484552834-6a58f850e0a1?w=800",
+            "title": "Kod Starog Mosta u Mostaru",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Mostar_Old_Town_Panorama_2007.jpg/1280px-Mostar_Old_Town_Panorama_2007.jpg",
             "panels": [
-                {"character": "👩‍🦰", "name": "Turistica", "text": "Vau! Koje su boje ovog ćilima?", "translation": "Wow! What colors is this carpet?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=44"},
-                {"character": "👳", "name": "Majstor", "text": "Ovaj je crven, plav i zelen.", "translation": "This one is red, blue and green.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=68"},
-                {"character": "👩‍🦰", "name": "Turistica", "text": "Predivan! A onaj bijeli?", "translation": "Beautiful! And that white one?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=44"},
-                {"character": "👳", "name": "Majstor", "text": "Bijeli je tradicionalni bosanski dizajn.", "translation": "The white is traditional Bosnian design.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=68"}
+                {"character": "👩‍🦰", "name": "Sara", "text": "Pogledaj! Stari Most je bijel i prekrasan!", "translation": "Look! The Old Bridge is white and beautiful!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=44"},
+                {"character": "👨🏻", "name": "Kenan", "text": "Da! A rijeka Neretva je zelena i plava.", "translation": "Yes! And the Neretva river is green and blue.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=68"},
+                {"character": "👩‍🦰", "name": "Sara", "text": "Volim bosansku zastavu - plava i žuta!", "translation": "I love the Bosnian flag - blue and yellow!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=44"},
+                {"character": "👨🏻", "name": "Kenan", "text": "A ja volim crnu bosansku kafu!", "translation": "And I love black Bosnian coffee!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=68"},
+                {"character": "👩‍🦰", "name": "Sara", "text": "Pogledaj one crvene ćilime u dućanu!", "translation": "Look at those red carpets in the shop!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=44"}
             ]
         },
         "dialogue": [

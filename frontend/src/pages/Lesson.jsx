@@ -113,36 +113,36 @@ function Lesson() {
 
   // Lesson-specific exercise data
   const exercisesByLesson = {
-    // Lesson 1: Greetings
+    // Lesson 1: Greetings & Verb "biti" (to be)
     1: {
       fillBlank: [
-        { id: 1, sentence: "_____, kako si?", answer: "Zdravo", translation: "Hello, how are you?", options: ["Zdravo", "Hvala", "Molim", "Doviđenja"] },
-        { id: 2, sentence: "Dobar _____, gospodine.", answer: "dan", translation: "Good day, sir.", options: ["dan", "noć", "jutro", "veče"] },
-        { id: 3, sentence: "_____ mi je.", answer: "Drago", translation: "Nice to meet you.", options: ["Drago", "Hvala", "Molim", "Zdravo"] },
-        { id: 4, sentence: "Zovem _____ Amina.", answer: "se", translation: "My name is Amina.", options: ["se", "sam", "si", "je"] },
-        { id: 5, sentence: "Ja _____ iz Sarajeva.", answer: "sam", translation: "I am from Sarajevo.", options: ["sam", "si", "je", "smo"] },
-        { id: 6, sentence: "_____ vam puno!", answer: "Hvala", translation: "Thank you very much!", options: ["Hvala", "Molim", "Zdravo", "Dobar"] }
+        { id: 1, sentence: "Ja _____ student.", answer: "sam", translation: "I am a student.", options: ["sam", "si", "je", "smo"] },
+        { id: 2, sentence: "Ti _____ iz Mostara.", answer: "si", translation: "You are from Mostar.", options: ["sam", "si", "je", "ste"] },
+        { id: 3, sentence: "On _____ moj prijatelj.", answer: "je", translation: "He is my friend.", options: ["sam", "si", "je", "su"] },
+        { id: 4, sentence: "Mi _____ iz Bosne.", answer: "smo", translation: "We are from Bosnia.", options: ["sam", "smo", "ste", "su"] },
+        { id: 5, sentence: "Vi _____ dobrodošli!", answer: "ste", translation: "You are welcome!", options: ["si", "smo", "ste", "su"] },
+        { id: 6, sentence: "Oni _____ u Sarajevu.", answer: "su", translation: "They are in Sarajevo.", options: ["je", "smo", "ste", "su"] }
       ],
       sentenceOrder: [
-        { id: 1, scrambled: ["si", "kako", "Zdravo"], correct: ["Zdravo", "kako", "si"], translation: "Hello, how are you?" },
-        { id: 2, scrambled: ["dan", "Dobar", "gospodine"], correct: ["Dobar", "dan", "gospodine"], translation: "Good day, sir." },
-        { id: 3, scrambled: ["mi", "Drago", "je"], correct: ["Drago", "mi", "je"], translation: "Nice to meet you." },
-        { id: 4, scrambled: ["se", "Zovem", "Emir"], correct: ["Zovem", "se", "Emir"], translation: "My name is Emir." },
-        { id: 5, scrambled: ["si", "Odakle", "ti"], correct: ["Odakle", "si", "ti"], translation: "Where are you from?" }
+        { id: 1, scrambled: ["sam", "Ja", "student"], correct: ["Ja", "sam", "student"], translation: "I am a student." },
+        { id: 2, scrambled: ["si", "Kako", "ti"], correct: ["Kako", "si", "ti"], translation: "How are you?" },
+        { id: 3, scrambled: ["je", "mi", "Drago"], correct: ["Drago", "mi", "je"], translation: "Nice to meet you." },
+        { id: 4, scrambled: ["Sarajeva", "iz", "sam", "Ja"], correct: ["Ja", "sam", "iz", "Sarajeva"], translation: "I am from Sarajevo." },
+        { id: 5, scrambled: ["smo", "Mi", "prijatelji"], correct: ["Mi", "smo", "prijatelji"], translation: "We are friends." }
       ],
       matching: [
-        { id: 1, bosnian: "Zdravo", english: "Hello" },
-        { id: 2, bosnian: "Dobar dan", english: "Good day" },
-        { id: 3, bosnian: "Hvala", english: "Thank you" },
-        { id: 4, bosnian: "Molim", english: "Please" },
-        { id: 5, bosnian: "Doviđenja", english: "Goodbye" },
-        { id: 6, bosnian: "Dobro jutro", english: "Good morning" }
+        { id: 1, bosnian: "Ja sam", english: "I am" },
+        { id: 2, bosnian: "Ti si", english: "You are" },
+        { id: 3, bosnian: "On/Ona je", english: "He/She is" },
+        { id: 4, bosnian: "Mi smo", english: "We are" },
+        { id: 5, bosnian: "Vi ste", english: "You are (formal)" },
+        { id: 6, bosnian: "Oni su", english: "They are" }
       ],
       translation: [
-        { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?", options: ["Zdravo, kako si?", "Dobar dan, hvala", "Doviđenja", "Ja sam dobro"] },
-        { id: 2, english: "My name is...", bosnian: "Zovem se...", options: ["Imam godina...", "Zovem se...", "Dolazim iz...", "Živim u..."] },
-        { id: 3, english: "Nice to meet you", bosnian: "Drago mi je", options: ["Hvala vam", "Drago mi je", "Izvinite", "Molim vas"] },
-        { id: 4, english: "Good morning", bosnian: "Dobro jutro", options: ["Dobro veče", "Dobar dan", "Dobro jutro", "Laku noć"] }
+        { id: 1, english: "I am from Sarajevo", bosnian: "Ja sam iz Sarajeva", options: ["Ja sam iz Sarajeva", "Ti si iz Sarajeva", "On je iz Sarajeva", "Mi smo iz Sarajeva"] },
+        { id: 2, english: "She is a teacher", bosnian: "Ona je učiteljica", options: ["On je učitelj", "Ona je učiteljica", "Mi smo učitelji", "Ti si učenik"] },
+        { id: 3, english: "We are friends", bosnian: "Mi smo prijatelji", options: ["Ja sam prijatelj", "Mi smo prijatelji", "Vi ste prijatelji", "Oni su prijatelji"] },
+        { id: 4, english: "You are welcome", bosnian: "Vi ste dobrodošli", options: ["Ti si dobrodošao", "Vi ste dobrodošli", "Mi smo dobrodošli", "Oni su dobrodošli"] }
       ]
     },
     // Lesson 2: Numbers (with ordinals and noun agreement)
@@ -177,36 +177,36 @@ function Lesson() {
         { id: 4, english: "The third lesson", bosnian: "Treća lekcija", options: ["Prva lekcija", "Druga lekcija", "Treća lekcija", "Četvrta lekcija"] }
       ]
     },
-    // Lesson 3: Colors
+    // Lesson 3: Colors & Adjective Agreement (rod pridjeva)
     3: {
       fillBlank: [
-        { id: 1, sentence: "Nebo je _____.", answer: "plavo", translation: "The sky is blue.", options: ["plavo", "crveno", "zeleno", "žuto"] },
-        { id: 2, sentence: "Trava je _____.", answer: "zelena", translation: "The grass is green.", options: ["plava", "crvena", "zelena", "bijela"] },
-        { id: 3, sentence: "Sunce je _____.", answer: "žuto", translation: "The sun is yellow.", options: ["plavo", "crveno", "zeleno", "žuto"] },
-        { id: 4, sentence: "_____ auto je lijep.", answer: "Crven", translation: "The red car is nice.", options: ["Crven", "Plav", "Zelen", "Bijel"] },
-        { id: 5, sentence: "Snijeg je _____.", answer: "bijel", translation: "Snow is white.", options: ["crn", "bijel", "siv", "plav"] },
-        { id: 6, sentence: "Noć je _____.", answer: "crna", translation: "Night is black.", options: ["bijela", "plava", "crna", "siva"] }
+        { id: 1, sentence: "Zastava BiH je _____ i žuta.", answer: "plava", translation: "The BiH flag is blue and yellow.", options: ["plav", "plava", "plavo", "plave"] },
+        { id: 2, sentence: "_____ džamija je u Sarajevu.", answer: "Bijela", translation: "The white mosque is in Sarajevo.", options: ["Bijel", "Bijela", "Bijelo", "Bijeli"] },
+        { id: 3, sentence: "Stari Most je _____ boje.", answer: "bijele", translation: "The Old Bridge is white color.", options: ["bijel", "bijela", "bijele", "bijelo"] },
+        { id: 4, sentence: "Bosanska kafa je _____.", answer: "crna", translation: "Bosnian coffee is black.", options: ["crn", "crna", "crno", "crni"] },
+        { id: 5, sentence: "_____ ćilim je tradicionalan.", answer: "Crveni", translation: "The red carpet is traditional.", options: ["Crven", "Crvena", "Crveni", "Crveno"] },
+        { id: 6, sentence: "Rijeka Miljacka je _____.", answer: "zelena", translation: "The Miljacka river is green.", options: ["zelen", "zelena", "zeleno", "zeleni"] }
       ],
       sentenceOrder: [
-        { id: 1, scrambled: ["plavo", "je", "Nebo"], correct: ["Nebo", "je", "plavo"], translation: "The sky is blue." },
-        { id: 2, scrambled: ["zelena", "Trava", "je"], correct: ["Trava", "je", "zelena"], translation: "The grass is green." },
-        { id: 3, scrambled: ["boje", "je", "Koje", "auto"], correct: ["Koje", "boje", "je", "auto"], translation: "What color is the car?" },
-        { id: 4, scrambled: ["crvena", "je", "Moja", "haljina"], correct: ["Moja", "haljina", "je", "crvena"], translation: "My dress is red." },
-        { id: 5, scrambled: ["boja", "Plava", "omiljena", "moja", "je"], correct: ["Plava", "je", "moja", "omiljena", "boja"], translation: "Blue is my favorite color." }
+        { id: 1, scrambled: ["plava", "je", "Zastava", "i", "žuta"], correct: ["Zastava", "je", "plava", "i", "žuta"], translation: "The flag is blue and yellow." },
+        { id: 2, scrambled: ["bijela", "džamija", "je", "Ova"], correct: ["Ova", "džamija", "je", "bijela"], translation: "This mosque is white." },
+        { id: 3, scrambled: ["crna", "je", "Bosanska", "kafa"], correct: ["Bosanska", "kafa", "je", "crna"], translation: "Bosnian coffee is black." },
+        { id: 4, scrambled: ["crveni", "je", "Ovaj", "ćilim"], correct: ["Ovaj", "ćilim", "je", "crveni"], translation: "This carpet is red." },
+        { id: 5, scrambled: ["boje", "je", "Koje", "nebo"], correct: ["Koje", "boje", "je", "nebo"], translation: "What color is the sky?" }
       ],
       matching: [
-        { id: 1, bosnian: "Crvena", english: "Red" },
-        { id: 2, bosnian: "Plava", english: "Blue" },
-        { id: 3, bosnian: "Zelena", english: "Green" },
-        { id: 4, bosnian: "Žuta", english: "Yellow" },
-        { id: 5, bosnian: "Bijela", english: "White" },
-        { id: 6, bosnian: "Crna", english: "Black" }
+        { id: 1, bosnian: "Crven ćilim (m)", english: "Red carpet" },
+        { id: 2, bosnian: "Bijela džamija (f)", english: "White mosque" },
+        { id: 3, bosnian: "Plavo nebo (n)", english: "Blue sky" },
+        { id: 4, bosnian: "Zelena rijeka (f)", english: "Green river" },
+        { id: 5, bosnian: "Žuta zastava (f)", english: "Yellow flag" },
+        { id: 6, bosnian: "Crna kafa (f)", english: "Black coffee" }
       ],
       translation: [
-        { id: 1, english: "What color is it?", bosnian: "Koje je boje?", options: ["Koje je boje?", "Šta je ovo?", "Gdje je?", "Kako si?"] },
-        { id: 2, english: "The sky is blue", bosnian: "Nebo je plavo", options: ["Nebo je zeleno", "Nebo je plavo", "Nebo je crveno", "Nebo je žuto"] },
-        { id: 3, english: "I like red", bosnian: "Volim crvenu", options: ["Volim plavu", "Volim crvenu", "Volim zelenu", "Volim žutu"] },
-        { id: 4, english: "The white house", bosnian: "Bijela kuća", options: ["Crvena kuća", "Plava kuća", "Bijela kuća", "Zelena kuća"] }
+        { id: 1, english: "The Bosnian flag is blue", bosnian: "Bosanska zastava je plava", options: ["Bosanska zastava je plava", "Bosanska zastava je crvena", "Bosanski grb je plav", "Bosanska kafa je crna"] },
+        { id: 2, english: "The Old Bridge is white", bosnian: "Stari Most je bijel", options: ["Stari Most je crn", "Stari Most je bijel", "Stari Most je zelen", "Stari Most je plav"] },
+        { id: 3, english: "I love black coffee", bosnian: "Volim crnu kafu", options: ["Volim bijelu kafu", "Volim crnu kafu", "Volim zelenu kafu", "Volim crvenu kafu"] },
+        { id: 4, english: "The green mountains", bosnian: "Zelene planine", options: ["Crvene planine", "Plave planine", "Zelene planine", "Bijele planine"] }
       ]
     }
   }
