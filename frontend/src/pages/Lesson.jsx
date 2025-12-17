@@ -334,28 +334,27 @@ function Lesson() {
   ]
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 safe-area-inset">
       <Link
         to={`/levels/${lesson.level}`}
-        className="inline-flex items-center space-x-2 text-gray-600 hover:text-bosnia-blue mb-6 transition-colors"
+        className="inline-flex items-center space-x-2 text-gray-600 hover:text-bosnia-blue mb-4 sm:mb-6 transition-colors py-2"
       >
-        <ArrowLeft className="w-4 h-4" />
-        <span>Nazad na lekcije</span>
+        <ArrowLeft className="w-5 h-5" />
+        <span className="font-medium">Nazad</span>
       </Link>
 
       {/* Header */}
-      <div className="bg-white rounded-xl p-6 shadow-md mb-6 animate-fadeIn">
+      <div className="bg-white rounded-xl p-4 sm:p-6 shadow-md mb-4 sm:mb-6 animate-fadeIn">
         <div className="flex items-start justify-between">
           <div>
-            <div className="flex items-center space-x-3 mb-2">
+            <div className="flex flex-wrap items-center gap-2 mb-2">
               <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
                 {lesson.level.toUpperCase()}
               </span>
-              <span className="text-gray-400">•</span>
-              <span className="text-gray-600">Lekcija {lesson.id}</span>
+              <span className="text-gray-600 text-sm">Lekcija {lesson.id}</span>
             </div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">{lesson.title}</h1>
-            <p className="text-gray-600">{lesson.description}</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">{lesson.title}</h1>
+            <p className="text-gray-600 text-sm sm:text-base">{lesson.description}</p>
           </div>
         </div>
 
@@ -378,24 +377,25 @@ function Lesson() {
 
       {/* Tabs */}
       <div className="bg-white rounded-xl shadow-md overflow-hidden animate-fadeIn">
-        <div className="flex border-b overflow-x-auto">
+        {/* Mobile-friendly scrollable tabs */}
+        <div className="flex border-b overflow-x-auto tabs-mobile no-select">
           {tabs.map(tab => (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center space-x-2 px-6 py-4 font-medium transition-colors whitespace-nowrap ${
+              className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-3 sm:py-4 font-medium transition-colors whitespace-nowrap text-sm sm:text-base ${
                 activeTab === tab.id
                   ? 'text-bosnia-blue border-b-2 border-bosnia-blue bg-blue-50'
                   : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
               }`}
             >
               {tab.icon}
-              <span>{tab.label}</span>
+              <span className="hidden sm:inline">{tab.label}</span>
             </button>
           ))}
         </div>
 
-        <div className="p-6">
+        <div className="p-4 sm:p-6">
           {/* Vocabulary Tab */}
           {activeTab === 'vocabulary' && (
             <div className="animate-fadeIn">
