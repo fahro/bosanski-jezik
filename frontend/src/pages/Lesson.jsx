@@ -5,13 +5,17 @@ import remarkGfm from 'remark-gfm'
 import { 
   ArrowLeft, BookOpen, MessageSquare, PenTool, HelpCircle, 
   Volume2, ChevronRight, ChevronLeft, CheckCircle, XCircle,
-  Lightbulb, Globe, RefreshCw, Dumbbell, Shuffle, GripVertical
+  Lightbulb, Globe, RefreshCw, Dumbbell, Shuffle, GripVertical,
+  Star, Trophy, Zap, Award
 } from 'lucide-react'
+import { useProgress } from '../hooks/useProgress'
 
 function Lesson() {
   const { lessonId } = useParams()
   const [lesson, setLesson] = useState(null)
   const [loading, setLoading] = useState(true)
+  const { progress, saveQuizScore, getStars, getAchievementInfo } = useProgress()
+  const [quizResult, setQuizResult] = useState(null)
   const [activeTab, setActiveTab] = useState('vocabulary')
   const [quizState, setQuizState] = useState({
     currentQuestion: 0,
@@ -61,17 +65,22 @@ function Lesson() {
   const handleQuizAnswer = (answerIndex) => {
     const currentQ = lesson.quiz[quizState.currentQuestion]
     const isCorrect = answerIndex === currentQ.correct_answer
+    const newScore = isCorrect ? quizState.score + 1 : quizState.score
     
     setQuizState(prev => ({
       ...prev,
       answers: [...prev.answers, { selected: answerIndex, correct: isCorrect }],
-      score: isCorrect ? prev.score + 1 : prev.score
+      score: newScore
     }))
 
     setTimeout(() => {
       if (quizState.currentQuestion < lesson.quiz.length - 1) {
         setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))
       } else {
+        // Quiz finished - save progress
+        const finalScore = newScore
+        const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
+        setQuizResult(result)
         setQuizState(prev => ({ ...prev, showResult: true }))
       }
     }, 1500)
@@ -80,6 +89,7 @@ function Lesson() {
   const resetQuiz = () => {
     setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
     setShowQuizTranslation(false)
+    setQuizResult(null)
   }
 
   // Grammar exercises data - Fill in the blank (10 exercises)
@@ -939,17 +949,69 @@ function Lesson() {
                 </div>
               ) : (
                 <div className="max-w-md mx-auto text-center animate-scaleIn">
+                  {/* Stars display */}
+                  <div className="flex justify-center space-x-2 mb-4">
+                    {[1, 2, 3].map((star) => {
+                      const percentage = Math.round((quizState.score / lesson.quiz.length) * 100)
+                      const filled = (star === 1 && percentage >= 50) || 
+                                    (star === 2 && percentage >= 70) || 
+                                    (star === 3 && percentage >= 90)
+                      return (
+                        <Star
+                          key={star}
+                          className={`w-12 h-12 ${filled ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'}`}
+                        />
+                      )
+                    })}
+                  </div>
+                  
                   <div className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 ${
                     quizState.score >= lesson.quiz.length * 0.7 ? 'bg-green-100' : 'bg-yellow-100'
                   }`}>
                     <span className="text-4xl">
-                      {quizState.score >= lesson.quiz.length * 0.7 ? '🎉' : '📚'}
+                      {quizState.score >= lesson.quiz.length * 0.9 ? '🏆' : quizState.score >= lesson.quiz.length * 0.7 ? '🎉' : '📚'}
                     </span>
                   </div>
+                  
                   <h3 className="text-2xl font-bold text-gray-800 mb-2">Kviz završen!</h3>
-                  <p className="text-gray-600 mb-4">
-                    Vaš rezultat: {quizState.score} od {lesson.quiz.length} ({Math.round(quizState.score / lesson.quiz.length * 100)}%)
+                  <p className="text-gray-600 mb-2">
+                    Vaš rezultat: <strong>{quizState.score}</strong> od <strong>{lesson.quiz.length}</strong> ({Math.round(quizState.score / lesson.quiz.length * 100)}%)
                   </p>
+                  
+                  {/* Points earned */}
+                  {quizResult && (
+                    <div className="mb-4 space-y-2">
+                      <div className="flex items-center justify-center space-x-2 text-green-600">
+                        <Zap className="w-5 h-5" />
+                        <span className="font-medium">+{quizResult.pointsEarned} bodova!</span>
+                      </div>
+                      {quizResult.isNewHighScore && (
+                        <div className="flex items-center justify-center space-x-2 text-yellow-600">
+                          <Trophy className="w-5 h-5" />
+                          <span className="font-medium">Novi rekord!</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  
+                  {/* Progress info */}
+                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                    <div className="flex items-center justify-center space-x-4 text-sm">
+                      <div className="text-center">
+                        <div className="font-bold text-bosnia-blue">{progress.totalPoints}</div>
+                        <div className="text-gray-500">Ukupno bodova</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="font-bold text-green-600">{progress.completedLessons.length}/12</div>
+                        <div className="text-gray-500">Lekcija</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="font-bold text-orange-500">{progress.streak}🔥</div>
+                        <div className="text-gray-500">Streak</div>
+                      </div>
+                    </div>
+                  </div>
+                  
                   <button
                     onClick={resetQuiz}
                     className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
