@@ -145,36 +145,36 @@ function Lesson() {
         { id: 4, english: "Good morning", bosnian: "Dobro jutro", options: ["Dobro veče", "Dobar dan", "Dobro jutro", "Laku noć"] }
       ]
     },
-    // Lesson 2: Numbers
+    // Lesson 2: Numbers (with ordinals and noun agreement)
     2: {
       fillBlank: [
-        { id: 1, sentence: "Jedan plus jedan je _____.", answer: "dva", translation: "One plus one is two.", options: ["dva", "tri", "četiri", "pet"] },
-        { id: 2, sentence: "Pet plus pet je _____.", answer: "deset", translation: "Five plus five is ten.", options: ["osam", "devet", "deset", "jedanaest"] },
-        { id: 3, sentence: "Koliko košta? _____ marke.", answer: "Tri", translation: "How much? Three marks.", options: ["Tri", "Jedan", "Pet", "Dva"] },
-        { id: 4, sentence: "Imam _____ godina.", answer: "dvadeset", translation: "I am twenty years old.", options: ["deset", "petnaest", "dvadeset", "trideset"] },
-        { id: 5, sentence: "Sedam plus tri je _____.", answer: "deset", translation: "Seven plus three is ten.", options: ["osam", "devet", "deset", "jedanaest"] },
-        { id: 6, sentence: "_____ minus jedan je četiri.", answer: "Pet", translation: "Five minus one is four.", options: ["Tri", "Četiri", "Pet", "Šest"] }
+        { id: 1, sentence: "Imam _____ brata.", answer: "jednog", translation: "I have one brother.", options: ["jednog", "jedna", "jedan", "jedno"] },
+        { id: 2, sentence: "Kupila sam _____ jabuke.", answer: "tri", translation: "I bought three apples.", options: ["dva", "tri", "pet", "šest"] },
+        { id: 3, sentence: "Ovo je moj _____ dan u školi.", answer: "prvi", translation: "This is my first day at school.", options: ["prvi", "druga", "treći", "peti"] },
+        { id: 4, sentence: "Imam _____ sestre.", answer: "dvije", translation: "I have two sisters.", options: ["jedan", "dva", "dvije", "tri"] },
+        { id: 5, sentence: "To je _____ lekcija.", answer: "druga", translation: "That is the second lesson.", options: ["prvi", "druga", "treći", "četvrti"] },
+        { id: 6, sentence: "U razredu ima _____ učenika.", answer: "pet", translation: "There are five students in class.", options: ["dva", "tri", "četiri", "pet"] }
       ],
       sentenceOrder: [
-        { id: 1, scrambled: ["dva", "plus", "Jedan", "jedan", "je"], correct: ["Jedan", "plus", "jedan", "je", "dva"], translation: "One plus one is two." },
-        { id: 2, scrambled: ["marke", "Tri", "košta"], correct: ["Košta", "tri", "marke"], translation: "It costs three marks." },
-        { id: 3, scrambled: ["godina", "dvadeset", "Imam"], correct: ["Imam", "dvadeset", "godina"], translation: "I am twenty years old." },
-        { id: 4, scrambled: ["jabuka", "pet", "Dajte", "mi"], correct: ["Dajte", "mi", "pet", "jabuka"], translation: "Give me five apples." },
-        { id: 5, scrambled: ["sedam", "je", "Koliko", "plus", "tri"], correct: ["Koliko", "je", "sedam", "plus", "tri"], translation: "How much is seven plus three?" }
+        { id: 1, scrambled: ["dan", "prvi", "moj", "je", "Ovo"], correct: ["Ovo", "je", "moj", "prvi", "dan"], translation: "This is my first day." },
+        { id: 2, scrambled: ["sestre", "dvije", "Imam"], correct: ["Imam", "dvije", "sestre"], translation: "I have two sisters." },
+        { id: 3, scrambled: ["lekcija", "druga", "je", "Ovo"], correct: ["Ovo", "je", "druga", "lekcija"], translation: "This is the second lesson." },
+        { id: 4, scrambled: ["jabuke", "tri", "sam", "Kupila"], correct: ["Kupila", "sam", "tri", "jabuke"], translation: "I bought three apples." },
+        { id: 5, scrambled: ["čovjek", "jedan", "Tu", "je"], correct: ["Tu", "je", "jedan", "čovjek"], translation: "There is one man." }
       ],
       matching: [
-        { id: 1, bosnian: "Jedan", english: "One" },
-        { id: 2, bosnian: "Dva", english: "Two" },
-        { id: 3, bosnian: "Pet", english: "Five" },
-        { id: 4, bosnian: "Deset", english: "Ten" },
-        { id: 5, bosnian: "Dvadeset", english: "Twenty" },
-        { id: 6, bosnian: "Sto", english: "Hundred" }
+        { id: 1, bosnian: "Prvi", english: "First" },
+        { id: 2, bosnian: "Drugi", english: "Second" },
+        { id: 3, bosnian: "Treći", english: "Third" },
+        { id: 4, bosnian: "Jedna žena", english: "One woman" },
+        { id: 5, bosnian: "Dva brata", english: "Two brothers" },
+        { id: 6, bosnian: "Pet djece", english: "Five children" }
       ],
       translation: [
-        { id: 1, english: "How much does it cost?", bosnian: "Koliko košta?", options: ["Koliko košta?", "Šta je ovo?", "Gdje je?", "Kako si?"] },
-        { id: 2, english: "I have five marks", bosnian: "Imam pet maraka", options: ["Imam dva dana", "Imam pet maraka", "Imam tri godine", "Imam sedam knjiga"] },
-        { id: 3, english: "Give me two kilograms", bosnian: "Dajte mi dva kilograma", options: ["Dajte mi tri jabuke", "Dajte mi dva kilograma", "Dajte mi pet maraka", "Dajte mi jedan dan"] },
-        { id: 4, english: "That is six marks", bosnian: "To je šest maraka", options: ["To je pet maraka", "To je šest maraka", "To je sedam maraka", "To je osam maraka"] }
+        { id: 1, english: "This is my first day", bosnian: "Ovo je moj prvi dan", options: ["Ovo je moj prvi dan", "Ovo je moj drugi dan", "Ovo je moja prva noć", "Ovo je moj treći dan"] },
+        { id: 2, english: "I have two sisters", bosnian: "Imam dvije sestre", options: ["Imam jednu sestru", "Imam dvije sestre", "Imam tri sestre", "Imam pet sestara"] },
+        { id: 3, english: "One man and two women", bosnian: "Jedan čovjek i dvije žene", options: ["Dva čovjeka i jedna žena", "Jedan čovjek i dvije žene", "Tri čovjeka i pet žena", "Pet ljudi"] },
+        { id: 4, english: "The third lesson", bosnian: "Treća lekcija", options: ["Prva lekcija", "Druga lekcija", "Treća lekcija", "Četvrta lekcija"] }
       ]
     },
     // Lesson 3: Colors

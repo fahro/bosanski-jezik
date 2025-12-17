@@ -126,7 +126,7 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"bosnian": "deset", "english": "ten", "pronunciation": "DEH-seht", "example": "Deset godina.", "example_translation": "Ten years.", "image_emoji": "🔟"}
         ],
         "grammar_explanation": """
-## Brojevi 1-20
+## Osnovni brojevi 1-20
 
 | Broj | Bosanski | Izgovor |
 |------|----------|---------|
@@ -140,20 +140,43 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 | 8 | osam | OH-sahm |
 | 9 | devet | DEH-veht |
 | 10 | deset | DEH-seht |
-| 11 | jedanaest | yeh-DAH-nah-ehst |
-| 12 | dvanaest | dvah-NAH-ehst |
-| 13 | trinaest | tree-NAH-ehst |
-| 14 | četrnaest | cheh-tr-NAH-ehst |
-| 15 | petnaest | peht-NAH-ehst |
-| 16 | šesnaest | shehst-NAH-ehst |
-| 17 | sedamnaest | seh-dahm-NAH-ehst |
-| 18 | osamnaest | oh-sahm-NAH-ehst |
-| 19 | devetnaest | deh-veht-NAH-ehst |
-| 20 | dvadeset | DVAH-deh-seht |
 
-## Rod brojeva
-- **jedan/jedna/jedno** - muški/ženski/srednji rod
-- Primjer: jedan stol (m), jedna žena (f), jedno dijete (n)
+## Redni brojevi (Ordinal Numbers)
+
+| Broj | Muški | Ženski | Srednji |
+|------|-------|--------|---------|
+| 1. | prvi | prva | prvo |
+| 2. | drugi | druga | drugo |
+| 3. | treći | treća | treće |
+| 4. | četvrti | četvrta | četvrto |
+| 5. | peti | peta | peto |
+
+### Primjeri:
+- **prvi** dan (m) - first day
+- **druga** lekcija (f) - second lesson  
+- **treće** dijete (n) - third child
+
+## Slaganje brojeva sa imenicama
+
+### Broj 1 - slaže se po rodu:
+- **jedan** čovjek (m) - one man
+- **jedna** žena (f) - one woman
+- **jedno** dijete (n) - one child
+
+### Brojevi 2, 3, 4 - imenica u jednini (poseban oblik):
+- **dva/dvije** čovjeka - two men
+- **tri** žene - three women
+- **četiri** djeteta - four children
+
+### Brojevi 5-20 - imenica u genitivu množine:
+- **pet** ljudi - five people
+- **šest** žena - six women
+- **deset** djece - ten children
+
+## Primjeri u rečenicama:
+- Imam **jednu** sestru i **dva** brata.
+- Ovo je moj **prvi** dan u školi.
+- Kupila sam **tri** jabuke.
 """,
         "cultural_note": "U Bosni i Hercegovini koristi se konvertibilna marka (KM) kao valuta. Kada kupujete na pijaci, često ćete čuti cijene u markama. Pregovaranje o cijeni je uobičajeno na tradicionalnim pijacama.",
         "cultural_comic": {
@@ -179,21 +202,21 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"id": 3, "type": "translate", "instruction": "Prevedite: 'I have seven books'", "content": {"text": "I have seven books"}, "answer": "Imam sedam knjiga", "hint": "Imam = I have"}
         ],
         "quiz": [
-            {"id": 1, "question": "Kako se kaže broj 7 na bosanskom?", "options": ["šest", "sedam", "osam", "devet"], "correct_answer": 1, "explanation": "'Sedam' je broj 7 na bosanskom jeziku.", "question_type": "vocabulary"},
-            {"id": 2, "question": "Koliko je 'trinaest'?", "options": ["12", "13", "14", "15"], "correct_answer": 1, "explanation": "'Trinaest' = tri + naest = 13", "question_type": "numbers"},
-            {"id": 3, "question": "Koji broj dolazi poslije 'devetnaest'?", "options": ["osamnaest", "dvadeset", "deset", "jedanaest"], "correct_answer": 1, "explanation": "Poslije 19 (devetnaest) dolazi 20 (dvadeset).", "question_type": "sequence"},
-            {"id": 4, "question": "Kako se kaže '15' na bosanskom?", "options": ["četrnaest", "petnaest", "šesnaest", "trinaest"], "correct_answer": 1, "explanation": "'Petnaest' = pet + naest = 15", "question_type": "vocabulary"},
-            {"id": 5, "question": "Šta je 'dva' na engleskom?", "options": ["one", "two", "three", "four"], "correct_answer": 1, "explanation": "'Dva' znači 'two' na engleskom.", "question_type": "translation"},
-            {"id": 6, "question": "Kako se kaže broj 11?", "options": ["deset", "jedanaest", "dvanaest", "trinaest"], "correct_answer": 1, "explanation": "'Jedanaest' = jedan + naest = 11", "question_type": "vocabulary"},
-            {"id": 7, "question": "Koliko je 5 + 4?", "options": ["osam", "devet", "deset", "sedam"], "correct_answer": 1, "explanation": "Pet plus četiri je devet (9).", "question_type": "math"},
-            {"id": 8, "question": "Koji broj je 'osam'?", "options": ["6", "7", "8", "9"], "correct_answer": 2, "explanation": "'Osam' je broj 8.", "question_type": "numbers"},
-            {"id": 9, "question": "Kako se kaže '20' na bosanskom?", "options": ["devetnaest", "dvadeset", "trideset", "deset"], "correct_answer": 1, "explanation": "'Dvadeset' = dva + deset = 20", "question_type": "vocabulary"},
-            {"id": 10, "question": "Šta znači 'četiri'?", "options": ["three", "four", "five", "six"], "correct_answer": 1, "explanation": "'Četiri' znači 'four' (4).", "question_type": "translation"},
+            {"id": 1, "question": "Kako se kaže 'first' na bosanskom?", "options": ["jedan", "prvi", "druga", "treći"], "correct_answer": 1, "explanation": "'Prvi' je redni broj za 'first'.", "question_type": "ordinal"},
+            {"id": 2, "question": "Koja je pravilna forma: '___ žena'?", "options": ["jedan", "jedna", "jedno", "jednog"], "correct_answer": 1, "explanation": "'Jedna žena' - žena je ženskog roda, pa koristimo 'jedna'.", "question_type": "grammar"},
+            {"id": 3, "question": "Kako kažemo 'two sisters'?", "options": ["dva sestre", "dvije sestre", "dva sestara", "jedne sestre"], "correct_answer": 1, "explanation": "'Dvije sestre' - za ženski rod koristimo 'dvije'.", "question_type": "grammar"},
+            {"id": 4, "question": "Koji je redni broj za 'second'?", "options": ["prvi", "drugi", "treći", "četvrti"], "correct_answer": 1, "explanation": "'Drugi/druga/drugo' je redni broj za 'second'.", "question_type": "ordinal"},
+            {"id": 5, "question": "Pravilna forma: 'Imam ___ brata'?", "options": ["jedan", "jedna", "jednog", "jedno"], "correct_answer": 2, "explanation": "'Jednog brata' - akuzativ muškog roda.", "question_type": "grammar"},
+            {"id": 6, "question": "Kako se kaže 'third lesson' (ž.r.)?", "options": ["treći lekcija", "treća lekcija", "treće lekcija", "trećeg lekcija"], "correct_answer": 1, "explanation": "'Treća lekcija' - lekcija je ženskog roda.", "question_type": "ordinal"},
+            {"id": 7, "question": "Koliko je 'dvadeset'?", "options": ["12", "15", "20", "22"], "correct_answer": 2, "explanation": "'Dvadeset' = dva + deset = 20", "question_type": "numbers"},
+            {"id": 8, "question": "Pravilna forma: '___ djece' (5)?", "options": ["pet", "peta", "peto", "petero"], "correct_answer": 0, "explanation": "'Pet djece' - s brojevima 5+ imenica ide u genitiv množine.", "question_type": "grammar"},
+            {"id": 9, "question": "Kako se kaže 'first day' (m.r.)?", "options": ["prva dan", "prvi dan", "prvo dan", "prve dan"], "correct_answer": 1, "explanation": "'Prvi dan' - dan je muškog roda.", "question_type": "ordinal"},
+            {"id": 10, "question": "Koja forma je tačna: '___ čovjeka' (2)?", "options": ["dva", "dvije", "dvoje", "dvojica"], "correct_answer": 0, "explanation": "'Dva čovjeka' - za muški rod koristimo 'dva'.", "question_type": "grammar"},
             {"id": 11, "question": "Koji broj dolazi prije 'pet'?", "options": ["tri", "četiri", "šest", "dva"], "correct_answer": 1, "explanation": "Prije pet (5) dolazi četiri (4).", "question_type": "sequence"},
-            {"id": 12, "question": "Koliko je 10 + 8?", "options": ["sedamnaest", "osamnaest", "devetnaest", "šesnaest"], "correct_answer": 1, "explanation": "Deset plus osam je osamnaest (18).", "question_type": "math"},
-            {"id": 13, "question": "Kako se kaže 'three' na bosanskom?", "options": ["dva", "tri", "četiri", "pet"], "correct_answer": 1, "explanation": "'Tri' znači 'three' (3).", "question_type": "vocabulary"},
-            {"id": 14, "question": "Koji je broj između 'šest' i 'osam'?", "options": ["pet", "devet", "sedam", "deset"], "correct_answer": 2, "explanation": "Između šest (6) i osam (8) je sedam (7).", "question_type": "sequence"},
-            {"id": 15, "question": "Koliko je 'šesnaest'?", "options": ["14", "15", "16", "17"], "correct_answer": 2, "explanation": "'Šesnaest' = šest + naest = 16", "question_type": "numbers"}
+            {"id": 12, "question": "Kako se kaže 'fourth' (m.r.)?", "options": ["četiri", "četvrti", "četvrta", "četvrto"], "correct_answer": 1, "explanation": "'Četvrti' je muški rod rednog broja za 4.", "question_type": "ordinal"},
+            {"id": 13, "question": "Pravilna forma: 'Tri ___'?", "options": ["jabuka", "jabuke", "jabuku", "jabukama"], "correct_answer": 1, "explanation": "'Tri jabuke' - s brojevima 2-4 imenica ide u poseban oblik.", "question_type": "grammar"},
+            {"id": 14, "question": "Koji je redni broj za 'fifth'?", "options": ["pet", "peti", "peta", "petog"], "correct_answer": 1, "explanation": "'Peti' je muški rod rednog broja za 5.", "question_type": "ordinal"},
+            {"id": 15, "question": "Kako kažemo 'one child' (n.r.)?", "options": ["jedan dijete", "jedna dijete", "jedno dijete", "jednog dijete"], "correct_answer": 2, "explanation": "'Jedno dijete' - dijete je srednjeg roda.", "question_type": "grammar"}
         ]
     },
     {
