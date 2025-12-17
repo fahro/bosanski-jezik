@@ -21,8 +21,8 @@ COPY backend/app ./app
 # Copy built frontend
 COPY --from=frontend-builder /app/frontend/dist ./static
 
-# Expose port
-EXPOSE 8000
+# Expose port (Railway uses dynamic PORT)
+EXPOSE ${PORT:-8000}
 
-# Start server
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start server with Railway's PORT environment variable
+CMD uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}
