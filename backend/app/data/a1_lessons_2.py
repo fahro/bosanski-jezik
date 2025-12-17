@@ -48,6 +48,16 @@ A1_LESSONS_PART2 = [
 - kći → kćeri (daughters)
 """,
         "cultural_note": "Porodica je vrlo važna u bosanskoj kulturi. Višegeneracijske porodice često žive zajedno ili blizu jedni drugih. Vikendi su obično rezervisani za porodična okupljanja, često uz tradicionalnu bosansku kafu i kolače.",
+        "cultural_comic": {
+            "title": "Porodično okupljanje u Sarajevu",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/sarajevo.jpg?w=1200",
+            "panels": [
+                {"character": "👵", "name": "Baka", "text": "Dobrodošli! Moja porodica je ovdje!", "translation": "Welcome! My family is here!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"},
+                {"character": "👨", "name": "Otac", "text": "Hvala, majko! Ovo je moja žena Amela.", "translation": "Thanks, mother! This is my wife Amela.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Amela", "text": "Drago mi je! Ovo su naša djeca - sin i kći.", "translation": "Nice to meet you! These are our children - son and daughter.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👵", "name": "Baka", "text": "Moji unuci! Hajde na pitu i kafu!", "translation": "My grandchildren! Come for pie and coffee!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=23"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Lejla", "text": "Imaš li braće ili sestara?", "translation": "Do you have brothers or sisters?"},
             {"speaker": "Kenan", "text": "Da, imam jednog brata i dvije sestre.", "translation": "Yes, I have one brother and two sisters."},
@@ -118,6 +128,16 @@ A1_LESSONS_PART2 = [
 - **U koji dan?** - On which day?
 """,
         "cultural_note": "U Bosni i Hercegovini, sedmica počinje ponedjeljkom. Petak je posebno važan dan za muslimane (džuma), a nedjelja za katolike i pravoslavce. Subota je tradicionalno dan za porodična okupljanja i odlazak na pijacu.",
+        "cultural_comic": {
+            "title": "Planiranje sedmice u Sarajevu",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/56/43/ce/caption.jpg?w=1200",
+            "panels": [
+                {"character": "👨", "name": "Amir", "text": "Koji je danas dan?", "translation": "What day is it today?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=52"},
+                {"character": "👩", "name": "Selma", "text": "Danas je četvrtak. Sutra je petak!", "translation": "Today is Thursday. Tomorrow is Friday!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=45"},
+                {"character": "👨", "name": "Amir", "text": "Odlično! U petak idem na džumu.", "translation": "Excellent! On Friday I go to Jumu'ah prayer.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=52"},
+                {"character": "👩", "name": "Selma", "text": "A u subotu idemo na pijacu Markale!", "translation": "And on Saturday we go to Markale market!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=45"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Amir", "text": "Koji je danas dan?", "translation": "What day is it today?"},
             {"speaker": "Selma", "text": "Danas je srijeda.", "translation": "Today is Wednesday."},
@@ -191,6 +211,16 @@ A1_LESSONS_PART2 = [
 - **u** + godišnje doba: u proljeće, u ljeto (ALI: zimi, u jesen)
 """,
         "cultural_note": "Bosna ima četiri izražena godišnja doba. Zime mogu biti veoma hladne sa puno snijega, posebno u planinskim krajevima. Ljeta su topla i suha. Tradicionalni bosanski kalendar također uključuje islamske i pravoslavne praznike koji se obilježavaju po lunarnom kalendaru.",
+        "cultural_comic": {
+            "title": "Godišnja doba na Jahorini",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/15/6d/b5/jahorina.jpg?w=1200",
+            "panels": [
+                {"character": "👨", "name": "Mirza", "text": "Volim zimu! U januaru skijam na Jahorini.", "translation": "I love winter! In January I ski on Jahorina.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"},
+                {"character": "👩", "name": "Lamija", "text": "Ja više volim proljeće. U aprilu cvijeta sve!", "translation": "I prefer spring. In April everything blooms!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=41"},
+                {"character": "👨", "name": "Mirza", "text": "A ljeto? U julu je more u Neumu prekrasno!", "translation": "And summer? In July the sea in Neum is beautiful!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"},
+                {"character": "👩", "name": "Lamija", "text": "Da! A u jesen, u oktobru, boje su predivne.", "translation": "Yes! And in autumn, in October, colors are wonderful.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=41"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Mirza", "text": "Kada je tvoj rođendan?", "translation": "When is your birthday?"},
             {"speaker": "Lamija", "text": "Moj rođendan je u maju, petnaestog.", "translation": "My birthday is in May, on the 15th."},

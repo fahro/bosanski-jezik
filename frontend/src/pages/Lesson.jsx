@@ -208,6 +208,225 @@ function Lesson() {
         { id: 3, english: "I love black coffee", bosnian: "Volim crnu kafu", options: ["Volim bijelu kafu", "Volim crnu kafu", "Volim zelenu kafu", "Volim crvenu kafu"] },
         { id: 4, english: "The green mountains", bosnian: "Zelene planine", options: ["Crvene planine", "Plave planine", "Zelene planine", "Bijele planine"] }
       ]
+    },
+    // Lesson 4: Family (Possessive pronouns)
+    4: {
+      fillBlank: [
+        { id: 1, sentence: "_____ majka je učiteljica.", answer: "Moja", translation: "My mother is a teacher.", options: ["Moj", "Moja", "Moje", "Moji"] },
+        { id: 2, sentence: "_____ otac radi u bolnici.", answer: "Moj", translation: "My father works in a hospital.", options: ["Moj", "Moja", "Moje", "Moji"] },
+        { id: 3, sentence: "Ovo je _____ sestra.", answer: "moja", translation: "This is my sister.", options: ["moj", "moja", "moje", "moji"] },
+        { id: 4, sentence: "_____ brat je stariji od mene.", answer: "Moj", translation: "My brother is older than me.", options: ["Moj", "Moja", "Moje", "Moji"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["majka", "Moja", "učiteljica", "je"], correct: ["Moja", "majka", "je", "učiteljica"], translation: "My mother is a teacher." },
+        { id: 2, scrambled: ["brata", "jednog", "Imam"], correct: ["Imam", "jednog", "brata"], translation: "I have one brother." },
+        { id: 3, scrambled: ["porodica", "velika", "Moja", "je"], correct: ["Moja", "porodica", "je", "velika"], translation: "My family is big." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Majka", english: "Mother" },
+        { id: 2, bosnian: "Otac", english: "Father" },
+        { id: 3, bosnian: "Brat", english: "Brother" },
+        { id: 4, bosnian: "Sestra", english: "Sister" },
+        { id: 5, bosnian: "Baka", english: "Grandmother" },
+        { id: 6, bosnian: "Djed", english: "Grandfather" }
+      ],
+      translation: [
+        { id: 1, english: "My mother is beautiful", bosnian: "Moja majka je lijepa", options: ["Moja majka je lijepa", "Moj otac je lijep", "Moja sestra je lijepa", "Moja baka je lijepa"] },
+        { id: 2, english: "I have two sisters", bosnian: "Imam dvije sestre", options: ["Imam jednu sestru", "Imam dvije sestre", "Imam tri sestre", "Imam brata"] }
+      ]
+    },
+    // Lesson 5: Days of the Week
+    5: {
+      fillBlank: [
+        { id: 1, sentence: "_____ je prvi dan radne sedmice.", answer: "Ponedjeljak", translation: "Monday is the first working day.", options: ["Ponedjeljak", "Utorak", "Srijeda", "Nedjelja"] },
+        { id: 2, sentence: "U _____ idem na pijacu.", answer: "subotu", translation: "On Saturday I go to the market.", options: ["ponedjeljak", "petak", "subotu", "nedjelju"] },
+        { id: 3, sentence: "_____ je dan odmora.", answer: "Nedjelja", translation: "Sunday is a rest day.", options: ["Petak", "Subota", "Nedjelja", "Ponedjeljak"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["dan", "je", "Koji", "danas"], correct: ["Koji", "je", "danas", "dan"], translation: "What day is it today?" },
+        { id: 2, scrambled: ["je", "Danas", "petak"], correct: ["Danas", "je", "petak"], translation: "Today is Friday." },
+        { id: 3, scrambled: ["idem", "U", "subotu", "u", "kupovinu"], correct: ["U", "subotu", "idem", "u", "kupovinu"], translation: "On Saturday I go shopping." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Ponedjeljak", english: "Monday" },
+        { id: 2, bosnian: "Utorak", english: "Tuesday" },
+        { id: 3, bosnian: "Srijeda", english: "Wednesday" },
+        { id: 4, bosnian: "Četvrtak", english: "Thursday" },
+        { id: 5, bosnian: "Petak", english: "Friday" },
+        { id: 6, bosnian: "Subota", english: "Saturday" }
+      ],
+      translation: [
+        { id: 1, english: "What day is today?", bosnian: "Koji je danas dan?", options: ["Koji je danas dan?", "Koliko je sati?", "Kako si?", "Gdje si?"] },
+        { id: 2, english: "Tomorrow is Friday", bosnian: "Sutra je petak", options: ["Danas je petak", "Sutra je petak", "Jučer je bio petak", "Sutra je subota"] }
+      ]
+    },
+    // Lesson 6: Months and Seasons
+    6: {
+      fillBlank: [
+        { id: 1, sentence: "U _____ počinje proljeće.", answer: "martu", translation: "Spring begins in March.", options: ["januaru", "februaru", "martu", "aprilu"] },
+        { id: 2, sentence: "_____ je najhladniji mjesec.", answer: "Januar", translation: "January is the coldest month.", options: ["Januar", "Juni", "Juli", "Septembar"] },
+        { id: 3, sentence: "Volim _____ jer je toplo.", answer: "ljeto", translation: "I love summer because it's warm.", options: ["zimu", "jesen", "proljeće", "ljeto"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["tvoj", "je", "Kada", "rođendan"], correct: ["Kada", "je", "tvoj", "rođendan"], translation: "When is your birthday?" },
+        { id: 2, scrambled: ["u", "maju", "Moj", "rođendan", "je"], correct: ["Moj", "rođendan", "je", "u", "maju"], translation: "My birthday is in May." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Proljeće", english: "Spring" },
+        { id: 2, bosnian: "Ljeto", english: "Summer" },
+        { id: 3, bosnian: "Jesen", english: "Autumn" },
+        { id: 4, bosnian: "Zima", english: "Winter" },
+        { id: 5, bosnian: "Januar", english: "January" },
+        { id: 6, bosnian: "Juli", english: "July" }
+      ],
+      translation: [
+        { id: 1, english: "When is your birthday?", bosnian: "Kada je tvoj rođendan?", options: ["Kada je tvoj rođendan?", "Koliko imaš godina?", "Gdje živiš?", "Kako se zoveš?"] },
+        { id: 2, english: "I love winter", bosnian: "Volim zimu", options: ["Volim ljeto", "Volim zimu", "Volim proljeće", "Volim jesen"] }
+      ]
+    },
+    // Lesson 7: Food and Drink
+    7: {
+      fillBlank: [
+        { id: 1, sentence: "_____ bosansku kafu.", answer: "Volim", translation: "I love Bosnian coffee.", options: ["Volim", "Voliš", "Voli", "Volimo"] },
+        { id: 2, sentence: "_____ ćevape sa lukom.", answer: "Želim", translation: "I want cevapi with onions.", options: ["Želim", "Želiš", "Želi", "Želimo"] },
+        { id: 3, sentence: "Bosanska kafa je _____.", answer: "jaka", translation: "Bosnian coffee is strong.", options: ["slaba", "jaka", "slatka", "kisela"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["kafu", "Želim", "jednu", "bosansku"], correct: ["Želim", "jednu", "bosansku", "kafu"], translation: "I want one Bosnian coffee." },
+        { id: 2, scrambled: ["ćevape", "Volim", "sa", "kajmakom"], correct: ["Volim", "ćevape", "sa", "kajmakom"], translation: "I love cevapi with kajmak." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Hljeb", english: "Bread" },
+        { id: 2, bosnian: "Meso", english: "Meat" },
+        { id: 3, bosnian: "Voda", english: "Water" },
+        { id: 4, bosnian: "Kafa", english: "Coffee" },
+        { id: 5, bosnian: "Ćevapi", english: "Cevapi" },
+        { id: 6, bosnian: "Burek", english: "Burek" }
+      ],
+      translation: [
+        { id: 1, english: "I want cevapi", bosnian: "Želim ćevape", options: ["Želim ćevape", "Volim ćevape", "Imam ćevape", "Jedem ćevape"] },
+        { id: 2, english: "The bill, please", bosnian: "Račun, molim", options: ["Račun, molim", "Kafu, molim", "Vodu, molim", "Hvala"] }
+      ]
+    },
+    // Lesson 8: House and Apartment
+    8: {
+      fillBlank: [
+        { id: 1, sentence: "Živim _____ stanu.", answer: "u", translation: "I live in an apartment.", options: ["u", "na", "iz", "sa"] },
+        { id: 2, sentence: "Knjiga je _____ stolu.", answer: "na", translation: "The book is on the table.", options: ["u", "na", "ispod", "iza"] },
+        { id: 3, sentence: "Mačka je _____ kreveta.", answer: "ispod", translation: "The cat is under the bed.", options: ["na", "u", "ispod", "iznad"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["živiš", "Gdje", "ti"], correct: ["Gdje", "živiš", "ti"], translation: "Where do you live?" },
+        { id: 2, scrambled: ["u", "Živim", "kući", "velikoj"], correct: ["Živim", "u", "velikoj", "kući"], translation: "I live in a big house." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Kuća", english: "House" },
+        { id: 2, bosnian: "Stan", english: "Apartment" },
+        { id: 3, bosnian: "Kuhinja", english: "Kitchen" },
+        { id: 4, bosnian: "Kupatilo", english: "Bathroom" },
+        { id: 5, bosnian: "Spavaća soba", english: "Bedroom" },
+        { id: 6, bosnian: "Dnevna soba", english: "Living room" }
+      ],
+      translation: [
+        { id: 1, english: "Where do you live?", bosnian: "Gdje živiš?", options: ["Gdje živiš?", "Kako si?", "Šta radiš?", "Odakle si?"] },
+        { id: 2, english: "I live in a house", bosnian: "Živim u kući", options: ["Živim u kući", "Živim u stanu", "Imam kuću", "Volim kuću"] }
+      ]
+    },
+    // Lesson 9: Body and Health
+    9: {
+      fillBlank: [
+        { id: 1, sentence: "Boli me _____.", answer: "glava", translation: "My head hurts.", options: ["glava", "ruka", "noga", "stomak"] },
+        { id: 2, sentence: "Imam dvije _____.", answer: "ruke", translation: "I have two hands.", options: ["ruke", "glave", "noze", "oka"] },
+        { id: 3, sentence: "_____ sam danas.", answer: "Bolestan", translation: "I am sick today.", options: ["Bolestan", "Sretan", "Gladan", "Umoran"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["me", "Boli", "stomak"], correct: ["Boli", "me", "stomak"], translation: "My stomach hurts." },
+        { id: 2, scrambled: ["sam", "Umoran", "danas"], correct: ["Umoran", "sam", "danas"], translation: "I am tired today." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Glava", english: "Head" },
+        { id: 2, bosnian: "Ruka", english: "Hand/Arm" },
+        { id: 3, bosnian: "Noga", english: "Leg/Foot" },
+        { id: 4, bosnian: "Oko", english: "Eye" },
+        { id: 5, bosnian: "Nos", english: "Nose" },
+        { id: 6, bosnian: "Usta", english: "Mouth" }
+      ],
+      translation: [
+        { id: 1, english: "My head hurts", bosnian: "Boli me glava", options: ["Boli me glava", "Boli me ruka", "Boli me noga", "Boli me stomak"] },
+        { id: 2, english: "I am tired", bosnian: "Umoran sam", options: ["Umoran sam", "Bolestan sam", "Sretan sam", "Gladan sam"] }
+      ]
+    },
+    // Lesson 10: Jobs and Work
+    10: {
+      fillBlank: [
+        { id: 1, sentence: "_____ kao učiteljica.", answer: "Radim", translation: "I work as a teacher.", options: ["Radim", "Radiš", "Radi", "Radimo"] },
+        { id: 2, sentence: "Ona je _____.", answer: "doktorica", translation: "She is a doctor.", options: ["doktor", "doktorica", "učitelj", "učiteljica"] },
+        { id: 3, sentence: "Moj otac _____ u bolnici.", answer: "radi", translation: "My father works in a hospital.", options: ["radim", "radiš", "radi", "rade"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["baviš", "se", "Čime"], correct: ["Čime", "se", "baviš"], translation: "What do you do?" },
+        { id: 2, scrambled: ["u", "školi", "Radim"], correct: ["Radim", "u", "školi"], translation: "I work at a school." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Doktor", english: "Doctor" },
+        { id: 2, bosnian: "Učitelj", english: "Teacher" },
+        { id: 3, bosnian: "Inženjer", english: "Engineer" },
+        { id: 4, bosnian: "Kuhar", english: "Cook" },
+        { id: 5, bosnian: "Vozač", english: "Driver" },
+        { id: 6, bosnian: "Prodavač", english: "Salesperson" }
+      ],
+      translation: [
+        { id: 1, english: "What do you do?", bosnian: "Čime se baviš?", options: ["Čime se baviš?", "Kako si?", "Gdje živiš?", "Koliko imaš godina?"] },
+        { id: 2, english: "I work as an engineer", bosnian: "Radim kao inženjer", options: ["Radim kao inženjer", "Radim kao doktor", "Radim kao učitelj", "Radim kao kuhar"] }
+      ]
+    },
+    // Lesson 11: Time
+    11: {
+      fillBlank: [
+        { id: 1, sentence: "Koliko je _____?", answer: "sati", translation: "What time is it?", options: ["sati", "dana", "godina", "minuta"] },
+        { id: 2, sentence: "Sada je _____ devet.", answer: "pola", translation: "It's 8:30 now.", options: ["pola", "četvrt", "tri", "dva"] },
+        { id: 3, sentence: "Film počinje u _____ sati.", answer: "pet", translation: "The movie starts at 5 o'clock.", options: ["tri", "četiri", "pet", "šest"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["sati", "je", "Koliko"], correct: ["Koliko", "je", "sati"], translation: "What time is it?" },
+        { id: 2, scrambled: ["osam", "je", "Sada", "sati"], correct: ["Sada", "je", "osam", "sati"], translation: "It's 8 o'clock now." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Sat", english: "Hour/Clock" },
+        { id: 2, bosnian: "Minuta", english: "Minute" },
+        { id: 3, bosnian: "Jutro", english: "Morning" },
+        { id: 4, bosnian: "Podne", english: "Noon" },
+        { id: 5, bosnian: "Veče", english: "Evening" },
+        { id: 6, bosnian: "Noć", english: "Night" }
+      ],
+      translation: [
+        { id: 1, english: "What time is it?", bosnian: "Koliko je sati?", options: ["Koliko je sati?", "Koji je dan?", "Kako si?", "Gdje si?"] },
+        { id: 2, english: "It's half past two", bosnian: "Pola tri je", options: ["Dva sata je", "Pola tri je", "Tri sata je", "Četvrt tri je"] }
+      ]
+    },
+    // Lesson 12: Basic Phrases
+    12: {
+      fillBlank: [
+        { id: 1, sentence: "_____, ne razumijem.", answer: "Izvinite", translation: "Sorry, I don't understand.", options: ["Izvinite", "Hvala", "Molim", "Naravno"] },
+        { id: 2, sentence: "_____ li engleski?", answer: "Govorite", translation: "Do you speak English?", options: ["Govorite", "Govorim", "Govori", "Govore"] },
+        { id: 3, sentence: "Nema na _____!", answer: "čemu", translation: "You're welcome!", options: ["čemu", "šta", "kako", "gdje"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["mi", "pomoći", "Možete", "li"], correct: ["Možete", "li", "mi", "pomoći"], translation: "Can you help me?" },
+        { id: 2, scrambled: ["razumijem", "Ne", "bosanski"], correct: ["Ne", "razumijem", "bosanski"], translation: "I don't understand Bosnian." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Izvinite", english: "Excuse me" },
+        { id: 2, bosnian: "Naravno", english: "Of course" },
+        { id: 3, bosnian: "Možda", english: "Maybe" },
+        { id: 4, bosnian: "Nema problema", english: "No problem" },
+        { id: 5, bosnian: "Ne razumijem", english: "I don't understand" },
+        { id: 6, bosnian: "Polako, molim", english: "Slowly, please" }
+      ],
+      translation: [
+        { id: 1, english: "Do you speak English?", bosnian: "Govorite li engleski?", options: ["Govorite li engleski?", "Govorite li bosanski?", "Razumijete li?", "Možete li?"] },
+        { id: 2, english: "I don't understand", bosnian: "Ne razumijem", options: ["Ne razumijem", "Ne znam", "Ne mogu", "Ne volim"] }
+      ]
     }
   }
 

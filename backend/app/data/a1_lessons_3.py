@@ -57,6 +57,16 @@ A1_LESSONS_PART3 = [
 - Račun, molim. - The bill, please.
 """,
         "cultural_note": "Bosanska kuhinja je bogata i ukusna. Ćevapi, burek i pita su najpoznatija jela. Bosanska kafa se priprema na poseban način i servira u fildžanu (mala šoljica) sa rahat-lokumom ili šećerom. Nikada ne žurite sa kafom - to je društveni ritual!",
+        "cultural_comic": {
+            "title": "U ćevabdžinici kod Želje",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/c8/7c/8e/cevabdzinica-zeljo.jpg?w=1200",
+            "panels": [
+                {"character": "🧑‍🍳", "name": "Konobar", "text": "Dobrodošli! Šta želite jesti?", "translation": "Welcome! What would you like to eat?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Gošća", "text": "Želim deset ćevapa sa lukom i kajmakom.", "translation": "I want ten cevapi with onions and kajmak.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "🧑‍🍳", "name": "Konobar", "text": "Odličan izbor! A za piti?", "translation": "Excellent choice! And to drink?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Gošća", "text": "Jednu bosansku kafu i čašu воде, molim.", "translation": "One Bosnian coffee and a glass of water, please.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Konobar", "text": "Dobar dan! Šta želite naručiti?", "translation": "Good day! What would you like to order?"},
             {"speaker": "Gost", "text": "Želim ćevape sa lukom i kajmakom.", "translation": "I want cevapi with onions and kajmak."},
@@ -131,6 +141,16 @@ A1_LESSONS_PART3 = [
 - Knjiga je **na** stolu. (The book is on the table.)
 """,
         "cultural_note": "U Bosni, mnogi ljudi žive u stanovima u gradovima, dok su kuće češće u manjim mjestima. Tradicionalne bosanske kuće imaju 'avliju' (dvorište) i često 'čardak' (drveni balkon). Gostoprimstvo je vrlo važno - gosti se uvijek dočekuju kafom i slatkišima.",
+        "cultural_comic": {
+            "title": "U tradicionalnoj bosanskoj kući",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/45/5d/83/traditional-bosnian-house.jpg?w=1200",
+            "panels": [
+                {"character": "👨", "name": "Tarik", "text": "Dobrodošla u moju kuću! Izvolite u dnevnu sobu.", "translation": "Welcome to my house! Please come to the living room.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Ema", "text": "Hvala! Kuća je prekrasna. Gdje je kupatilo?", "translation": "Thanks! The house is beautiful. Where is the bathroom?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Tarik", "text": "Kupatilo je gore, pored spavaće sobe.", "translation": "The bathroom is upstairs, next to the bedroom.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Ema", "text": "A kuhinja? Mogu li pomoći sa kafom?", "translation": "And the kitchen? Can I help with coffee?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Tarik", "text": "Gdje živiš?", "translation": "Where do you live?"},
             {"speaker": "Ema", "text": "Živim u stanu u centru grada.", "translation": "I live in an apartment in the city center."},
@@ -206,6 +226,16 @@ Konstrukcija za izražavanje boli:
 - **Umoran/umorna sam.** - I'm tired.
 """,
         "cultural_note": "U Bosni i Hercegovini zdravstvena zaštita je dostupna svima. Kada ste bolesni, uobičajeno je da vas posjete prijatelji i porodica sa hranom i podrškom. Tradicionalni lijekovi poput čaja od kamilice, meda i limuna još uvijek su popularni za prehladu.",
+        "cultural_comic": {
+            "title": "Kod doktora u Sarajevu",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/c5/ab/c5/clinical-center-university.jpg?w=1200",
+            "panels": [
+                {"character": "👨‍⚕️", "name": "Doktor", "text": "Dobar dan. Šta vas boli?", "translation": "Good day. What hurts?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
+                {"character": "👩", "name": "Pacijent", "text": "Boli me glava i grlo. I umorna sam.", "translation": "My head and throat hurt. And I'm tired.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "👨‍⚕️", "name": "Doktor", "text": "Imate prehladu. Pijte čaj sa medom.", "translation": "You have a cold. Drink tea with honey.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
+                {"character": "👩", "name": "Pacijent", "text": "Hvala, doktore! Osjećam se bolje već.", "translation": "Thank you, doctor! I feel better already.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Doktor", "text": "Dobar dan. Šta vas muči?", "translation": "Good day. What's bothering you?"},
             {"speaker": "Pacijent", "text": "Dobar dan, doktore. Boli me glava i grlo.", "translation": "Good day, doctor. My head and throat hurt."},

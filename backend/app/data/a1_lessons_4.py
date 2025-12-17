@@ -52,6 +52,16 @@ A1_LESSONS_PART4 = [
 - **Radim u...** - I work at/in...
 """,
         "cultural_note": "U Bosni i Hercegovini, tradicionalno je uobičajeno pitati ljude čime se bave. Obrazovanje i profesionalni uspjeh su cijenjeni. Mnogi mladi Bosanci i Bosanke studiraju na univerzitetima u Sarajevu, Banja Luci, Tuzli i Mostaru.",
+        "cultural_comic": {
+            "title": "Na Univerzitetu u Sarajevu",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/4a/e5/c9/university-of-sarajevo.jpg?w=1200",
+            "panels": [
+                {"character": "👨", "name": "Adi", "text": "Čime se baviš, Sabina?", "translation": "What do you do, Sabina?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Sabina", "text": "Ja sam učiteljica. Radim u školi.", "translation": "I am a teacher. I work at a school.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Adi", "text": "Lijepo! Ja sam inženjer u IT firmi.", "translation": "Nice! I am an engineer at an IT company.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Sabina", "text": "Super! Moj brat je također programer.", "translation": "Great! My brother is also a programmer.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Adi", "text": "Čime se baviš, Sabina?", "translation": "What do you do, Sabina?"},
             {"speaker": "Sabina", "text": "Ja sam učiteljica. Radim u osnovnoj školi.", "translation": "I am a teacher. I work in an elementary school."},
@@ -125,6 +135,16 @@ A1_LESSONS_PART4 = [
 - **U koliko sati?** - At what time?
 """,
         "cultural_note": "Bosanci koriste 24-satni format u službenim situacijama (npr. vozni red), ali u svakodnevnom govoru češće koriste 12-satni format. 'Pola' se računa unaprijed, tako da 'pola pet' znači 4:30, a ne 5:30!",
+        "cultural_comic": {
+            "title": "Na željezničkoj stanici u Sarajevu",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/a5/d5/aa/sarajevo-railway-station.jpg?w=1200",
+            "panels": [
+                {"character": "👩", "name": "Hana", "text": "Koliko je sati? Kada ide voz za Mostar?", "translation": "What time is it? When does the train to Mostar leave?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=45"},
+                {"character": "👨", "name": "Dino", "text": "Sada je pola tri. Voz ide u pet sati.", "translation": "It's 2:30 now. The train leaves at 5 o'clock.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=52"},
+                {"character": "👩", "name": "Hana", "text": "Odlično! Imamo dva i po sata.", "translation": "Excellent! We have two and a half hours.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=45"},
+                {"character": "👨", "name": "Dino", "text": "Hajde na kafu! Vraćamo se u četvrt do pet.", "translation": "Let's go for coffee! We'll return at quarter to five.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=52"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Hana", "text": "Koliko je sati?", "translation": "What time is it?"},
             {"speaker": "Dino", "text": "Sada je pola tri.", "translation": "It's half past two now."},
@@ -202,6 +222,16 @@ A1_LESSONS_PART4 = [
 | Hvala ti | Hvala vam |
 """,
         "cultural_note": "Bosanci su poznati po gostoprimstvu. Ako vas neko pozove na kafu, nemojte odbiti - to je dio tradicije. Fraza 'Nema na čemu' doslovno znači 'There is nothing (to thank for)', što odražava skromnost bosanske kulture.",
+        "cultural_comic": {
+            "title": "Turist u Sarajevu traži pomoć",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/d3/a7/fe/ferhadija-street.jpg?w=1200",
+            "panels": [
+                {"character": "🧔", "name": "Turist", "text": "Izvinite, govorite li engleski?", "translation": "Excuse me, do you speak English?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=11"},
+                {"character": "👩", "name": "Sarajka", "text": "Malo. Mogu li vam pomoći?", "translation": "A little. Can I help you?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "🧔", "name": "Turist", "text": "Gdje je Baščaršija? Ne razumijem mapu.", "translation": "Where is Baščaršija? I don't understand the map.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=11"},
+                {"character": "👩", "name": "Sarajka", "text": "Idite pravo, pa lijevo. Nema na čemu!", "translation": "Go straight, then left. You're welcome!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"}
+            ]
+        },
         "dialogue": [
             {"speaker": "Turist", "text": "Izvinite, govorite li engleski?", "translation": "Excuse me, do you speak English?"},
             {"speaker": "Lokalni", "text": "Malo. Mogu li vam pomoći?", "translation": "A little. Can I help you?"},
