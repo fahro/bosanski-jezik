@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://bosanski-jezik-production.up.railway.app'
+const API_URL = import.meta.env.VITE_API_URL || ''
 
 export const api = {
   get: async (endpoint) => {
