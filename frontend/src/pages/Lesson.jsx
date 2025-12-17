@@ -709,11 +709,21 @@ function Lesson() {
                           {showResult && !isCorrect && (
                             <div className="mt-3 p-2 bg-red-100 rounded-lg text-sm text-red-700">
                               ✓ Tačan redoslijed: <strong>{exercise.correct.join(' ')}</strong>
+                              <div className="text-gray-600 italic mt-1">🌍 {exercise.translation}</div>
                             </div>
                           )}
                           {showResult && isCorrect && (
                             <div className="mt-3 p-2 bg-green-100 rounded-lg text-sm text-green-700">
                               ✓ Odlično! Tačna rečenica!
+                              <div className="text-gray-600 italic mt-1">🌍 {exercise.translation}</div>
+                            </div>
+                          )}
+                          
+                          {/* Show translation when sentence is complete (all words used) */}
+                          {!showResult && builtSentence.length === exercise.scrambled.length && (
+                            <div className="mt-3 p-2 bg-blue-50 rounded-lg text-sm text-blue-700">
+                              📝 Složena rečenica: <strong>{builtSentence.join(' ')}</strong>
+                              <div className="text-gray-600 italic mt-1">🌍 {exercise.translation}</div>
                             </div>
                           )}
                         </div>
