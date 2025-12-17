@@ -101,16 +101,36 @@ def check_answer(data: dict):
     }
 
 # Serve static frontend files (for production deployment)
-static_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")
-if os.path.exists(static_dir):
-    app.mount("/assets", StaticFiles(directory=os.path.join(static_dir, "assets")), name="assets")
+# Try multiple possible static directories
+possible_static_dirs = [
+    "/app/static",  # Docker production path
+    os.path.join(os.path.dirname(os.path.dirname(__file__)), "static"),  # Relative path
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "static"),  # Alternative
+]
+
+static_dir = None
+for dir_path in possible_static_dirs:
+    if os.path.exists(dir_path) and os.path.isdir(dir_path):
+        static_dir = dir_path
+        break
+
+if static_dir:
+    assets_dir = os.path.join(static_dir, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
     
     @app.get("/{full_path:path}")
     async def serve_frontend(full_path: str):
+        # Don't serve frontend for API routes
+        if full_path.startswith("api/"):
+            return {"error": "Not found"}
         file_path = os.path.join(static_dir, full_path)
         if os.path.exists(file_path) and os.path.isfile(file_path):
             return FileResponse(file_path)
-        return FileResponse(os.path.join(static_dir, "index.html"))
+        index_path = os.path.join(static_dir, "index.html")
+        if os.path.exists(index_path):
+            return FileResponse(index_path)
+        return {"error": "Frontend not found"}
 
 if __name__ == "__main__":
     import uvicorn
