@@ -63,7 +63,7 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
         "cultural_note": "U Bosni i Hercegovini, ljudi se često pozdravljaju sa 'Merhaba' (iz turskog) ili 'Selam' u neformalnim situacijama. 'Vi' forma se koristi za starije osobe i u formalnim situacijama kao znak poštovanja.",
         "cultural_comic": {
             "title": "Kod Sebilj fontane u Baščaršiji",
-            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Sarajevo_City_Panorama.JPG/1280px-Sarajevo_City_Panorama.JPG",
+            "image": "https://images.unsplash.com/photo-1555990538-1e6c0c6a4b75?w=800",
             "panels": [
                 {"character": "🧔🏻", "name": "Ahmed", "text": "Selam, brate! Ja sam Ahmed.", "translation": "Hi brother! I am Ahmed.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
                 {"character": "👨🏻", "name": "Emir", "text": "Selam! Ja sam Emir. Drago mi je!", "translation": "Hi! I am Emir. Nice to meet you!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"},
@@ -182,7 +182,7 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
         "cultural_note": "U Bosni i Hercegovini koristi se konvertibilna marka (KM) kao valuta. Kada kupujete na pijaci, često ćete čuti cijene u markama. Pregovaranje o cijeni je uobičajeno na tradicionalnim pijacama.",
         "cultural_comic": {
             "title": "Na Baščaršiji - kupovina u dućanu",
-            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Bascarsija_Sarajevo.JPG/1280px-Bascarsija_Sarajevo.JPG",
+            "image": "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=800",
             "panels": [
                 {"character": "👩", "name": "Amra", "text": "Dobar dan! Ovo je moja prva posjeta Baščaršiji.", "translation": "Good day! This is my first visit to Baščaršija.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
                 {"character": "👨‍🌾", "name": "Dućandžija", "text": "Dobrodošli! Imam lijepe ćilime. Ovaj je prvi put na prodaju.", "translation": "Welcome! I have nice carpets. This one is for sale for the first time.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
@@ -271,7 +271,7 @@ Pridjevi za boje se mijenjaju prema rodu imenice:
         "cultural_note": "Bosna i Hercegovina ima zastavu sa plavom bojom i žutim trokutom sa bijelim zvijezdama. Plava i žuta su nacionalne boje. Tradicionalna bosanska ćilimska umjetnost koristi živopisne crvene, plave i zelene boje.",
         "cultural_comic": {
             "title": "Kod Starog Mosta u Mostaru",
-            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Mostar_Old_Town_Panorama_2007.jpg/1280px-Mostar_Old_Town_Panorama_2007.jpg",
+            "image": "https://images.unsplash.com/photo-1592425104520-196dedfd6277?w=800",
             "panels": [
                 {"character": "👩‍🦰", "name": "Sara", "text": "Pogledaj! Stari Most je bijel i prekrasan!", "translation": "Look! The Old Bridge is white and beautiful!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=44"},
                 {"character": "👨🏻", "name": "Kenan", "text": "Da! A rijeka Neretva je zelena i plava.", "translation": "Yes! And the Neretva river is green and blue.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=68"},
