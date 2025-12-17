@@ -232,12 +232,7 @@ function Lesson() {
   }
 
   const checkSentenceExercises = () => {
-    const answers = {}
-    sentenceOrderingList.forEach(ex => {
-      const userOrder = wordPositions[ex.id] || ex.scrambled
-      answers[ex.id] = JSON.stringify(userOrder) === JSON.stringify(ex.correct)
-    })
-    setSentenceExercises({ answers, showResults: true })
+    setSentenceExercises(prev => ({ ...prev, showResults: true }))
   }
 
   const resetSentenceExercises = () => {
@@ -246,7 +241,12 @@ function Lesson() {
   }
 
   const getSentenceScore = () => {
-    return Object.values(sentenceExercises.answers).filter(v => v).length
+    let correct = 0
+    sentenceOrderingList.forEach(ex => {
+      const built = sentenceExercises.answers[ex.id]?.built || []
+      if (JSON.stringify(built) === JSON.stringify(ex.correct)) correct++
+    })
+    return correct
   }
 
   // Matching exercise handlers
@@ -587,7 +587,7 @@ function Lesson() {
               {activeExerciseType === 'sentenceOrder' && (
                 <div className="animate-fadeIn">
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">🔀 Složi rečenicu</h3>
-                  <p className="text-gray-600 mb-4">Prevucite riječi s lijeve strane u polje desno da složite rečenicu</p>
+                  <p className="text-gray-600 mb-4">Klikni na riječi redom da složiš rečenicu</p>
 
                   <div className="space-y-6">
                     {sentenceOrderingList.map((exercise) => {
@@ -595,8 +595,43 @@ function Lesson() {
                         initializeSentenceExercise(exercise.id, exercise.scrambled)
                       }
                       const currentWords = wordPositions[exercise.id] || exercise.scrambled
-                      const isCorrect = sentenceExercises.answers[exercise.id]
+                      const usedIndices = sentenceExercises.answers[exercise.id]?.usedIndices || []
+                      const builtSentence = sentenceExercises.answers[exercise.id]?.built || []
+                      const isCorrect = sentenceExercises.showResults && JSON.stringify(builtSentence) === JSON.stringify(exercise.correct)
                       const showResult = sentenceExercises.showResults
+
+                      const handleWordClick = (word, idx) => {
+                        if (showResult || usedIndices.includes(idx)) return
+                        setSentenceExercises(prev => ({
+                          ...prev,
+                          answers: {
+                            ...prev.answers,
+                            [exercise.id]: {
+                              usedIndices: [...usedIndices, idx],
+                              built: [...builtSentence, word]
+                            }
+                          }
+                        }))
+                      }
+
+                      const handleRemoveWord = (removeIdx) => {
+                        if (showResult) return
+                        const newBuilt = builtSentence.filter((_, i) => i !== removeIdx)
+                        const removedWord = builtSentence[removeIdx]
+                        const originalIdx = exercise.scrambled.indexOf(removedWord)
+                        const newUsedIndices = usedIndices.filter(i => exercise.scrambled[i] !== removedWord || usedIndices.indexOf(i) !== usedIndices.lastIndexOf(i) ? i !== usedIndices[removeIdx] : true)
+                        
+                        setSentenceExercises(prev => ({
+                          ...prev,
+                          answers: {
+                            ...prev.answers,
+                            [exercise.id]: {
+                              usedIndices: usedIndices.filter((_, i) => i !== removeIdx),
+                              built: newBuilt
+                            }
+                          }
+                        }))
+                      }
 
                       return (
                         <div
@@ -607,54 +642,68 @@ function Lesson() {
                               : 'bg-white border-gray-200'
                           }`}
                         >
-                          {/* Header with number and translation */}
-                          <div className="flex items-center justify-between mb-4">
-                            <div className="flex items-center space-x-2">
-                              <span className="bg-bosnia-blue text-white px-2 py-1 rounded-md text-sm font-bold">#{exercise.id}</span>
-                              <span className="text-gray-600 font-medium">{exercise.translation}</span>
-                            </div>
+                          {/* Header */}
+                          <div className="flex items-center space-x-2 mb-4">
+                            <span className="bg-bosnia-blue text-white px-2 py-1 rounded-md text-sm font-bold">#{exercise.id}</span>
+                            <span className="text-gray-600 font-medium">{exercise.translation}</span>
                           </div>
                           
                           {/* Two-column layout */}
-                          <div className="grid grid-cols-2 gap-4">
-                            {/* Left side - Available words label */}
-                            <div className="text-center">
-                              <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">📦 Dostupne riječi</div>
-                            </div>
-                            {/* Right side - Sentence area label */}
-                            <div className="text-center">
-                              <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">📝 Tvoja rečenica</div>
-                            </div>
-                          </div>
-                          
-                          {/* Drop zone with words */}
-                          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-4 border-2 border-dashed border-gray-300">
-                            <div className="flex flex-wrap gap-2 min-h-[50px] items-center justify-center">
-                              {currentWords.map((word, idx) => (
-                                <div
-                                  key={idx}
-                                  draggable={!showResult}
-                                  onDragStart={() => handleWordDragStart(exercise.id, idx)}
-                                  onDragOver={handleDragOver}
-                                  onDrop={() => handleWordDrop(exercise.id, idx)}
-                                  className={`px-4 py-2 rounded-lg font-medium cursor-grab active:cursor-grabbing transition-all shadow-md ${
-                                    showResult
-                                      ? isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
-                                      : 'bg-bosnia-blue text-white hover:bg-blue-700 hover:scale-105'
-                                  }`}
-                                >
-                                  <span className="flex items-center gap-1">
-                                    <GripVertical className="w-3 h-3 opacity-50" />
-                                    {word}
-                                  </span>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {/* Left - Available words */}
+                            <div>
+                              <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide text-center">📦 Dostupne riječi</div>
+                              <div className="bg-blue-50 rounded-xl p-3 min-h-[80px] border-2 border-dashed border-blue-200">
+                                <div className="flex flex-wrap gap-2 justify-center">
+                                  {exercise.scrambled.map((word, idx) => (
+                                    <button
+                                      key={idx}
+                                      onClick={() => handleWordClick(word, idx)}
+                                      disabled={usedIndices.includes(idx) || showResult}
+                                      className={`px-3 py-2 rounded-lg font-medium transition-all ${
+                                        usedIndices.includes(idx)
+                                          ? 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50'
+                                          : 'bg-bosnia-blue text-white hover:bg-blue-700 hover:scale-105 cursor-pointer shadow-md'
+                                      }`}
+                                    >
+                                      {word}
+                                    </button>
+                                  ))}
                                 </div>
-                              ))}
-                            </div>
-                            {!showResult && (
-                              <div className="text-center mt-3 text-gray-400 text-sm">
-                                ↔️ Povuci i ispusti da promijeniš redoslijed
                               </div>
-                            )}
+                            </div>
+                            
+                            {/* Right - Built sentence */}
+                            <div>
+                              <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide text-center">📝 Tvoja rečenica</div>
+                              <div className={`rounded-xl p-3 min-h-[80px] border-2 ${
+                                showResult
+                                  ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                                  : 'bg-green-50 border-dashed border-green-300'
+                              }`}>
+                                <div className="flex flex-wrap gap-2 justify-center min-h-[40px] items-center">
+                                  {builtSentence.length === 0 ? (
+                                    <span className="text-gray-400 text-sm italic">Klikni na riječi lijevo...</span>
+                                  ) : (
+                                    builtSentence.map((word, idx) => (
+                                      <button
+                                        key={idx}
+                                        onClick={() => handleRemoveWord(idx)}
+                                        disabled={showResult}
+                                        className={`px-3 py-2 rounded-lg font-medium transition-all ${
+                                          showResult
+                                            ? isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                                            : 'bg-green-600 text-white hover:bg-red-500 cursor-pointer shadow-md'
+                                        }`}
+                                        title={!showResult ? "Klikni da ukloniš" : ""}
+                                      >
+                                        {word}
+                                      </button>
+                                    ))
+                                  )}
+                                </div>
+                              </div>
+                            </div>
                           </div>
                           
                           {showResult && !isCorrect && (
