@@ -63,12 +63,12 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
         "cultural_note": "U Bosni i Hercegovini, ljudi se često pozdravljaju sa 'Merhaba' (iz turskog) ili 'Selam' u neformalnim situacijama. 'Vi' forma se koristi za starije osobe i u formalnim situacijama kao znak poštovanja.",
         "cultural_comic": {
             "title": "Selam u Sarajevu",
-            "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600",
+            "image": "https://images.unsplash.com/photo-1590073242678-70ee3fc28e8e?w=800",
             "panels": [
-                {"character": "👨", "name": "Ahmed", "text": "Selam, brate! Kako si?", "translation": "Hi brother! How are you?", "position": "left"},
-                {"character": "👨‍🦱", "name": "Emir", "text": "Selam! Evo, dobro sam, hvala Bogu.", "translation": "Hi! I'm good, thank God.", "position": "right"},
-                {"character": "👨", "name": "Ahmed", "text": "Ajde na kafu?", "translation": "Let's go for coffee?", "position": "left"},
-                {"character": "👨‍🦱", "name": "Emir", "text": "Može! Idemo u Baščaršiju.", "translation": "Sure! Let's go to Baščaršija.", "position": "right"}
+                {"character": "🧔🏻", "name": "Ahmed", "text": "Selam, brate! Kako si?", "translation": "Hi brother! How are you?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👨🏻", "name": "Emir", "text": "Selam! Evo, dobro sam, hvala Bogu.", "translation": "Hi! I'm good, thank God.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"},
+                {"character": "🧔🏻", "name": "Ahmed", "text": "Hajde na kafu?", "translation": "Let's go for coffee?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👨🏻", "name": "Emir", "text": "Može! Idemo u Baščaršiju.", "translation": "Sure! Let's go to Baščaršija.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=12"}
             ]
         },
         "dialogue": [

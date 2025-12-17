@@ -929,42 +929,56 @@ function Lesson() {
                     <span className="mr-2">💬</span> {lesson.cultural_comic.title}
                   </h3>
                   
-                  {/* Comic container */}
-                  <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 border-4 border-gray-800 shadow-xl">
-                    {/* Background image */}
-                    <div className="relative mb-6 rounded-xl overflow-hidden">
+                  {/* Comic container with background */}
+                  <div className="relative rounded-2xl overflow-hidden shadow-xl">
+                    {/* Background image - čaršija/kafana */}
+                    <div className="absolute inset-0">
                       <img 
                         src={lesson.cultural_comic.image} 
                         alt={lesson.cultural_comic.title}
-                        className="w-full h-48 object-cover opacity-30"
+                        className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.onerror = null
-                          e.target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'
+                          e.target.src = 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'
                         }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-yellow-50 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
                     </div>
                     
                     {/* Comic panels */}
-                    <div className="space-y-4">
+                    <div className="relative p-4 sm:p-6 space-y-4">
                       {lesson.cultural_comic.panels.map((panel, index) => (
                         <div 
                           key={index} 
                           className={`flex ${panel.position === 'right' ? 'justify-end' : 'justify-start'}`}
                         >
-                          <div className={`max-w-[85%] flex items-start gap-3 ${panel.position === 'right' ? 'flex-row-reverse' : ''}`}>
-                            {/* Character avatar */}
-                            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white border-3 border-gray-800 flex items-center justify-center text-2xl shadow-md">
-                              {panel.character}
+                          <div className={`max-w-[85%] flex items-start gap-2 sm:gap-3 ${panel.position === 'right' ? 'flex-row-reverse' : ''}`}>
+                            {/* Character avatar with fes */}
+                            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-white shadow-lg">
+                              {panel.avatar ? (
+                                <img 
+                                  src={panel.avatar} 
+                                  alt={panel.name}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    e.target.onerror = null
+                                    e.target.parentElement.innerHTML = `<div class="w-full h-full bg-bosnia-blue flex items-center justify-center text-white text-xl">${panel.character}</div>`
+                                  }}
+                                />
+                              ) : (
+                                <div className="w-full h-full bg-bosnia-blue flex items-center justify-center text-white text-xl">
+                                  {panel.character}
+                                </div>
+                              )}
                             </div>
                             
                             {/* Speech bubble */}
-                            <div className={`relative bg-white rounded-2xl p-4 border-3 border-gray-800 shadow-md ${
-                              panel.position === 'right' ? 'rounded-tr-none' : 'rounded-tl-none'
+                            <div className={`relative bg-white/95 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-lg ${
+                              panel.position === 'right' ? 'rounded-tr-sm' : 'rounded-tl-sm'
                             }`}>
                               <div className="font-bold text-sm text-bosnia-blue mb-1">{panel.name}</div>
-                              <div className="text-gray-800 font-medium text-lg">{panel.text}</div>
-                              <div className="text-gray-500 text-sm italic mt-1">{panel.translation}</div>
+                              <div className="text-gray-800 font-medium text-base sm:text-lg">{panel.text}</div>
+                              <div className="text-gray-500 text-xs sm:text-sm italic mt-1">{panel.translation}</div>
                             </div>
                           </div>
                         </div>
