@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { BookOpen, Clock, ChevronRight, ArrowLeft } from 'lucide-react'
+import { api } from '../api'
 
 function LessonList() {
   const { levelId } = useParams()
@@ -10,8 +11,8 @@ function LessonList() {
 
   useEffect(() => {
     Promise.all([
-      fetch(`/api/levels/${levelId}`).then(res => res.json()),
-      fetch(`/api/levels/${levelId}/lessons`).then(res => res.json())
+      api.get(`/api/levels/${levelId}`),
+      api.get(`/api/levels/${levelId}/lessons`)
     ])
       .then(([levelData, lessonsData]) => {
         setLevel(levelData)

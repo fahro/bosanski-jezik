@@ -9,6 +9,7 @@ import {
   Star, Trophy, Zap, Award
 } from 'lucide-react'
 import { useProgress } from '../hooks/useProgress'
+import { api } from '../api'
 
 function Lesson() {
   const { lessonId } = useParams()
@@ -46,8 +47,7 @@ function Lesson() {
   })
 
   useEffect(() => {
-    fetch(`/api/lessons/${lessonId}`)
-      .then(res => res.json())
+    api.get(`/api/lessons/${lessonId}`)
       .then(data => {
         setLesson(data)
         setLoading(false)

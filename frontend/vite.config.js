@@ -11,5 +11,12 @@ export default defineConfig({
         changeOrigin: true
       }
     }
+  },
+  preview: {
+    port: process.env.PORT || 3000,
+    host: true
+  },
+  define: {
+    'import.meta.env.VITE_API_URL': JSON.stringify(process.env.VITE_API_URL || '')
   }
 })

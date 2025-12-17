@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BookOpen, ChevronRight, Lock } from 'lucide-react'
+import { api } from '../api'
 
 function Levels() {
   const [levels, setLevels] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('/api/levels')
-      .then(res => res.json())
+    api.get('/api/levels')
       .then(data => {
         setLevels(data)
         setLoading(false)
