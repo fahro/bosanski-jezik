@@ -998,7 +998,7 @@ function Lesson() {
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.onerror = null
-                          e.target.src = 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800'
+                          e.target.src = 'https://images.unsplash.com/photo-1592425104520-196dedfd6277?w=800'
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
