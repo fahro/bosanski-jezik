@@ -975,14 +975,66 @@ function Lesson() {
             <span>Prethodna lekcija</span>
           </Link>
         )}
-        {lesson.id < 12 && (
-          <Link
-            to={`/lesson/${lesson.id + 1}`}
+        
+        {/* Guide through tabs, then next lesson after quiz completion */}
+        {activeTab === 'vocabulary' && (
+          <button
+            onClick={() => setActiveTab('grammar')}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
-            <span>Sljedeća lekcija</span>
+            <span>Idite na Gramatiku</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'grammar' && (
+          <button
+            onClick={() => setActiveTab('exercises')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Vježbe</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && (
+          <button
+            onClick={() => setActiveTab('dialogue')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Dijalog</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'dialogue' && (
+          <button
+            onClick={() => setActiveTab('culture')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Kulturu</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'culture' && (
+          <button
+            onClick={() => setActiveTab('quiz')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Kviz</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'quiz' && quizState.showResult && lesson.id < 12 && (
+          <Link
+            to={`/lesson/${lesson.id + 1}`}
+            className="inline-flex items-center space-x-2 bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Lekciju {lesson.id + 1}</span>
             <ChevronRight className="w-5 h-5" />
           </Link>
+        )}
+        {activeTab === 'quiz' && !quizState.showResult && (
+          <div className="ml-auto text-gray-500 text-sm italic">
+            Završite kviz da biste nastavili na sljedeću lekciju
+          </div>
         )}
       </div>
     </div>
