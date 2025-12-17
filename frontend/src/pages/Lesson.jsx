@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm'
 import { 
   ArrowLeft, BookOpen, MessageSquare, PenTool, HelpCircle, 
   Volume2, ChevronRight, ChevronLeft, CheckCircle, XCircle,
-  Lightbulb, Globe, RefreshCw
+  Lightbulb, Globe, RefreshCw, Dumbbell, Shuffle, GripVertical
 } from 'lucide-react'
 
 function Lesson() {
@@ -26,6 +26,19 @@ function Lesson() {
     answers: {},
     showResults: false,
     draggedItem: null
+  })
+  const [sentenceExercises, setSentenceExercises] = useState({
+    answers: {},
+    showResults: false
+  })
+  const [activeExerciseType, setActiveExerciseType] = useState('fillBlank')
+  const [matchingExercises, setMatchingExercises] = useState({
+    answers: {},
+    showResults: false
+  })
+  const [translationExercises, setTranslationExercises] = useState({
+    answers: {},
+    showResults: false
   })
 
   useEffect(() => {
@@ -69,28 +82,58 @@ function Lesson() {
     setShowQuizTranslation(false)
   }
 
-  // Grammar exercises data
+  // Grammar exercises data - Fill in the blank (10 exercises)
   const grammarExercisesList = [
     { id: 1, sentence: "Ja ___ student.", answer: "sam", translation: "I am a student." },
     { id: 2, sentence: "Ti ___ lijepa.", answer: "si", translation: "You are beautiful." },
     { id: 3, sentence: "On ___ visok.", answer: "je", translation: "He is tall." },
-    { id: 4, sentence: "Ona ___ pametna.", answer: "je", translation: "She is smart." },
-    { id: 5, sentence: "Mi ___ prijatelji.", answer: "smo", translation: "We are friends." },
-    { id: 6, sentence: "Vi ___ dobri.", answer: "ste", translation: "You are good." },
-    { id: 7, sentence: "Oni ___ sretni.", answer: "su", translation: "They are happy." },
-    { id: 8, sentence: "Ja ___ iz Bosne.", answer: "sam", translation: "I am from Bosnia." },
+    { id: 4, sentence: "Mi ___ prijatelji.", answer: "smo", translation: "We are friends." },
+    { id: 5, sentence: "Vi ___ dobri.", answer: "ste", translation: "You are good." },
+    { id: 6, sentence: "Oni ___ sretni.", answer: "su", translation: "They are happy." },
+    { id: 7, sentence: "Ona ___ učiteljica.", answer: "je", translation: "She is a teacher." },
+    { id: 8, sentence: "Mi ___ u školi.", answer: "smo", translation: "We are at school." },
     { id: 9, sentence: "Ti ___ moj prijatelj.", answer: "si", translation: "You are my friend." },
-    { id: 10, sentence: "Ona ___ učiteljica.", answer: "je", translation: "She is a teacher." },
-    { id: 11, sentence: "Mi ___ u školi.", answer: "smo", translation: "We are at school." },
-    { id: 12, sentence: "Vi ___ spremni?", answer: "ste", translation: "Are you ready?" },
-    { id: 13, sentence: "Oni ___ kod kuće.", answer: "su", translation: "They are at home." },
-    { id: 14, sentence: "Ja ___ gladan.", answer: "sam", translation: "I am hungry." },
-    { id: 15, sentence: "Ti ___ umoran.", answer: "si", translation: "You are tired." },
-    { id: 16, sentence: "On ___ doktor.", answer: "je", translation: "He is a doctor." },
-    { id: 17, sentence: "Mi ___ Bosanci.", answer: "smo", translation: "We are Bosnians." },
-    { id: 18, sentence: "Vi ___ gosti.", answer: "ste", translation: "You are guests." },
-    { id: 19, sentence: "One ___ sestre.", answer: "su", translation: "They are sisters." },
-    { id: 20, sentence: "Ja ___ sretan.", answer: "sam", translation: "I am happy." }
+    { id: 10, sentence: "Ja ___ sretan.", answer: "sam", translation: "I am happy." }
+  ]
+
+  // Sentence ordering exercises (10 exercises)
+  const sentenceOrderingList = [
+    { id: 1, scrambled: ["sam", "ja", "student"], correct: ["ja", "sam", "student"], translation: "I am a student." },
+    { id: 2, scrambled: ["lijepa", "si", "ti"], correct: ["ti", "si", "lijepa"], translation: "You are beautiful." },
+    { id: 3, scrambled: ["je", "on", "visok"], correct: ["on", "je", "visok"], translation: "He is tall." },
+    { id: 4, scrambled: ["smo", "prijatelji", "mi"], correct: ["mi", "smo", "prijatelji"], translation: "We are friends." },
+    { id: 5, scrambled: ["zoveš", "kako", "se"], correct: ["kako", "se", "zoveš"], translation: "What is your name?" },
+    { id: 6, scrambled: ["dan", "dobar", "gospodine"], correct: ["dobar", "dan", "gospodine"], translation: "Good day, sir." },
+    { id: 7, scrambled: ["mi", "drago", "je"], correct: ["drago", "mi", "je"], translation: "Nice to meet you." },
+    { id: 8, scrambled: ["Sarajeva", "iz", "sam", "ja"], correct: ["ja", "sam", "iz", "Sarajeva"], translation: "I am from Sarajevo." },
+    { id: 9, scrambled: ["si", "odakle", "ti"], correct: ["odakle", "si", "ti"], translation: "Where are you from?" },
+    { id: 10, scrambled: ["puno", "hvala", "vam"], correct: ["hvala", "vam", "puno"], translation: "Thank you very much." }
+  ]
+
+  // Matching exercises (Bosnian to English)
+  const matchingList = [
+    { id: 1, bosnian: "Zdravo", english: "Hello" },
+    { id: 2, bosnian: "Dobar dan", english: "Good day" },
+    { id: 3, bosnian: "Hvala", english: "Thank you" },
+    { id: 4, bosnian: "Molim", english: "Please" },
+    { id: 5, bosnian: "Doviđenja", english: "Goodbye" },
+    { id: 6, bosnian: "Dobro jutro", english: "Good morning" },
+    { id: 7, bosnian: "Laku noć", english: "Good night" },
+    { id: 8, bosnian: "Da", english: "Yes" },
+    { id: 9, bosnian: "Ne", english: "No" },
+    { id: 10, bosnian: "Izvini", english: "Sorry" }
+  ]
+
+  // Translation exercises
+  const translationList = [
+    { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?", hint: "Zdravo = Hello" },
+    { id: 2, english: "My name is...", bosnian: "Zovem se...", hint: "Zovem se = I call myself" },
+    { id: 3, english: "Nice to meet you", bosnian: "Drago mi je", hint: "Drago = pleased" },
+    { id: 4, english: "Where are you from?", bosnian: "Odakle si?", hint: "Odakle = from where" },
+    { id: 5, english: "I am from Bosnia", bosnian: "Ja sam iz Bosne", hint: "iz = from" },
+    { id: 6, english: "Thank you very much", bosnian: "Hvala vam puno", hint: "puno = very much" },
+    { id: 7, english: "Good morning", bosnian: "Dobro jutro", hint: "jutro = morning" },
+    { id: 8, english: "Goodbye, see you tomorrow", bosnian: "Doviđenja, vidimo se sutra", hint: "sutra = tomorrow" }
   ]
 
   const verbOptions = ["sam", "si", "je", "smo", "ste", "su"]
@@ -129,6 +172,112 @@ function Lesson() {
     return correct
   }
 
+  // Sentence ordering handlers
+  const [draggedWord, setDraggedWord] = useState(null)
+  const [wordPositions, setWordPositions] = useState({})
+
+  const initializeSentenceExercise = (exerciseId, words) => {
+    if (!wordPositions[exerciseId]) {
+      setWordPositions(prev => ({
+        ...prev,
+        [exerciseId]: [...words]
+      }))
+    }
+  }
+
+  const handleWordDragStart = (exerciseId, wordIndex) => {
+    setDraggedWord({ exerciseId, wordIndex })
+  }
+
+  const handleWordDrop = (exerciseId, targetIndex) => {
+    if (draggedWord && draggedWord.exerciseId === exerciseId) {
+      const words = [...(wordPositions[exerciseId] || [])]
+      const [removed] = words.splice(draggedWord.wordIndex, 1)
+      words.splice(targetIndex, 0, removed)
+      setWordPositions(prev => ({
+        ...prev,
+        [exerciseId]: words
+      }))
+    }
+    setDraggedWord(null)
+  }
+
+  const checkSentenceExercises = () => {
+    const answers = {}
+    sentenceOrderingList.forEach(ex => {
+      const userOrder = wordPositions[ex.id] || ex.scrambled
+      answers[ex.id] = JSON.stringify(userOrder) === JSON.stringify(ex.correct)
+    })
+    setSentenceExercises({ answers, showResults: true })
+  }
+
+  const resetSentenceExercises = () => {
+    setWordPositions({})
+    setSentenceExercises({ answers: {}, showResults: false })
+  }
+
+  const getSentenceScore = () => {
+    return Object.values(sentenceExercises.answers).filter(v => v).length
+  }
+
+  // Matching exercise handlers
+  const [selectedBosnian, setSelectedBosnian] = useState(null)
+  const [matchedPairs, setMatchedPairs] = useState({})
+
+  const handleMatchClick = (type, id, value) => {
+    if (matchingExercises.showResults) return
+    
+    if (type === 'bosnian') {
+      setSelectedBosnian({ id, value })
+    } else if (type === 'english' && selectedBosnian) {
+      setMatchedPairs(prev => ({
+        ...prev,
+        [selectedBosnian.id]: value
+      }))
+      setSelectedBosnian(null)
+    }
+  }
+
+  const checkMatchingExercises = () => {
+    setMatchingExercises({ answers: matchedPairs, showResults: true })
+  }
+
+  const resetMatchingExercises = () => {
+    setMatchedPairs({})
+    setSelectedBosnian(null)
+    setMatchingExercises({ answers: {}, showResults: false })
+  }
+
+  const getMatchingScore = () => {
+    let correct = 0
+    matchingList.forEach(item => {
+      if (matchedPairs[item.id] === item.english) correct++
+    })
+    return correct
+  }
+
+  // Translation exercise handlers
+  const [translationInputs, setTranslationInputs] = useState({})
+
+  const checkTranslationExercises = () => {
+    setTranslationExercises({ answers: translationInputs, showResults: true })
+  }
+
+  const resetTranslationExercises = () => {
+    setTranslationInputs({})
+    setTranslationExercises({ answers: {}, showResults: false })
+  }
+
+  const getTranslationScore = () => {
+    let correct = 0
+    translationList.forEach(item => {
+      const userAnswer = (translationInputs[item.id] || '').toLowerCase().trim()
+      const correctAnswer = item.bosnian.toLowerCase().trim()
+      if (userAnswer === correctAnswer) correct++
+    })
+    return correct
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -144,9 +293,17 @@ function Lesson() {
   const tabs = [
     { id: 'vocabulary', label: 'Vokabular', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'grammar', label: 'Gramatika', icon: <PenTool className="w-4 h-4" /> },
+    { id: 'exercises', label: 'Vježbajmo', icon: <Dumbbell className="w-4 h-4" /> },
     { id: 'dialogue', label: 'Dijalog', icon: <MessageSquare className="w-4 h-4" /> },
     { id: 'culture', label: 'Kultura', icon: <Globe className="w-4 h-4" /> },
     { id: 'quiz', label: 'Kviz', icon: <HelpCircle className="w-4 h-4" /> }
+  ]
+
+  const exerciseTypes = [
+    { id: 'fillBlank', label: 'Popuni prazninu', icon: '✏️' },
+    { id: 'sentenceOrder', label: 'Složi rečenicu', icon: '🔀' },
+    { id: 'matching', label: 'Spoji parove', icon: '🔗' },
+    { id: 'translation', label: 'Prevedi', icon: '🌍' }
   ]
 
   return (
@@ -267,116 +424,337 @@ function Lesson() {
                   {lesson.grammar_explanation}
                 </ReactMarkdown>
               </div>
+              <div className="mt-6 p-4 bg-blue-50 rounded-xl text-center">
+                <p className="text-blue-700">💡 Želite vježbati? Posjetite tab <strong>"Vježbajmo"</strong> za interaktivne vježbe!</p>
+              </div>
+            </div>
+          )}
 
-              {/* Drag and Drop Exercises */}
-              <div className="mt-8 pt-8 border-t-2 border-gray-200">
-                <h3 className="text-xl font-semibold text-gray-800 mb-4 flex items-center space-x-2">
-                  <PenTool className="w-5 h-5" />
-                  <span>Vježbe: Glagol "biti" (To be)</span>
-                </h3>
-                <p className="text-gray-600 mb-6">Prevucite ispravan oblik glagola u prazno polje</p>
+          {/* Exercises Tab */}
+          {activeTab === 'exercises' && (
+            <div className="animate-fadeIn">
+              <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center space-x-2">
+                <Dumbbell className="w-6 h-6" />
+                <span>Vježbajmo gramatiku!</span>
+              </h2>
+              
+              {/* Exercise type selector */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {exerciseTypes.map(type => (
+                  <button
+                    key={type.id}
+                    onClick={() => setActiveExerciseType(type.id)}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center space-x-2 ${
+                      activeExerciseType === type.id
+                        ? 'bg-bosnia-blue text-white shadow-md'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <span>{type.icon}</span>
+                    <span>{type.label}</span>
+                  </button>
+                ))}
+              </div>
 
-                {/* Verb options to drag */}
-                <div className="flex flex-wrap gap-3 mb-6 p-4 bg-blue-50 rounded-xl">
-                  <span className="text-sm text-gray-600 mr-2">Opcije:</span>
-                  {verbOptions.map((verb, i) => (
-                    <div
-                      key={i}
-                      draggable
-                      onDragStart={() => handleDragStart(verb)}
-                      className="px-4 py-2 bg-bosnia-blue text-white rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors font-medium shadow-md"
-                    >
-                      {verb}
-                    </div>
-                  ))}
-                </div>
+              {/* Fill in the Blank Exercises */}
+              {activeExerciseType === 'fillBlank' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">✏️ Popuni prazninu - Glagol "biti"</h3>
+                  <p className="text-gray-600 mb-4">Prevucite ispravan oblik glagola u prazno polje</p>
 
-                {/* Exercises grid */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  {grammarExercisesList.map((exercise) => {
-                    const userAnswer = grammarExercises.answers[exercise.id]
-                    const isCorrect = userAnswer === exercise.answer
-                    const showResult = grammarExercises.showResults && userAnswer
-
-                    return (
+                  <div className="flex flex-wrap gap-3 mb-6 p-4 bg-blue-50 rounded-xl">
+                    <span className="text-sm text-gray-600 mr-2">Opcije:</span>
+                    {verbOptions.map((verb, i) => (
                       <div
-                        key={exercise.id}
-                        className={`p-4 rounded-xl border-2 transition-all ${
-                          showResult
-                            ? isCorrect
-                              ? 'bg-green-50 border-green-300'
-                              : 'bg-red-50 border-red-300'
-                            : 'bg-white border-gray-200 hover:border-blue-300'
-                        }`}
+                        key={i}
+                        draggable
+                        onDragStart={() => handleDragStart(verb)}
+                        className="px-4 py-2 bg-bosnia-blue text-white rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors font-medium shadow-md"
                       >
-                        <div className="flex items-center space-x-2 text-lg">
-                          <span className="text-gray-500 text-sm">#{exercise.id}</span>
-                          <span>
-                            {exercise.sentence.split('___')[0]}
-                            <span
-                              onDragOver={handleDragOver}
-                              onDrop={() => handleDrop(exercise.id)}
-                              onClick={() => !grammarExercises.showResults && setGrammarExercises(prev => ({
-                                ...prev,
-                                answers: { ...prev.answers, [exercise.id]: undefined }
-                              }))}
-                              className={`inline-block min-w-[60px] mx-1 px-3 py-1 rounded-lg border-2 border-dashed text-center cursor-pointer ${
-                                userAnswer
-                                  ? showResult
-                                    ? isCorrect
-                                      ? 'bg-green-100 border-green-400 text-green-700'
-                                      : 'bg-red-100 border-red-400 text-red-700'
-                                    : 'bg-blue-100 border-blue-400 text-blue-700'
-                                  : 'bg-gray-100 border-gray-300 text-gray-400'
+                        {verb}
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {grammarExercisesList.map((exercise) => {
+                      const userAnswer = grammarExercises.answers[exercise.id]
+                      const isCorrect = userAnswer === exercise.answer
+                      const showResult = grammarExercises.showResults && userAnswer !== undefined
+
+                      return (
+                        <div
+                          key={exercise.id}
+                          className={`p-4 rounded-xl border-2 transition-all ${
+                            showResult
+                              ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                              : 'bg-white border-gray-200 hover:border-blue-300'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-2 text-lg">
+                            <span className="text-gray-500 text-sm">#{exercise.id}</span>
+                            <span>
+                              {exercise.sentence.split('___')[0]}
+                              <span
+                                onDragOver={handleDragOver}
+                                onDrop={() => handleDrop(exercise.id)}
+                                onClick={() => !grammarExercises.showResults && setGrammarExercises(prev => ({
+                                  ...prev,
+                                  answers: { ...prev.answers, [exercise.id]: undefined }
+                                }))}
+                                className={`inline-block min-w-[60px] mx-1 px-3 py-1 rounded-lg border-2 border-dashed text-center cursor-pointer ${
+                                  userAnswer
+                                    ? showResult
+                                      ? isCorrect ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700'
+                                      : 'bg-blue-100 border-blue-400 text-blue-700'
+                                    : 'bg-gray-100 border-gray-300 text-gray-400'
+                                }`}
+                              >
+                                {userAnswer || '___'}
+                              </span>
+                              {exercise.sentence.split('___')[1]}
+                            </span>
+                          </div>
+                          {showResult && (
+                            <div className="mt-2 text-sm">
+                              {!isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
+                              <div className="text-gray-500 italic mt-1">{exercise.translation}</div>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <div className="flex justify-center space-x-4 mt-6">
+                    {!grammarExercises.showResults ? (
+                      <button onClick={checkGrammarExercises} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        Provjeri ({Object.keys(grammarExercises.answers).length}/{grammarExercisesList.length})
+                      </button>
+                    ) : (
+                      <div className="text-center">
+                        <div className="mb-4 text-xl">Rezultat: <strong className="text-bosnia-blue">{getGrammarScore()}</strong> / {grammarExercisesList.length}</div>
+                        <button onClick={resetGrammarExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Sentence Ordering Exercises */}
+              {activeExerciseType === 'sentenceOrder' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🔀 Složi rečenicu</h3>
+                  <p className="text-gray-600 mb-4">Prevucite riječi u ispravan redoslijed</p>
+
+                  <div className="space-y-4">
+                    {sentenceOrderingList.map((exercise) => {
+                      if (!wordPositions[exercise.id]) {
+                        initializeSentenceExercise(exercise.id, exercise.scrambled)
+                      }
+                      const currentWords = wordPositions[exercise.id] || exercise.scrambled
+                      const isCorrect = sentenceExercises.answers[exercise.id]
+                      const showResult = sentenceExercises.showResults
+
+                      return (
+                        <div
+                          key={exercise.id}
+                          className={`p-4 rounded-xl border-2 transition-all ${
+                            showResult
+                              ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                              : 'bg-white border-gray-200'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-2 mb-3">
+                            <span className="text-gray-500 text-sm">#{exercise.id}</span>
+                            <span className="text-gray-400 text-sm">({exercise.translation})</span>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            {currentWords.map((word, idx) => (
+                              <div
+                                key={idx}
+                                draggable={!showResult}
+                                onDragStart={() => handleWordDragStart(exercise.id, idx)}
+                                onDragOver={handleDragOver}
+                                onDrop={() => handleWordDrop(exercise.id, idx)}
+                                className={`px-4 py-2 rounded-lg font-medium cursor-grab active:cursor-grabbing transition-all ${
+                                  showResult
+                                    ? isCorrect ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
+                                    : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
+                                }`}
+                              >
+                                {word}
+                              </div>
+                            ))}
+                          </div>
+                          {showResult && !isCorrect && (
+                            <div className="mt-2 text-sm text-red-600">
+                              Tačno: <strong>{exercise.correct.join(' ')}</strong>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <div className="flex justify-center space-x-4 mt-6">
+                    {!sentenceExercises.showResults ? (
+                      <button onClick={checkSentenceExercises} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        Provjeri odgovore
+                      </button>
+                    ) : (
+                      <div className="text-center">
+                        <div className="mb-4 text-xl">Rezultat: <strong className="text-bosnia-blue">{getSentenceScore()}</strong> / {sentenceOrderingList.length}</div>
+                        <button onClick={resetSentenceExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Matching Exercises */}
+              {activeExerciseType === 'matching' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🔗 Spoji parove</h3>
+                  <p className="text-gray-600 mb-4">Kliknite na bosansku riječ, zatim na engleski prijevod</p>
+
+                  <div className="grid md:grid-cols-2 gap-8">
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-3">Bosanski</h4>
+                      <div className="space-y-2">
+                        {matchingList.map(item => {
+                          const isMatched = matchedPairs[item.id]
+                          const isSelected = selectedBosnian?.id === item.id
+                          const isCorrect = matchingExercises.showResults && matchedPairs[item.id] === item.english
+                          const isWrong = matchingExercises.showResults && matchedPairs[item.id] && matchedPairs[item.id] !== item.english
+
+                          return (
+                            <button
+                              key={item.id}
+                              onClick={() => handleMatchClick('bosnian', item.id, item.bosnian)}
+                              disabled={isMatched || matchingExercises.showResults}
+                              className={`w-full p-3 rounded-lg text-left transition-all ${
+                                isCorrect ? 'bg-green-100 border-2 border-green-400' :
+                                isWrong ? 'bg-red-100 border-2 border-red-400' :
+                                isMatched ? 'bg-gray-100 text-gray-400' :
+                                isSelected ? 'bg-bosnia-blue text-white' :
+                                'bg-white border-2 border-gray-200 hover:border-bosnia-blue'
                               }`}
                             >
-                              {userAnswer || '___'}
-                            </span>
-                            {exercise.sentence.split('___')[1]}
-                          </span>
-                        </div>
-                        {showResult && (
-                          <div className="mt-2 text-sm">
-                            {!isCorrect && (
-                              <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>
-                            )}
-                            <div className="text-gray-500 italic mt-1">{exercise.translation}</div>
-                          </div>
-                        )}
+                              {item.bosnian}
+                              {isMatched && <span className="float-right text-sm">→ {matchedPairs[item.id]}</span>}
+                            </button>
+                          )
+                        })}
                       </div>
-                    )
-                  })}
-                </div>
-
-                {/* Check/Reset buttons */}
-                <div className="flex justify-center space-x-4 mt-6">
-                  {!grammarExercises.showResults ? (
-                    <button
-                      onClick={checkGrammarExercises}
-                      disabled={Object.keys(grammarExercises.answers).length < grammarExercisesList.length}
-                      className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
-                    >
-                      Provjeri odgovore ({Object.keys(grammarExercises.answers).length}/{grammarExercisesList.length})
-                    </button>
-                  ) : (
-                    <div className="text-center">
-                      <div className="mb-4 text-xl">
-                        Rezultat: <strong className="text-bosnia-blue">{getGrammarScore()}</strong> / {grammarExercisesList.length}
-                        <span className="ml-2">
-                          {getGrammarScore() >= 18 ? '🎉 Odlično!' : getGrammarScore() >= 14 ? '👍 Dobro!' : '📚 Vježbaj više!'}
-                        </span>
-                      </div>
-                      <button
-                        onClick={resetGrammarExercises}
-                        className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
-                      >
-                        <RefreshCw className="w-5 h-5" />
-                        <span>Pokušaj ponovo</span>
-                      </button>
                     </div>
-                  )}
+                    <div>
+                      <h4 className="font-medium text-gray-700 mb-3">English</h4>
+                      <div className="space-y-2">
+                        {[...matchingList].sort(() => Math.random() - 0.5).map(item => {
+                          const isUsed = Object.values(matchedPairs).includes(item.english)
+                          return (
+                            <button
+                              key={item.english}
+                              onClick={() => handleMatchClick('english', item.id, item.english)}
+                              disabled={isUsed || !selectedBosnian || matchingExercises.showResults}
+                              className={`w-full p-3 rounded-lg text-left transition-all ${
+                                isUsed ? 'bg-gray-100 text-gray-400' :
+                                selectedBosnian ? 'bg-white border-2 border-gray-200 hover:border-green-400 hover:bg-green-50' :
+                                'bg-white border-2 border-gray-200'
+                              }`}
+                            >
+                              {item.english}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex justify-center space-x-4 mt-6">
+                    {!matchingExercises.showResults ? (
+                      <button onClick={checkMatchingExercises} disabled={Object.keys(matchedPairs).length < matchingList.length} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors disabled:bg-gray-300">
+                        Provjeri ({Object.keys(matchedPairs).length}/{matchingList.length})
+                      </button>
+                    ) : (
+                      <div className="text-center">
+                        <div className="mb-4 text-xl">Rezultat: <strong className="text-bosnia-blue">{getMatchingScore()}</strong> / {matchingList.length}</div>
+                        <button onClick={resetMatchingExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
+
+              {/* Translation Exercises */}
+              {activeExerciseType === 'translation' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🌍 Prevedi na bosanski</h3>
+                  <p className="text-gray-600 mb-4">Upišite prijevod engleske rečenice na bosanski</p>
+
+                  <div className="space-y-4">
+                    {translationList.map(item => {
+                      const userAnswer = translationInputs[item.id] || ''
+                      const isCorrect = userAnswer.toLowerCase().trim() === item.bosnian.toLowerCase().trim()
+                      const showResult = translationExercises.showResults
+
+                      return (
+                        <div
+                          key={item.id}
+                          className={`p-4 rounded-xl border-2 transition-all ${
+                            showResult
+                              ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                              : 'bg-white border-gray-200'
+                          }`}
+                        >
+                          <div className="flex items-center space-x-2 mb-2">
+                            <span className="text-gray-500 text-sm">#{item.id}</span>
+                            <span className="font-medium text-gray-800">{item.english}</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={userAnswer}
+                            onChange={(e) => setTranslationInputs(prev => ({ ...prev, [item.id]: e.target.value }))}
+                            disabled={showResult}
+                            placeholder="Upišite prijevod..."
+                            className={`w-full p-3 rounded-lg border-2 ${
+                              showResult
+                                ? isCorrect ? 'border-green-400 bg-green-50' : 'border-red-400 bg-red-50'
+                                : 'border-gray-200 focus:border-bosnia-blue focus:outline-none'
+                            }`}
+                          />
+                          {!showResult && <p className="text-sm text-gray-400 mt-1">💡 {item.hint}</p>}
+                          {showResult && !isCorrect && (
+                            <p className="text-sm text-red-600 mt-1">Tačan odgovor: <strong>{item.bosnian}</strong></p>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <div className="flex justify-center space-x-4 mt-6">
+                    {!translationExercises.showResults ? (
+                      <button onClick={checkTranslationExercises} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors">
+                        Provjeri odgovore
+                      </button>
+                    ) : (
+                      <div className="text-center">
+                        <div className="mb-4 text-xl">Rezultat: <strong className="text-bosnia-blue">{getTranslationScore()}</strong> / {translationList.length}</div>
+                        <button onClick={resetTranslationExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
