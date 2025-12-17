@@ -587,9 +587,9 @@ function Lesson() {
               {activeExerciseType === 'sentenceOrder' && (
                 <div className="animate-fadeIn">
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">🔀 Složi rečenicu</h3>
-                  <p className="text-gray-600 mb-4">Prevucite riječi u ispravan redoslijed</p>
+                  <p className="text-gray-600 mb-4">Prevucite riječi s lijeve strane u polje desno da složite rečenicu</p>
 
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {sentenceOrderingList.map((exercise) => {
                       if (!wordPositions[exercise.id]) {
                         initializeSentenceExercise(exercise.id, exercise.scrambled)
@@ -607,31 +607,64 @@ function Lesson() {
                               : 'bg-white border-gray-200'
                           }`}
                         >
-                          <div className="flex items-center space-x-2 mb-3">
-                            <span className="text-gray-500 text-sm">#{exercise.id}</span>
-                            <span className="text-gray-400 text-sm">({exercise.translation})</span>
+                          {/* Header with number and translation */}
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center space-x-2">
+                              <span className="bg-bosnia-blue text-white px-2 py-1 rounded-md text-sm font-bold">#{exercise.id}</span>
+                              <span className="text-gray-600 font-medium">{exercise.translation}</span>
+                            </div>
                           </div>
-                          <div className="flex flex-wrap gap-2">
-                            {currentWords.map((word, idx) => (
-                              <div
-                                key={idx}
-                                draggable={!showResult}
-                                onDragStart={() => handleWordDragStart(exercise.id, idx)}
-                                onDragOver={handleDragOver}
-                                onDrop={() => handleWordDrop(exercise.id, idx)}
-                                className={`px-4 py-2 rounded-lg font-medium cursor-grab active:cursor-grabbing transition-all ${
-                                  showResult
-                                    ? isCorrect ? 'bg-green-200 text-green-800' : 'bg-red-200 text-red-800'
-                                    : 'bg-blue-100 text-blue-800 hover:bg-blue-200'
-                                }`}
-                              >
-                                {word}
+                          
+                          {/* Two-column layout */}
+                          <div className="grid grid-cols-2 gap-4">
+                            {/* Left side - Available words label */}
+                            <div className="text-center">
+                              <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">📦 Dostupne riječi</div>
+                            </div>
+                            {/* Right side - Sentence area label */}
+                            <div className="text-center">
+                              <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide">📝 Tvoja rečenica</div>
+                            </div>
+                          </div>
+                          
+                          {/* Drop zone with words */}
+                          <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-xl p-4 border-2 border-dashed border-gray-300">
+                            <div className="flex flex-wrap gap-2 min-h-[50px] items-center justify-center">
+                              {currentWords.map((word, idx) => (
+                                <div
+                                  key={idx}
+                                  draggable={!showResult}
+                                  onDragStart={() => handleWordDragStart(exercise.id, idx)}
+                                  onDragOver={handleDragOver}
+                                  onDrop={() => handleWordDrop(exercise.id, idx)}
+                                  className={`px-4 py-2 rounded-lg font-medium cursor-grab active:cursor-grabbing transition-all shadow-md ${
+                                    showResult
+                                      ? isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                                      : 'bg-bosnia-blue text-white hover:bg-blue-700 hover:scale-105'
+                                  }`}
+                                >
+                                  <span className="flex items-center gap-1">
+                                    <GripVertical className="w-3 h-3 opacity-50" />
+                                    {word}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                            {!showResult && (
+                              <div className="text-center mt-3 text-gray-400 text-sm">
+                                ↔️ Povuci i ispusti da promijeniš redoslijed
                               </div>
-                            ))}
+                            )}
                           </div>
+                          
                           {showResult && !isCorrect && (
-                            <div className="mt-2 text-sm text-red-600">
-                              Tačno: <strong>{exercise.correct.join(' ')}</strong>
+                            <div className="mt-3 p-2 bg-red-100 rounded-lg text-sm text-red-700">
+                              ✓ Tačan redoslijed: <strong>{exercise.correct.join(' ')}</strong>
+                            </div>
+                          )}
+                          {showResult && isCorrect && (
+                            <div className="mt-3 p-2 bg-green-100 rounded-lg text-sm text-green-700">
+                              ✓ Odlično! Tačna rečenica!
                             </div>
                           )}
                         </div>
