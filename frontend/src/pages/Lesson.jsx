@@ -335,52 +335,68 @@ function Lesson() {
         { id: 4, english: "What would you like to eat?", bosnian: "Šta želite jesti?", options: ["Šta želite jesti?", "Šta volite jesti?", "Koliko košta?", "Gdje je restoran?"] }
       ]
     },
-    // Lesson 8: House and Apartment
+    // Lesson 8: House and Apartment (prijedlozi mjesta: u, na, ispod, iznad, pored, između, iza, ispred)
     8: {
       fillBlank: [
-        { id: 1, sentence: "Živim _____ stanu.", answer: "u", translation: "I live in an apartment.", options: ["u", "na", "iz", "sa"] },
+        { id: 1, sentence: "Živim _____ stanu u Sarajevu.", answer: "u", translation: "I live in an apartment in Sarajevo.", options: ["u", "na", "iz", "sa"] },
         { id: 2, sentence: "Knjiga je _____ stolu.", answer: "na", translation: "The book is on the table.", options: ["u", "na", "ispod", "iza"] },
-        { id: 3, sentence: "Mačka je _____ kreveta.", answer: "ispod", translation: "The cat is under the bed.", options: ["na", "u", "ispod", "iznad"] }
+        { id: 3, sentence: "Mačka je _____ kreveta.", answer: "ispod", translation: "The cat is under the bed.", options: ["na", "u", "ispod", "iznad"] },
+        { id: 4, sentence: "Slika je _____ vrata.", answer: "iznad", translation: "The picture is above the door.", options: ["ispod", "iznad", "pored", "iza"] },
+        { id: 5, sentence: "Kupatilo je _____ spavaće sobe.", answer: "pored", translation: "The bathroom is next to the bedroom.", options: ["ispod", "iznad", "pored", "u"] },
+        { id: 6, sentence: "Stolice su _____ stola i zida.", answer: "između", translation: "The chairs are between the table and the wall.", options: ["pored", "između", "ispred", "iza"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["živiš", "Gdje", "ti"], correct: ["Gdje", "živiš", "ti"], translation: "Where do you live?" },
-        { id: 2, scrambled: ["u", "Živim", "kući", "velikoj"], correct: ["Živim", "u", "velikoj", "kući"], translation: "I live in a big house." }
+        { id: 2, scrambled: ["u", "Živim", "kući", "velikoj"], correct: ["Živim", "u", "velikoj", "kući"], translation: "I live in a big house." },
+        { id: 3, scrambled: ["je", "na", "Knjiga", "stolu"], correct: ["Knjiga", "je", "na", "stolu"], translation: "The book is on the table." },
+        { id: 4, scrambled: ["je", "kuće", "Vrt", "iza"], correct: ["Vrt", "je", "iza", "kuće"], translation: "The garden is behind the house." },
+        { id: 5, scrambled: ["kuhinje", "Kupatilo", "pored", "je"], correct: ["Kupatilo", "je", "pored", "kuhinje"], translation: "The bathroom is next to the kitchen." }
       ],
       matching: [
-        { id: 1, bosnian: "Kuća", english: "House" },
-        { id: 2, bosnian: "Stan", english: "Apartment" },
-        { id: 3, bosnian: "Kuhinja", english: "Kitchen" },
-        { id: 4, bosnian: "Kupatilo", english: "Bathroom" },
-        { id: 5, bosnian: "Spavaća soba", english: "Bedroom" },
-        { id: 6, bosnian: "Dnevna soba", english: "Living room" }
+        { id: 1, bosnian: "U kući", english: "In the house" },
+        { id: 2, bosnian: "Na stolu", english: "On the table" },
+        { id: 3, bosnian: "Ispod kreveta", english: "Under the bed" },
+        { id: 4, bosnian: "Iznad vrata", english: "Above the door" },
+        { id: 5, bosnian: "Pored prozora", english: "Next to the window" },
+        { id: 6, bosnian: "Iza kuće", english: "Behind the house" }
       ],
       translation: [
         { id: 1, english: "Where do you live?", bosnian: "Gdje živiš?", options: ["Gdje živiš?", "Kako si?", "Šta radiš?", "Odakle si?"] },
-        { id: 2, english: "I live in a house", bosnian: "Živim u kući", options: ["Živim u kući", "Živim u stanu", "Imam kuću", "Volim kuću"] }
+        { id: 2, english: "I live in an apartment", bosnian: "Živim u stanu", options: ["Živim u kući", "Živim u stanu", "Imam stan", "Volim stan"] },
+        { id: 3, english: "The kitchen is next to the living room", bosnian: "Kuhinja je pored dnevne sobe", options: ["Kuhinja je pored dnevne sobe", "Kuhinja je iza dnevne sobe", "Kuhinja je u dnevnoj sobi", "Kuhinja je ispod dnevne sobe"] },
+        { id: 4, english: "The cat is under the table", bosnian: "Mačka je ispod stola", options: ["Mačka je na stolu", "Mačka je ispod stola", "Mačka je pored stola", "Mačka je iza stola"] }
       ]
     },
-    // Lesson 9: Body and Health
+    // Lesson 9: Body and Health (boli me..., bole me..., dijelovi tijela, kako se osjećate)
     9: {
       fillBlank: [
-        { id: 1, sentence: "Boli me _____.", answer: "glava", translation: "My head hurts.", options: ["glava", "ruka", "noga", "stomak"] },
-        { id: 2, sentence: "Imam dvije _____.", answer: "ruke", translation: "I have two hands.", options: ["ruke", "glave", "noze", "oka"] },
-        { id: 3, sentence: "_____ sam danas.", answer: "Bolestan", translation: "I am sick today.", options: ["Bolestan", "Sretan", "Gladan", "Umoran"] }
+        { id: 1, sentence: "Boli me _____.", answer: "glava", translation: "My head hurts.", options: ["glava", "ruka", "oči", "uši"] },
+        { id: 2, sentence: "_____ me oči.", answer: "Bole", translation: "My eyes hurt.", options: ["Boli", "Bole", "Imam", "Vidim"] },
+        { id: 3, sentence: "_____ sam danas.", answer: "Bolestan", translation: "I am sick today.", options: ["Bolestan", "Sretan", "Gladan", "Dobar"] },
+        { id: 4, sentence: "Kako se _____?", answer: "osjećate", translation: "How are you feeling?", options: ["osjećate", "zovete", "bavite", "živite"] },
+        { id: 5, sentence: "_____ sam. Trebam odmor.", answer: "Umorna", translation: "I'm tired. I need rest.", options: ["Umorna", "Sretna", "Gladna", "Zdrava"] },
+        { id: 6, sentence: "Boli me _____ i grlo.", answer: "glava", translation: "My head and throat hurt.", options: ["glava", "noga", "ruka", "stomak"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["me", "Boli", "stomak"], correct: ["Boli", "me", "stomak"], translation: "My stomach hurts." },
-        { id: 2, scrambled: ["sam", "Umoran", "danas"], correct: ["Umoran", "sam", "danas"], translation: "I am tired today." }
+        { id: 2, scrambled: ["sam", "Umoran", "danas"], correct: ["Umoran", "sam", "danas"], translation: "I am tired today." },
+        { id: 3, scrambled: ["me", "Bole", "oči"], correct: ["Bole", "me", "oči"], translation: "My eyes hurt." },
+        { id: 4, scrambled: ["sam", "Loše"], correct: ["Loše", "sam"], translation: "I'm not well." },
+        { id: 5, scrambled: ["se", "Kako", "osjećate"], correct: ["Kako", "se", "osjećate"], translation: "How are you feeling?" }
       ],
       matching: [
-        { id: 1, bosnian: "Glava", english: "Head" },
-        { id: 2, bosnian: "Ruka", english: "Hand/Arm" },
-        { id: 3, bosnian: "Noga", english: "Leg/Foot" },
-        { id: 4, bosnian: "Oko", english: "Eye" },
-        { id: 5, bosnian: "Nos", english: "Nose" },
-        { id: 6, bosnian: "Usta", english: "Mouth" }
+        { id: 1, bosnian: "Boli me glava", english: "My head hurts" },
+        { id: 2, bosnian: "Bole me oči", english: "My eyes hurt" },
+        { id: 3, bosnian: "Bolestan sam", english: "I'm sick" },
+        { id: 4, bosnian: "Umorna sam", english: "I'm tired (f)" },
+        { id: 5, bosnian: "Loše sam", english: "I'm not well" },
+        { id: 6, bosnian: "Dobro sam", english: "I'm fine" }
       ],
       translation: [
-        { id: 1, english: "My head hurts", bosnian: "Boli me glava", options: ["Boli me glava", "Boli me ruka", "Boli me noga", "Boli me stomak"] },
-        { id: 2, english: "I am tired", bosnian: "Umoran sam", options: ["Umoran sam", "Bolestan sam", "Sretan sam", "Gladan sam"] }
+        { id: 1, english: "My head hurts", bosnian: "Boli me glava", options: ["Boli me glava", "Bole me glave", "Imam glavu", "Vidim glavu"] },
+        { id: 2, english: "I am tired", bosnian: "Umoran sam", options: ["Umoran sam", "Bolestan sam", "Sretan sam", "Gladan sam"] },
+        { id: 3, english: "My eyes hurt", bosnian: "Bole me oči", options: ["Boli me oko", "Bole me oči", "Imam oči", "Vidim oči"] },
+        { id: 4, english: "How are you feeling?", bosnian: "Kako se osjećate?", options: ["Kako se osjećate?", "Kako se zovete?", "Gdje živite?", "Šta radite?"] }
       ]
     },
     // Lesson 10: Jobs and Work

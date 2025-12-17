@@ -144,13 +144,15 @@ A1_LESSONS_PART3 = [
 """,
         "cultural_note": "U Bosni, mnogi ljudi žive u stanovima u gradovima, dok su kuće češće u manjim mjestima. Tradicionalne bosanske kuće imaju 'avliju' (dvorište) i često 'čardak' (drveni balkon). Gostoprimstvo je vrlo važno - gosti se uvijek dočekuju kafom i slatkišima.",
         "cultural_comic": {
-            "title": "U tradicionalnoj bosanskoj kući",
+            "title": "Obilazak novog stana u Sarajevu",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/45/5d/83/traditional-bosnian-house.jpg?w=1200",
             "panels": [
-                {"character": "👨", "name": "Tarik", "text": "Dobrodošla u moju kuću! Izvolite u dnevnu sobu.", "translation": "Welcome to my house! Please come to the living room.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
-                {"character": "👩", "name": "Ema", "text": "Hvala! Kuća je prekrasna. Gdje je kupatilo?", "translation": "Thanks! The house is beautiful. Where is the bathroom?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👨", "name": "Tarik", "text": "Kupatilo je gore, pored spavaće sobe.", "translation": "The bathroom is upstairs, next to the bedroom.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
-                {"character": "👩", "name": "Ema", "text": "A kuhinja? Mogu li pomoći sa kafom?", "translation": "And the kitchen? Can I help with coffee?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"}
+                {"character": "👩", "name": "Amela", "text": "Ovo je moj novi stan! Izvolite u dnevnu sobu.", "translation": "This is my new apartment! Please come to the living room.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Kenan", "text": "Predivno! Gdje je kuhinja?", "translation": "Beautiful! Where is the kitchen?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Amela", "text": "Kuhinja je pored dnevne sobe. A kupatilo je iza.", "translation": "The kitchen is next to the living room. And the bathroom is behind.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Kenan", "text": "A spavaća soba? Koliko soba imaš?", "translation": "And the bedroom? How many rooms do you have?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Amela", "text": "Imam dvije spavaće sobe. Jedna je iznad kuhinje.", "translation": "I have two bedrooms. One is above the kitchen.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Kenan", "text": "Sto je ispod prozora. A stolice su između stola i zida.", "translation": "The table is under the window. And the chairs are between the table and the wall.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
@@ -170,7 +172,17 @@ A1_LESSONS_PART3 = [
             {"id": 2, "question": "Koji prijedlog znači 'under'?", "options": ["na", "u", "ispod", "iznad"], "correct_answer": 2, "explanation": "'Ispod' znači 'under'.", "question_type": "grammar"},
             {"id": 3, "question": "Gdje spavate?", "options": ["u kuhinji", "u spavaćoj sobi", "u kupatilu", "u dnevnoj sobi"], "correct_answer": 1, "explanation": "Spavamo u spavaćoj sobi.", "question_type": "context"},
             {"id": 4, "question": "Šta znači 'stan'?", "options": ["house", "room", "apartment", "table"], "correct_answer": 2, "explanation": "'Stan' znači 'apartment'.", "question_type": "vocabulary"},
-            {"id": 5, "question": "Koja je pravilna forma: 'Ja _____ u Sarajevu' (živjeti)?", "options": ["živiš", "živi", "živim", "živimo"], "correct_answer": 2, "explanation": "'Ja živim' - prva osoba jednine.", "question_type": "grammar"}
+            {"id": 5, "question": "Koja je pravilna forma: 'Ja _____ u Sarajevu' (živjeti)?", "options": ["živiš", "živi", "živim", "živimo"], "correct_answer": 2, "explanation": "'Ja živim' - prva osoba jednine.", "question_type": "grammar"},
+            {"id": 6, "question": "Koji prijedlog znači 'next to'?", "options": ["ispod", "iznad", "pored", "iza"], "correct_answer": 2, "explanation": "'Pored' znači 'next to'.", "question_type": "grammar"},
+            {"id": 7, "question": "Kako se kaže 'bathroom' na bosanskom?", "options": ["kuhinja", "kupatilo", "spavaća soba", "dnevna soba"], "correct_answer": 1, "explanation": "'Kupatilo' znači 'bathroom'.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Šta znači 'iza kuće'?", "options": ["in front of the house", "behind the house", "next to the house", "in the house"], "correct_answer": 1, "explanation": "'Iza kuće' znači 'behind the house'.", "question_type": "grammar"},
+            {"id": 9, "question": "Gdje kuhate hranu?", "options": ["u spavaćoj sobi", "u kupatilu", "u kuhinji", "u dnevnoj sobi"], "correct_answer": 2, "explanation": "Kuhamo u kuhinji.", "question_type": "context"},
+            {"id": 10, "question": "Kako se kaže 'table' na bosanskom?", "options": ["stolica", "sto", "krevet", "ormar"], "correct_answer": 1, "explanation": "'Sto' znači 'table'.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Šta znači 'Knjiga je na stolu'?", "options": ["The book is under the table", "The book is on the table", "The book is next to the table", "The book is behind the table"], "correct_answer": 1, "explanation": "'Na stolu' znači 'on the table'.", "question_type": "grammar"},
+            {"id": 12, "question": "Koja je pravilna forma: 'Ti _____ u kući' (živjeti)?", "options": ["živim", "živiš", "živi", "živimo"], "correct_answer": 1, "explanation": "'Ti živiš' - druga osoba jednine.", "question_type": "grammar"},
+            {"id": 13, "question": "Koji prijedlog znači 'between'?", "options": ["pored", "ispod", "između", "ispred"], "correct_answer": 2, "explanation": "'Između' znači 'between'.", "question_type": "grammar"},
+            {"id": 14, "question": "Kako se kaže 'bed' na bosanskom?", "options": ["sto", "stolica", "krevet", "ormar"], "correct_answer": 2, "explanation": "'Krevet' znači 'bed'.", "question_type": "vocabulary"},
+            {"id": 15, "question": "Šta znači 'ispred kuće'?", "options": ["behind the house", "in the house", "in front of the house", "above the house"], "correct_answer": 2, "explanation": "'Ispred kuće' znači 'in front of the house'.", "question_type": "grammar"}
         ]
     },
     {
@@ -229,13 +241,15 @@ Konstrukcija za izražavanje boli:
 """,
         "cultural_note": "U Bosni i Hercegovini zdravstvena zaštita je dostupna svima. Kada ste bolesni, uobičajeno je da vas posjete prijatelji i porodica sa hranom i podrškom. Tradicionalni lijekovi poput čaja od kamilice, meda i limuna još uvijek su popularni za prehladu.",
         "cultural_comic": {
-            "title": "Kod doktora u Sarajevu",
+            "title": "Posjeta doktoru - Boli me glava",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/c5/ab/c5/clinical-center-university.jpg?w=1200",
             "panels": [
-                {"character": "👨‍⚕️", "name": "Doktor", "text": "Dobar dan. Šta vas boli?", "translation": "Good day. What hurts?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
-                {"character": "👩", "name": "Pacijent", "text": "Boli me glava i grlo. I umorna sam.", "translation": "My head and throat hurt. And I'm tired.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
-                {"character": "👨‍⚕️", "name": "Doktor", "text": "Imate prehladu. Pijte čaj sa medom.", "translation": "You have a cold. Drink tea with honey.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
-                {"character": "👩", "name": "Pacijent", "text": "Hvala, doktore! Osjećam se bolje već.", "translation": "Thank you, doctor! I feel better already.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"}
+                {"character": "👨‍⚕️", "name": "Doktor", "text": "Dobar dan. Kako se osjećate?", "translation": "Good day. How are you feeling?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
+                {"character": "👩", "name": "Amina", "text": "Loše sam. Boli me glava i grlo.", "translation": "I'm not well. My head and throat hurt.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "👨‍⚕️", "name": "Doktor", "text": "Bole li vas oči? Imate li temperaturu?", "translation": "Do your eyes hurt? Do you have a fever?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
+                {"character": "👩", "name": "Amina", "text": "Da, bole me oči. I umorna sam.", "translation": "Yes, my eyes hurt. And I'm tired.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "👨‍⚕️", "name": "Doktor", "text": "Bolesni ste. Pijte čaj i odmarajte.", "translation": "You're sick. Drink tea and rest.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=60"},
+                {"character": "👩", "name": "Amina", "text": "Hvala, doktore! Boli li me i stomak?", "translation": "Thank you, doctor! Does my stomach hurt too?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"}
             ]
         },
         "dialogue": [
@@ -255,7 +269,17 @@ Konstrukcija za izražavanje boli:
             {"id": 2, "question": "Kako kažete 'My stomach hurts'?", "options": ["Boli me glava", "Boli me stomak", "Boli me ruka", "Boli me noga"], "correct_answer": 1, "explanation": "'Boli me stomak' = My stomach hurts.", "question_type": "usage"},
             {"id": 3, "question": "Koja je množina od 'oko'?", "options": ["oka", "oči", "okovi", "oke"], "correct_answer": 1, "explanation": "'Oči' je množina od 'oko'.", "question_type": "grammar"},
             {"id": 4, "question": "Šta znači 'Bolestan sam'?", "options": ["I'm happy", "I'm tired", "I'm sick", "I'm hungry"], "correct_answer": 2, "explanation": "'Bolestan sam' znači 'I'm sick'.", "question_type": "vocabulary"},
-            {"id": 5, "question": "Koliko ruku ima čovjek?", "options": ["jednu", "dvije", "tri", "četiri"], "correct_answer": 1, "explanation": "Čovjek ima dvije ruke.", "question_type": "context"}
+            {"id": 5, "question": "Koliko ruku ima čovjek?", "options": ["jednu", "dvije", "tri", "četiri"], "correct_answer": 1, "explanation": "Čovjek ima dvije ruke.", "question_type": "context"},
+            {"id": 6, "question": "Kako se kaže 'leg' na bosanskom?", "options": ["ruka", "noga", "glava", "stomak"], "correct_answer": 1, "explanation": "'Noga' znači 'leg/foot'.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Šta znači 'Umorna sam'?", "options": ["I'm happy", "I'm tired", "I'm sick", "I'm hungry"], "correct_answer": 1, "explanation": "'Umorna sam' znači 'I'm tired' (female).", "question_type": "vocabulary"},
+            {"id": 8, "question": "Koja je množina od 'uho'?", "options": ["uha", "uši", "uhovi", "uhe"], "correct_answer": 1, "explanation": "'Uši' je množina od 'uho'.", "question_type": "grammar"},
+            {"id": 9, "question": "Kako kažete 'My eyes hurt'?", "options": ["Boli me oko", "Bole me oči", "Boli me uho", "Bole me uši"], "correct_answer": 1, "explanation": "'Bole me oči' - množina koristi 'bole'.", "question_type": "grammar"},
+            {"id": 10, "question": "Šta znači 'Dobro sam'?", "options": ["I'm sick", "I'm tired", "I'm fine", "I'm sad"], "correct_answer": 2, "explanation": "'Dobro sam' znači 'I'm fine'.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Kako se kaže 'tooth' na bosanskom?", "options": ["nos", "usta", "zub", "uho"], "correct_answer": 2, "explanation": "'Zub' znači 'tooth'.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Šta znači 'Loše sam'?", "options": ["I'm fine", "I'm not well", "I'm happy", "I'm hungry"], "correct_answer": 1, "explanation": "'Loše sam' znači 'I'm not well'.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Koja je množina od 'zub'?", "options": ["zuba", "zubi", "zubovi", "zube"], "correct_answer": 1, "explanation": "'Zubi' je množina od 'zub'.", "question_type": "grammar"},
+            {"id": 14, "question": "Kako se kaže 'heart' na bosanskom?", "options": ["glava", "srce", "stomak", "ruka"], "correct_answer": 1, "explanation": "'Srce' znači 'heart'.", "question_type": "vocabulary"},
+            {"id": 15, "question": "Šta kažete doktoru kada vas boli glava?", "options": ["Boli me noga", "Boli me glava", "Dobro sam", "Umoran sam"], "correct_answer": 1, "explanation": "'Boli me glava' = My head hurts.", "question_type": "usage"}
         ]
     }
 ]
