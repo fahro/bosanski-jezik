@@ -554,7 +554,8 @@ function Lesson() {
                               {exercise.sentence.split('___')[1]}
                             </span>
                           </div>
-                          {(showResult || showFillBlankTranslation) && (
+                          {/* Show translation when answer is filled OR toggle is on OR after results */}
+                          {(userAnswer || showResult || showFillBlankTranslation) && (
                             <div className="mt-2 text-sm">
                               {showResult && !isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
                               <div className="text-gray-500 italic mt-1">🌍 {exercise.translation}</div>
