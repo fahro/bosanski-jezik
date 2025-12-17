@@ -49,13 +49,14 @@ A1_LESSONS_PART2 = [
 """,
         "cultural_note": "Porodica je vrlo važna u bosanskoj kulturi. Višegeneracijske porodice često žive zajedno ili blizu jedni drugih. Vikendi su obično rezervisani za porodična okupljanja, često uz tradicionalnu bosansku kafu i kolače.",
         "cultural_comic": {
-            "title": "Porodično okupljanje u Sarajevu",
-            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/33/fc/f0/sarajevo.jpg?w=1200",
+            "title": "Porodični ručak kod bake u Zenici",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/72/d5/92/bosnian-traditional-house.jpg?w=1200",
             "panels": [
-                {"character": "👵", "name": "Baka", "text": "Dobrodošli! Moja porodica je ovdje!", "translation": "Welcome! My family is here!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"},
-                {"character": "👨", "name": "Otac", "text": "Hvala, majko! Ovo je moja žena Amela.", "translation": "Thanks, mother! This is my wife Amela.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
-                {"character": "👩", "name": "Amela", "text": "Drago mi je! Ovo su naša djeca - sin i kći.", "translation": "Nice to meet you! These are our children - son and daughter.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👵", "name": "Baka", "text": "Moji unuci! Hajde na pitu i kafu!", "translation": "My grandchildren! Come for pie and coffee!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=23"}
+                {"character": "👵", "name": "Baka Fatima", "text": "Moj sin Emir i njegova žena dolaze na ručak!", "translation": "My son Emir and his wife are coming for lunch!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"},
+                {"character": "👴", "name": "Djed Hasan", "text": "Odlično! A gdje su naši unuci?", "translation": "Excellent! And where are our grandchildren?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=70"},
+                {"character": "👨", "name": "Emir", "text": "Moja kći Amina je sa mojom sestrom. Moj sin Tarik je ovdje.", "translation": "My daughter Amina is with my sister. My son Tarik is here.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Žena Sanela", "text": "Tvoja majka pravi najbolju pitu! Njena pita je poznata!", "translation": "Your mother makes the best pie! Her pie is famous!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👵", "name": "Baka Fatima", "text": "Hvala, snaho! Naša porodica voli jesti zajedno.", "translation": "Thank you, daughter-in-law! Our family loves eating together.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"}
             ]
         },
         "dialogue": [
@@ -129,13 +130,14 @@ A1_LESSONS_PART2 = [
 """,
         "cultural_note": "U Bosni i Hercegovini, sedmica počinje ponedjeljkom. Petak je posebno važan dan za muslimane (džuma), a nedjelja za katolike i pravoslavce. Subota je tradicionalno dan za porodična okupljanja i odlazak na pijacu.",
         "cultural_comic": {
-            "title": "Planiranje sedmice u Sarajevu",
-            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/56/43/ce/caption.jpg?w=1200",
+            "title": "Sedmični planovi na pijacu Markale",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/5a/c2/58/markale-market.jpg?w=1200",
             "panels": [
-                {"character": "👨", "name": "Amir", "text": "Koji je danas dan?", "translation": "What day is it today?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=52"},
-                {"character": "👩", "name": "Selma", "text": "Danas je četvrtak. Sutra je petak!", "translation": "Today is Thursday. Tomorrow is Friday!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=45"},
-                {"character": "👨", "name": "Amir", "text": "Odlično! U petak idem na džumu.", "translation": "Excellent! On Friday I go to Jumu'ah prayer.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=52"},
-                {"character": "👩", "name": "Selma", "text": "A u subotu idemo na pijacu Markale!", "translation": "And on Saturday we go to Markale market!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=45"}
+                {"character": "👩", "name": "Amra", "text": "Koji je danas dan? Moram na pijacu!", "translation": "What day is it today? I need to go to the market!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=45"},
+                {"character": "👨", "name": "Kemal", "text": "Danas je petak. Pijaca je otvorena!", "translation": "Today is Friday. The market is open!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=52"},
+                {"character": "👩", "name": "Amra", "text": "Super! A sutra, u subotu, imam sastanak.", "translation": "Great! And tomorrow, on Saturday, I have a meeting.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=45"},
+                {"character": "👨", "name": "Kemal", "text": "Jučer, u četvrtak, sam kupio voće ovdje.", "translation": "Yesterday, on Thursday, I bought fruit here.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=52"},
+                {"character": "👩", "name": "Amra", "text": "U nedjelju odmaram. A u ponedjeljak radim.", "translation": "On Sunday I rest. And on Monday I work.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=45"}
             ]
         },
         "dialogue": [

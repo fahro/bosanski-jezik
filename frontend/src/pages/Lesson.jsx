@@ -209,55 +209,66 @@ function Lesson() {
         { id: 4, english: "The green mountains", bosnian: "Zelene planine", options: ["Crvene planine", "Plave planine", "Zelene planine", "Bijele planine"] }
       ]
     },
-    // Lesson 4: Family (Possessive pronouns)
+    // Lesson 4: Family (Possessive pronouns - moj/moja/moje, tvoj/tvoja, njegov/njena, naš/naša)
     4: {
       fillBlank: [
-        { id: 1, sentence: "_____ majka je učiteljica.", answer: "Moja", translation: "My mother is a teacher.", options: ["Moj", "Moja", "Moje", "Moji"] },
-        { id: 2, sentence: "_____ otac radi u bolnici.", answer: "Moj", translation: "My father works in a hospital.", options: ["Moj", "Moja", "Moje", "Moji"] },
-        { id: 3, sentence: "Ovo je _____ sestra.", answer: "moja", translation: "This is my sister.", options: ["moj", "moja", "moje", "moji"] },
-        { id: 4, sentence: "_____ brat je stariji od mene.", answer: "Moj", translation: "My brother is older than me.", options: ["Moj", "Moja", "Moje", "Moji"] }
+        { id: 1, sentence: "_____ majka pravi pitu.", answer: "Moja", translation: "My mother makes pie.", options: ["Moj", "Moja", "Moje", "Tvoja"] },
+        { id: 2, sentence: "Gdje je _____ otac?", answer: "tvoj", translation: "Where is your father?", options: ["moj", "tvoj", "njegov", "naš"] },
+        { id: 3, sentence: "_____ sestra je mlađa od mene.", answer: "Njegova", translation: "His sister is younger than him.", options: ["Moja", "Tvoja", "Njegova", "Njena"] },
+        { id: 4, sentence: "_____ baka živi u Zenici.", answer: "Naša", translation: "Our grandmother lives in Zenica.", options: ["Moja", "Tvoja", "Njegova", "Naša"] },
+        { id: 5, sentence: "Ovo je _____ dijete.", answer: "njeno", translation: "This is her child.", options: ["moje", "tvoje", "njegovo", "njeno"] },
+        { id: 6, sentence: "_____ djed čita novine.", answer: "Moj", translation: "My grandfather reads newspapers.", options: ["Moj", "Moja", "Moje", "Moji"] }
       ],
       sentenceOrder: [
-        { id: 1, scrambled: ["majka", "Moja", "učiteljica", "je"], correct: ["Moja", "majka", "je", "učiteljica"], translation: "My mother is a teacher." },
-        { id: 2, scrambled: ["brata", "jednog", "Imam"], correct: ["Imam", "jednog", "brata"], translation: "I have one brother." },
-        { id: 3, scrambled: ["porodica", "velika", "Moja", "je"], correct: ["Moja", "porodica", "je", "velika"], translation: "My family is big." }
+        { id: 1, scrambled: ["pravi", "baka", "pitu", "Moja"], correct: ["Moja", "baka", "pravi", "pitu"], translation: "My grandmother makes pie." },
+        { id: 2, scrambled: ["je", "sin", "Njegov", "visok"], correct: ["Njegov", "sin", "je", "visok"], translation: "His son is tall." },
+        { id: 3, scrambled: ["u", "živi", "Naša", "Sarajevu", "porodica"], correct: ["Naša", "porodica", "živi", "u", "Sarajevu"], translation: "Our family lives in Sarajevo." },
+        { id: 4, scrambled: ["kći", "Njena", "studentica", "je"], correct: ["Njena", "kći", "je", "studentica"], translation: "Her daughter is a student." }
       ],
       matching: [
-        { id: 1, bosnian: "Majka", english: "Mother" },
-        { id: 2, bosnian: "Otac", english: "Father" },
-        { id: 3, bosnian: "Brat", english: "Brother" },
-        { id: 4, bosnian: "Sestra", english: "Sister" },
-        { id: 5, bosnian: "Baka", english: "Grandmother" },
-        { id: 6, bosnian: "Djed", english: "Grandfather" }
+        { id: 1, bosnian: "Moj brat", english: "My brother" },
+        { id: 2, bosnian: "Tvoja sestra", english: "Your sister" },
+        { id: 3, bosnian: "Njegov otac", english: "His father" },
+        { id: 4, bosnian: "Njena majka", english: "Her mother" },
+        { id: 5, bosnian: "Naša baka", english: "Our grandmother" },
+        { id: 6, bosnian: "Njihov djed", english: "Their grandfather" }
       ],
       translation: [
-        { id: 1, english: "My mother is beautiful", bosnian: "Moja majka je lijepa", options: ["Moja majka je lijepa", "Moj otac je lijep", "Moja sestra je lijepa", "Moja baka je lijepa"] },
-        { id: 2, english: "I have two sisters", bosnian: "Imam dvije sestre", options: ["Imam jednu sestru", "Imam dvije sestre", "Imam tri sestre", "Imam brata"] }
+        { id: 1, english: "My grandmother makes the best pie", bosnian: "Moja baka pravi najbolju pitu", options: ["Moja baka pravi najbolju pitu", "Tvoja baka pravi pitu", "Njegova majka pravi pitu", "Naša sestra pravi pitu"] },
+        { id: 2, english: "His wife is a teacher", bosnian: "Njegova žena je učiteljica", options: ["Moja žena je učiteljica", "Tvoja žena je učiteljica", "Njegova žena je učiteljica", "Njena žena je učiteljica"] },
+        { id: 3, english: "Our family is big", bosnian: "Naša porodica je velika", options: ["Moja porodica je velika", "Tvoja porodica je velika", "Naša porodica je velika", "Njihova porodica je velika"] }
       ]
     },
-    // Lesson 5: Days of the Week
+    // Lesson 5: Days of the Week (danas/sutra/jučer, u + dan, redoslijed dana)
     5: {
       fillBlank: [
-        { id: 1, sentence: "_____ je prvi dan radne sedmice.", answer: "Ponedjeljak", translation: "Monday is the first working day.", options: ["Ponedjeljak", "Utorak", "Srijeda", "Nedjelja"] },
-        { id: 2, sentence: "U _____ idem na pijacu.", answer: "subotu", translation: "On Saturday I go to the market.", options: ["ponedjeljak", "petak", "subotu", "nedjelju"] },
-        { id: 3, sentence: "_____ je dan odmora.", answer: "Nedjelja", translation: "Sunday is a rest day.", options: ["Petak", "Subota", "Nedjelja", "Ponedjeljak"] }
+        { id: 1, sentence: "_____ je petak. Sutra je subota!", answer: "Danas", translation: "Today is Friday. Tomorrow is Saturday!", options: ["Danas", "Sutra", "Jučer", "Preksutra"] },
+        { id: 2, sentence: "U _____ idem na pijacu Markale.", answer: "subotu", translation: "On Saturday I go to Markale market.", options: ["ponedjeljak", "srijedu", "subotu", "nedjelju"] },
+        { id: 3, sentence: "_____ sam bio kod bake.", answer: "Jučer", translation: "Yesterday I was at grandma's.", options: ["Danas", "Sutra", "Jučer", "Prekosutra"] },
+        { id: 4, sentence: "Koji dan dolazi poslije utorka? _____.", answer: "Srijeda", translation: "Which day comes after Tuesday? Wednesday.", options: ["Ponedjeljak", "Srijeda", "Četvrtak", "Petak"] },
+        { id: 5, sentence: "U _____ radim, a u nedjelju odmaram.", answer: "ponedjeljak", translation: "On Monday I work, and on Sunday I rest.", options: ["ponedjeljak", "subotu", "nedjelju", "petak"] },
+        { id: 6, sentence: "_____ je dan prije subote.", answer: "Petak", translation: "Friday is the day before Saturday.", options: ["Četvrtak", "Petak", "Nedjelja", "Srijeda"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["dan", "je", "Koji", "danas"], correct: ["Koji", "je", "danas", "dan"], translation: "What day is it today?" },
-        { id: 2, scrambled: ["je", "Danas", "petak"], correct: ["Danas", "je", "petak"], translation: "Today is Friday." },
-        { id: 3, scrambled: ["idem", "U", "subotu", "u", "kupovinu"], correct: ["U", "subotu", "idem", "u", "kupovinu"], translation: "On Saturday I go shopping." }
+        { id: 2, scrambled: ["je", "petak", "Danas"], correct: ["Danas", "je", "petak"], translation: "Today is Friday." },
+        { id: 3, scrambled: ["subotu", "U", "pijacu", "idem", "na"], correct: ["U", "subotu", "idem", "na", "pijacu"], translation: "On Saturday I go to the market." },
+        { id: 4, scrambled: ["bio", "Jučer", "sam", "kod", "bake"], correct: ["Jučer", "sam", "bio", "kod", "bake"], translation: "Yesterday I was at grandma's." },
+        { id: 5, scrambled: ["je", "Sutra", "nedjelja"], correct: ["Sutra", "je", "nedjelja"], translation: "Tomorrow is Sunday." }
       ],
       matching: [
-        { id: 1, bosnian: "Ponedjeljak", english: "Monday" },
-        { id: 2, bosnian: "Utorak", english: "Tuesday" },
-        { id: 3, bosnian: "Srijeda", english: "Wednesday" },
-        { id: 4, bosnian: "Četvrtak", english: "Thursday" },
-        { id: 5, bosnian: "Petak", english: "Friday" },
-        { id: 6, bosnian: "Subota", english: "Saturday" }
+        { id: 1, bosnian: "Danas", english: "Today" },
+        { id: 2, bosnian: "Sutra", english: "Tomorrow" },
+        { id: 3, bosnian: "Jučer", english: "Yesterday" },
+        { id: 4, bosnian: "U ponedjeljak", english: "On Monday" },
+        { id: 5, bosnian: "U subotu", english: "On Saturday" },
+        { id: 6, bosnian: "U nedjelju", english: "On Sunday" }
       ],
       translation: [
-        { id: 1, english: "What day is today?", bosnian: "Koji je danas dan?", options: ["Koji je danas dan?", "Koliko je sati?", "Kako si?", "Gdje si?"] },
-        { id: 2, english: "Tomorrow is Friday", bosnian: "Sutra je petak", options: ["Danas je petak", "Sutra je petak", "Jučer je bio petak", "Sutra je subota"] }
+        { id: 1, english: "What day is it today?", bosnian: "Koji je danas dan?", options: ["Koji je danas dan?", "Koliko je sati?", "Kako si?", "Gdje si?"] },
+        { id: 2, english: "Tomorrow is Saturday", bosnian: "Sutra je subota", options: ["Danas je subota", "Sutra je subota", "Jučer je bila subota", "Sutra je petak"] },
+        { id: 3, english: "On Friday I go to the market", bosnian: "U petak idem na pijacu", options: ["U petak idem na pijacu", "U subotu idem na pijacu", "Danas idem na pijacu", "Jučer sam išao na pijacu"] },
+        { id: 4, english: "Yesterday was Thursday", bosnian: "Jučer je bio četvrtak", options: ["Jučer je bio četvrtak", "Danas je četvrtak", "Sutra je četvrtak", "Jučer je bila srijeda"] }
       ]
     },
     // Lesson 6: Months and Seasons
