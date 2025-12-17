@@ -888,29 +888,54 @@ function Lesson() {
                 </div>
               </div>
 
-              {/* Cultural Images */}
-              {lesson.cultural_images && lesson.cultural_images.length > 0 && (
+              {/* Cultural Comic Strip */}
+              {lesson.cultural_comic && (
                 <div className="mt-8">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
-                    <span className="mr-2">📸</span> Slike iz kulture
+                    <span className="mr-2">💬</span> {lesson.cultural_comic.title}
                   </h3>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {lesson.cultural_images.map((image, index) => (
-                      <div key={index} className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all">
-                        <img 
-                          src={image.url} 
-                          alt={image.alt}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                          onError={(e) => {
-                            e.target.onerror = null
-                            e.target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400'
-                          }}
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                          <p className="text-white text-sm font-medium">{image.caption}</p>
+                  
+                  {/* Comic container */}
+                  <div className="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 border-4 border-gray-800 shadow-xl">
+                    {/* Background image */}
+                    <div className="relative mb-6 rounded-xl overflow-hidden">
+                      <img 
+                        src={lesson.cultural_comic.image} 
+                        alt={lesson.cultural_comic.title}
+                        className="w-full h-48 object-cover opacity-30"
+                        onError={(e) => {
+                          e.target.onerror = null
+                          e.target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600'
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-yellow-50 to-transparent"></div>
+                    </div>
+                    
+                    {/* Comic panels */}
+                    <div className="space-y-4">
+                      {lesson.cultural_comic.panels.map((panel, index) => (
+                        <div 
+                          key={index} 
+                          className={`flex ${panel.position === 'right' ? 'justify-end' : 'justify-start'}`}
+                        >
+                          <div className={`max-w-[85%] flex items-start gap-3 ${panel.position === 'right' ? 'flex-row-reverse' : ''}`}>
+                            {/* Character avatar */}
+                            <div className="flex-shrink-0 w-12 h-12 rounded-full bg-white border-3 border-gray-800 flex items-center justify-center text-2xl shadow-md">
+                              {panel.character}
+                            </div>
+                            
+                            {/* Speech bubble */}
+                            <div className={`relative bg-white rounded-2xl p-4 border-3 border-gray-800 shadow-md ${
+                              panel.position === 'right' ? 'rounded-tr-none' : 'rounded-tl-none'
+                            }`}>
+                              <div className="font-bold text-sm text-bosnia-blue mb-1">{panel.name}</div>
+                              <div className="text-gray-800 font-medium text-lg">{panel.text}</div>
+                              <div className="text-gray-500 text-sm italic mt-1">{panel.translation}</div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               )}
