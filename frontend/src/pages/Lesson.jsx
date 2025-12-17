@@ -45,8 +45,27 @@ function Lesson() {
     answers: {},
     showResults: false
   })
+  const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
 
   useEffect(() => {
+    // Reset all state when lesson changes
+    setActiveTab('vocabulary')
+    setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
+    setQuizResult(null)
+    setFlippedCards({})
+    setShowCultureTranslation(false)
+    setShowQuizTranslation(false)
+    setGrammarExercises({ answers: {}, showResults: false, draggedItem: null })
+    setSentenceExercises({ answers: {}, showResults: false })
+    setMatchingExercises({ answers: {}, showResults: false })
+    setTranslationExercises({ answers: {}, showResults: false })
+    setActiveExerciseType('fillBlank')
+    setTranslationInputs({})
+    setMatchedPairs({})
+    setSelectedBosnian(null)
+    setWordPositions({})
+    setShowFillBlankTranslation(false)
+    
     api.get(`/api/lessons/${lessonId}`)
       .then(data => {
         setLesson(data)
@@ -134,16 +153,16 @@ function Lesson() {
     { id: 10, bosnian: "Izvini", english: "Sorry" }
   ]
 
-  // Translation exercises
+  // Translation exercises with multiple choice options
   const translationList = [
-    { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?", hint: "Zdravo = Hello" },
-    { id: 2, english: "My name is...", bosnian: "Zovem se...", hint: "Zovem se = I call myself" },
-    { id: 3, english: "Nice to meet you", bosnian: "Drago mi je", hint: "Drago = pleased" },
-    { id: 4, english: "Where are you from?", bosnian: "Odakle si?", hint: "Odakle = from where" },
-    { id: 5, english: "I am from Bosnia", bosnian: "Ja sam iz Bosne", hint: "iz = from" },
-    { id: 6, english: "Thank you very much", bosnian: "Hvala vam puno", hint: "puno = very much" },
-    { id: 7, english: "Good morning", bosnian: "Dobro jutro", hint: "jutro = morning" },
-    { id: 8, english: "Goodbye, see you tomorrow", bosnian: "Doviđenja, vidimo se sutra", hint: "sutra = tomorrow" }
+    { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?", options: ["Zdravo, kako si?", "Dobar dan, hvala", "Doviđenja, laku noć", "Ja sam dobro"] },
+    { id: 2, english: "My name is...", bosnian: "Zovem se...", options: ["Imam godina...", "Zovem se...", "Dolazim iz...", "Živim u..."] },
+    { id: 3, english: "Nice to meet you", bosnian: "Drago mi je", options: ["Hvala vam", "Drago mi je", "Izvinite", "Molim vas"] },
+    { id: 4, english: "Where are you from?", bosnian: "Odakle si?", options: ["Kako si?", "Koliko imaš godina?", "Odakle si?", "Gdje živiš?"] },
+    { id: 5, english: "I am from Bosnia", bosnian: "Ja sam iz Bosne", options: ["Ja volim Bosnu", "Ja sam iz Bosne", "Ja idem u Bosnu", "Ja živim u Bosni"] },
+    { id: 6, english: "Thank you very much", bosnian: "Hvala vam puno", options: ["Molim vas lijepo", "Hvala vam puno", "Izvinite mnogo", "Dobar dan svima"] },
+    { id: 7, english: "Good morning", bosnian: "Dobro jutro", options: ["Dobro veče", "Dobar dan", "Dobro jutro", "Laku noć"] },
+    { id: 8, english: "Goodbye, see you tomorrow", bosnian: "Doviđenja, vidimo se sutra", options: ["Zdravo, kako si danas", "Doviđenja, vidimo se sutra", "Dobar dan, drago mi je", "Hvala, laku noć"] }
   ]
 
   const verbOptions = ["sam", "si", "je", "smo", "ste", "su"]
@@ -281,9 +300,7 @@ function Lesson() {
   const getTranslationScore = () => {
     let correct = 0
     translationList.forEach(item => {
-      const userAnswer = (translationInputs[item.id] || '').toLowerCase().trim()
-      const correctAnswer = item.bosnian.toLowerCase().trim()
-      if (userAnswer === correctAnswer) correct++
+      if (translationInputs[item.id] === item.bosnian) correct++
     })
     return correct
   }
@@ -469,7 +486,19 @@ function Lesson() {
               {/* Fill in the Blank Exercises */}
               {activeExerciseType === 'fillBlank' && (
                 <div className="animate-fadeIn">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">✏️ Popuni prazninu - Glagol "biti"</h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-lg font-semibold text-gray-800">✏️ Popuni prazninu - Glagol "biti"</h3>
+                    <button
+                      onClick={() => setShowFillBlankTranslation(!showFillBlankTranslation)}
+                      className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                        showFillBlankTranslation 
+                          ? 'bg-bosnia-blue text-white' 
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      {showFillBlankTranslation ? '🌍 Sakrij prijevod' : '🌍 Prikaži prijevod'}
+                    </button>
+                  </div>
                   <p className="text-gray-600 mb-4">Prevucite ispravan oblik glagola u prazno polje</p>
 
                   <div className="flex flex-wrap gap-3 mb-6 p-4 bg-blue-50 rounded-xl">
@@ -525,10 +554,10 @@ function Lesson() {
                               {exercise.sentence.split('___')[1]}
                             </span>
                           </div>
-                          {showResult && (
+                          {(showResult || showFillBlankTranslation) && (
                             <div className="mt-2 text-sm">
-                              {!isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
-                              <div className="text-gray-500 italic mt-1">{exercise.translation}</div>
+                              {showResult && !isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
+                              <div className="text-gray-500 italic mt-1">🌍 {exercise.translation}</div>
                             </div>
                           )}
                         </div>
@@ -703,46 +732,63 @@ function Lesson() {
                 </div>
               )}
 
-              {/* Translation Exercises */}
+              {/* Translation Exercises - Multiple Choice */}
               {activeExerciseType === 'translation' && (
                 <div className="animate-fadeIn">
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">🌍 Prevedi na bosanski</h3>
-                  <p className="text-gray-600 mb-4">Upišite prijevod engleske rečenice na bosanski</p>
+                  <p className="text-gray-600 mb-4">Odaberite tačan prijevod engleske rečenice na bosanski</p>
 
-                  <div className="space-y-4">
+                  <div className="space-y-6">
                     {translationList.map(item => {
-                      const userAnswer = translationInputs[item.id] || ''
-                      const isCorrect = userAnswer.toLowerCase().trim() === item.bosnian.toLowerCase().trim()
+                      const userAnswer = translationInputs[item.id]
+                      const isCorrect = userAnswer === item.bosnian
                       const showResult = translationExercises.showResults
+                      const hasAnswered = userAnswer !== undefined
 
                       return (
                         <div
                           key={item.id}
                           className={`p-4 rounded-xl border-2 transition-all ${
-                            showResult
+                            showResult && hasAnswered
                               ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
                               : 'bg-white border-gray-200'
                           }`}
                         >
-                          <div className="flex items-center space-x-2 mb-2">
+                          <div className="flex items-center space-x-2 mb-3">
                             <span className="text-gray-500 text-sm">#{item.id}</span>
-                            <span className="font-medium text-gray-800">{item.english}</span>
+                            <span className="font-medium text-gray-800 text-lg">{item.english}</span>
                           </div>
-                          <input
-                            type="text"
-                            value={userAnswer}
-                            onChange={(e) => setTranslationInputs(prev => ({ ...prev, [item.id]: e.target.value }))}
-                            disabled={showResult}
-                            placeholder="Upišite prijevod..."
-                            className={`w-full p-3 rounded-lg border-2 ${
-                              showResult
-                                ? isCorrect ? 'border-green-400 bg-green-50' : 'border-red-400 bg-red-50'
-                                : 'border-gray-200 focus:border-bosnia-blue focus:outline-none'
-                            }`}
-                          />
-                          {!showResult && <p className="text-sm text-gray-400 mt-1">💡 {item.hint}</p>}
-                          {showResult && !isCorrect && (
-                            <p className="text-sm text-red-600 mt-1">Tačan odgovor: <strong>{item.bosnian}</strong></p>
+                          
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                            {item.options.map((option, optIndex) => {
+                              const isSelected = userAnswer === option
+                              const isCorrectOption = option === item.bosnian
+                              
+                              return (
+                                <button
+                                  key={optIndex}
+                                  onClick={() => !showResult && setTranslationInputs(prev => ({ ...prev, [item.id]: option }))}
+                                  disabled={showResult}
+                                  className={`p-3 rounded-lg border-2 text-left transition-all ${
+                                    showResult
+                                      ? isCorrectOption
+                                        ? 'bg-green-100 border-green-400 text-green-700'
+                                        : isSelected
+                                          ? 'bg-red-100 border-red-400 text-red-700'
+                                          : 'bg-gray-50 border-gray-200 text-gray-500'
+                                      : isSelected
+                                        ? 'bg-bosnia-blue text-white border-bosnia-blue'
+                                        : 'bg-gray-50 border-gray-200 hover:border-bosnia-blue hover:bg-blue-50'
+                                  }`}
+                                >
+                                  <span className="font-medium">{String.fromCharCode(65 + optIndex)}.</span> {option}
+                                </button>
+                              )
+                            })}
+                          </div>
+                          
+                          {showResult && hasAnswered && !isCorrect && (
+                            <p className="text-sm text-green-600 mt-2">✓ Tačan odgovor: <strong>{item.bosnian}</strong></p>
                           )}
                         </div>
                       )
@@ -751,8 +797,11 @@ function Lesson() {
 
                   <div className="flex justify-center space-x-4 mt-6">
                     {!translationExercises.showResults ? (
-                      <button onClick={checkTranslationExercises} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors">
-                        Provjeri odgovore
+                      <button 
+                        onClick={checkTranslationExercises} 
+                        className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors"
+                      >
+                        Provjeri odgovore ({Object.keys(translationInputs).length}/{translationList.length})
                       </button>
                     ) : (
                       <div className="text-center">
