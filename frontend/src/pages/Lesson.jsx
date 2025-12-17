@@ -111,61 +111,120 @@ function Lesson() {
     setQuizResult(null)
   }
 
-  // Grammar exercises data - Fill in the blank (10 exercises)
-  const grammarExercisesList = [
-    { id: 1, sentence: "Ja ___ student.", answer: "sam", translation: "I am a student." },
-    { id: 2, sentence: "Ti ___ lijepa.", answer: "si", translation: "You are beautiful." },
-    { id: 3, sentence: "On ___ visok.", answer: "je", translation: "He is tall." },
-    { id: 4, sentence: "Mi ___ prijatelji.", answer: "smo", translation: "We are friends." },
-    { id: 5, sentence: "Vi ___ dobri.", answer: "ste", translation: "You are good." },
-    { id: 6, sentence: "Oni ___ sretni.", answer: "su", translation: "They are happy." },
-    { id: 7, sentence: "Ona ___ učiteljica.", answer: "je", translation: "She is a teacher." },
-    { id: 8, sentence: "Mi ___ u školi.", answer: "smo", translation: "We are at school." },
-    { id: 9, sentence: "Ti ___ moj prijatelj.", answer: "si", translation: "You are my friend." },
-    { id: 10, sentence: "Ja ___ sretan.", answer: "sam", translation: "I am happy." }
-  ]
+  // Lesson-specific exercise data
+  const exercisesByLesson = {
+    // Lesson 1: Greetings
+    1: {
+      fillBlank: [
+        { id: 1, sentence: "_____, kako si?", answer: "Zdravo", translation: "Hello, how are you?", options: ["Zdravo", "Hvala", "Molim", "Doviđenja"] },
+        { id: 2, sentence: "Dobar _____, gospodine.", answer: "dan", translation: "Good day, sir.", options: ["dan", "noć", "jutro", "veče"] },
+        { id: 3, sentence: "_____ mi je.", answer: "Drago", translation: "Nice to meet you.", options: ["Drago", "Hvala", "Molim", "Zdravo"] },
+        { id: 4, sentence: "Zovem _____ Amina.", answer: "se", translation: "My name is Amina.", options: ["se", "sam", "si", "je"] },
+        { id: 5, sentence: "Ja _____ iz Sarajeva.", answer: "sam", translation: "I am from Sarajevo.", options: ["sam", "si", "je", "smo"] },
+        { id: 6, sentence: "_____ vam puno!", answer: "Hvala", translation: "Thank you very much!", options: ["Hvala", "Molim", "Zdravo", "Dobar"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["si", "kako", "Zdravo"], correct: ["Zdravo", "kako", "si"], translation: "Hello, how are you?" },
+        { id: 2, scrambled: ["dan", "Dobar", "gospodine"], correct: ["Dobar", "dan", "gospodine"], translation: "Good day, sir." },
+        { id: 3, scrambled: ["mi", "Drago", "je"], correct: ["Drago", "mi", "je"], translation: "Nice to meet you." },
+        { id: 4, scrambled: ["se", "Zovem", "Emir"], correct: ["Zovem", "se", "Emir"], translation: "My name is Emir." },
+        { id: 5, scrambled: ["si", "Odakle", "ti"], correct: ["Odakle", "si", "ti"], translation: "Where are you from?" }
+      ],
+      matching: [
+        { id: 1, bosnian: "Zdravo", english: "Hello" },
+        { id: 2, bosnian: "Dobar dan", english: "Good day" },
+        { id: 3, bosnian: "Hvala", english: "Thank you" },
+        { id: 4, bosnian: "Molim", english: "Please" },
+        { id: 5, bosnian: "Doviđenja", english: "Goodbye" },
+        { id: 6, bosnian: "Dobro jutro", english: "Good morning" }
+      ],
+      translation: [
+        { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?", options: ["Zdravo, kako si?", "Dobar dan, hvala", "Doviđenja", "Ja sam dobro"] },
+        { id: 2, english: "My name is...", bosnian: "Zovem se...", options: ["Imam godina...", "Zovem se...", "Dolazim iz...", "Živim u..."] },
+        { id: 3, english: "Nice to meet you", bosnian: "Drago mi je", options: ["Hvala vam", "Drago mi je", "Izvinite", "Molim vas"] },
+        { id: 4, english: "Good morning", bosnian: "Dobro jutro", options: ["Dobro veče", "Dobar dan", "Dobro jutro", "Laku noć"] }
+      ]
+    },
+    // Lesson 2: Numbers
+    2: {
+      fillBlank: [
+        { id: 1, sentence: "Jedan plus jedan je _____.", answer: "dva", translation: "One plus one is two.", options: ["dva", "tri", "četiri", "pet"] },
+        { id: 2, sentence: "Pet plus pet je _____.", answer: "deset", translation: "Five plus five is ten.", options: ["osam", "devet", "deset", "jedanaest"] },
+        { id: 3, sentence: "Koliko košta? _____ marke.", answer: "Tri", translation: "How much? Three marks.", options: ["Tri", "Jedan", "Pet", "Dva"] },
+        { id: 4, sentence: "Imam _____ godina.", answer: "dvadeset", translation: "I am twenty years old.", options: ["deset", "petnaest", "dvadeset", "trideset"] },
+        { id: 5, sentence: "Sedam plus tri je _____.", answer: "deset", translation: "Seven plus three is ten.", options: ["osam", "devet", "deset", "jedanaest"] },
+        { id: 6, sentence: "_____ minus jedan je četiri.", answer: "Pet", translation: "Five minus one is four.", options: ["Tri", "Četiri", "Pet", "Šest"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["dva", "plus", "Jedan", "jedan", "je"], correct: ["Jedan", "plus", "jedan", "je", "dva"], translation: "One plus one is two." },
+        { id: 2, scrambled: ["marke", "Tri", "košta"], correct: ["Košta", "tri", "marke"], translation: "It costs three marks." },
+        { id: 3, scrambled: ["godina", "dvadeset", "Imam"], correct: ["Imam", "dvadeset", "godina"], translation: "I am twenty years old." },
+        { id: 4, scrambled: ["jabuka", "pet", "Dajte", "mi"], correct: ["Dajte", "mi", "pet", "jabuka"], translation: "Give me five apples." },
+        { id: 5, scrambled: ["sedam", "je", "Koliko", "plus", "tri"], correct: ["Koliko", "je", "sedam", "plus", "tri"], translation: "How much is seven plus three?" }
+      ],
+      matching: [
+        { id: 1, bosnian: "Jedan", english: "One" },
+        { id: 2, bosnian: "Dva", english: "Two" },
+        { id: 3, bosnian: "Pet", english: "Five" },
+        { id: 4, bosnian: "Deset", english: "Ten" },
+        { id: 5, bosnian: "Dvadeset", english: "Twenty" },
+        { id: 6, bosnian: "Sto", english: "Hundred" }
+      ],
+      translation: [
+        { id: 1, english: "How much does it cost?", bosnian: "Koliko košta?", options: ["Koliko košta?", "Šta je ovo?", "Gdje je?", "Kako si?"] },
+        { id: 2, english: "I have five marks", bosnian: "Imam pet maraka", options: ["Imam dva dana", "Imam pet maraka", "Imam tri godine", "Imam sedam knjiga"] },
+        { id: 3, english: "Give me two kilograms", bosnian: "Dajte mi dva kilograma", options: ["Dajte mi tri jabuke", "Dajte mi dva kilograma", "Dajte mi pet maraka", "Dajte mi jedan dan"] },
+        { id: 4, english: "That is six marks", bosnian: "To je šest maraka", options: ["To je pet maraka", "To je šest maraka", "To je sedam maraka", "To je osam maraka"] }
+      ]
+    },
+    // Lesson 3: Colors
+    3: {
+      fillBlank: [
+        { id: 1, sentence: "Nebo je _____.", answer: "plavo", translation: "The sky is blue.", options: ["plavo", "crveno", "zeleno", "žuto"] },
+        { id: 2, sentence: "Trava je _____.", answer: "zelena", translation: "The grass is green.", options: ["plava", "crvena", "zelena", "bijela"] },
+        { id: 3, sentence: "Sunce je _____.", answer: "žuto", translation: "The sun is yellow.", options: ["plavo", "crveno", "zeleno", "žuto"] },
+        { id: 4, sentence: "_____ auto je lijep.", answer: "Crven", translation: "The red car is nice.", options: ["Crven", "Plav", "Zelen", "Bijel"] },
+        { id: 5, sentence: "Snijeg je _____.", answer: "bijel", translation: "Snow is white.", options: ["crn", "bijel", "siv", "plav"] },
+        { id: 6, sentence: "Noć je _____.", answer: "crna", translation: "Night is black.", options: ["bijela", "plava", "crna", "siva"] }
+      ],
+      sentenceOrder: [
+        { id: 1, scrambled: ["plavo", "je", "Nebo"], correct: ["Nebo", "je", "plavo"], translation: "The sky is blue." },
+        { id: 2, scrambled: ["zelena", "Trava", "je"], correct: ["Trava", "je", "zelena"], translation: "The grass is green." },
+        { id: 3, scrambled: ["boje", "je", "Koje", "auto"], correct: ["Koje", "boje", "je", "auto"], translation: "What color is the car?" },
+        { id: 4, scrambled: ["crvena", "je", "Moja", "haljina"], correct: ["Moja", "haljina", "je", "crvena"], translation: "My dress is red." },
+        { id: 5, scrambled: ["boja", "Plava", "omiljena", "moja", "je"], correct: ["Plava", "je", "moja", "omiljena", "boja"], translation: "Blue is my favorite color." }
+      ],
+      matching: [
+        { id: 1, bosnian: "Crvena", english: "Red" },
+        { id: 2, bosnian: "Plava", english: "Blue" },
+        { id: 3, bosnian: "Zelena", english: "Green" },
+        { id: 4, bosnian: "Žuta", english: "Yellow" },
+        { id: 5, bosnian: "Bijela", english: "White" },
+        { id: 6, bosnian: "Crna", english: "Black" }
+      ],
+      translation: [
+        { id: 1, english: "What color is it?", bosnian: "Koje je boje?", options: ["Koje je boje?", "Šta je ovo?", "Gdje je?", "Kako si?"] },
+        { id: 2, english: "The sky is blue", bosnian: "Nebo je plavo", options: ["Nebo je zeleno", "Nebo je plavo", "Nebo je crveno", "Nebo je žuto"] },
+        { id: 3, english: "I like red", bosnian: "Volim crvenu", options: ["Volim plavu", "Volim crvenu", "Volim zelenu", "Volim žutu"] },
+        { id: 4, english: "The white house", bosnian: "Bijela kuća", options: ["Crvena kuća", "Plava kuća", "Bijela kuća", "Zelena kuća"] }
+      ]
+    }
+  }
 
-  // Sentence ordering exercises (10 exercises)
-  const sentenceOrderingList = [
-    { id: 1, scrambled: ["sam", "ja", "student"], correct: ["ja", "sam", "student"], translation: "I am a student." },
-    { id: 2, scrambled: ["lijepa", "si", "ti"], correct: ["ti", "si", "lijepa"], translation: "You are beautiful." },
-    { id: 3, scrambled: ["je", "on", "visok"], correct: ["on", "je", "visok"], translation: "He is tall." },
-    { id: 4, scrambled: ["smo", "prijatelji", "mi"], correct: ["mi", "smo", "prijatelji"], translation: "We are friends." },
-    { id: 5, scrambled: ["zoveš", "kako", "se"], correct: ["kako", "se", "zoveš"], translation: "What is your name?" },
-    { id: 6, scrambled: ["dan", "dobar", "gospodine"], correct: ["dobar", "dan", "gospodine"], translation: "Good day, sir." },
-    { id: 7, scrambled: ["mi", "drago", "je"], correct: ["drago", "mi", "je"], translation: "Nice to meet you." },
-    { id: 8, scrambled: ["Sarajeva", "iz", "sam", "ja"], correct: ["ja", "sam", "iz", "Sarajeva"], translation: "I am from Sarajevo." },
-    { id: 9, scrambled: ["si", "odakle", "ti"], correct: ["odakle", "si", "ti"], translation: "Where are you from?" },
-    { id: 10, scrambled: ["puno", "hvala", "vam"], correct: ["hvala", "vam", "puno"], translation: "Thank you very much." }
-  ]
+  // Get exercises for current lesson (fallback to lesson 1 if not found)
+  const currentExercises = exercisesByLesson[lesson?.id] || exercisesByLesson[1]
+  const grammarExercisesList = currentExercises.fillBlank
+  const sentenceOrderingList = currentExercises.sentenceOrder
+  const matchingList = currentExercises.matching
+  const translationList = currentExercises.translation
 
-  // Matching exercises (Bosnian to English)
-  const matchingList = [
-    { id: 1, bosnian: "Zdravo", english: "Hello" },
-    { id: 2, bosnian: "Dobar dan", english: "Good day" },
-    { id: 3, bosnian: "Hvala", english: "Thank you" },
-    { id: 4, bosnian: "Molim", english: "Please" },
-    { id: 5, bosnian: "Doviđenja", english: "Goodbye" },
-    { id: 6, bosnian: "Dobro jutro", english: "Good morning" },
-    { id: 7, bosnian: "Laku noć", english: "Good night" },
-    { id: 8, bosnian: "Da", english: "Yes" },
-    { id: 9, bosnian: "Ne", english: "No" },
-    { id: 10, bosnian: "Izvini", english: "Sorry" }
-  ]
-
-  // Translation exercises with multiple choice options
-  const translationList = [
-    { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?", options: ["Zdravo, kako si?", "Dobar dan, hvala", "Doviđenja, laku noć", "Ja sam dobro"] },
-    { id: 2, english: "My name is...", bosnian: "Zovem se...", options: ["Imam godina...", "Zovem se...", "Dolazim iz...", "Živim u..."] },
-    { id: 3, english: "Nice to meet you", bosnian: "Drago mi je", options: ["Hvala vam", "Drago mi je", "Izvinite", "Molim vas"] },
-    { id: 4, english: "Where are you from?", bosnian: "Odakle si?", options: ["Kako si?", "Koliko imaš godina?", "Odakle si?", "Gdje živiš?"] },
-    { id: 5, english: "I am from Bosnia", bosnian: "Ja sam iz Bosne", options: ["Ja volim Bosnu", "Ja sam iz Bosne", "Ja idem u Bosnu", "Ja živim u Bosni"] },
-    { id: 6, english: "Thank you very much", bosnian: "Hvala vam puno", options: ["Molim vas lijepo", "Hvala vam puno", "Izvinite mnogo", "Dobar dan svima"] },
-    { id: 7, english: "Good morning", bosnian: "Dobro jutro", options: ["Dobro veče", "Dobar dan", "Dobro jutro", "Laku noć"] },
-    { id: 8, english: "Goodbye, see you tomorrow", bosnian: "Doviđenja, vidimo se sutra", options: ["Zdravo, kako si danas", "Doviđenja, vidimo se sutra", "Dobar dan, drago mi je", "Hvala, laku noć"] }
-  ]
-
-  const verbOptions = ["sam", "si", "je", "smo", "ste", "su"]
+  // Get options for fill-blank based on lesson
+  const getVerbOptions = () => {
+    if (lesson?.id === 2) return ["dva", "tri", "pet", "deset", "dvadeset", "sto"]
+    if (lesson?.id === 3) return ["crveno", "plavo", "zeleno", "žuto", "bijelo", "crno"]
+    return ["sam", "si", "je", "smo", "ste", "su"]
+  }
+  const verbOptions = getVerbOptions()
 
   const handleDragStart = (verb) => {
     setGrammarExercises(prev => ({ ...prev, draggedItem: verb }))
@@ -487,7 +546,7 @@ function Lesson() {
               {activeExerciseType === 'fillBlank' && (
                 <div className="animate-fadeIn">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-gray-800">✏️ Popuni prazninu - Glagol "biti"</h3>
+                    <h3 className="text-lg font-semibold text-gray-800">✏️ Popuni prazninu - {lesson?.title || 'Vježba'}</h3>
                     <button
                       onClick={() => setShowFillBlankTranslation(!showFillBlankTranslation)}
                       className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
@@ -499,65 +558,72 @@ function Lesson() {
                       {showFillBlankTranslation ? '🌍 Sakrij prijevod' : '🌍 Prikaži prijevod'}
                     </button>
                   </div>
-                  <p className="text-gray-600 mb-4">Prevucite ispravan oblik glagola u prazno polje</p>
+                  <p className="text-gray-600 mb-4">Odaberi tačan odgovor za svaku rečenicu</p>
 
-                  <div className="flex flex-wrap gap-3 mb-6 p-4 bg-blue-50 rounded-xl">
-                    <span className="text-sm text-gray-600 mr-2">Opcije:</span>
-                    {verbOptions.map((verb, i) => (
-                      <div
-                        key={i}
-                        draggable
-                        onDragStart={() => handleDragStart(verb)}
-                        className="px-4 py-2 bg-bosnia-blue text-white rounded-lg cursor-grab active:cursor-grabbing hover:bg-blue-700 transition-colors font-medium shadow-md"
-                      >
-                        {verb}
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-4">
                     {grammarExercisesList.map((exercise) => {
                       const userAnswer = grammarExercises.answers[exercise.id]
                       const isCorrect = userAnswer === exercise.answer
-                      const showResult = grammarExercises.showResults && userAnswer !== undefined
+                      const showResult = grammarExercises.showResults
 
                       return (
                         <div
                           key={exercise.id}
                           className={`p-4 rounded-xl border-2 transition-all ${
-                            showResult
+                            showResult && userAnswer
                               ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
-                              : 'bg-white border-gray-200 hover:border-blue-300'
+                              : 'bg-white border-gray-200'
                           }`}
                         >
-                          <div className="flex items-center space-x-2 text-lg">
-                            <span className="text-gray-500 text-sm">#{exercise.id}</span>
-                            <span>
-                              {exercise.sentence.split('___')[0]}
-                              <span
-                                onDragOver={handleDragOver}
-                                onDrop={() => handleDrop(exercise.id)}
-                                onClick={() => !grammarExercises.showResults && setGrammarExercises(prev => ({
-                                  ...prev,
-                                  answers: { ...prev.answers, [exercise.id]: undefined }
-                                }))}
-                                className={`inline-block min-w-[60px] mx-1 px-3 py-1 rounded-lg border-2 border-dashed text-center cursor-pointer ${
-                                  userAnswer
-                                    ? showResult
-                                      ? isCorrect ? 'bg-green-100 border-green-400 text-green-700' : 'bg-red-100 border-red-400 text-red-700'
-                                      : 'bg-blue-100 border-blue-400 text-blue-700'
-                                    : 'bg-gray-100 border-gray-300 text-gray-400'
-                                }`}
-                              >
-                                {userAnswer || '___'}
+                          {/* Sentence with blank */}
+                          <div className="flex items-center space-x-2 text-lg mb-3">
+                            <span className="bg-bosnia-blue text-white px-2 py-1 rounded text-sm font-bold">#{exercise.id}</span>
+                            <span className="font-medium">
+                              {exercise.sentence.split('_____')[0]}
+                              <span className={`inline-block min-w-[80px] mx-1 px-3 py-1 rounded-lg border-2 text-center ${
+                                userAnswer
+                                  ? showResult
+                                    ? isCorrect ? 'bg-green-100 border-green-400 text-green-700 font-bold' : 'bg-red-100 border-red-400 text-red-700 font-bold'
+                                    : 'bg-blue-100 border-blue-400 text-blue-700 font-bold'
+                                  : 'bg-gray-100 border-dashed border-gray-300 text-gray-400'
+                              }`}>
+                                {userAnswer || '_____'}
                               </span>
-                              {exercise.sentence.split('___')[1]}
+                              {exercise.sentence.split('_____')[1]}
                             </span>
                           </div>
-                          {/* Show translation when answer is filled OR toggle is on OR after results */}
+                          
+                          {/* Options */}
+                          <div className="flex flex-wrap gap-2">
+                            {exercise.options.map((option, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => !showResult && setGrammarExercises(prev => ({
+                                  ...prev,
+                                  answers: { ...prev.answers, [exercise.id]: option }
+                                }))}
+                                disabled={showResult}
+                                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                                  showResult
+                                    ? option === exercise.answer
+                                      ? 'bg-green-500 text-white'
+                                      : userAnswer === option
+                                        ? 'bg-red-500 text-white'
+                                        : 'bg-gray-100 text-gray-400'
+                                    : userAnswer === option
+                                      ? 'bg-bosnia-blue text-white'
+                                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                              >
+                                {option}
+                              </button>
+                            ))}
+                          </div>
+                          
+                          {/* Translation */}
                           {(userAnswer || showResult || showFillBlankTranslation) && (
-                            <div className="mt-2 text-sm">
-                              {showResult && !isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
+                            <div className="mt-3 text-sm">
+                              {showResult && userAnswer && !isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
                               <div className="text-gray-500 italic mt-1">🌍 {exercise.translation}</div>
                             </div>
                           )}
