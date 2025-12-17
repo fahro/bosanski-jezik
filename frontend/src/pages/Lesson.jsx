@@ -887,6 +887,33 @@ function Lesson() {
                   {showCultureTranslation ? '← Klikni da sakriješ prijevod' : 'Klikni za prijevod na engleski →'}
                 </div>
               </div>
+
+              {/* Cultural Images */}
+              {lesson.cultural_images && lesson.cultural_images.length > 0 && (
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
+                    <span className="mr-2">📸</span> Slike iz kulture
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {lesson.cultural_images.map((image, index) => (
+                      <div key={index} className="group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all">
+                        <img 
+                          src={image.url} 
+                          alt={image.alt}
+                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                          onError={(e) => {
+                            e.target.onerror = null
+                            e.target.src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400'
+                          }}
+                        />
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
+                          <p className="text-white text-sm font-medium">{image.caption}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

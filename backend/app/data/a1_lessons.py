@@ -61,6 +61,11 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 - **Mi smo** prijatelji. (We are friends.)
 """,
         "cultural_note": "U Bosni i Hercegovini, ljudi se često pozdravljaju sa 'Merhaba' (iz turskog) ili 'Selam' u neformalnim situacijama. 'Vi' forma se koristi za starije osobe i u formalnim situacijama kao znak poštovanja.",
+        "cultural_images": [
+            {"url": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=400", "caption": "Prijatelji se pozdravljaju - Selam!", "alt": "Friends greeting each other"},
+            {"url": "https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=400", "caption": "Formalni pozdrav - rukovanje", "alt": "Formal handshake greeting"},
+            {"url": "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=400", "caption": "Profesionalni pozdrav", "alt": "Professional greeting"}
+        ],
         "dialogue": [
             {"speaker": "Amina", "text": "Zdravo! Ja sam Amina. Kako se ti zoveš?", "translation": "Hello! I am Amina. What is your name?"},
             {"speaker": "Emir", "text": "Zdravo Amina! Zovem se Emir. Drago mi je.", "translation": "Hello Amina! My name is Emir. Nice to meet you."},
@@ -146,6 +151,11 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 - Primjer: jedan stol (m), jedna žena (f), jedno dijete (n)
 """,
         "cultural_note": "U Bosni i Hercegovini koristi se konvertibilna marka (KM) kao valuta. Kada kupujete na pijaci, često ćete čuti cijene u markama. Pregovaranje o cijeni je uobičajeno na tradicionalnim pijacama.",
+        "cultural_images": [
+            {"url": "https://images.unsplash.com/photo-1579113800032-c38bd7635818?w=400", "caption": "Tradicionalna bosanska pijaca", "alt": "Traditional Bosnian market"},
+            {"url": "https://images.unsplash.com/photo-1554672723-b208dc85134f?w=400", "caption": "Konvertibilna marka (KM)", "alt": "Bosnian currency"},
+            {"url": "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400", "caption": "Voće na pijaci - brojanje", "alt": "Counting fruits at market"}
+        ],
         "dialogue": [
             {"speaker": "Prodavač", "text": "Dobar dan! Izvolite?", "translation": "Good day! Can I help you?"},
             {"speaker": "Kupac", "text": "Koliko košta kilogram jabuka?", "translation": "How much is a kilogram of apples?"},
@@ -224,6 +234,11 @@ Pridjevi za boje se mijenjaju prema rodu imenice:
 - Koje boje je tvoja kuća? - What color is your house?
 """,
         "cultural_note": "Bosna i Hercegovina ima zastavu sa plavom bojom i žutim trokutom sa bijelim zvijezdama. Plava i žuta su nacionalne boje. Tradicionalna bosanska ćilimska umjetnost koristi živopisne crvene, plave i zelene boje.",
+        "cultural_images": [
+            {"url": "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400", "caption": "Zastava Bosne i Hercegovine", "alt": "Bosnia and Herzegovina flag"},
+            {"url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400", "caption": "Tradicionalni bosanski ćilim", "alt": "Traditional Bosnian carpet"},
+            {"url": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400", "caption": "Šarene boje na pijaci", "alt": "Colorful market display"}
+        ],
         "dialogue": [
             {"speaker": "Ana", "text": "Volim tvoju novu haljinu! Koje je boje?", "translation": "I love your new dress! What color is it?"},
             {"speaker": "Maja", "text": "Hvala! Ona je plava, moja omiljena boja.", "translation": "Thanks! It's blue, my favorite color."},
