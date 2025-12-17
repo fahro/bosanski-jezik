@@ -271,52 +271,68 @@ function Lesson() {
         { id: 4, english: "Yesterday was Thursday", bosnian: "Jučer je bio četvrtak", options: ["Jučer je bio četvrtak", "Danas je četvrtak", "Sutra je četvrtak", "Jučer je bila srijeda"] }
       ]
     },
-    // Lesson 6: Months and Seasons
+    // Lesson 6: Months and Seasons (u + mjesec, godišnja doba, rođendan)
     6: {
       fillBlank: [
-        { id: 1, sentence: "U _____ počinje proljeće.", answer: "martu", translation: "Spring begins in March.", options: ["januaru", "februaru", "martu", "aprilu"] },
-        { id: 2, sentence: "_____ je najhladniji mjesec.", answer: "Januar", translation: "January is the coldest month.", options: ["Januar", "Juni", "Juli", "Septembar"] },
-        { id: 3, sentence: "Volim _____ jer je toplo.", answer: "ljeto", translation: "I love summer because it's warm.", options: ["zimu", "jesen", "proljeće", "ljeto"] }
+        { id: 1, sentence: "Moj rođendan je u _____.", answer: "maju", translation: "My birthday is in May.", options: ["januar", "maju", "juli", "decembar"] },
+        { id: 2, sentence: "U _____ pada snijeg.", answer: "januaru", translation: "In January snow falls.", options: ["januaru", "junu", "augustu", "maju"] },
+        { id: 3, sentence: "_____ je toplo godišnje doba.", answer: "Ljeto", translation: "Summer is a warm season.", options: ["Zima", "Jesen", "Proljeće", "Ljeto"] },
+        { id: 4, sentence: "U _____ i oktobru je jesen.", answer: "septembru", translation: "In September and October it's autumn.", options: ["martu", "junu", "septembru", "decembru"] },
+        { id: 5, sentence: "_____ počinje u martu.", answer: "Proljeće", translation: "Spring begins in March.", options: ["Zima", "Ljeto", "Jesen", "Proljeće"] },
+        { id: 6, sentence: "U julu i _____ idemo na more.", answer: "augustu", translation: "In July and August we go to the sea.", options: ["januaru", "martu", "augustu", "novembru"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["tvoj", "je", "Kada", "rođendan"], correct: ["Kada", "je", "tvoj", "rođendan"], translation: "When is your birthday?" },
-        { id: 2, scrambled: ["u", "maju", "Moj", "rođendan", "je"], correct: ["Moj", "rođendan", "je", "u", "maju"], translation: "My birthday is in May." }
+        { id: 2, scrambled: ["u", "maju", "Moj", "rođendan", "je"], correct: ["Moj", "rođendan", "je", "u", "maju"], translation: "My birthday is in May." },
+        { id: 3, scrambled: ["zimi", "pada", "Snijeg"], correct: ["Snijeg", "pada", "zimi"], translation: "Snow falls in winter." },
+        { id: 4, scrambled: ["u", "počinje", "Ljeto", "junu"], correct: ["Ljeto", "počinje", "u", "junu"], translation: "Summer begins in June." },
+        { id: 5, scrambled: ["pada", "jesen", "U", "lišće"], correct: ["U", "jesen", "lišće", "pada"], translation: "In autumn leaves fall." }
       ],
       matching: [
-        { id: 1, bosnian: "Proljeće", english: "Spring" },
-        { id: 2, bosnian: "Ljeto", english: "Summer" },
-        { id: 3, bosnian: "Jesen", english: "Autumn" },
-        { id: 4, bosnian: "Zima", english: "Winter" },
-        { id: 5, bosnian: "Januar", english: "January" },
-        { id: 6, bosnian: "Juli", english: "July" }
+        { id: 1, bosnian: "U januaru", english: "In January" },
+        { id: 2, bosnian: "U maju", english: "In May" },
+        { id: 3, bosnian: "U proljeće", english: "In spring" },
+        { id: 4, bosnian: "Zimi", english: "In winter" },
+        { id: 5, bosnian: "U jesen", english: "In autumn" },
+        { id: 6, bosnian: "Ljeti", english: "In summer" }
       ],
       translation: [
         { id: 1, english: "When is your birthday?", bosnian: "Kada je tvoj rođendan?", options: ["Kada je tvoj rođendan?", "Koliko imaš godina?", "Gdje živiš?", "Kako se zoveš?"] },
-        { id: 2, english: "I love winter", bosnian: "Volim zimu", options: ["Volim ljeto", "Volim zimu", "Volim proljeće", "Volim jesen"] }
+        { id: 2, english: "My birthday is in December", bosnian: "Moj rođendan je u decembru", options: ["Moj rođendan je u maju", "Moj rođendan je u decembru", "Moj rođendan je u julu", "Moj rođendan je u martu"] },
+        { id: 3, english: "Snow falls in winter", bosnian: "Snijeg pada zimi", options: ["Snijeg pada ljeti", "Snijeg pada zimi", "Snijeg pada u proljeće", "Snijeg pada u jesen"] },
+        { id: 4, english: "In July we go to Neum", bosnian: "U julu idemo u Neum", options: ["U januaru idemo u Neum", "U julu idemo u Neum", "U martu idemo u Neum", "U oktobru idemo u Neum"] }
       ]
     },
-    // Lesson 7: Food and Drink
+    // Lesson 7: Food and Drink (volim/ne volim, želim, koliko košta, naručivanje)
     7: {
       fillBlank: [
-        { id: 1, sentence: "_____ bosansku kafu.", answer: "Volim", translation: "I love Bosnian coffee.", options: ["Volim", "Voliš", "Voli", "Volimo"] },
-        { id: 2, sentence: "_____ ćevape sa lukom.", answer: "Želim", translation: "I want cevapi with onions.", options: ["Želim", "Želiš", "Želi", "Želimo"] },
-        { id: 3, sentence: "Bosanska kafa je _____.", answer: "jaka", translation: "Bosnian coffee is strong.", options: ["slaba", "jaka", "slatka", "kisela"] }
+        { id: 1, sentence: "_____ ćevape sa lukom.", answer: "Volim", translation: "I love cevapi with onions.", options: ["Volim", "Voliš", "Voli", "Volimo"] },
+        { id: 2, sentence: "Ja ne _____ ribu.", answer: "volim", translation: "I don't like fish.", options: ["volim", "voliš", "želim", "želiš"] },
+        { id: 3, sentence: "_____ jednu bosansku kafu, molim.", answer: "Želim", translation: "I want one Bosnian coffee, please.", options: ["Želim", "Volim", "Imam", "Pijem"] },
+        { id: 4, sentence: "_____ košta burek?", answer: "Koliko", translation: "How much does burek cost?", options: ["Koliko", "Kada", "Gdje", "Šta"] },
+        { id: 5, sentence: "_____, molim.", answer: "Račun", translation: "The bill, please.", options: ["Račun", "Kafu", "Vodu", "Hljeb"] },
+        { id: 6, sentence: "Šta _____ piti?", answer: "želite", translation: "What would you like to drink?", options: ["želim", "želiš", "želite", "žele"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["kafu", "Želim", "jednu", "bosansku"], correct: ["Želim", "jednu", "bosansku", "kafu"], translation: "I want one Bosnian coffee." },
-        { id: 2, scrambled: ["ćevape", "Volim", "sa", "kajmakom"], correct: ["Volim", "ćevape", "sa", "kajmakom"], translation: "I love cevapi with kajmak." }
+        { id: 2, scrambled: ["ćevape", "ne", "Ja", "volim"], correct: ["Ja", "ne", "volim", "ćevape"], translation: "I don't like cevapi." },
+        { id: 3, scrambled: ["košta", "Koliko", "burek"], correct: ["Koliko", "košta", "burek"], translation: "How much does burek cost?" },
+        { id: 4, scrambled: ["molim", "Račun"], correct: ["Račun", "molim"], translation: "The bill, please." },
+        { id: 5, scrambled: ["jesti", "želite", "Šta"], correct: ["Šta", "želite", "jesti"], translation: "What would you like to eat?" }
       ],
       matching: [
-        { id: 1, bosnian: "Hljeb", english: "Bread" },
-        { id: 2, bosnian: "Meso", english: "Meat" },
-        { id: 3, bosnian: "Voda", english: "Water" },
-        { id: 4, bosnian: "Kafa", english: "Coffee" },
-        { id: 5, bosnian: "Ćevapi", english: "Cevapi" },
-        { id: 6, bosnian: "Burek", english: "Burek" }
+        { id: 1, bosnian: "Volim kafu", english: "I love coffee" },
+        { id: 2, bosnian: "Ne volim ribu", english: "I don't like fish" },
+        { id: 3, bosnian: "Želim vodu", english: "I want water" },
+        { id: 4, bosnian: "Koliko košta?", english: "How much?" },
+        { id: 5, bosnian: "Račun, molim", english: "The bill, please" },
+        { id: 6, bosnian: "Mogu li dobiti...?", english: "Can I get...?" }
       ],
       translation: [
-        { id: 1, english: "I want cevapi", bosnian: "Želim ćevape", options: ["Želim ćevape", "Volim ćevape", "Imam ćevape", "Jedem ćevape"] },
-        { id: 2, english: "The bill, please", bosnian: "Račun, molim", options: ["Račun, molim", "Kafu, molim", "Vodu, molim", "Hvala"] }
+        { id: 1, english: "I love cevapi with kajmak", bosnian: "Volim ćevape sa kajmakom", options: ["Volim ćevape sa kajmakom", "Želim ćevape sa kajmakom", "Ne volim ćevape", "Imam ćevape"] },
+        { id: 2, english: "I don't like onions", bosnian: "Ne volim luk", options: ["Volim luk", "Ne volim luk", "Želim luk", "Imam luk"] },
+        { id: 3, english: "How much does coffee cost?", bosnian: "Koliko košta kafa?", options: ["Koliko košta kafa?", "Gdje je kafa?", "Želim kafu", "Volim kafu"] },
+        { id: 4, english: "What would you like to eat?", bosnian: "Šta želite jesti?", options: ["Šta želite jesti?", "Šta volite jesti?", "Koliko košta?", "Gdje je restoran?"] }
       ]
     },
     // Lesson 8: House and Apartment

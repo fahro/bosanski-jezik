@@ -58,13 +58,15 @@ A1_LESSONS_PART3 = [
 """,
         "cultural_note": "Bosanska kuhinja je bogata i ukusna. Ćevapi, burek i pita su najpoznatija jela. Bosanska kafa se priprema na poseban način i servira u fildžanu (mala šoljica) sa rahat-lokumom ili šećerom. Nikada ne žurite sa kafom - to je društveni ritual!",
         "cultural_comic": {
-            "title": "U ćevabdžinici kod Želje",
+            "title": "Naručivanje u ćevabdžinici Željo",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/c8/7c/8e/cevabdzinica-zeljo.jpg?w=1200",
             "panels": [
                 {"character": "🧑‍🍳", "name": "Konobar", "text": "Dobrodošli! Šta želite jesti?", "translation": "Welcome! What would you like to eat?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=59"},
-                {"character": "👩", "name": "Gošća", "text": "Želim deset ćevapa sa lukom i kajmakom.", "translation": "I want ten cevapi with onions and kajmak.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
-                {"character": "🧑‍🍳", "name": "Konobar", "text": "Odličan izbor! A za piti?", "translation": "Excellent choice! And to drink?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=59"},
-                {"character": "👩", "name": "Gošća", "text": "Jednu bosansku kafu i čašu воде, molim.", "translation": "One Bosnian coffee and a glass of water, please.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"}
+                {"character": "👩", "name": "Amina", "text": "Ja volim ćevape! Želim deset ćevapa sa lukom.", "translation": "I love cevapi! I want ten cevapi with onions.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "👨", "name": "Tarik", "text": "Ja ne volim luk. Želim ćevape sa kajmakom.", "translation": "I don't like onions. I want cevapi with kajmak.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=52"},
+                {"character": "🧑‍🍳", "name": "Konobar", "text": "A za piti? Imamo kafu, sok, vodu...", "translation": "And to drink? We have coffee, juice, water...", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Amina", "text": "Želim bosansku kafu. Koliko košta?", "translation": "I want Bosnian coffee. How much does it cost?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=32"},
+                {"character": "🧑‍🍳", "name": "Konobar", "text": "Kafa je dvije marke. Račun, molim?", "translation": "Coffee is two marks. The bill, please?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"}
             ]
         },
         "dialogue": [

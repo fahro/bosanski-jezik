@@ -214,13 +214,14 @@ A1_LESSONS_PART2 = [
 """,
         "cultural_note": "Bosna ima četiri izražena godišnja doba. Zime mogu biti veoma hladne sa puno snijega, posebno u planinskim krajevima. Ljeta su topla i suha. Tradicionalni bosanski kalendar također uključuje islamske i pravoslavne praznike koji se obilježavaju po lunarnom kalendaru.",
         "cultural_comic": {
-            "title": "Godišnja doba na Jahorini",
+            "title": "Četiri godišnja doba u Bosni",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/15/6d/b5/jahorina.jpg?w=1200",
             "panels": [
-                {"character": "👨", "name": "Mirza", "text": "Volim zimu! U januaru skijam na Jahorini.", "translation": "I love winter! In January I ski on Jahorina.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"},
-                {"character": "👩", "name": "Lamija", "text": "Ja više volim proljeće. U aprilu cvijeta sve!", "translation": "I prefer spring. In April everything blooms!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=41"},
-                {"character": "👨", "name": "Mirza", "text": "A ljeto? U julu je more u Neumu prekrasno!", "translation": "And summer? In July the sea in Neum is beautiful!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"},
-                {"character": "👩", "name": "Lamija", "text": "Da! A u jesen, u oktobru, boje su predivne.", "translation": "Yes! And in autumn, in October, colors are wonderful.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=41"}
+                {"character": "👨", "name": "Mirza", "text": "Kada je tvoj rođendan? Moj je u decembru.", "translation": "When is your birthday? Mine is in December.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"},
+                {"character": "👩", "name": "Lamija", "text": "Moj rođendan je u maju! To je u proljeće.", "translation": "My birthday is in May! That's in spring.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=41"},
+                {"character": "👨", "name": "Mirza", "text": "U maju je lijepo. A zimi, u januaru i februaru, pada snijeg.", "translation": "May is nice. And in winter, in January and February, snow falls.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"},
+                {"character": "👩", "name": "Lamija", "text": "U julu i augustu je ljeto - idemo na more u Neum!", "translation": "In July and August it's summer - we go to the sea in Neum!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=41"},
+                {"character": "👨", "name": "Mirza", "text": "A u septembru i oktobru je jesen. Lišće pada.", "translation": "And in September and October it's autumn. Leaves fall.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=57"}
             ]
         },
         "dialogue": [
