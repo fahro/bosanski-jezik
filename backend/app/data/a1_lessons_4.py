@@ -70,9 +70,14 @@ A1_LESSONS_PART4 = [
             {"speaker": "Adi", "text": "Ja sam inženjer. Radim u IT firmi.", "translation": "I am an engineer. I work in an IT company."}
         ],
         "exercises": [
-            {"id": 1, "type": "matching", "instruction": "Povežite zanimanja sa radnim mjestima", "content": {"pairs": [["doktor", "bolnica"], ["učitelj", "škola"], ["kuhar", "restoran"]]}, "answer": "correct_pairs", "hint": "Gdje rade ovi ljudi?"},
-            {"id": 2, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Ona je _____. (teacher, f.)"}, "answer": "učiteljica", "hint": "Ženski oblik"},
-            {"id": 3, "type": "translate", "instruction": "Prevedite: 'I work as a doctor'", "content": {"text": "I work as a doctor"}, "answer": "Radim kao doktor", "hint": "Radim kao..."}
+            {"id": 1, "type": "matching", "instruction": "Povežite zanimanja sa radnim mjestima", "content": {"pairs": [["doktor", "bolnica"], ["učitelj", "škola"], ["kuhar", "restoran"], ["prodavač", "trgovina"], ["policajac", "policijska stanica"]]}, "answer": "correct_pairs", "hint": "Gdje rade ovi ljudi?"},
+            {"id": 2, "type": "fill_blank", "instruction": "Napišite ženski oblik zanimanja", "content": {"sentence": "On je kuhar, a ona je _____."}, "answer": "kuharica", "hint": "Dodajte nastavak -ica"},
+            {"id": 3, "type": "fill_blank", "instruction": "Konjugirajte glagol 'raditi'", "content": {"sentence": "Mi _____ u fabrici. (raditi)"}, "answer": "radimo", "hint": "Prvo lice množine"},
+            {"id": 4, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "What do you do for work?"}, "answer": "Čime se baviš? / Čime se bavite?", "hint": "Formalno ili neformalno"},
+            {"id": 5, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "She is a doctor."}, "answer": "Ona je doktorica.", "hint": "Ženski oblik od 'doktor'"},
+            {"id": 6, "type": "matching", "instruction": "Povežite muški i ženski oblik zanimanja", "content": {"pairs": [["student", "studentica"], ["prodavač", "prodavačica"], ["učitelj", "učiteljica"], ["advokat", "advokatica"]]}, "answer": "correct_pairs", "hint": "Ženski oblici završavaju na -ica"},
+            {"id": 7, "type": "fill_blank", "instruction": "Odgovorite na pitanje: Gdje radiš?", "content": {"sentence": "_____ u banci. (raditi, ja)"}, "answer": "Radim", "hint": "Prvo lice jednine"},
+            {"id": 8, "type": "translate", "instruction": "Prevedite na engleski", "content": {"text": "Moj otac je vozač."}, "answer": "My father is a driver.", "hint": "Vozač = driver"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'teacher' (ženski rod)?", "options": ["učitelj", "učiteljica", "doktorica", "studentica"], "correct_answer": 1, "explanation": "'Učiteljica' je ženski oblik od 'učitelj'.", "question_type": "vocabulary"},

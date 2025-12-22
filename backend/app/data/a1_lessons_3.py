@@ -207,7 +207,7 @@ A1_LESSONS_PART3 = [
             {"bosnian": "usta", "english": "mouth", "pronunciation": "OO-stah", "example": "Govorim ustima.", "example_translation": "I speak with my mouth.", "image_emoji": "👄"},
             {"bosnian": "srce", "english": "heart", "pronunciation": "SR-tseh", "example": "Srce kuca.", "example_translation": "The heart beats.", "image_emoji": "❤️"},
             {"bosnian": "stomak", "english": "stomach", "pronunciation": "STOH-mahk", "example": "Boli me stomak.", "example_translation": "My stomach hurts.", "image_emoji": "🫃"},
-            {"bosnian": "zub", "english": "tooth", "pronunciation": "zoob", "example": "Imam zubi.", "example_translation": "I have a toothache.", "image_emoji": "🦷"}
+            {"bosnian": "zub", "english": "tooth", "pronunciation": "zoob", "example": "Imam zube.", "example_translation": "I have a toothache.", "image_emoji": "🦷"}
         ],
         "grammar_explanation": """
 ## Izražavanje boli - "Boli me..."
@@ -260,9 +260,14 @@ Konstrukcija za izražavanje boli:
             {"speaker": "Doktor", "text": "Mislim da imate prehladu. Odmor i puno tekućine.", "translation": "I think you have a cold. Rest and lots of fluids."}
         ],
         "exercises": [
-            {"id": 1, "type": "matching", "instruction": "Povežite dijelove tijela sa funkcijama", "content": {"pairs": [["oči", "vidjeti"], ["uši", "čuti"], ["nos", "mirisati"]]}, "answer": "correct_pairs", "hint": "Čula"},
-            {"id": 2, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Boli me _____. (head)"}, "answer": "glava", "hint": "Dio tijela na vrhu"},
-            {"id": 3, "type": "translate", "instruction": "Prevedite: 'I'm tired'", "content": {"text": "I'm tired"}, "answer": "Umoran sam / Umorna sam", "hint": "Zavisi od roda govornika"}
+            {"id": 1, "type": "matching", "instruction": "Povežite dijelove tijela sa funkcijama", "content": {"pairs": [["oči", "vidjeti"], ["uši", "čuti"], ["nos", "mirisati"], ["usta", "govoriti"], ["ruke", "pisati"]]}, "answer": "correct_pairs", "hint": "Šta radimo sa svakim dijelom tijela?"},
+            {"id": 2, "type": "fill_blank", "instruction": "Popunite prazninu sa odgovarajućim dijelom tijela", "content": {"sentence": "Boli me _____. (stomach)"}, "answer": "stomak", "hint": "Gdje osjećamo glad?"},
+            {"id": 3, "type": "fill_blank", "instruction": "Koristite 'boli' ili 'bole'", "content": {"sentence": "_____ me oči."}, "answer": "Bole", "hint": "Množina koristi 'bole'"},
+            {"id": 4, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "My head hurts."}, "answer": "Boli me glava.", "hint": "Boli me + dio tijela"},
+            {"id": 5, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "I'm sick."}, "answer": "Bolestan sam. / Bolesna sam.", "hint": "Zavisi od roda govornika"},
+            {"id": 6, "type": "fill_blank", "instruction": "Odgovorite na pitanje: Kako se osjećate? (not well)", "content": {"sentence": "_____ sam."}, "answer": "Loše", "hint": "Suprotno od 'dobro'"},
+            {"id": 7, "type": "matching", "instruction": "Povežite jedninu sa množinom", "content": {"pairs": [["oko", "oči"], ["uho", "uši"], ["zub", "zubi"], ["ruka", "ruke"], ["noga", "noge"]]}, "answer": "correct_pairs", "hint": "Nepravilne množine"},
+            {"id": 8, "type": "translate", "instruction": "Prevedite na engleski", "content": {"text": "Imam temperaturu."}, "answer": "I have a fever.", "hint": "Temperatura = fever"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'head' na bosanskom?", "options": ["ruka", "noga", "glava", "stomak"], "correct_answer": 2, "explanation": "'Glava' znači 'head'.", "question_type": "vocabulary"},

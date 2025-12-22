@@ -9,6 +9,7 @@ import {
   Star, Trophy, Zap, Award
 } from 'lucide-react'
 import { useProgress } from '../hooks/useProgress'
+import { useSpeech } from '../hooks/useSpeech'
 import { api } from '../api'
 
 function Lesson() {
@@ -16,6 +17,7 @@ function Lesson() {
   const [lesson, setLesson] = useState(null)
   const [loading, setLoading] = useState(true)
   const { progress, saveQuizScore, getStars, getAchievementInfo } = useProgress()
+  const { speak, isSpeaking } = useSpeech()
   const [quizResult, setQuizResult] = useState(null)
   const [activeTab, setActiveTab] = useState('vocabulary')
   const [quizState, setQuizState] = useState({
@@ -739,7 +741,19 @@ function Lesson() {
                     } border-2 rounded-xl p-4 min-h-[180px] flex flex-col justify-between hover:shadow-lg transition-shadow`}>
                       {!flippedCards[index] ? (
                         <>
-                          <div className="text-4xl mb-2">{word.image_emoji}</div>
+                          <div className="flex justify-between items-start">
+                            <div className="text-4xl mb-2">{word.image_emoji}</div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                speak(word.bosnian)
+                              }}
+                              className="p-2 rounded-full bg-white/70 hover:bg-white shadow-sm hover:shadow transition-all text-bosnia-blue hover:text-blue-700"
+                              title="Slušaj izgovor"
+                            >
+                              <Volume2 className="w-5 h-5" />
+                            </button>
+                          </div>
                           <div>
                             <div className="text-2xl font-bold text-gray-800">{word.bosnian}</div>
                             <div className="text-sm text-gray-500 mt-1">{word.pronunciation}</div>
@@ -748,9 +762,33 @@ function Lesson() {
                         </>
                       ) : (
                         <>
-                          <div className="text-lg font-semibold text-green-800">{word.english}</div>
+                          <div className="flex justify-between items-start">
+                            <div className="text-lg font-semibold text-green-800">{word.english}</div>
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation()
+                                speak(word.bosnian)
+                              }}
+                              className="p-2 rounded-full bg-white/70 hover:bg-white shadow-sm hover:shadow transition-all text-green-600 hover:text-green-700"
+                              title="Slušaj riječ"
+                            >
+                              <Volume2 className="w-4 h-4" />
+                            </button>
+                          </div>
                           <div className="mt-2 p-2 bg-white/50 rounded-lg">
-                            <div className="text-sm text-gray-700 italic">"{word.example}"</div>
+                            <div className="flex justify-between items-start gap-2">
+                              <div className="text-sm text-gray-700 italic">"{word.example}"</div>
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  speak(word.example)
+                                }}
+                                className="p-1.5 rounded-full bg-white/70 hover:bg-white shadow-sm hover:shadow transition-all text-green-600 hover:text-green-700 flex-shrink-0"
+                                title="Slušaj rečenicu"
+                              >
+                                <Volume2 className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
                             <div className="text-xs text-gray-500 mt-1">{word.example_translation}</div>
                           </div>
                           <div className="text-xs text-green-600 mt-2">← Klikni za bosanski</div>

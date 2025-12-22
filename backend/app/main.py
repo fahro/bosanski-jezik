@@ -1,11 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel
 from typing import List, Optional
 import json
 import os
+from openai import OpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI(title="Bosanski Jezik - Learn Bosnian", version="1.0.0")
 
@@ -111,6 +115,70 @@ def check_answer(data: dict):
         "correct": data.get("selected") == data.get("correct_answer"),
         "correct_answer": data.get("correct_answer")
     }
+
+# Load audio manifest for pre-generated audio files
+import hashlib
+
+AUDIO_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "audio")
+AUDIO_MANIFEST = {}
+
+def load_audio_manifest():
+    global AUDIO_MANIFEST
+    manifest_path = os.path.join(AUDIO_DIR, "manifest.json")
+    if os.path.exists(manifest_path):
+        with open(manifest_path, 'r', encoding='utf-8') as f:
+            AUDIO_MANIFEST = json.load(f)
+
+load_audio_manifest()
+
+# Mount static audio directory
+if os.path.exists(AUDIO_DIR):
+    app.mount("/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
+
+@app.get("/api/audio/{text:path}")
+async def get_audio_url(text: str):
+    """Get the URL for a pre-generated audio file."""
+    if text in AUDIO_MANIFEST:
+        filename = AUDIO_MANIFEST[text]
+        return {"url": f"/audio/{filename}", "exists": True}
+    
+    # Generate filename hash for fallback check
+    text_hash = hashlib.md5(text.encode('utf-8')).hexdigest()[:12]
+    filename = f"{text_hash}.mp3"
+    file_path = os.path.join(AUDIO_DIR, filename)
+    
+    if os.path.exists(file_path):
+        return {"url": f"/audio/{filename}", "exists": True}
+    
+    return {"url": None, "exists": False}
+
+class TTSRequest(BaseModel):
+    text: str
+    voice: str = "alloy"
+
+@app.post("/api/tts")
+async def text_to_speech(request: TTSRequest):
+    """Generate audio on-the-fly (fallback if pre-generated not available)."""
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="OpenAI API key not configured")
+    
+    try:
+        client = OpenAI(api_key=api_key)
+        response = client.audio.speech.create(
+            model="tts-1",
+            voice=request.voice,
+            input=request.text
+        )
+        
+        audio_content = response.content
+        return Response(
+            content=audio_content,
+            media_type="audio/mpeg",
+            headers={"Content-Disposition": "inline; filename=speech.mp3"}
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Serve static frontend files (for production deployment)
 if STATIC_DIR:
