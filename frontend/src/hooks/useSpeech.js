@@ -1,26 +1,41 @@
 import { useState, useCallback, useRef } from 'react'
-import { api, getApiUrl } from '../api'
+import { getApiUrl } from '../api'
+import SparkMD5 from 'spark-md5'
+
+// Transliterate Bosnian characters to ASCII
+function sanitizeFilename(text, maxLength = 50) {
+  const replacements = {
+    'č': 'c', 'ć': 'c', 'š': 's', 'ž': 'z', 'đ': 'dj',
+    'Č': 'C', 'Ć': 'C', 'Š': 'S', 'Ž': 'Z', 'Đ': 'Dj'
+  }
+  
+  let result = text
+  for (const [bos, lat] of Object.entries(replacements)) {
+    result = result.split(bos).join(lat)
+  }
+  
+  // Remove accents and non-ASCII
+  result = result.normalize('NFKD').replace(/[^\w\s-]/g, '')
+  result = result.replace(/[\s]+/g, '_')
+  result = result.toLowerCase().replace(/^_+|_+$/g, '')
+  
+  if (result.length > maxLength) {
+    result = result.substring(0, maxLength).replace(/_+$/, '')
+  }
+  
+  return result
+}
+
+// Generate filename matching the Python script
+function getAudioFilename(text) {
+  const safeName = sanitizeFilename(text)
+  const hash = SparkMD5.hash(text).substring(0, 6)
+  return `${safeName}_${hash}.mp3`
+}
 
 export function useSpeech() {
   const [isSpeaking, setIsSpeaking] = useState(false)
   const audioRef = useRef(null)
-
-  const playAudio = async (audioUrl, shouldRevokeUrl = false) => {
-    const audio = new Audio(audioUrl)
-    audioRef.current = audio
-    
-    audio.onended = () => {
-      setIsSpeaking(false)
-      if (shouldRevokeUrl) URL.revokeObjectURL(audioUrl)
-    }
-    
-    audio.onerror = () => {
-      setIsSpeaking(false)
-      if (shouldRevokeUrl) URL.revokeObjectURL(audioUrl)
-    }
-
-    await audio.play()
-  }
 
   const speak = useCallback(async (text) => {
     if (!text) return
@@ -35,34 +50,24 @@ export function useSpeech() {
     const baseUrl = getApiUrl()
 
     try {
-      // First, check if pre-generated audio exists
-      const checkResponse = await fetch(`${baseUrl}/api/audio/${encodeURIComponent(text)}`)
-      const checkData = await checkResponse.json()
+      // Generate filename directly (matching Python script logic)
+      const filename = getAudioFilename(text)
+      const audioUrl = `${baseUrl}/audio/${filename}`
       
-      if (checkData.exists && checkData.url) {
-        // Use pre-generated audio
-        await playAudio(baseUrl + checkData.url)
-        return
+      const audio = new Audio(audioUrl)
+      audioRef.current = audio
+      
+      audio.onended = () => setIsSpeaking(false)
+      audio.onerror = () => {
+        console.warn('Audio file not found, using fallback:', filename)
+        setIsSpeaking(false)
+        fallbackSpeak(text)
       }
 
-      // Fallback: generate on-the-fly
-      const response = await fetch(baseUrl + '/api/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text, voice: 'alloy' })
-      })
-
-      if (!response.ok) {
-        throw new Error('TTS request failed')
-      }
-
-      const audioBlob = await response.blob()
-      const audioUrl = URL.createObjectURL(audioBlob)
-      await playAudio(audioUrl, true)
+      await audio.play()
     } catch (error) {
-      console.error('TTS Error:', error)
+      console.error('Audio Error:', error)
       setIsSpeaking(false)
-      // Fallback to Web Speech API if OpenAI fails
       fallbackSpeak(text)
     }
   }, [])
