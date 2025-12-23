@@ -60,16 +60,6 @@ def get_audio_filename(text: str) -> str:
     text_hash = hashlib.md5(text.encode('utf-8')).hexdigest()[:6]
     return f"{safe_name}_{text_hash}.mp3"
 
-def prepare_text_for_tts(text: str) -> str:
-    """
-    Prepare text for better Bosnian/Serbian pronunciation.
-    Add phonetic hints and language context.
-    """
-    # Add language context prefix to help the model
-    # This tricks the model into using Slavic pronunciation patterns
-    prepared = f"[Bosnian/Serbian language] {text}"
-    return prepared
-
 def generate_audio(client: OpenAI, text: str, output_path: Path) -> bool:
     """Generate audio file using OpenAI TTS with optimized settings."""
     if output_path.exists():
@@ -77,13 +67,10 @@ def generate_audio(client: OpenAI, text: str, output_path: Path) -> bool:
         return True
     
     try:
-        # Prepare text with language hints
-        prepared_text = prepare_text_for_tts(text)
-        
         response = client.audio.speech.create(
             model="tts-1-hd",      # HD model za bolji kvalitet
             voice="nova",          # Nova glas bolje izgovara strane jezike
-            input=prepared_text,
+            input=text,            # Direktno tekst bez prefiksa
             speed=0.9              # Malo sporije za jasniji izgovor
         )
         
@@ -95,6 +82,15 @@ def generate_audio(client: OpenAI, text: str, output_path: Path) -> bool:
     except Exception as e:
         print(f"  ✗ Error for '{text[:30]}...': {e}")
         return False
+
+def extract_bosnian_text(text: str) -> str:
+    """Extract only Bosnian text, removing English translations and other noise."""
+    if not text:
+        return ""
+    # Skip if it looks like English only
+    if text.startswith("How ") or text.startswith("What ") or text.startswith("The "):
+        return ""
+    return text.strip()
 
 def main():
     api_key = os.getenv("OPENAI_API_KEY")
@@ -112,13 +108,13 @@ def main():
     texts_to_generate = []
     manifest = {}
     
-    print("Collecting vocabulary from lessons...")
+    print("Collecting all Bosnian text from lessons...")
     
     for lesson in A1_LESSONS:
         lesson_id = lesson["id"]
         print(f"\nLesson {lesson_id}: {lesson['title']}")
         
-        # Vocabulary words and examples
+        # 1. Vocabulary words and examples
         for word in lesson.get("vocabulary", []):
             bosnian = word.get("bosnian", "")
             example = word.get("example", "")
@@ -128,17 +124,70 @@ def main():
             if example:
                 texts_to_generate.append(example)
         
-        # Dialogue lines
+        # 2. Dialogue lines
         for line in lesson.get("dialogue", []):
             text = line.get("text", "")
             if text:
                 texts_to_generate.append(text)
+        
+        # 3. Quiz questions and options (Bosnian parts only)
+        for quiz in lesson.get("quiz", []):
+            question = quiz.get("question", "")
+            # Only add if question is in Bosnian (contains Bosnian characters or patterns)
+            if question and ("Kako" in question or "Koja" in question or "Šta" in question or "Koji" in question):
+                texts_to_generate.append(question)
+            # Add Bosnian options
+            for option in quiz.get("options", []):
+                # Skip English-only options
+                if option and not option[0].isupper() or any(c in option for c in "čćšžđČĆŠŽĐ"):
+                    texts_to_generate.append(option)
+        
+        # 4. Exercises - fill in blank sentences, matching pairs, etc.
+        for exercise in lesson.get("exercises", []):
+            content = exercise.get("content", {})
+            
+            # Fill blank sentences
+            sentence = content.get("sentence", "")
+            if sentence:
+                # Replace blank with the answer for full sentence
+                answer = exercise.get("answer", "")
+                full_sentence = sentence.replace("_____", answer).replace("___", answer)
+                texts_to_generate.append(full_sentence)
+            
+            # Matching pairs - Bosnian words
+            pairs = content.get("pairs", [])
+            for pair in pairs:
+                if isinstance(pair, list) and len(pair) > 0:
+                    texts_to_generate.append(pair[0])  # First item is usually Bosnian
+            
+            # Translation text
+            trans_text = content.get("text", "")
+            if trans_text:
+                texts_to_generate.append(trans_text)
+        
+        # 5. Cultural notes
+        cultural_note = lesson.get("cultural_note", "")
+        if cultural_note:
+            # Split into sentences for better audio
+            sentences = re.split(r'[.!?]+', cultural_note)
+            for sentence in sentences:
+                sentence = sentence.strip()
+                if sentence and len(sentence) > 10:
+                    texts_to_generate.append(sentence)
+        
+        # 6. Cultural comic panels
+        cultural_comic = lesson.get("cultural_comic", {})
+        for panel in cultural_comic.get("panels", []):
+            panel_text = panel.get("text", "")
+            if panel_text:
+                texts_to_generate.append(panel_text)
     
     # Remove duplicates while preserving order
     seen = set()
     unique_texts = []
     for text in texts_to_generate:
-        if text and text not in seen:
+        text = extract_bosnian_text(text)
+        if text and text not in seen and len(text) > 1:
             seen.add(text)
             unique_texts.append(text)
     
