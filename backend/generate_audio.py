@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
 Script to generate audio files for all vocabulary words and examples.
-Requires OPENAI_API_KEY environment variable to be set.
+Uses Azure Cognitive Services TTS with native Bosnian voices for authentic pronunciation.
+Requires AZURE_SPEECH_KEY and AZURE_SPEECH_REGION environment variables.
 """
 
 import os
@@ -10,7 +11,6 @@ import hashlib
 import json
 import unicodedata
 from pathlib import Path
-from openai import OpenAI
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -25,10 +25,10 @@ MANIFEST_FILE = AUDIO_DIR / "manifest.json"
 FEMALE_NAMES = {'Amina', 'Ana', 'Maja', 'Amra', 'Sara', 'Sabina', 'Lejla', 'Naida', 'Baka', 'Majka', 'Sestra', 'Kći', 'Žena', 'Snaha'}
 MALE_NAMES = {'Emir', 'Ahmed', 'Kenan', 'Prodavač', 'Kupac', 'Dućandžija', 'Tarik', 'Haris', 'Djed', 'Otac', 'Brat', 'Sin', 'Muž', 'Doktor'}
 
-# OpenAI TTS voices
-FEMALE_VOICE = "nova"      # Female voice - good for Slavic languages
-MALE_VOICE = "onyx"        # Male voice
-DEFAULT_VOICE = "nova"     # Default for vocabulary etc.
+# Azure TTS Bosnian voices - Native speakers!
+FEMALE_VOICE = "bs-BA-VesnaNeural"   # Bosnian female voice
+MALE_VOICE = "bs-BA-GoranNeural"     # Bosnian male voice
+DEFAULT_VOICE = "bs-BA-VesnaNeural"  # Default for vocabulary etc.
 
 def sanitize_filename(text: str, max_length: int = 50) -> str:
     """
@@ -89,29 +89,42 @@ def get_voice_for_speaker(speaker: str) -> str:
     
     return DEFAULT_VOICE
 
-def generate_audio(client: OpenAI, text: str, output_path: Path, voice: str = DEFAULT_VOICE, force: bool = False) -> bool:
-    """Generate audio file using OpenAI TTS with optimized settings."""
+def generate_audio_azure(speech_config, text: str, output_path: Path, voice: str = DEFAULT_VOICE, force: bool = False) -> bool:
+    """Generate audio file using Azure TTS with native Bosnian voices."""
+    import azure.cognitiveservices.speech as speechsdk
+    
     if output_path.exists() and not force:
         print(f"  ✓ Already exists: {output_path.name}")
         return True
     
     try:
-        response = client.audio.speech.create(
-            model="tts-1-hd",      # HD model za bolji kvalitet
-            voice=voice,           # Voice based on speaker gender
-            input=text,            # Direktno tekst bez prefiksa
-            speed=0.9              # Malo sporije za jasniji izgovor
-        )
+        # Set the voice
+        speech_config.speech_synthesis_voice_name = voice
         
-        with open(output_path, 'wb') as f:
-            f.write(response.content)
+        # Create audio config to save to file
+        audio_config = speechsdk.audio.AudioOutputConfig(filename=str(output_path))
         
-        voice_icon = "♀" if voice == FEMALE_VOICE else "♂" if voice == MALE_VOICE else "○"
-        print(f"  ✓ Generated [{voice_icon}]: {output_path.name} - '{text[:40]}...'")
-        return True
+        # Create synthesizer
+        synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
+        
+        # Generate speech
+        result = synthesizer.speak_text_async(text).get()
+        
+        if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
+            voice_icon = "♀" if "Vesna" in voice else "♂" if "Goran" in voice else "○"
+            print(f"  ✓ Generated [{voice_icon}]: {output_path.name} - '{text[:40]}...'")
+            return True
+        elif result.reason == speechsdk.ResultReason.Canceled:
+            cancellation = result.cancellation_details
+            print(f"  ✗ Canceled: {cancellation.reason}")
+            if cancellation.reason == speechsdk.CancellationReason.Error:
+                print(f"     Error details: {cancellation.error_details}")
+            return False
     except Exception as e:
         print(f"  ✗ Error for '{text[:30]}...': {e}")
         return False
+    
+    return False
 
 def extract_bosnian_text(text: str) -> str:
     """Extract only Bosnian text, removing English translations and other noise."""
@@ -124,18 +137,31 @@ def extract_bosnian_text(text: str) -> str:
 
 def main():
     import argparse
+    import azure.cognitiveservices.speech as speechsdk
+    
     parser = argparse.ArgumentParser(description='Generate audio files for lessons')
     parser.add_argument('--force', action='store_true', help='Regenerate all audio files')
     parser.add_argument('--force-voiced', action='store_true', help='Regenerate only dialogue/culture audio with correct voices')
     args = parser.parse_args()
     
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        print("ERROR: OPENAI_API_KEY environment variable not set!")
-        print("Create a .env file with: OPENAI_API_KEY=your-key-here")
+    # Azure Speech credentials
+    speech_key = os.getenv("AZURE_SPEECH_KEY")
+    speech_region = os.getenv("AZURE_SPEECH_REGION")
+    
+    if not speech_key or not speech_region:
+        print("ERROR: Azure Speech credentials not set!")
+        print("Create a .env file with:")
+        print("  AZURE_SPEECH_KEY=your-key-here")
+        print("  AZURE_SPEECH_REGION=westeurope")
         return
     
-    client = OpenAI(api_key=api_key)
+    # Configure Azure Speech
+    speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=speech_region)
+    speech_config.set_speech_synthesis_output_format(speechsdk.SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3)
+    
+    print(f"Using Azure TTS with native Bosnian voices:")
+    print(f"  Female: {FEMALE_VOICE}")
+    print(f"  Male: {MALE_VOICE}")
     
     # Create audio directory
     AUDIO_DIR.mkdir(parents=True, exist_ok=True)
@@ -254,7 +280,7 @@ def main():
         force_this = args.force or (args.force_voiced and is_voiced)
         
         print(f"[{i}/{len(unique_texts)}]", end="")
-        if generate_audio(client, text, output_path, voice=voice, force=force_this):
+        if generate_audio_azure(speech_config, text, output_path, voice=voice, force=force_this):
             manifest[text] = filename
             success_count += 1
     
