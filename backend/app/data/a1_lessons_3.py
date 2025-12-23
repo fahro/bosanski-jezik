@@ -86,7 +86,20 @@ A1_LESSONS_PART3 = [
             {"id": 2, "question": "Koja je pravilna forma: 'Ti _____ kafu' (voljeti)?", "options": ["volim", "voliš", "voli", "volimo"], "correct_answer": 1, "explanation": "'Ti voliš' - druga osoba jednine.", "question_type": "grammar"},
             {"id": 3, "question": "Šta su ćevapi?", "options": ["dessert", "drink", "grilled meat dish", "soup"], "correct_answer": 2, "explanation": "Ćevapi su tradicionalno jelo od mljevenog mesa.", "question_type": "culture"},
             {"id": 4, "question": "Kako naručujete u restoranu?", "options": ["Doviđenja", "Želim...", "Kako si?", "Hvala"], "correct_answer": 1, "explanation": "'Želim...' se koristi za naručivanje.", "question_type": "usage"},
-            {"id": 5, "question": "Šta znači 'voda'?", "options": ["coffee", "tea", "water", "juice"], "correct_answer": 2, "explanation": "'Voda' znači 'water'.", "question_type": "vocabulary"}
+            {"id": 5, "question": "Šta znači 'voda'?", "options": ["coffee", "tea", "water", "juice"], "correct_answer": 2, "explanation": "'Voda' znači 'water'.", "question_type": "vocabulary"},
+            {"id": 6, "question": "Kako se kaže 'meat' na bosanskom?", "options": ["riba", "meso", "hljeb", "povrće"], "correct_answer": 1, "explanation": "'Meso' znači 'meat'.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koja je pravilna forma: 'Ja _____ kafu' (voljeti)?", "options": ["volim", "voliš", "voli", "volimo"], "correct_answer": 0, "explanation": "'Ja volim' - prva osoba jednine.", "question_type": "grammar"},
+            {"id": 8, "question": "Šta znači 'kafa'?", "options": ["tea", "coffee", "juice", "water"], "correct_answer": 1, "explanation": "'Kafa' znači 'coffee'.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako se kaže 'fish' na bosanskom?", "options": ["meso", "riba", "voće", "povrće"], "correct_answer": 1, "explanation": "'Riba' znači 'fish'.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Koja je pravilna forma: 'On _____ ćevape' (voljeti)?", "options": ["volim", "voliš", "voli", "volimo"], "correct_answer": 2, "explanation": "'On voli' - treća osoba jednine.", "question_type": "grammar"},
+            {"id": 11, "question": "Šta znači 'čaj'?", "options": ["coffee", "tea", "juice", "milk"], "correct_answer": 1, "explanation": "'Čaj' znači 'tea'.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Kako se kaže 'vegetables' na bosanskom?", "options": ["voće", "meso", "povrće", "hljeb"], "correct_answer": 2, "explanation": "'Povrće' znači 'vegetables'.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Kako pitate za cijenu?", "options": ["Gdje je?", "Koliko košta?", "Kako si?", "Koji je dan?"], "correct_answer": 1, "explanation": "'Koliko košta?' = How much does it cost?", "question_type": "usage"},
+            {"id": 14, "question": "Šta znači 'sok'?", "options": ["water", "coffee", "juice", "tea"], "correct_answer": 2, "explanation": "'Sok' znači 'juice'.", "question_type": "vocabulary"},
+            {"id": 15, "question": "Koja je pravilna forma: 'Mi _____ ribu' (voljeti)?", "options": ["volim", "voliš", "voli", "volimo"], "correct_answer": 3, "explanation": "'Mi volimo' - prva osoba množine.", "question_type": "grammar"},
+            {"id": 16, "question": "Kako se kaže 'fruit' na bosanskom?", "options": ["povrće", "voće", "meso", "riba"], "correct_answer": 1, "explanation": "'Voće' znači 'fruit'.", "question_type": "vocabulary"},
+            {"id": 17, "question": "Šta znači 'Račun, molim'?", "options": ["Menu, please", "Water, please", "The bill, please", "More, please"], "correct_answer": 2, "explanation": "'Račun' znači 'bill/check'.", "question_type": "translation"},
+            {"id": 18, "question": "Kako se kaže 'I want' na bosanskom?", "options": ["Imam", "Želim", "Volim", "Mogu"], "correct_answer": 1, "explanation": "'Želim' znači 'I want'.", "question_type": "vocabulary"}
         ]
     },
     {

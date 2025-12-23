@@ -76,7 +76,20 @@ A1_LESSONS_PART2 = [
             {"id": 2, "question": "Koja je pravilna posvojna zamjenica: '_____ otac' (my, m.r.)?", "options": ["moja", "moj", "moje", "moji"], "correct_answer": 1, "explanation": "'Otac' je muškog roda, pa koristimo 'moj'.", "question_type": "grammar"},
             {"id": 3, "question": "Šta znači 'baka'?", "options": ["mother", "sister", "grandmother", "aunt"], "correct_answer": 2, "explanation": "'Baka' znači 'grandmother'.", "question_type": "vocabulary"},
             {"id": 4, "question": "Kako se kaže 'brothers' (množina)?", "options": ["brat", "braća", "bratu", "bratovi"], "correct_answer": 1, "explanation": "'Braća' je množina od 'brat'.", "question_type": "grammar"},
-            {"id": 5, "question": "Koji član porodice je 'muž'?", "options": ["father", "brother", "husband", "son"], "correct_answer": 2, "explanation": "'Muž' znači 'husband'.", "question_type": "vocabulary"}
+            {"id": 5, "question": "Koji član porodice je 'muž'?", "options": ["father", "brother", "husband", "son"], "correct_answer": 2, "explanation": "'Muž' znači 'husband'.", "question_type": "vocabulary"},
+            {"id": 6, "question": "Kako se kaže 'father' na bosanskom?", "options": ["majka", "otac", "brat", "djed"], "correct_answer": 1, "explanation": "'Otac' znači 'father'. Neformalno 'tata'.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koja je pravilna forma: '_____ sestra' (my, ž.r.)?", "options": ["moj", "moja", "moje", "moji"], "correct_answer": 1, "explanation": "'Sestra' je ženskog roda, pa koristimo 'moja'.", "question_type": "grammar"},
+            {"id": 8, "question": "Šta znači 'djed'?", "options": ["father", "uncle", "grandfather", "brother"], "correct_answer": 2, "explanation": "'Djed' znači 'grandfather'.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako se kaže 'daughter' na bosanskom?", "options": ["sin", "kći", "sestra", "majka"], "correct_answer": 1, "explanation": "'Kći' znači 'daughter'.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Koja je pravilna forma: '_____ dijete' (my, s.r.)?", "options": ["moj", "moja", "moje", "moji"], "correct_answer": 2, "explanation": "'Dijete' je srednjeg roda, pa koristimo 'moje'.", "question_type": "grammar"},
+            {"id": 11, "question": "Šta znači 'sin'?", "options": ["daughter", "son", "brother", "father"], "correct_answer": 1, "explanation": "'Sin' znači 'son'.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Kako se kaže 'wife' na bosanskom?", "options": ["muž", "žena", "majka", "sestra"], "correct_answer": 1, "explanation": "'Žena' znači 'wife' (i 'woman').", "question_type": "vocabulary"},
+            {"id": 13, "question": "Koja je pravilna forma: '_____ braća' (his)?", "options": ["njegov", "njegova", "njegovo", "njegovi"], "correct_answer": 1, "explanation": "'Braća' koristi oblik 'njegova'.", "question_type": "grammar"},
+            {"id": 14, "question": "Kako se kaže 'sisters' (množina)?", "options": ["sestra", "sestre", "sestri", "sestrama"], "correct_answer": 1, "explanation": "'Sestre' je množina od 'sestra'.", "question_type": "grammar"},
+            {"id": 15, "question": "Šta znači 'Imam jednog brata'?", "options": ["I have one sister", "I have one brother", "I have two brothers", "I have no brothers"], "correct_answer": 1, "explanation": "'Imam jednog brata' = I have one brother.", "question_type": "translation"},
+            {"id": 16, "question": "Koja je pravilna forma: '_____ majka' (her)?", "options": ["njen", "njena", "njeno", "njeni"], "correct_answer": 1, "explanation": "'Majka' je ženskog roda, pa koristimo 'njena'.", "question_type": "grammar"},
+            {"id": 17, "question": "Kako se kaže 'grandchildren'?", "options": ["djeca", "unuci", "sinovi", "kćeri"], "correct_answer": 1, "explanation": "'Unuci' znači 'grandchildren'.", "question_type": "vocabulary"},
+            {"id": 18, "question": "Šta znači 'Moja porodica je velika'?", "options": ["My family is small", "My family is big", "My family is happy", "My family is here"], "correct_answer": 1, "explanation": "'Velika' znači 'big'.", "question_type": "translation"}
         ]
     },
     {
@@ -157,7 +170,20 @@ A1_LESSONS_PART2 = [
             {"id": 2, "question": "Kako se kaže 'Saturday' na bosanskom?", "options": ["petak", "subota", "nedjelja", "četvrtak"], "correct_answer": 1, "explanation": "'Subota' znači 'Saturday'.", "question_type": "vocabulary"},
             {"id": 3, "question": "Šta znači 'sutra'?", "options": ["yesterday", "today", "tomorrow", "now"], "correct_answer": 2, "explanation": "'Sutra' znači 'tomorrow'.", "question_type": "vocabulary"},
             {"id": 4, "question": "Kako pitamo 'What day is it today?'", "options": ["Gdje si?", "Koji je danas dan?", "Koliko imaš godina?", "Kako se zoveš?"], "correct_answer": 1, "explanation": "'Koji je danas dan?' = What day is it today?", "question_type": "usage"},
-            {"id": 5, "question": "Koji je prvi dan radne sedmice u BiH?", "options": ["nedjelja", "subota", "ponedjeljak", "utorak"], "correct_answer": 2, "explanation": "Ponedjeljak je prvi dan radne sedmice.", "question_type": "culture"}
+            {"id": 5, "question": "Koji je prvi dan radne sedmice u BiH?", "options": ["nedjelja", "subota", "ponedjeljak", "utorak"], "correct_answer": 2, "explanation": "Ponedjeljak je prvi dan radne sedmice.", "question_type": "culture"},
+            {"id": 6, "question": "Kako se kaže 'Monday' na bosanskom?", "options": ["utorak", "srijeda", "ponedjeljak", "petak"], "correct_answer": 2, "explanation": "'Ponedjeljak' znači 'Monday'.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koji dan dolazi prije petka?", "options": ["srijeda", "četvrtak", "subota", "nedjelja"], "correct_answer": 1, "explanation": "Četvrtak dolazi prije petka.", "question_type": "sequence"},
+            {"id": 8, "question": "Šta znači 'jučer'?", "options": ["tomorrow", "today", "yesterday", "now"], "correct_answer": 2, "explanation": "'Jučer' znači 'yesterday'.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako se kaže 'Wednesday' na bosanskom?", "options": ["utorak", "srijeda", "četvrtak", "petak"], "correct_answer": 1, "explanation": "'Srijeda' znači 'Wednesday'.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Koji dan je 'vikend'?", "options": ["ponedjeljak i utorak", "četvrtak i petak", "subota i nedjelja", "srijeda i četvrtak"], "correct_answer": 2, "explanation": "Vikend su subota i nedjelja.", "question_type": "culture"},
+            {"id": 11, "question": "Šta znači 'danas'?", "options": ["tomorrow", "today", "yesterday", "week"], "correct_answer": 1, "explanation": "'Danas' znači 'today'.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Kako se kaže 'Friday' na bosanskom?", "options": ["četvrtak", "petak", "subota", "nedjelja"], "correct_answer": 1, "explanation": "'Petak' znači 'Friday'.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Koji dan dolazi poslije nedjelje?", "options": ["subota", "ponedjeljak", "utorak", "petak"], "correct_answer": 1, "explanation": "Ponedjeljak dolazi poslije nedjelje.", "question_type": "sequence"},
+            {"id": 14, "question": "Šta znači 'U ponedjeljak radim'?", "options": ["I work on Monday", "I rest on Monday", "Monday is free", "I like Monday"], "correct_answer": 0, "explanation": "'U ponedjeljak radim' = I work on Monday.", "question_type": "translation"},
+            {"id": 15, "question": "Kako se kaže 'Sunday' na bosanskom?", "options": ["subota", "nedjelja", "petak", "četvrtak"], "correct_answer": 1, "explanation": "'Nedjelja' znači 'Sunday'.", "question_type": "vocabulary"},
+            {"id": 16, "question": "Koji dan dolazi prije srijede?", "options": ["ponedjeljak", "utorak", "četvrtak", "petak"], "correct_answer": 1, "explanation": "Utorak dolazi prije srijede.", "question_type": "sequence"},
+            {"id": 17, "question": "Kako se kaže 'Tuesday' na bosanskom?", "options": ["ponedjeljak", "utorak", "srijeda", "četvrtak"], "correct_answer": 1, "explanation": "'Utorak' znači 'Tuesday'.", "question_type": "vocabulary"},
+            {"id": 18, "question": "Šta znači 'Petak je moj omiljeni dan'?", "options": ["Friday is my worst day", "Friday is my favorite day", "I hate Friday", "Friday is boring"], "correct_answer": 1, "explanation": "'Omiljeni' znači 'favorite'.", "question_type": "translation"}
         ]
     },
     {
@@ -241,7 +267,20 @@ A1_LESSONS_PART2 = [
             {"id": 2, "question": "Koje godišnje doba je 'ljeto'?", "options": ["spring", "summer", "autumn", "winter"], "correct_answer": 1, "explanation": "'Ljeto' znači 'summer'.", "question_type": "vocabulary"},
             {"id": 3, "question": "U kojem godišnjem dobu pada snijeg?", "options": ["proljeće", "ljeto", "jesen", "zima"], "correct_answer": 3, "explanation": "Snijeg pada zimi.", "question_type": "context"},
             {"id": 4, "question": "Koji je osmi mjesec?", "options": ["juli", "august", "septembar", "juni"], "correct_answer": 1, "explanation": "August je osmi mjesec.", "question_type": "sequence"},
-            {"id": 5, "question": "Kada počinje proljeće?", "options": ["u januaru", "u martu", "u junu", "u septembru"], "correct_answer": 1, "explanation": "Proljeće počinje u martu.", "question_type": "knowledge"}
+            {"id": 5, "question": "Kada počinje proljeće?", "options": ["u januaru", "u martu", "u junu", "u septembru"], "correct_answer": 1, "explanation": "Proljeće počinje u martu.", "question_type": "knowledge"},
+            {"id": 6, "question": "Kako se kaže 'January' na bosanskom?", "options": ["februar", "januar", "mart", "april"], "correct_answer": 1, "explanation": "'Januar' znači 'January'.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koje godišnje doba je 'jesen'?", "options": ["spring", "summer", "autumn", "winter"], "correct_answer": 2, "explanation": "'Jesen' znači 'autumn'.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Koji mjesec dolazi prije aprila?", "options": ["februar", "mart", "maj", "juni"], "correct_answer": 1, "explanation": "Mart dolazi prije aprila.", "question_type": "sequence"},
+            {"id": 9, "question": "Kako se kaže 'winter' na bosanskom?", "options": ["proljeće", "ljeto", "jesen", "zima"], "correct_answer": 3, "explanation": "'Zima' znači 'winter'.", "question_type": "vocabulary"},
+            {"id": 10, "question": "U kojem mjesecu počinje ljeto?", "options": ["mart", "juni", "septembar", "decembar"], "correct_answer": 1, "explanation": "Ljeto počinje u junu.", "question_type": "knowledge"},
+            {"id": 11, "question": "Koliko mjeseci ima godina?", "options": ["10", "11", "12", "13"], "correct_answer": 2, "explanation": "Godina ima 12 mjeseci.", "question_type": "knowledge"},
+            {"id": 12, "question": "Kako se kaže 'December' na bosanskom?", "options": ["novembar", "decembar", "januar", "oktobar"], "correct_answer": 1, "explanation": "'Decembar' znači 'December'.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Koje godišnje doba je 'proljeće'?", "options": ["spring", "summer", "autumn", "winter"], "correct_answer": 0, "explanation": "'Proljeće' znači 'spring'.", "question_type": "vocabulary"},
+            {"id": 14, "question": "Koji je posljednji mjesec u godini?", "options": ["novembar", "januar", "decembar", "oktobar"], "correct_answer": 2, "explanation": "Decembar je posljednji mjesec.", "question_type": "sequence"},
+            {"id": 15, "question": "Šta znači 'U proljeće cvjetaju cvijeće'?", "options": ["Flowers bloom in spring", "Flowers die in spring", "It rains in spring", "It snows in spring"], "correct_answer": 0, "explanation": "'Cvjetaju' znači 'bloom'.", "question_type": "translation"},
+            {"id": 16, "question": "Kako se kaže 'July' na bosanskom?", "options": ["juni", "juli", "august", "septembar"], "correct_answer": 1, "explanation": "'Juli' znači 'July'.", "question_type": "vocabulary"},
+            {"id": 17, "question": "Kada pada lišće?", "options": ["u proljeće", "u ljeto", "u jesen", "u zimu"], "correct_answer": 2, "explanation": "Lišće pada u jesen.", "question_type": "context"},
+            {"id": 18, "question": "Koji je prvi mjesec u godini?", "options": ["decembar", "januar", "februar", "mart"], "correct_answer": 1, "explanation": "Januar je prvi mjesec.", "question_type": "sequence"}
         ]
     }
 ]
