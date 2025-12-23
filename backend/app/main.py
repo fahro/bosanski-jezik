@@ -119,20 +119,26 @@ def check_answer(data: dict):
 # Load audio manifest for pre-generated audio files
 import hashlib
 
-AUDIO_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "audio")
+# Support both local development and Docker paths
+AUDIO_DIR = None
+for audio_path in ["/app/static/audio", os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "audio")]:
+    if os.path.exists(audio_path):
+        AUDIO_DIR = audio_path
+        break
 AUDIO_MANIFEST = {}
 
 def load_audio_manifest():
     global AUDIO_MANIFEST
-    manifest_path = os.path.join(AUDIO_DIR, "manifest.json")
-    if os.path.exists(manifest_path):
-        with open(manifest_path, 'r', encoding='utf-8') as f:
-            AUDIO_MANIFEST = json.load(f)
+    if AUDIO_DIR:
+        manifest_path = os.path.join(AUDIO_DIR, "manifest.json")
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                AUDIO_MANIFEST = json.load(f)
 
 load_audio_manifest()
 
 # Mount static audio directory
-if os.path.exists(AUDIO_DIR):
+if AUDIO_DIR and os.path.exists(AUDIO_DIR):
     app.mount("/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
 
 @app.get("/api/audio/{text:path}")
