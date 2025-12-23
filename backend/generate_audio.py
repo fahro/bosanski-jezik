@@ -21,6 +21,15 @@ from app.data.a1_lessons import A1_LESSONS
 AUDIO_DIR = Path(__file__).parent / "static" / "audio"
 MANIFEST_FILE = AUDIO_DIR / "manifest.json"
 
+# Gender mapping for speakers/characters
+FEMALE_NAMES = {'Amina', 'Ana', 'Maja', 'Amra', 'Sara', 'Sabina', 'Lejla', 'Naida', 'Baka', 'Majka', 'Sestra', 'Kći', 'Žena', 'Snaha'}
+MALE_NAMES = {'Emir', 'Ahmed', 'Kenan', 'Prodavač', 'Kupac', 'Dućandžija', 'Tarik', 'Haris', 'Djed', 'Otac', 'Brat', 'Sin', 'Muž', 'Doktor'}
+
+# OpenAI TTS voices
+FEMALE_VOICE = "nova"      # Female voice - good for Slavic languages
+MALE_VOICE = "onyx"        # Male voice
+DEFAULT_VOICE = "nova"     # Default for vocabulary etc.
+
 def sanitize_filename(text: str, max_length: int = 50) -> str:
     """
     Convert text to a safe filename.
@@ -60,16 +69,36 @@ def get_audio_filename(text: str) -> str:
     text_hash = hashlib.md5(text.encode('utf-8')).hexdigest()[:6]
     return f"{safe_name}_{text_hash}.mp3"
 
-def generate_audio(client: OpenAI, text: str, output_path: Path) -> bool:
+def get_voice_for_speaker(speaker: str) -> str:
+    """Determine voice based on speaker name."""
+    if not speaker:
+        return DEFAULT_VOICE
+    
+    # Check exact match first
+    if speaker in FEMALE_NAMES:
+        return FEMALE_VOICE
+    if speaker in MALE_NAMES:
+        return MALE_VOICE
+    
+    # Check if name contains female/male indicators
+    speaker_lower = speaker.lower()
+    if any(name.lower() in speaker_lower for name in FEMALE_NAMES):
+        return FEMALE_VOICE
+    if any(name.lower() in speaker_lower for name in MALE_NAMES):
+        return MALE_VOICE
+    
+    return DEFAULT_VOICE
+
+def generate_audio(client: OpenAI, text: str, output_path: Path, voice: str = DEFAULT_VOICE, force: bool = False) -> bool:
     """Generate audio file using OpenAI TTS with optimized settings."""
-    if output_path.exists():
+    if output_path.exists() and not force:
         print(f"  ✓ Already exists: {output_path.name}")
         return True
     
     try:
         response = client.audio.speech.create(
             model="tts-1-hd",      # HD model za bolji kvalitet
-            voice="nova",          # Nova glas bolje izgovara strane jezike
+            voice=voice,           # Voice based on speaker gender
             input=text,            # Direktno tekst bez prefiksa
             speed=0.9              # Malo sporije za jasniji izgovor
         )
@@ -77,7 +106,8 @@ def generate_audio(client: OpenAI, text: str, output_path: Path) -> bool:
         with open(output_path, 'wb') as f:
             f.write(response.content)
         
-        print(f"  ✓ Generated: {output_path.name} - '{text[:50]}...'")
+        voice_icon = "♀" if voice == FEMALE_VOICE else "♂" if voice == MALE_VOICE else "○"
+        print(f"  ✓ Generated [{voice_icon}]: {output_path.name} - '{text[:40]}...'")
         return True
     except Exception as e:
         print(f"  ✗ Error for '{text[:30]}...': {e}")
@@ -93,6 +123,12 @@ def extract_bosnian_text(text: str) -> str:
     return text.strip()
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='Generate audio files for lessons')
+    parser.add_argument('--force', action='store_true', help='Regenerate all audio files')
+    parser.add_argument('--force-voiced', action='store_true', help='Regenerate only dialogue/culture audio with correct voices')
+    args = parser.parse_args()
+    
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         print("ERROR: OPENAI_API_KEY environment variable not set!")
@@ -104,7 +140,7 @@ def main():
     # Create audio directory
     AUDIO_DIR.mkdir(parents=True, exist_ok=True)
     
-    # Collect all texts to generate
+    # Collect all texts to generate with speaker info: (text, speaker, is_voiced)
     texts_to_generate = []
     manifest = {}
     
@@ -114,33 +150,34 @@ def main():
         lesson_id = lesson["id"]
         print(f"\nLesson {lesson_id}: {lesson['title']}")
         
-        # 1. Vocabulary words and examples
+        # 1. Vocabulary words and examples (no specific speaker)
         for word in lesson.get("vocabulary", []):
             bosnian = word.get("bosnian", "")
             example = word.get("example", "")
             
             if bosnian:
-                texts_to_generate.append(bosnian)
+                texts_to_generate.append((bosnian, None, False))
             if example:
-                texts_to_generate.append(example)
+                texts_to_generate.append((example, None, False))
         
-        # 2. Dialogue lines
+        # 2. Dialogue lines - WITH SPEAKER INFO
         for line in lesson.get("dialogue", []):
             text = line.get("text", "")
+            speaker = line.get("speaker", "")
             if text:
-                texts_to_generate.append(text)
+                texts_to_generate.append((text, speaker, True))
         
         # 3. Quiz questions and options (Bosnian parts only)
         for quiz in lesson.get("quiz", []):
             question = quiz.get("question", "")
             # Only add if question is in Bosnian (contains Bosnian characters or patterns)
             if question and ("Kako" in question or "Koja" in question or "Šta" in question or "Koji" in question):
-                texts_to_generate.append(question)
+                texts_to_generate.append((question, None, False))
             # Add Bosnian options
             for option in quiz.get("options", []):
                 # Skip English-only options
                 if option and not option[0].isupper() or any(c in option for c in "čćšžđČĆŠŽĐ"):
-                    texts_to_generate.append(option)
+                    texts_to_generate.append((option, None, False))
         
         # 4. Exercises - fill in blank sentences, matching pairs, etc.
         for exercise in lesson.get("exercises", []):
@@ -152,20 +189,20 @@ def main():
                 # Replace blank with the answer for full sentence
                 answer = exercise.get("answer", "")
                 full_sentence = sentence.replace("_____", answer).replace("___", answer)
-                texts_to_generate.append(full_sentence)
+                texts_to_generate.append((full_sentence, None, False))
             
             # Matching pairs - Bosnian words
             pairs = content.get("pairs", [])
             for pair in pairs:
                 if isinstance(pair, list) and len(pair) > 0:
-                    texts_to_generate.append(pair[0])  # First item is usually Bosnian
+                    texts_to_generate.append((pair[0], None, False))  # First item is usually Bosnian
             
             # Translation text
             trans_text = content.get("text", "")
             if trans_text:
-                texts_to_generate.append(trans_text)
+                texts_to_generate.append((trans_text, None, False))
         
-        # 5. Cultural notes
+        # 5. Cultural notes (no specific speaker)
         cultural_note = lesson.get("cultural_note", "")
         if cultural_note:
             # Split into sentences for better audio
@@ -173,35 +210,51 @@ def main():
             for sentence in sentences:
                 sentence = sentence.strip()
                 if sentence and len(sentence) > 10:
-                    texts_to_generate.append(sentence)
+                    texts_to_generate.append((sentence, None, False))
         
-        # 6. Cultural comic panels
+        # 6. Cultural comic panels - WITH SPEAKER INFO
         cultural_comic = lesson.get("cultural_comic", {})
         for panel in cultural_comic.get("panels", []):
             panel_text = panel.get("text", "")
+            panel_name = panel.get("name", "")
             if panel_text:
-                texts_to_generate.append(panel_text)
+                texts_to_generate.append((panel_text, panel_name, True))
     
-    # Remove duplicates while preserving order
-    seen = set()
+    # Remove duplicates while preserving order and keeping speaker info
+    seen = {}
     unique_texts = []
-    for text in texts_to_generate:
+    for text, speaker, is_voiced in texts_to_generate:
         text = extract_bosnian_text(text)
-        if text and text not in seen and len(text) > 1:
-            seen.add(text)
-            unique_texts.append(text)
+        if text and len(text) > 1:
+            if text not in seen:
+                seen[text] = (speaker, is_voiced)
+                unique_texts.append((text, speaker, is_voiced))
+            elif is_voiced and not seen[text][1]:
+                # Update if this version has speaker info
+                seen[text] = (speaker, is_voiced)
+                # Update in unique_texts
+                for i, (t, s, v) in enumerate(unique_texts):
+                    if t == text:
+                        unique_texts[i] = (text, speaker, is_voiced)
+                        break
     
     print(f"\nTotal unique texts to generate: {len(unique_texts)}")
+    voiced_count = sum(1 for _, _, is_voiced in unique_texts if is_voiced)
+    print(f"Texts with speaker-specific voice: {voiced_count}")
     print("=" * 50)
     
     # Generate audio files
     success_count = 0
-    for i, text in enumerate(unique_texts, 1):
+    for i, (text, speaker, is_voiced) in enumerate(unique_texts, 1):
         filename = get_audio_filename(text)
         output_path = AUDIO_DIR / filename
+        voice = get_voice_for_speaker(speaker) if speaker else DEFAULT_VOICE
+        
+        # Determine if we should force regenerate this file
+        force_this = args.force or (args.force_voiced and is_voiced)
         
         print(f"[{i}/{len(unique_texts)}]", end="")
-        if generate_audio(client, text, output_path):
+        if generate_audio(client, text, output_path, voice=voice, force=force_this):
             manifest[text] = filename
             success_count += 1
     
