@@ -21,6 +21,9 @@ COPY backend/app ./app
 # Copy built frontend
 COPY --from=frontend-builder /app/frontend/dist ./static
 
+# Copy audio files (generated with Azure TTS)
+COPY backend/static/audio ./static/audio
+
 # Expose port (Railway uses dynamic PORT)
 EXPOSE ${PORT:-8000}
 
