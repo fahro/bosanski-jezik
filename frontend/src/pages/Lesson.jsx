@@ -1294,8 +1294,21 @@ function Lesson() {
                         ? 'bg-blue-100 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl' 
                         : 'bg-green-100 rounded-tl-2xl rounded-bl-2xl rounded-br-2xl'
                     } p-4`}>
-                      <div className="font-semibold text-gray-700 text-sm mb-1">{line.speaker}</div>
-                      <div className="text-gray-800">{line.text}</div>
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="font-semibold text-gray-700 text-sm">{line.speaker}</div>
+                        <button
+                          onClick={() => speak(line.text)}
+                          className={`p-1.5 rounded-full transition-all ${
+                            index % 2 === 0 
+                              ? 'hover:bg-blue-200 text-blue-600' 
+                              : 'hover:bg-green-200 text-green-600'
+                          }`}
+                          title="Slušaj"
+                        >
+                          <Volume2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                      <div className="text-gray-800 cursor-pointer hover:text-blue-700" onClick={() => speak(line.text)}>{line.text}</div>
                       <div className="text-sm text-gray-500 mt-2 italic">{line.translation}</div>
                     </div>
                   </div>
@@ -1401,8 +1414,22 @@ function Lesson() {
                             <div className={`relative bg-white/95 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-lg ${
                               panel.position === 'right' ? 'rounded-tr-sm' : 'rounded-tl-sm'
                             }`}>
-                              <div className="font-bold text-sm text-bosnia-blue mb-1">{panel.name}</div>
-                              <div className="text-gray-800 font-medium text-base sm:text-lg">{panel.text}</div>
+                              <div className="flex items-center justify-between mb-1">
+                                <div className="font-bold text-sm text-bosnia-blue">{panel.name}</div>
+                                <button
+                                  onClick={() => speak(panel.text)}
+                                  className="p-1 rounded-full hover:bg-blue-100 text-bosnia-blue transition-all"
+                                  title="Slušaj"
+                                >
+                                  <Volume2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                              <div 
+                                className="text-gray-800 font-medium text-base sm:text-lg cursor-pointer hover:text-bosnia-blue transition-colors"
+                                onClick={() => speak(panel.text)}
+                              >
+                                {panel.text}
+                              </div>
                               <div className="text-gray-500 text-xs sm:text-sm italic mt-1">{panel.translation}</div>
                             </div>
                           </div>
@@ -1443,9 +1470,21 @@ function Lesson() {
                   </div>
 
                   <div className="bg-gray-50 rounded-xl p-6 mb-6">
-                    <h3 className="text-lg font-medium text-gray-800">
-                      {lesson.quiz[quizState.currentQuestion].question}
-                    </h3>
+                    <div className="flex items-start justify-between gap-2">
+                      <h3 
+                        className="text-lg font-medium text-gray-800 cursor-pointer hover:text-bosnia-blue transition-colors flex-1"
+                        onClick={() => speak(lesson.quiz[quizState.currentQuestion].question)}
+                      >
+                        {lesson.quiz[quizState.currentQuestion].question}
+                      </h3>
+                      <button
+                        onClick={() => speak(lesson.quiz[quizState.currentQuestion].question)}
+                        className="p-2 rounded-full hover:bg-gray-200 text-bosnia-blue transition-all flex-shrink-0"
+                        title="Slušaj pitanje"
+                      >
+                        <Volume2 className="w-5 h-5" />
+                      </button>
+                    </div>
                     
                     {/* Translation toggle */}
                     <button
@@ -1482,10 +1521,8 @@ function Lesson() {
                       const showFeedback = currentAnswer !== undefined
 
                       return (
-                        <button
+                        <div
                           key={i}
-                          onClick={() => !showFeedback && handleQuizAnswer(i)}
-                          disabled={showFeedback}
                           className={`w-full p-4 rounded-xl text-left transition-all ${
                             showFeedback
                               ? isCorrect
@@ -1497,11 +1534,29 @@ function Lesson() {
                           }`}
                         >
                           <div className="flex items-center justify-between">
-                            <span>{option}</span>
-                            {showFeedback && isCorrect && <CheckCircle className="w-5 h-5 text-green-600" />}
-                            {showFeedback && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-600" />}
+                            <button
+                              onClick={() => !showFeedback && handleQuizAnswer(i)}
+                              disabled={showFeedback}
+                              className="flex-1 text-left"
+                            >
+                              {option}
+                            </button>
+                            <div className="flex items-center gap-2">
+                              <button
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  speak(option)
+                                }}
+                                className="p-1.5 rounded-full hover:bg-gray-200 text-gray-500 hover:text-bosnia-blue transition-all"
+                                title="Slušaj"
+                              >
+                                <Volume2 className="w-4 h-4" />
+                              </button>
+                              {showFeedback && isCorrect && <CheckCircle className="w-5 h-5 text-green-600" />}
+                              {showFeedback && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-600" />}
+                            </div>
                           </div>
-                        </button>
+                        </div>
                       )
                     })}
                   </div>
