@@ -124,7 +124,17 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"bosnian": "sedam", "english": "seven", "pronunciation": "SEH-dahm", "example": "Sedam sati.", "example_translation": "Seven hours.", "image_emoji": "7️⃣"},
             {"bosnian": "osam", "english": "eight", "pronunciation": "OH-sahm", "example": "Osam knjiga.", "example_translation": "Eight books.", "image_emoji": "8️⃣"},
             {"bosnian": "devet", "english": "nine", "pronunciation": "DEH-veht", "example": "Devet eura.", "example_translation": "Nine euros.", "image_emoji": "9️⃣"},
-            {"bosnian": "deset", "english": "ten", "pronunciation": "DEH-seht", "example": "Deset godina.", "example_translation": "Ten years.", "image_emoji": "🔟"}
+            {"bosnian": "deset", "english": "ten", "pronunciation": "DEH-seht", "example": "Deset godina.", "example_translation": "Ten years.", "image_emoji": "🔟"},
+            {"bosnian": "jedanaest", "english": "eleven", "pronunciation": "yeh-DAH-nah-ehst", "example": "Jedanaest učenika.", "example_translation": "Eleven students.", "image_emoji": "1️⃣1️⃣"},
+            {"bosnian": "dvanaest", "english": "twelve", "pronunciation": "DVAH-nah-ehst", "example": "Dvanaest mjeseci.", "example_translation": "Twelve months.", "image_emoji": "1️⃣2️⃣"},
+            {"bosnian": "trinaest", "english": "thirteen", "pronunciation": "TREE-nah-ehst", "example": "Trinaest ljudi.", "example_translation": "Thirteen people.", "image_emoji": "1️⃣3️⃣"},
+            {"bosnian": "četrnaest", "english": "fourteen", "pronunciation": "cheh-TR-nah-ehst", "example": "Četrnaest dana.", "example_translation": "Fourteen days.", "image_emoji": "1️⃣4️⃣"},
+            {"bosnian": "petnaest", "english": "fifteen", "pronunciation": "PEHT-nah-ehst", "example": "Petnaest minuta.", "example_translation": "Fifteen minutes.", "image_emoji": "1️⃣5️⃣"},
+            {"bosnian": "šesnaest", "english": "sixteen", "pronunciation": "SHEHST-nah-ehst", "example": "Šesnaest godina.", "example_translation": "Sixteen years.", "image_emoji": "1️⃣6️⃣"},
+            {"bosnian": "sedamnaest", "english": "seventeen", "pronunciation": "SEH-dahm-nah-ehst", "example": "Sedamnaest knjiga.", "example_translation": "Seventeen books.", "image_emoji": "1️⃣7️⃣"},
+            {"bosnian": "osamnaest", "english": "eighteen", "pronunciation": "OH-sahm-nah-ehst", "example": "Osamnaest eura.", "example_translation": "Eighteen euros.", "image_emoji": "1️⃣8️⃣"},
+            {"bosnian": "devetnaest", "english": "nineteen", "pronunciation": "DEH-veht-nah-ehst", "example": "Devetnaest sati.", "example_translation": "Nineteen hours.", "image_emoji": "1️⃣9️⃣"},
+            {"bosnian": "dvadeset", "english": "twenty", "pronunciation": "DVAH-deh-seht", "example": "Dvadeset maraka.", "example_translation": "Twenty marks.", "image_emoji": "2️⃣0️⃣"}
         ],
         "grammar_explanation": """
 ## Osnovni brojevi 1-20
@@ -141,6 +151,16 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 | 8 | osam | OH-sahm |
 | 9 | devet | DEH-veht |
 | 10 | deset | DEH-seht |
+| 11 | jedanaest | yeh-DAH-nah-ehst |
+| 12 | dvanaest | DVAH-nah-ehst |
+| 13 | trinaest | TREE-nah-ehst |
+| 14 | četrnaest | cheh-TR-nah-ehst |
+| 15 | petnaest | PEHT-nah-ehst |
+| 16 | šesnaest | SHEHST-nah-ehst |
+| 17 | sedamnaest | SEH-dahm-nah-ehst |
+| 18 | osamnaest | OH-sahm-nah-ehst |
+| 19 | devetnaest | DEH-veht-nah-ehst |
+| 20 | dvadeset | DVAH-deh-seht |
 
 ## Redni brojevi (Ordinal Numbers)
 
@@ -218,7 +238,17 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"id": 12, "question": "Kako se kaže 'fourth' (m.r.)?", "options": ["četiri", "četvrti", "četvrta", "četvrto"], "correct_answer": 1, "explanation": "'Četvrti' je muški rod rednog broja za 4.", "question_type": "ordinal"},
             {"id": 13, "question": "Pravilna forma: 'Tri ___'?", "options": ["jabuka", "jabuke", "jabuku", "jabukama"], "correct_answer": 1, "explanation": "'Tri jabuke' - s brojevima 2-4 imenica ide u poseban oblik.", "question_type": "grammar"},
             {"id": 14, "question": "Koji je redni broj za 'fifth'?", "options": ["pet", "peti", "peta", "petog"], "correct_answer": 1, "explanation": "'Peti' je muški rod rednog broja za 5.", "question_type": "ordinal"},
-            {"id": 15, "question": "Kako kažemo 'one child' (n.r.)?", "options": ["jedan dijete", "jedna dijete", "jedno dijete", "jednog dijete"], "correct_answer": 2, "explanation": "'Jedno dijete' - dijete je srednjeg roda.", "question_type": "grammar"}
+            {"id": 15, "question": "Kako kažemo 'one child' (n.r.)?", "options": ["jedan dijete", "jedna dijete", "jedno dijete", "jednog dijete"], "correct_answer": 2, "explanation": "'Jedno dijete' - dijete je srednjeg roda.", "question_type": "grammar"},
+            {"id": 16, "question": "Kako se kaže 'eleven' na bosanskom?", "options": ["deset", "jedanaest", "dvanaest", "dvaeset"], "correct_answer": 1, "explanation": "'Jedanaest' = jedan + na + est (11).", "question_type": "numbers"},
+            {"id": 17, "question": "Koliko je 'petnaest'?", "options": ["5", "50", "15", "25"], "correct_answer": 2, "explanation": "'Petnaest' = pet + na + est = 15.", "question_type": "numbers"},
+            {"id": 18, "question": "Koji broj dolazi poslije 'trinaest'?", "options": ["dvanaest", "trinaest", "četrnaest", "petnaest"], "correct_answer": 2, "explanation": "Poslije trinaest (13) dolazi četrnaest (14).", "question_type": "sequence"},
+            {"id": 19, "question": "Kako se kaže 'eighteen' na bosanskom?", "options": ["osam", "osamnaest", "sedamnaest", "devetnaest"], "correct_answer": 1, "explanation": "'Osamnaest' = osam + na + est = 18.", "question_type": "numbers"},
+            {"id": 20, "question": "Koliko je 'dvanaest'?", "options": ["2", "12", "20", "22"], "correct_answer": 1, "explanation": "'Dvanaest' = dva + na + est = 12.", "question_type": "numbers"},
+            {"id": 21, "question": "Pravilna forma: '___ učenika' (16)?", "options": ["šesnaest", "šesnaesta", "šesnaesto", "šesnaesti"], "correct_answer": 0, "explanation": "'Šesnaest učenika' - s brojevima 5+ imenica ide u genitiv množine.", "question_type": "grammar"},
+            {"id": 22, "question": "Koji broj je između 'sedamnaest' i 'devetnaest'?", "options": ["šesnaest", "osamnaest", "dvadeset", "petnaest"], "correct_answer": 1, "explanation": "Između 17 i 19 je 18 (osamnaest).", "question_type": "sequence"},
+            {"id": 23, "question": "Kako se kaže 'nineteen' na bosanskom?", "options": ["devet", "devetnaest", "dvadeset", "osamnaest"], "correct_answer": 1, "explanation": "'Devetnaest' = devet + na + est = 19.", "question_type": "numbers"},
+            {"id": 24, "question": "5 + 8 = ?", "options": ["dvanaest", "trinaest", "četrnaest", "petnaest"], "correct_answer": 1, "explanation": "Pet plus osam jednako trinaest (5 + 8 = 13).", "question_type": "math"},
+            {"id": 25, "question": "10 + 10 = ?", "options": ["deset", "petnaest", "dvadeset", "jedanaest"], "correct_answer": 2, "explanation": "Deset plus deset jednako dvadeset (10 + 10 = 20).", "question_type": "math"}
         ]
     },
     {
