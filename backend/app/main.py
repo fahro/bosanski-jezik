@@ -13,6 +13,20 @@ load_dotenv()
 
 app = FastAPI(title="Bosanski Jezik - Learn Bosnian", version="1.0.0")
 
+# Initialize database
+from app.database import engine, Base
+from app.models import User, LessonProgress, QuizAttempt, FinalTestAttempt
+Base.metadata.create_all(bind=engine)
+
+# Include routers
+from app.routes.auth import router as auth_router
+from app.routes.progress import router as progress_router
+from app.routes.final_test import router as final_test_router
+
+app.include_router(auth_router)
+app.include_router(progress_router)
+app.include_router(final_test_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],

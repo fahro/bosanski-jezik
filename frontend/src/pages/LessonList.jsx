@@ -1,29 +1,56 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { BookOpen, Clock, ChevronRight, ArrowLeft } from 'lucide-react'
-import { api } from '../api'
+import { BookOpen, Clock, ChevronRight, ArrowLeft, Lock, CheckCircle } from 'lucide-react'
+import { api, progressApi } from '../api'
+import { useAuth } from '../context/AuthContext'
 
 function LessonList() {
   const { levelId } = useParams()
   const [lessons, setLessons] = useState([])
   const [level, setLevel] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [lessonProgress, setLessonProgress] = useState([])
+  const { isAuthenticated, stats } = useAuth()
 
   useEffect(() => {
-    Promise.all([
-      api.get(`/api/levels/${levelId}`),
-      api.get(`/api/levels/${levelId}/lessons`)
-    ])
-      .then(([levelData, lessonsData]) => {
+    const fetchData = async () => {
+      try {
+        const [levelData, lessonsData] = await Promise.all([
+          api.get(`/api/levels/${levelId}`),
+          api.get(`/api/levels/${levelId}/lessons`)
+        ])
         setLevel(levelData)
         setLessons(lessonsData)
-        setLoading(false)
-      })
-      .catch(err => {
+
+        // Fetch progress if authenticated
+        if (isAuthenticated) {
+          try {
+            const progress = await progressApi.getAllProgress()
+            setLessonProgress(progress)
+          } catch (err) {
+            console.error('Error fetching progress:', err)
+          }
+        }
+      } catch (err) {
         console.error('Error fetching data:', err)
+      } finally {
         setLoading(false)
-      })
-  }, [levelId])
+      }
+    }
+    fetchData()
+  }, [levelId, isAuthenticated])
+
+  // Check if a lesson is unlocked
+  const isLessonUnlocked = (lessonId) => {
+    if (!isAuthenticated) return true // Allow all if not logged in (guest mode)
+    return lessonId <= (stats?.current_lesson_id || 1)
+  }
+
+  // Check if a lesson is completed
+  const isLessonCompleted = (lessonId) => {
+    const progress = lessonProgress.find(p => p.lesson_id === lessonId)
+    return progress?.completed || false
+  }
 
   if (loading) {
     return (
@@ -86,35 +113,81 @@ function LessonList() {
           </h2>
           
           <div className="grid gap-4">
-            {moduleLessons.map((lesson, index) => (
-              <Link
-                key={lesson.id}
-                to={`/lesson/${lesson.id}`}
-                className="block bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1 animate-slideIn"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-primary-100 to-primary-200 rounded-xl flex items-center justify-center text-primary-700 font-bold">
-                      {lesson.id}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-800">{lesson.title}</h3>
-                      <p className="text-sm text-gray-600">{lesson.description}</p>
-                      <div className="flex items-center space-x-3 mt-2">
-                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
-                          {lesson.vocabulary?.length || 0} riječi
-                        </span>
-                        <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
-                          {lesson.quiz?.length || 0} pitanja
-                        </span>
+            {moduleLessons.map((lesson, index) => {
+              const unlocked = isLessonUnlocked(lesson.id)
+              const completed = isLessonCompleted(lesson.id)
+
+              if (!unlocked) {
+                // Locked lesson - not clickable
+                return (
+                  <div
+                    key={lesson.id}
+                    className="block bg-gray-100 rounded-xl p-5 shadow-md opacity-60 cursor-not-allowed animate-slideIn"
+                    style={{ animationDelay: `${index * 50}ms` }}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-4">
+                        <div className="w-12 h-12 bg-gray-300 rounded-xl flex items-center justify-center text-gray-500 font-bold">
+                          <Lock className="w-5 h-5" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-gray-500">{lesson.title}</h3>
+                          <p className="text-sm text-gray-400">{lesson.description}</p>
+                          <div className="flex items-center space-x-3 mt-2">
+                            <span className="text-xs bg-gray-200 text-gray-500 px-2 py-1 rounded-full">
+                              🔒 Završite prethodnu lekciju
+                            </span>
+                          </div>
+                        </div>
                       </div>
+                      <Lock className="w-5 h-5 text-gray-400" />
                     </div>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-gray-400" />
-                </div>
-              </Link>
-            ))}
+                )
+              }
+
+              // Unlocked lesson - clickable
+              return (
+                <Link
+                  key={lesson.id}
+                  to={`/lesson/${lesson.id}`}
+                  className={`block bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1 animate-slideIn ${
+                    completed ? 'border-l-4 border-green-500' : ''
+                  }`}
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-4">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center font-bold ${
+                        completed 
+                          ? 'bg-green-100 text-green-700' 
+                          : 'bg-gradient-to-br from-primary-100 to-primary-200 text-primary-700'
+                      }`}>
+                        {completed ? <CheckCircle className="w-6 h-6" /> : lesson.id}
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-800">{lesson.title}</h3>
+                        <p className="text-sm text-gray-600">{lesson.description}</p>
+                        <div className="flex items-center space-x-3 mt-2">
+                          <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                            {lesson.vocabulary?.length || 0} riječi
+                          </span>
+                          <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                            {lesson.quiz?.length || 0} pitanja
+                          </span>
+                          {completed && (
+                            <span className="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                              ✓ Završeno
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-gray-400" />
+                  </div>
+                </Link>
+              )
+            })}
           </div>
         </div>
       ))}

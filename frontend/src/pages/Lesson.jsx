@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { 
@@ -10,7 +10,8 @@ import {
 } from 'lucide-react'
 import { useProgress } from '../hooks/useProgress'
 import { useSpeech } from '../hooks/useSpeech'
-import { api } from '../api'
+import { useAuth } from '../context/AuthContext'
+import { api, progressApi } from '../api'
 
 function Lesson() {
   const { lessonId } = useParams()
@@ -18,7 +19,13 @@ function Lesson() {
   const [loading, setLoading] = useState(true)
   const { progress, saveQuizScore, getStars, getAchievementInfo } = useProgress()
   const { speak, isSpeaking } = useSpeech()
+  const { isAuthenticated, refreshStats, stats } = useAuth()
+  const navigate = useNavigate()
+  const [accessDenied, setAccessDenied] = useState(false)
   const [quizResult, setQuizResult] = useState(null)
+  const [lessonProgress, setLessonProgress] = useState(null)
+  const [exerciseResult, setExerciseResult] = useState(null)
+  const [allExercisesCompleted, setAllExercisesCompleted] = useState(false)
   const [activeTab, setActiveTab] = useState('vocabulary')
   const [quizState, setQuizState] = useState({
     currentQuestion: 0,
@@ -50,6 +57,17 @@ function Lesson() {
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
 
   useEffect(() => {
+    // Check if lesson is accessible for authenticated users
+    const lessonNum = parseInt(lessonId)
+    if (isAuthenticated && stats?.current_lesson_id) {
+      if (lessonNum > stats.current_lesson_id) {
+        setAccessDenied(true)
+        setLoading(false)
+        return
+      }
+    }
+    setAccessDenied(false)
+
     // Reset all state when lesson changes
     setActiveTab('vocabulary')
     setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
@@ -77,13 +95,24 @@ function Lesson() {
         console.error('Error:', err)
         setLoading(false)
       })
-  }, [lessonId])
+
+    // Fetch lesson progress if authenticated
+    if (isAuthenticated) {
+      progressApi.getLessonProgress(lessonId)
+        .then(data => {
+          setLessonProgress(data)
+        })
+        .catch(err => {
+          console.error('Error fetching lesson progress:', err)
+        })
+    }
+  }, [lessonId, isAuthenticated, stats?.current_lesson_id])
 
   const toggleCard = (index) => {
     setFlippedCards(prev => ({ ...prev, [index]: !prev[index] }))
   }
 
-  const handleQuizAnswer = (answerIndex) => {
+  const handleQuizAnswer = async (answerIndex) => {
     const currentQ = lesson.quiz[quizState.currentQuestion]
     const isCorrect = answerIndex === currentQ.correct_answer
     const newScore = isCorrect ? quizState.score + 1 : quizState.score
@@ -94,14 +123,48 @@ function Lesson() {
       score: newScore
     }))
 
-    setTimeout(() => {
+    setTimeout(async () => {
       if (quizState.currentQuestion < lesson.quiz.length - 1) {
         setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))
       } else {
         // Quiz finished - save progress
         const finalScore = newScore
-        const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
-        setQuizResult(result)
+        
+        // Save to backend if authenticated
+        if (isAuthenticated) {
+          try {
+            const apiResult = await progressApi.submitQuiz(
+              lesson.id,
+              finalScore,
+              lesson.quiz.length,
+              quizState.answers.reduce((acc, a, i) => ({ ...acc, [i]: a.selected }), {})
+            )
+            setQuizResult({
+              pointsEarned: apiResult.xp_earned,
+              isNewHighScore: apiResult.is_new_high_score,
+              lessonCompleted: apiResult.lesson_completed,
+              totalXp: apiResult.total_xp,
+              currentLevel: apiResult.current_level,
+              passed: apiResult.passed,
+              percentage: apiResult.percentage
+            })
+            // Update lesson progress state
+            setLessonProgress(prev => ({
+              ...prev,
+              quiz_passed: apiResult.passed,
+              best_quiz_percentage: apiResult.percentage
+            }))
+            await refreshStats()
+          } catch (error) {
+            console.error('Failed to save quiz result:', error)
+            const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
+            setQuizResult(result)
+          }
+        } else {
+          const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
+          setQuizResult(result)
+        }
+        
         setQuizState(prev => ({ ...prev, showResult: true }))
       }
     }, 1500)
@@ -510,10 +573,13 @@ function Lesson() {
 
   const checkGrammarExercises = () => {
     setGrammarExercises(prev => ({ ...prev, showResults: true }))
+    checkAndSubmitAllExercises()
   }
 
   const resetGrammarExercises = () => {
     setGrammarExercises({ answers: {}, showResults: false, draggedItem: null })
+    setExerciseResult(null)
+    setAllExercisesCompleted(false)
   }
 
   const getGrammarScore = () => {
@@ -522,6 +588,44 @@ function Lesson() {
       if (grammarExercises.answers[ex.id] === ex.answer) correct++
     })
     return correct
+  }
+
+  // Function to calculate and submit total exercise score
+  const checkAndSubmitAllExercises = async () => {
+    // Check if all 4 exercise types have been completed
+    const grammarDone = grammarExercises.showResults || Object.keys(grammarExercises.answers).length > 0
+    const sentenceDone = sentenceExercises.showResults
+    const matchingDone = matchingExercises.showResults
+    const translationDone = translationExercises.showResults
+
+    // Wait for current exercise to show results
+    setTimeout(async () => {
+      const grammarScore = getGrammarScore()
+      const sentenceScore = getSentenceScore()
+      const matchingScore = getMatchingScore()
+      const translationScore = getTranslationScore()
+
+      const totalScore = grammarScore + sentenceScore + matchingScore + translationScore
+      const totalExercises = grammarExercisesList.length + sentenceOrderingList.length + matchingList.length + translationList.length
+
+      // Submit if authenticated and all exercises completed
+      if (isAuthenticated && grammarExercises.showResults && sentenceExercises.showResults && 
+          matchingExercises.showResults && translationExercises.showResults) {
+        setAllExercisesCompleted(true)
+        try {
+          const result = await progressApi.submitExercises(parseInt(lessonId), totalScore, totalExercises)
+          setExerciseResult(result)
+          setLessonProgress(prev => ({
+            ...prev,
+            exercises_passed: result.exercises_passed,
+            best_exercise_percentage: result.percentage
+          }))
+          await refreshStats()
+        } catch (error) {
+          console.error('Failed to submit exercise results:', error)
+        }
+      }
+    }, 100)
   }
 
   // Sentence ordering handlers
@@ -556,11 +660,14 @@ function Lesson() {
 
   const checkSentenceExercises = () => {
     setSentenceExercises(prev => ({ ...prev, showResults: true }))
+    checkAndSubmitAllExercises()
   }
 
   const resetSentenceExercises = () => {
     setWordPositions({})
     setSentenceExercises({ answers: {}, showResults: false })
+    setExerciseResult(null)
+    setAllExercisesCompleted(false)
   }
 
   const getSentenceScore = () => {
@@ -592,12 +699,15 @@ function Lesson() {
 
   const checkMatchingExercises = () => {
     setMatchingExercises({ answers: matchedPairs, showResults: true })
+    checkAndSubmitAllExercises()
   }
 
   const resetMatchingExercises = () => {
     setMatchedPairs({})
     setSelectedBosnian(null)
     setMatchingExercises({ answers: {}, showResults: false })
+    setExerciseResult(null)
+    setAllExercisesCompleted(false)
   }
 
   const getMatchingScore = () => {
@@ -613,11 +723,14 @@ function Lesson() {
 
   const checkTranslationExercises = () => {
     setTranslationExercises({ answers: translationInputs, showResults: true })
+    checkAndSubmitAllExercises()
   }
 
   const resetTranslationExercises = () => {
     setTranslationInputs({})
     setTranslationExercises({ answers: {}, showResults: false })
+    setExerciseResult(null)
+    setAllExercisesCompleted(false)
   }
 
   const getTranslationScore = () => {
@@ -632,6 +745,36 @@ function Lesson() {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="animate-spin rounded-full h-12 w-12 border-4 border-bosnia-blue border-t-transparent"></div>
+      </div>
+    )
+  }
+
+  if (accessDenied) {
+    return (
+      <div className="max-w-md mx-auto text-center py-12">
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">🔒</span>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Lekcija zaključana</h2>
+          <p className="text-gray-600 mb-6">
+            Morate završiti prethodne lekcije prije pristupa ovoj lekciji.
+          </p>
+          <div className="space-y-3">
+            <Link
+              to={`/lesson/${stats?.current_lesson_id || 1}`}
+              className="block w-full bg-bosnia-blue text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Idi na lekciju {stats?.current_lesson_id || 1}
+            </Link>
+            <Link
+              to="/levels/a1"
+              className="block w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-colors"
+            >
+              Nazad na listu lekcija
+            </Link>
+          </div>
+        </div>
       </div>
     )
   }
@@ -696,6 +839,85 @@ function Lesson() {
             ))}
           </ul>
         </div>
+
+        {/* Progress Requirements - Only show for authenticated users */}
+        {isAuthenticated && (
+          <div className="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 rounded-lg border border-amber-200">
+            <h3 className="font-semibold text-amber-800 mb-3 flex items-center space-x-2">
+              <Trophy className="w-5 h-5" />
+              <span>Za otključavanje sljedeće lekcije</span>
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {/* Exercises Progress */}
+              <div className={`p-3 rounded-lg border-2 ${
+                lessonProgress?.exercises_passed 
+                  ? 'bg-green-50 border-green-300' 
+                  : 'bg-white border-gray-200'
+              }`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Dumbbell className={`w-5 h-5 ${lessonProgress?.exercises_passed ? 'text-green-600' : 'text-gray-400'}`} />
+                    <span className={`font-medium ${lessonProgress?.exercises_passed ? 'text-green-700' : 'text-gray-700'}`}>
+                      Vježbe
+                    </span>
+                  </div>
+                  {lessonProgress?.exercises_passed ? (
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                  ) : (
+                    <span className="text-sm text-gray-500">≥70% potrebno</span>
+                  )}
+                </div>
+                {lessonProgress?.best_exercise_percentage > 0 && (
+                  <div className="mt-2 text-sm text-gray-600">
+                    Najbolji rezultat: {Math.round(lessonProgress.best_exercise_percentage)}%
+                  </div>
+                )}
+              </div>
+
+              {/* Quiz Progress */}
+              <div className={`p-3 rounded-lg border-2 ${
+                lessonProgress?.quiz_passed 
+                  ? 'bg-green-50 border-green-300' 
+                  : 'bg-white border-gray-200'
+              }`}>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <HelpCircle className={`w-5 h-5 ${lessonProgress?.quiz_passed ? 'text-green-600' : 'text-gray-400'}`} />
+                    <span className={`font-medium ${lessonProgress?.quiz_passed ? 'text-green-700' : 'text-gray-700'}`}>
+                      Kviz
+                    </span>
+                  </div>
+                  {lessonProgress?.quiz_passed ? (
+                    <CheckCircle className="w-5 h-5 text-green-600" />
+                  ) : (
+                    <span className="text-sm text-gray-500">≥70% potrebno</span>
+                  )}
+                </div>
+                {lessonProgress?.best_quiz_percentage > 0 && (
+                  <div className="mt-2 text-sm text-gray-600">
+                    Najbolji rezultat: {Math.round(lessonProgress.best_quiz_percentage)}%
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Lesson completed status */}
+            {lessonProgress?.exercises_passed && lessonProgress?.quiz_passed ? (
+              <div className="mt-3 p-2 bg-green-100 rounded-lg text-center">
+                <span className="text-green-700 font-medium flex items-center justify-center space-x-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>Lekcija {lesson.id} završena! Sljedeća lekcija je otključana.</span>
+                </span>
+              </div>
+            ) : (
+              <div className="mt-3 p-2 bg-amber-100 rounded-lg text-center">
+                <span className="text-amber-700 text-sm">
+                  💡 Položite vježbe i kviz sa minimalno 70% da otključate sljedeću lekciju
+                </span>
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {/* Tabs */}
