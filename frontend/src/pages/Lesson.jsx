@@ -1027,60 +1027,9 @@ function Lesson() {
               <Trophy className="w-5 h-5" />
               <span>Za otključavanje sljedeće lekcije</span>
             </h3>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {/* Exercises Progress */}
-              <div className={`p-3 rounded-lg border-2 ${
-                lessonProgress?.exercises_passed 
-                  ? 'bg-green-50 border-green-300' 
-                  : 'bg-white border-gray-200'
-              }`}>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Dumbbell className={`w-5 h-5 ${lessonProgress?.exercises_passed ? 'text-green-600' : 'text-gray-400'}`} />
-                    <span className={`font-medium ${lessonProgress?.exercises_passed ? 'text-green-700' : 'text-gray-700'}`}>
-                      Vježbe
-                    </span>
-                  </div>
-                  {lessonProgress?.exercises_passed ? (
-                    <CheckCircle className="w-5 h-5 text-green-600" />
-                  ) : (
-                    <span className="text-sm text-gray-500">≥70% potrebno</span>
-                  )}
-                </div>
-                {/* Live exercise progress bar */}
-                {(() => {
-                  const totalExercises = grammarExercisesList.length + sentenceOrderingList.length + matchingList.length + translationList.length
-                  const currentScore = getGrammarScore() + getSentenceScore() + getMatchingScore() + getTranslationScore()
-                  const currentPercentage = totalExercises > 0 ? Math.round((currentScore / totalExercises) * 100) : 0
-                  const hasStarted = Object.keys(grammarExercises.answers).length > 0 || 
-                                    Object.keys(sentenceExercises.answers).length > 0 || 
-                                    Object.keys(matchingExercises.answers).length > 0 ||
-                                    Object.keys(translationExercises.answers).length > 0
-                  
-                  return hasStarted && !lessonProgress?.exercises_passed ? (
-                    <div className="mt-2">
-                      <div className="flex justify-between text-xs text-gray-600 mb-1">
-                        <span>Trenutni napredak</span>
-                        <span className={currentPercentage >= 70 ? 'text-green-600 font-bold' : ''}>{currentPercentage}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className={`h-2 rounded-full transition-all duration-300 ${currentPercentage >= 70 ? 'bg-green-500' : 'bg-blue-500'}`}
-                          style={{ width: `${currentPercentage}%` }}
-                        />
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">{currentScore}/{totalExercises} tačno</div>
-                    </div>
-                  ) : lessonProgress?.best_exercise_percentage > 0 ? (
-                    <div className="mt-2 text-sm text-gray-600">
-                      Najbolji rezultat: {Math.round(lessonProgress.best_exercise_percentage)}%
-                    </div>
-                  ) : null
-                })()}
-              </div>
-
-              {/* Quiz Progress */}
-              <div className={`p-3 rounded-lg border-2 ${
+            
+            {/* Quiz Progress - Only quiz required */}
+            <div className={`p-3 rounded-lg border-2 ${
                 lessonProgress?.quiz_passed 
                   ? 'bg-green-50 border-green-300' 
                   : 'bg-white border-gray-200'
@@ -1127,7 +1076,6 @@ function Lesson() {
                   ) : null
                 })()}
               </div>
-            </div>
 
             {/* Lesson completed status */}
             {lessonProgress?.quiz_passed ? (
