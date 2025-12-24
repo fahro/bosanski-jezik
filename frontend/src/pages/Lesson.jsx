@@ -253,6 +253,8 @@ function Lesson() {
       if (quizState.currentQuestion < lesson.quiz.length - 1) {
         setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))
       } else {
+        // Show result immediately
+        setQuizState(prev => ({ ...prev, showResult: true }))
         // Quiz finished - save progress
         const finalScore = newScore
         
@@ -290,10 +292,8 @@ function Lesson() {
           const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
           setQuizResult(result)
         }
-        
-        setQuizState(prev => ({ ...prev, showResult: true }))
       }
-    }, 1500)
+    }, 500)
   }
 
   const resetQuiz = () => {
