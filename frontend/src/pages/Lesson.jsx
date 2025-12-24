@@ -179,6 +179,51 @@ function Lesson() {
     }
   }, [lessonId, isAuthenticated, stats?.current_lesson_id])
 
+  // Submit exercises when all are completed
+  useEffect(() => {
+    const submitAllExercises = async () => {
+      if (!isAuthenticated || !lesson) return
+      if (!grammarExercises.showResults || !sentenceExercises.showResults || 
+          !matchingExercises.showResults || !translationExercises.showResults) return
+      if (allExercisesCompleted) return // Already submitted
+      
+      const grammarScore = grammarExercisesList.reduce((acc, ex) => 
+        grammarExercises.answers[ex.id] === ex.answer ? acc + 1 : acc, 0)
+      const sentenceScore = sentenceOrderingList.reduce((acc, ex) => {
+        const userAnswer = (wordPositions[ex.id] || []).join(' ')
+        return userAnswer === ex.correct ? acc + 1 : acc
+      }, 0)
+      const matchingScore = matchingList.reduce((acc, ex) => 
+        matchedPairs[ex.bosnian] === ex.english ? acc + 1 : acc, 0)
+      const translationScore = translationList.reduce((acc, ex) => 
+        translationInputs[ex.id] === ex.correct ? acc + 1 : acc, 0)
+      
+      const totalScore = grammarScore + sentenceScore + matchingScore + translationScore
+      const totalExercises = grammarExercisesList.length + sentenceOrderingList.length + 
+                            matchingList.length + translationList.length
+      
+      setAllExercisesCompleted(true)
+      try {
+        const result = await progressApi.submitExercises(parseInt(lessonId), totalScore, totalExercises)
+        console.log('Exercise submission result:', result)
+        setExerciseResult(result)
+        setLessonProgress(prev => ({
+          ...prev,
+          exercises_passed: result.exercises_passed,
+          exercises_completed: true,
+          best_exercise_percentage: result.percentage
+        }))
+        await refreshStats()
+      } catch (error) {
+        console.error('Failed to submit exercise results:', error)
+        setAllExercisesCompleted(false)
+      }
+    }
+    
+    submitAllExercises()
+  }, [grammarExercises.showResults, sentenceExercises.showResults, 
+      matchingExercises.showResults, translationExercises.showResults])
+
   const toggleCard = (index) => {
     setFlippedCards(prev => ({ ...prev, [index]: !prev[index] }))
   }
@@ -699,7 +744,6 @@ function Lesson() {
 
   const checkGrammarExercises = () => {
     setGrammarExercises(prev => ({ ...prev, showResults: true }))
-    checkAndSubmitAllExercises()
   }
 
   const resetGrammarExercises = () => {
@@ -714,44 +758,6 @@ function Lesson() {
       if (grammarExercises.answers[ex.id] === ex.answer) correct++
     })
     return correct
-  }
-
-  // Function to calculate and submit total exercise score
-  const checkAndSubmitAllExercises = async () => {
-    // Check if all 4 exercise types have been completed
-    const grammarDone = grammarExercises.showResults || Object.keys(grammarExercises.answers).length > 0
-    const sentenceDone = sentenceExercises.showResults
-    const matchingDone = matchingExercises.showResults
-    const translationDone = translationExercises.showResults
-
-    // Wait for current exercise to show results
-    setTimeout(async () => {
-      const grammarScore = getGrammarScore()
-      const sentenceScore = getSentenceScore()
-      const matchingScore = getMatchingScore()
-      const translationScore = getTranslationScore()
-
-      const totalScore = grammarScore + sentenceScore + matchingScore + translationScore
-      const totalExercises = grammarExercisesList.length + sentenceOrderingList.length + matchingList.length + translationList.length
-
-      // Submit if authenticated and all exercises completed
-      if (isAuthenticated && grammarExercises.showResults && sentenceExercises.showResults && 
-          matchingExercises.showResults && translationExercises.showResults) {
-        setAllExercisesCompleted(true)
-        try {
-          const result = await progressApi.submitExercises(parseInt(lessonId), totalScore, totalExercises)
-          setExerciseResult(result)
-          setLessonProgress(prev => ({
-            ...prev,
-            exercises_passed: result.exercises_passed,
-            best_exercise_percentage: result.percentage
-          }))
-          await refreshStats()
-        } catch (error) {
-          console.error('Failed to submit exercise results:', error)
-        }
-      }
-    }, 100)
   }
 
   // Sentence ordering handlers
@@ -786,7 +792,6 @@ function Lesson() {
 
   const checkSentenceExercises = () => {
     setSentenceExercises(prev => ({ ...prev, showResults: true }))
-    checkAndSubmitAllExercises()
   }
 
   const resetSentenceExercises = () => {
@@ -824,7 +829,6 @@ function Lesson() {
 
   const checkMatchingExercises = () => {
     setMatchingExercises({ answers: matchedPairs, showResults: true })
-    checkAndSubmitAllExercises()
   }
 
   const resetMatchingExercises = () => {
@@ -848,7 +852,6 @@ function Lesson() {
 
   const checkTranslationExercises = () => {
     setTranslationExercises({ answers: translationInputs, showResults: true })
-    checkAndSubmitAllExercises()
   }
 
   const resetTranslationExercises = () => {
