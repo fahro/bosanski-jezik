@@ -749,6 +749,37 @@ function Lesson() {
     )
   }
 
+  // Require authentication to view lessons
+  if (!isAuthenticated) {
+    return (
+      <div className="max-w-md mx-auto text-center py-12">
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">📚</span>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Registracija potrebna</h2>
+          <p className="text-gray-600 mb-6">
+            Da biste pristupili lekcijama, potrebno je da se registrujete ili prijavite. Registracija je besplatna!
+          </p>
+          <div className="space-y-3">
+            <Link
+              to="/register"
+              className="block w-full bg-bosnia-blue text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition-colors"
+            >
+              Registruj se besplatno
+            </Link>
+            <Link
+              to="/login"
+              className="block w-full bg-gray-100 text-gray-700 py-3 rounded-xl font-semibold hover:bg-gray-200 transition-colors"
+            >
+              Već imam račun - Prijava
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   if (accessDenied) {
     return (
       <div className="max-w-md mx-auto text-center py-12">
