@@ -101,8 +101,26 @@ function Lesson() {
       progressApi.getLessonProgress(lessonId)
         .then(data => {
           setLessonProgress(data)
-          // Restore saved quiz progress
-          if (data.saved_quiz_answers && !data.quiz_passed) {
+          // If quiz is already passed, show the result
+          if (data.quiz_passed) {
+            const bestScore = data.best_quiz_score || 0
+            const totalQuestions = lesson?.quiz?.length || 15
+            setQuizState({
+              currentQuestion: totalQuestions,
+              answers: [],
+              showResult: true,
+              score: bestScore
+            })
+            setQuizResult({
+              pointsEarned: 0,
+              isNewHighScore: false,
+              lessonCompleted: data.exercises_passed && data.quiz_passed,
+              alreadyPassed: true,
+              bestPercentage: data.best_quiz_percentage
+            })
+          }
+          // Restore saved quiz progress if not passed yet
+          else if (data.saved_quiz_answers) {
             const savedAnswers = Object.entries(data.saved_quiz_answers).map(([idx, ans]) => ({
               selected: ans.selected,
               correct: ans.correct
@@ -1969,7 +1987,9 @@ function Lesson() {
                   {/* Stars display */}
                   <div className="flex justify-center space-x-2 mb-4">
                     {[1, 2, 3].map((star) => {
-                      const percentage = Math.round((quizState.score / lesson.quiz.length) * 100)
+                      const percentage = quizResult?.alreadyPassed 
+                        ? Math.round(quizResult.bestPercentage) 
+                        : Math.round((quizState.score / lesson.quiz.length) * 100)
                       const filled = (star === 1 && percentage >= 50) || 
                                     (star === 2 && percentage >= 70) || 
                                     (star === 3 && percentage >= 90)
@@ -1982,21 +2002,37 @@ function Lesson() {
                     })}
                   </div>
                   
-                  <div className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 ${
-                    quizState.score >= lesson.quiz.length * 0.7 ? 'bg-green-100' : 'bg-yellow-100'
-                  }`}>
-                    <span className="text-4xl">
-                      {quizState.score >= lesson.quiz.length * 0.9 ? '🏆' : quizState.score >= lesson.quiz.length * 0.7 ? '🎉' : '📚'}
-                    </span>
-                  </div>
+                  {(() => {
+                    const percentage = quizResult?.alreadyPassed 
+                      ? quizResult.bestPercentage 
+                      : (quizState.score / lesson.quiz.length) * 100
+                    return (
+                      <div className={`w-24 h-24 mx-auto rounded-full flex items-center justify-center mb-6 ${
+                        percentage >= 70 ? 'bg-green-100' : 'bg-yellow-100'
+                      }`}>
+                        <span className="text-4xl">
+                          {percentage >= 90 ? '🏆' : percentage >= 70 ? '🎉' : '📚'}
+                        </span>
+                      </div>
+                    )
+                  })()}
                   
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">Kviz završen!</h3>
-                  <p className="text-gray-600 mb-2">
-                    Vaš rezultat: <strong>{quizState.score}</strong> od <strong>{lesson.quiz.length}</strong> ({Math.round(quizState.score / lesson.quiz.length * 100)}%)
-                  </p>
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
+                    {quizResult?.alreadyPassed ? 'Kviz položen!' : 'Kviz završen!'}
+                  </h3>
+                  
+                  {quizResult?.alreadyPassed ? (
+                    <p className="text-gray-600 mb-2">
+                      Najbolji rezultat: <strong>{Math.round(quizResult.bestPercentage)}%</strong>
+                    </p>
+                  ) : (
+                    <p className="text-gray-600 mb-2">
+                      Vaš rezultat: <strong>{quizState.score}</strong> od <strong>{lesson.quiz.length}</strong> ({Math.round(quizState.score / lesson.quiz.length * 100)}%)
+                    </p>
+                  )}
                   
                   {/* Points earned */}
-                  {quizResult && (
+                  {quizResult && !quizResult.alreadyPassed && (
                     <div className="mb-4 space-y-2">
                       <div className="flex items-center justify-center space-x-2 text-green-600">
                         <Zap className="w-5 h-5" />
@@ -2008,6 +2044,16 @@ function Lesson() {
                           <span className="font-medium">Novi rekord!</span>
                         </div>
                       )}
+                    </div>
+                  )}
+
+                  {/* Already passed message */}
+                  {quizResult?.alreadyPassed && (
+                    <div className="mb-4 p-3 bg-green-100 rounded-lg">
+                      <div className="flex items-center justify-center space-x-2 text-green-700">
+                        <CheckCircle className="w-5 h-5" />
+                        <span className="font-medium">Već ste položili ovaj kviz!</span>
+                      </div>
                     </div>
                   )}
                   
@@ -2034,7 +2080,7 @@ function Lesson() {
                     className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
                   >
                     <RefreshCw className="w-5 h-5" />
-                    <span>Pokušaj ponovo</span>
+                    <span>{quizResult?.alreadyPassed ? 'Radi ponovo' : 'Pokušaj ponovo'}</span>
                   </button>
                 </div>
               )}
