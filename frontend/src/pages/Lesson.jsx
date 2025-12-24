@@ -56,6 +56,9 @@ function Lesson() {
   })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
 
+  // Track previous lessonId to only reset state when lesson actually changes
+  const prevLessonIdRef = React.useRef(lessonId)
+  
   useEffect(() => {
     // Check if lesson is accessible for authenticated users
     const lessonNum = parseInt(lessonId)
@@ -78,6 +81,12 @@ function Lesson() {
       setAccessDenied(false)
     }
 
+    // Only reset state when lesson ID actually changes (not when stats update)
+    const lessonChanged = prevLessonIdRef.current !== lessonId
+    prevLessonIdRef.current = lessonId
+    
+    if (!lessonChanged) return // Don't reset if just stats changed
+    
     // Reset all state when lesson changes
     setActiveTab('vocabulary')
     setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
