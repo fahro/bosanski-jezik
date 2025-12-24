@@ -57,7 +57,7 @@ function Lesson() {
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
 
   // Track previous lessonId to only reset state when lesson actually changes
-  const prevLessonIdRef = useRef(lessonId)
+  const prevLessonIdRef = useRef(null)
   
   useEffect(() => {
     // Check if lesson is accessible for authenticated users
