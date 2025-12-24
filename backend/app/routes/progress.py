@@ -383,8 +383,8 @@ async def submit_quiz(
     current_user.total_xp += xp_earned
     current_user.current_level = calculate_level(current_user.total_xp)
     
-    # Update current lesson only if BOTH exercises and quiz passed
-    if exercises_passed and progress.quiz_passed and submission.lesson_id >= current_user.current_lesson_id:
+    # Update current lesson if quiz passed (only quiz required for next lesson)
+    if progress.quiz_passed and submission.lesson_id >= current_user.current_lesson_id:
         if submission.lesson_id < 12:
             current_user.current_lesson_id = submission.lesson_id + 1
     
@@ -458,8 +458,8 @@ async def submit_exercises(
     current_user.total_xp += xp_earned
     current_user.current_level = calculate_level(current_user.total_xp)
     
-    # Update current lesson only if BOTH exercises and quiz passed
-    if progress.exercises_passed and quiz_passed and submission.lesson_id >= current_user.current_lesson_id:
+    # Update current lesson if quiz passed (only quiz required for next lesson)
+    if quiz_passed and submission.lesson_id >= current_user.current_lesson_id:
         if submission.lesson_id < 12:
             current_user.current_lesson_id = submission.lesson_id + 1
     

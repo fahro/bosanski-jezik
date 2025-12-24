@@ -50,9 +50,9 @@ function LessonList() {
     // Check if stats say this lesson is unlocked
     if (lessonId <= (stats?.current_lesson_id || 1)) return true
     
-    // Also check if previous lesson is completed (exercises + quiz passed)
+    // Also check if previous lesson quiz is passed (only quiz required)
     const previousLessonProgress = lessonProgress.find(p => p.lesson_id === lessonId - 1)
-    if (previousLessonProgress?.exercises_passed && previousLessonProgress?.quiz_passed) {
+    if (previousLessonProgress?.quiz_passed) {
       return true
     }
     

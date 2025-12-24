@@ -114,7 +114,7 @@ function Lesson() {
       if (lessonNum > 1 && accessDenied) {
         progressApi.getLessonProgress(lessonNum - 1)
           .then(prevData => {
-            if (prevData.exercises_passed && prevData.quiz_passed) {
+            if (prevData.quiz_passed) {
               setAccessDenied(false)
             }
           })
@@ -137,7 +137,7 @@ function Lesson() {
             setQuizResult({
               pointsEarned: 0,
               isNewHighScore: false,
-              lessonCompleted: data.exercises_passed && data.quiz_passed,
+              lessonCompleted: data.quiz_passed,
               alreadyPassed: true,
               bestPercentage: data.best_quiz_percentage
             })
@@ -178,51 +178,6 @@ function Lesson() {
         })
     }
   }, [lessonId, isAuthenticated, stats?.current_lesson_id])
-
-  // Submit exercises when all are completed
-  useEffect(() => {
-    const submitAllExercises = async () => {
-      if (!isAuthenticated || !lesson) return
-      if (!grammarExercises.showResults || !sentenceExercises.showResults || 
-          !matchingExercises.showResults || !translationExercises.showResults) return
-      if (allExercisesCompleted) return // Already submitted
-      
-      const grammarScore = grammarExercisesList.reduce((acc, ex) => 
-        grammarExercises.answers[ex.id] === ex.answer ? acc + 1 : acc, 0)
-      const sentenceScore = sentenceOrderingList.reduce((acc, ex) => {
-        const userAnswer = (wordPositions[ex.id] || []).join(' ')
-        return userAnswer === ex.correct ? acc + 1 : acc
-      }, 0)
-      const matchingScore = matchingList.reduce((acc, ex) => 
-        matchedPairs[ex.bosnian] === ex.english ? acc + 1 : acc, 0)
-      const translationScore = translationList.reduce((acc, ex) => 
-        translationInputs[ex.id] === ex.correct ? acc + 1 : acc, 0)
-      
-      const totalScore = grammarScore + sentenceScore + matchingScore + translationScore
-      const totalExercises = grammarExercisesList.length + sentenceOrderingList.length + 
-                            matchingList.length + translationList.length
-      
-      setAllExercisesCompleted(true)
-      try {
-        const result = await progressApi.submitExercises(parseInt(lessonId), totalScore, totalExercises)
-        console.log('Exercise submission result:', result)
-        setExerciseResult(result)
-        setLessonProgress(prev => ({
-          ...prev,
-          exercises_passed: result.exercises_passed,
-          exercises_completed: true,
-          best_exercise_percentage: result.percentage
-        }))
-        await refreshStats()
-      } catch (error) {
-        console.error('Failed to submit exercise results:', error)
-        setAllExercisesCompleted(false)
-      }
-    }
-    
-    submitAllExercises()
-  }, [grammarExercises.showResults, sentenceExercises.showResults, 
-      matchingExercises.showResults, translationExercises.showResults])
 
   const toggleCard = (index) => {
     setFlippedCards(prev => ({ ...prev, [index]: !prev[index] }))
@@ -742,8 +697,68 @@ function Lesson() {
     e.preventDefault()
   }
 
+  // Submit all exercises to backend - defined here so it can be called by check functions
+  const submitAllExercisesToBackend = async (grammarDone, sentenceDone, matchingDone, translationDone) => {
+    // Only submit if ALL 4 types are done
+    if (!grammarDone || !sentenceDone || !matchingDone || !translationDone) return
+    if (!isAuthenticated || !lesson) return
+    if (allExercisesCompleted) return
+    
+    // Calculate scores using the current state values
+    const currentExercises = exercisesByLesson[lesson?.id] || exercisesByLesson[1]
+    const grammarList = currentExercises.fillBlank
+    const sentenceList = currentExercises.sentenceOrder
+    const matchList = currentExercises.matching
+    const transList = currentExercises.translation
+    
+    let grammarScore = 0
+    grammarList.forEach(ex => {
+      if (grammarExercises.answers[ex.id] === ex.answer) grammarScore++
+    })
+    
+    let sentenceScore = 0
+    sentenceList.forEach(ex => {
+      const userAnswer = (wordPositions[ex.id] || []).join(' ')
+      if (userAnswer === ex.correct) sentenceScore++
+    })
+    
+    let matchingScore = 0
+    matchList.forEach(ex => {
+      if (matchedPairs[ex.bosnian] === ex.english) matchingScore++
+    })
+    
+    let translationScore = 0
+    transList.forEach(ex => {
+      if (translationInputs[ex.id] === ex.correct) translationScore++
+    })
+    
+    const totalScore = grammarScore + sentenceScore + matchingScore + translationScore
+    const totalExercises = grammarList.length + sentenceList.length + matchList.length + transList.length
+    
+    console.log('Submitting exercises:', { totalScore, totalExercises })
+    
+    setAllExercisesCompleted(true)
+    try {
+      const result = await progressApi.submitExercises(parseInt(lessonId), totalScore, totalExercises)
+      console.log('Exercise submission result:', result)
+      setExerciseResult(result)
+      setLessonProgress(prev => ({
+        ...prev,
+        exercises_passed: result.exercises_passed,
+        exercises_completed: true,
+        best_exercise_percentage: result.percentage
+      }))
+      await refreshStats()
+    } catch (error) {
+      console.error('Failed to submit exercise results:', error)
+      setAllExercisesCompleted(false)
+    }
+  }
+
   const checkGrammarExercises = () => {
     setGrammarExercises(prev => ({ ...prev, showResults: true }))
+    // Try to submit if all exercises are done
+    submitAllExercisesToBackend(true, sentenceExercises.showResults, matchingExercises.showResults, translationExercises.showResults)
   }
 
   const resetGrammarExercises = () => {
@@ -792,6 +807,8 @@ function Lesson() {
 
   const checkSentenceExercises = () => {
     setSentenceExercises(prev => ({ ...prev, showResults: true }))
+    // Try to submit if all exercises are done
+    submitAllExercisesToBackend(grammarExercises.showResults, true, matchingExercises.showResults, translationExercises.showResults)
   }
 
   const resetSentenceExercises = () => {
@@ -829,6 +846,8 @@ function Lesson() {
 
   const checkMatchingExercises = () => {
     setMatchingExercises({ answers: matchedPairs, showResults: true })
+    // Try to submit if all exercises are done
+    submitAllExercisesToBackend(grammarExercises.showResults, sentenceExercises.showResults, true, translationExercises.showResults)
   }
 
   const resetMatchingExercises = () => {
@@ -852,6 +871,8 @@ function Lesson() {
 
   const checkTranslationExercises = () => {
     setTranslationExercises({ answers: translationInputs, showResults: true })
+    // Try to submit if all exercises are done
+    submitAllExercisesToBackend(grammarExercises.showResults, sentenceExercises.showResults, matchingExercises.showResults, true)
   }
 
   const resetTranslationExercises = () => {
@@ -1109,7 +1130,7 @@ function Lesson() {
             </div>
 
             {/* Lesson completed status */}
-            {lessonProgress?.exercises_passed && lessonProgress?.quiz_passed ? (
+            {lessonProgress?.quiz_passed ? (
               <div className="mt-3 p-2 bg-green-100 rounded-lg text-center">
                 <span className="text-green-700 font-medium flex items-center justify-center space-x-2">
                   <CheckCircle className="w-5 h-5" />
@@ -1119,7 +1140,7 @@ function Lesson() {
             ) : (
               <div className="mt-3 p-2 bg-amber-100 rounded-lg text-center">
                 <span className="text-amber-700 text-sm">
-                  💡 Položite vježbe i kviz sa minimalno 70% da otključate sljedeću lekciju
+                  💡 Položite kviz sa minimalno 70% da otključate sljedeću lekciju
                 </span>
               </div>
             )}
