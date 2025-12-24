@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -57,7 +57,7 @@ function Lesson() {
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
 
   // Track previous lessonId to only reset state when lesson actually changes
-  const prevLessonIdRef = React.useRef(lessonId)
+  const prevLessonIdRef = useRef(lessonId)
   
   useEffect(() => {
     // Check if lesson is accessible for authenticated users
