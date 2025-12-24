@@ -43,7 +43,20 @@ function LessonList() {
   // Check if a lesson is unlocked
   const isLessonUnlocked = (lessonId) => {
     if (!isAuthenticated) return true // Allow all if not logged in (guest mode)
-    return lessonId <= (stats?.current_lesson_id || 1)
+    
+    // First lesson is always unlocked
+    if (lessonId === 1) return true
+    
+    // Check if stats say this lesson is unlocked
+    if (lessonId <= (stats?.current_lesson_id || 1)) return true
+    
+    // Also check if previous lesson is completed (exercises + quiz passed)
+    const previousLessonProgress = lessonProgress.find(p => p.lesson_id === lessonId - 1)
+    if (previousLessonProgress?.exercises_passed && previousLessonProgress?.quiz_passed) {
+      return true
+    }
+    
+    return false
   }
 
   // Check if a lesson is completed

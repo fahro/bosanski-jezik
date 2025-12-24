@@ -59,14 +59,24 @@ function Lesson() {
   useEffect(() => {
     // Check if lesson is accessible for authenticated users
     const lessonNum = parseInt(lessonId)
-    if (isAuthenticated && stats?.current_lesson_id) {
-      if (lessonNum > stats.current_lesson_id) {
+    
+    // First lesson is always accessible
+    if (lessonNum === 1) {
+      setAccessDenied(false)
+    } else if (isAuthenticated && stats?.current_lesson_id) {
+      // Check if stats allow access
+      if (lessonNum <= stats.current_lesson_id) {
+        setAccessDenied(false)
+      } else {
+        // Will check again after loading previous lesson progress
         setAccessDenied(true)
-        setLoading(false)
-        return
       }
+    } else if (isAuthenticated) {
+      // Stats not loaded yet, will check via lessonProgress
+      setAccessDenied(lessonNum > 1)
+    } else {
+      setAccessDenied(false)
     }
-    setAccessDenied(false)
 
     // Reset all state when lesson changes
     setActiveTab('vocabulary')
@@ -98,6 +108,19 @@ function Lesson() {
 
     // Fetch lesson progress if authenticated
     if (isAuthenticated) {
+      const lessonNum = parseInt(lessonId)
+      
+      // If this is not lesson 1, check previous lesson's progress for access
+      if (lessonNum > 1 && accessDenied) {
+        progressApi.getLessonProgress(lessonNum - 1)
+          .then(prevData => {
+            if (prevData.exercises_passed && prevData.quiz_passed) {
+              setAccessDenied(false)
+            }
+          })
+          .catch(err => console.error('Error checking previous lesson:', err))
+      }
+      
       progressApi.getLessonProgress(lessonId)
         .then(data => {
           setLessonProgress(data)
