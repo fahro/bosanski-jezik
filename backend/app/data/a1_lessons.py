@@ -116,7 +116,7 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
         ],
         "vocabulary": [
             {"bosnian": "jedan", "english": "one", "pronunciation": "YEH-dahn", "example": "Imam jedan auto.", "example_translation": "I have one car.", "image_emoji": "1️⃣"},
-            {"bosnian": "dva", "english": "two", "pronunciation": "dvah", "example": "Dva kafе, molim.", "example_translation": "Two coffees, please.", "image_emoji": "2️⃣"},
+            {"bosnian": "dva", "english": "two", "pronunciation": "dvah", "example": "Dvije kafe, molim.", "example_translation": "Two coffees, please.", "image_emoji": "2️⃣"},
             {"bosnian": "tri", "english": "three", "pronunciation": "tree", "example": "Tri jabuke.", "example_translation": "Three apples.", "image_emoji": "3️⃣"},
             {"bosnian": "četiri", "english": "four", "pronunciation": "CHEH-tee-ree", "example": "Četiri osobe.", "example_translation": "Four people.", "image_emoji": "4️⃣"},
             {"bosnian": "pet", "english": "five", "pronunciation": "peht", "example": "Pet minuta.", "example_translation": "Five minutes.", "image_emoji": "5️⃣"},
