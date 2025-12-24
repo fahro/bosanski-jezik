@@ -3,8 +3,12 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# Use /app/data folder for Docker volume persistence
-data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+# Use Railway volume (/data) if available, otherwise local data folder
+railway_volume = "/data"
+if os.path.isdir(railway_volume):
+    data_dir = railway_volume
+else:
+    data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
 os.makedirs(data_dir, exist_ok=True)
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{data_dir}/bosanski.db")
 
