@@ -898,11 +898,36 @@ function Lesson() {
                     <span className="text-sm text-gray-500">≥70% potrebno</span>
                   )}
                 </div>
-                {lessonProgress?.best_exercise_percentage > 0 && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    Najbolji rezultat: {Math.round(lessonProgress.best_exercise_percentage)}%
-                  </div>
-                )}
+                {/* Live exercise progress bar */}
+                {(() => {
+                  const totalExercises = grammarExercisesList.length + sentenceOrderingList.length + matchingList.length + translationList.length
+                  const currentScore = getGrammarScore() + getSentenceScore() + getMatchingScore() + getTranslationScore()
+                  const currentPercentage = totalExercises > 0 ? Math.round((currentScore / totalExercises) * 100) : 0
+                  const hasStarted = Object.keys(grammarExercises.answers).length > 0 || 
+                                    Object.keys(sentenceExercises.answers).length > 0 || 
+                                    Object.keys(matchingExercises.answers).length > 0 ||
+                                    Object.keys(translationExercises.answers).length > 0
+                  
+                  return hasStarted && !lessonProgress?.exercises_passed ? (
+                    <div className="mt-2">
+                      <div className="flex justify-between text-xs text-gray-600 mb-1">
+                        <span>Trenutni napredak</span>
+                        <span className={currentPercentage >= 70 ? 'text-green-600 font-bold' : ''}>{currentPercentage}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className={`h-2 rounded-full transition-all duration-300 ${currentPercentage >= 70 ? 'bg-green-500' : 'bg-blue-500'}`}
+                          style={{ width: `${currentPercentage}%` }}
+                        />
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">{currentScore}/{totalExercises} tačno</div>
+                    </div>
+                  ) : lessonProgress?.best_exercise_percentage > 0 ? (
+                    <div className="mt-2 text-sm text-gray-600">
+                      Najbolji rezultat: {Math.round(lessonProgress.best_exercise_percentage)}%
+                    </div>
+                  ) : null
+                })()}
               </div>
 
               {/* Quiz Progress */}
@@ -924,11 +949,34 @@ function Lesson() {
                     <span className="text-sm text-gray-500">≥70% potrebno</span>
                   )}
                 </div>
-                {lessonProgress?.best_quiz_percentage > 0 && (
-                  <div className="mt-2 text-sm text-gray-600">
-                    Najbolji rezultat: {Math.round(lessonProgress.best_quiz_percentage)}%
-                  </div>
-                )}
+                {/* Live quiz progress bar */}
+                {(() => {
+                  const totalQuestions = lesson?.quiz?.length || 0
+                  const answeredQuestions = quizState.answers.length
+                  const correctAnswers = quizState.answers.filter(a => a.correct).length
+                  const currentPercentage = answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0
+                  const projectedPercentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0
+                  
+                  return answeredQuestions > 0 && !quizState.showResult && !lessonProgress?.quiz_passed ? (
+                    <div className="mt-2">
+                      <div className="flex justify-between text-xs text-gray-600 mb-1">
+                        <span>Trenutni napredak</span>
+                        <span className={projectedPercentage >= 70 ? 'text-green-600 font-bold' : ''}>{projectedPercentage}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div 
+                          className={`h-2 rounded-full transition-all duration-300 ${projectedPercentage >= 70 ? 'bg-green-500' : 'bg-blue-500'}`}
+                          style={{ width: `${projectedPercentage}%` }}
+                        />
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">{correctAnswers}/{totalQuestions} tačno ({answeredQuestions} odgovoreno)</div>
+                    </div>
+                  ) : lessonProgress?.best_quiz_percentage > 0 ? (
+                    <div className="mt-2 text-sm text-gray-600">
+                      Najbolji rezultat: {Math.round(lessonProgress.best_quiz_percentage)}%
+                    </div>
+                  ) : null
+                })()}
               </div>
             </div>
 
