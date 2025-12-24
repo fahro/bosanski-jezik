@@ -2115,7 +2115,34 @@ function Lesson() {
             <ChevronRight className="w-5 h-5" />
           </button>
         )}
-        {activeTab === 'exercises' && (
+        {activeTab === 'exercises' && activeExerciseType === 'fillBlank' && (
+          <button
+            onClick={() => setActiveExerciseType('sentenceOrder')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Složi rečenicu</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'sentenceOrder' && (
+          <button
+            onClick={() => setActiveExerciseType('matching')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Spoji parove</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'matching' && (
+          <button
+            onClick={() => setActiveExerciseType('translation')}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Prevedi</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'translation' && (
           <button
             onClick={() => setActiveTab('dialogue')}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
