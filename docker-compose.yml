@@ -10,6 +10,8 @@ services:
       - "8808:8000"
     environment:
       - PYTHONUNBUFFERED=1
+    volumes:
+      - bosanski-data:/app/data
     restart: unless-stopped
 
   frontend:
@@ -22,6 +24,9 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+
+volumes:
+  bosanski-data:
 
 networks:
   default:

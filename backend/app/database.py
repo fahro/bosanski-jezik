@@ -3,7 +3,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./bosanski.db")
+# Use /app/data folder for Docker volume persistence
+data_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "data")
+os.makedirs(data_dir, exist_ok=True)
+DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{data_dir}/bosanski.db")
 
 engine = create_engine(
     DATABASE_URL, 

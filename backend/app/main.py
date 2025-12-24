@@ -18,6 +18,10 @@ from app.database import engine, Base
 from app.models import User, LessonProgress, QuizAttempt, FinalTestAttempt
 Base.metadata.create_all(bind=engine)
 
+# Seed initial users
+from app.seed import seed_users
+seed_users()
+
 # Include routers
 from app.routes.auth import router as auth_router
 from app.routes.progress import router as progress_router
