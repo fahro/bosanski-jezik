@@ -81,6 +81,9 @@ export const progressApi = {
       score,
       total_exercises: totalExercises
     })
+  },
+  saveProgress: async (lessonId, data) => {
+    return api.post(`/api/progress/lessons/${lessonId}/save-progress`, data)
   }
 }
 

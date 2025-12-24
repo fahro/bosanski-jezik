@@ -192,7 +192,10 @@ async def get_lesson_progress(
             "best_quiz_score": 0,
             "best_quiz_percentage": 0.0,
             "xp_earned": 0,
-            "started": False
+            "started": False,
+            "saved_quiz_answers": None,
+            "saved_quiz_position": 0,
+            "saved_exercise_answers": None
         }
     
     return {
@@ -210,7 +213,10 @@ async def get_lesson_progress(
         "best_quiz_score": progress.best_quiz_score,
         "best_quiz_percentage": progress.best_quiz_percentage,
         "xp_earned": progress.xp_earned,
-        "started": True
+        "started": True,
+        "saved_quiz_answers": getattr(progress, 'saved_quiz_answers', None),
+        "saved_quiz_position": getattr(progress, 'saved_quiz_position', 0),
+        "saved_exercise_answers": getattr(progress, 'saved_exercise_answers', None)
     }
 
 @router.post("/lessons/{lesson_id}/view")
@@ -277,6 +283,41 @@ async def update_lesson_view(
         "total_xp": current_user.total_xp,
         "current_level": current_user.current_level
     }
+
+@router.post("/lessons/{lesson_id}/save-progress")
+async def save_lesson_progress(
+    lesson_id: int,
+    save_data: dict,
+    current_user: User = Depends(get_current_user_required),
+    db: Session = Depends(get_db)
+):
+    """Save quiz and exercise answers for resuming later."""
+    progress = db.query(LessonProgress).filter(
+        LessonProgress.user_id == current_user.id,
+        LessonProgress.lesson_id == lesson_id
+    ).first()
+    
+    if not progress:
+        progress = LessonProgress(
+            user_id=current_user.id,
+            lesson_id=lesson_id
+        )
+        db.add(progress)
+    
+    # Save quiz progress
+    if "quiz_answers" in save_data:
+        progress.saved_quiz_answers = save_data["quiz_answers"]
+    if "quiz_position" in save_data:
+        progress.saved_quiz_position = save_data["quiz_position"]
+    
+    # Save exercise progress
+    if "exercise_answers" in save_data:
+        progress.saved_exercise_answers = save_data["exercise_answers"]
+    
+    progress.last_accessed = datetime.utcnow()
+    db.commit()
+    
+    return {"success": True}
 
 @router.post("/quiz/submit")
 async def submit_quiz(

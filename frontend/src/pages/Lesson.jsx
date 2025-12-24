@@ -101,6 +101,36 @@ function Lesson() {
       progressApi.getLessonProgress(lessonId)
         .then(data => {
           setLessonProgress(data)
+          // Restore saved quiz progress
+          if (data.saved_quiz_answers && !data.quiz_passed) {
+            const savedAnswers = Object.entries(data.saved_quiz_answers).map(([idx, ans]) => ({
+              selected: ans.selected,
+              correct: ans.correct
+            }))
+            const savedScore = savedAnswers.filter(a => a.correct).length
+            setQuizState({
+              currentQuestion: data.saved_quiz_position || savedAnswers.length,
+              answers: savedAnswers,
+              showResult: false,
+              score: savedScore
+            })
+          }
+          // Restore saved exercise progress
+          if (data.saved_exercise_answers && !data.exercises_passed) {
+            const saved = data.saved_exercise_answers
+            if (saved.grammar) {
+              setGrammarExercises(prev => ({ ...prev, answers: saved.grammar }))
+            }
+            if (saved.sentence) {
+              setSentenceExercises(prev => ({ ...prev, answers: saved.sentence }))
+            }
+            if (saved.matching) {
+              setMatchedPairs(saved.matching)
+            }
+            if (saved.translation) {
+              setTranslationInputs(saved.translation)
+            }
+          }
         })
         .catch(err => {
           console.error('Error fetching lesson progress:', err)
@@ -112,16 +142,71 @@ function Lesson() {
     setFlippedCards(prev => ({ ...prev, [index]: !prev[index] }))
   }
 
+  // Save progress to backend
+  const saveProgressToBackend = async (quizAnswers, quizPosition, exerciseAnswers) => {
+    if (!isAuthenticated) return
+    try {
+      await progressApi.saveProgress(lessonId, {
+        quiz_answers: quizAnswers,
+        quiz_position: quizPosition,
+        exercise_answers: exerciseAnswers
+      })
+    } catch (err) {
+      console.error('Error saving progress:', err)
+    }
+  }
+
+  // Save all current exercise answers
+  const saveExerciseProgress = (newGrammar, newSentence, newMatching, newTranslation) => {
+    const exerciseAnswers = {
+      grammar: newGrammar || grammarExercises.answers,
+      sentence: newSentence || sentenceExercises.answers,
+      matching: newMatching || matchedPairs,
+      translation: newTranslation || translationInputs
+    }
+    saveProgressToBackend(null, null, exerciseAnswers)
+  }
+
+  // Handler for grammar exercise answer
+  const handleGrammarAnswer = (exerciseId, option) => {
+    const newAnswers = { ...grammarExercises.answers, [exerciseId]: option }
+    setGrammarExercises(prev => ({ ...prev, answers: newAnswers }))
+    saveExerciseProgress(newAnswers, null, null, null)
+  }
+
+  // Handler for matching exercise
+  const handleMatchingAnswer = (bosnianId, englishValue) => {
+    const newPairs = { ...matchedPairs, [bosnianId]: englishValue }
+    setMatchedPairs(newPairs)
+    saveExerciseProgress(null, null, newPairs, null)
+  }
+
+  // Handler for translation exercise
+  const handleTranslationInput = (itemId, value) => {
+    const newInputs = { ...translationInputs, [itemId]: value }
+    setTranslationInputs(newInputs)
+    // Debounce saving for text input (save after 500ms of no typing)
+  }
+
   const handleQuizAnswer = async (answerIndex) => {
     const currentQ = lesson.quiz[quizState.currentQuestion]
     const isCorrect = answerIndex === currentQ.correct_answer
     const newScore = isCorrect ? quizState.score + 1 : quizState.score
     
+    const newAnswers = [...quizState.answers, { selected: answerIndex, correct: isCorrect }]
+    
     setQuizState(prev => ({
       ...prev,
-      answers: [...prev.answers, { selected: answerIndex, correct: isCorrect }],
+      answers: newAnswers,
       score: newScore
     }))
+
+    // Save quiz progress after each answer
+    const quizAnswersToSave = {}
+    newAnswers.forEach((ans, idx) => {
+      quizAnswersToSave[idx] = ans
+    })
+    saveProgressToBackend(quizAnswersToSave, quizState.currentQuestion + 1, null)
 
     setTimeout(async () => {
       if (quizState.currentQuestion < lesson.quiz.length - 1) {
@@ -689,11 +774,10 @@ function Lesson() {
     if (type === 'bosnian') {
       setSelectedBosnian({ id, value })
     } else if (type === 'english' && selectedBosnian) {
-      setMatchedPairs(prev => ({
-        ...prev,
-        [selectedBosnian.id]: value
-      }))
+      const newPairs = { ...matchedPairs, [selectedBosnian.id]: value }
+      setMatchedPairs(newPairs)
       setSelectedBosnian(null)
+      saveExerciseProgress(null, null, newPairs, null)
     }
   }
 
@@ -1199,10 +1283,7 @@ function Lesson() {
                             {exercise.options.map((option, idx) => (
                               <button
                                 key={idx}
-                                onClick={() => !showResult && setGrammarExercises(prev => ({
-                                  ...prev,
-                                  answers: { ...prev.answers, [exercise.id]: option }
-                                }))}
+                                onClick={() => !showResult && handleGrammarAnswer(exercise.id, option)}
                                 disabled={showResult}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
                                   showResult
@@ -1527,7 +1608,13 @@ function Lesson() {
                               return (
                                 <button
                                   key={optIndex}
-                                  onClick={() => !showResult && setTranslationInputs(prev => ({ ...prev, [item.id]: option }))}
+                                  onClick={() => {
+                                    if (!showResult) {
+                                      const newInputs = { ...translationInputs, [item.id]: option }
+                                      setTranslationInputs(newInputs)
+                                      saveExerciseProgress(null, null, null, newInputs)
+                                    }
+                                  }}
                                   disabled={showResult}
                                   className={`p-3 rounded-lg border-2 text-left transition-all ${
                                     showResult

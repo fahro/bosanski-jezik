@@ -51,6 +51,11 @@ class LessonProgress(Base):
     exercises_passed = Column(Boolean, default=False)
     quiz_passed = Column(Boolean, default=False)
     
+    # Saved progress state (for resuming)
+    saved_quiz_answers = Column(JSON, nullable=True)  # {questionIndex: answerIndex, ...}
+    saved_quiz_position = Column(Integer, default=0)  # Current question index
+    saved_exercise_answers = Column(JSON, nullable=True)  # {exerciseType: {id: answer}, ...}
+    
     # XP earned from this lesson
     xp_earned = Column(Integer, default=0)
     
