@@ -106,18 +106,28 @@ class FinalTestAttempt(Base):
     
     user = relationship("User", back_populates="final_test_attempts")
 
-# XP and Level configuration
+# XP and Level configuration (20 levels, slower progression)
 LEVEL_CONFIG = {
     1: {"name": "Početnik", "min_xp": 0, "title": "Beginner"},
-    2: {"name": "Učenik", "min_xp": 100, "title": "Student"},
-    3: {"name": "Napredni Učenik", "min_xp": 300, "title": "Advanced Student"},
-    4: {"name": "Srednji Nivo", "min_xp": 600, "title": "Intermediate"},
-    5: {"name": "Napredni", "min_xp": 1000, "title": "Advanced"},
-    6: {"name": "Stručnjak", "min_xp": 1500, "title": "Expert"},
-    7: {"name": "Majstor", "min_xp": 2200, "title": "Master"},
-    8: {"name": "Virtuoz", "min_xp": 3000, "title": "Virtuoso"},
-    9: {"name": "Guru", "min_xp": 4000, "title": "Guru"},
-    10: {"name": "Legenda", "min_xp": 5500, "title": "Legend"},
+    2: {"name": "Učenik I", "min_xp": 25, "title": "Student I"},
+    3: {"name": "Učenik II", "min_xp": 60, "title": "Student II"},
+    4: {"name": "Učenik III", "min_xp": 100, "title": "Student III"},
+    5: {"name": "Napredni Učenik I", "min_xp": 150, "title": "Advanced Student I"},
+    6: {"name": "Napredni Učenik II", "min_xp": 210, "title": "Advanced Student II"},
+    7: {"name": "Srednji Nivo I", "min_xp": 280, "title": "Intermediate I"},
+    8: {"name": "Srednji Nivo II", "min_xp": 360, "title": "Intermediate II"},
+    9: {"name": "Srednji Nivo III", "min_xp": 450, "title": "Intermediate III"},
+    10: {"name": "Napredni I", "min_xp": 550, "title": "Advanced I"},
+    11: {"name": "Napredni II", "min_xp": 660, "title": "Advanced II"},
+    12: {"name": "Napredni III", "min_xp": 780, "title": "Advanced III"},
+    13: {"name": "Stručnjak I", "min_xp": 910, "title": "Expert I"},
+    14: {"name": "Stručnjak II", "min_xp": 1050, "title": "Expert II"},
+    15: {"name": "Majstor I", "min_xp": 1200, "title": "Master I"},
+    16: {"name": "Majstor II", "min_xp": 1360, "title": "Master II"},
+    17: {"name": "Virtuoz", "min_xp": 1530, "title": "Virtuoso"},
+    18: {"name": "Guru", "min_xp": 1710, "title": "Guru"},
+    19: {"name": "Legenda", "min_xp": 1900, "title": "Legend"},
+    20: {"name": "Bosanski Majstor", "min_xp": 2100, "title": "Bosnian Master"},
 }
 
 def calculate_level(total_xp: int) -> int:
@@ -133,20 +143,20 @@ def get_xp_for_next_level(current_level: int) -> int:
     next_level = current_level + 1
     if next_level in LEVEL_CONFIG:
         return LEVEL_CONFIG[next_level]["min_xp"]
-    return LEVEL_CONFIG[10]["min_xp"]
+    return LEVEL_CONFIG[20]["min_xp"]
 
 def calculate_quiz_xp(score: int, total: int, is_first_attempt: bool = False) -> int:
-    """Calculate XP earned from a quiz."""
+    """Calculate XP earned from a quiz (reduced amounts for slower progression)."""
     percentage = (score / total) * 100 if total > 0 else 0
     
-    base_xp = int(percentage * 0.5)  # Up to 50 XP for 100%
+    base_xp = int(percentage * 0.15)  # Up to 15 XP for 100%
     
     # Bonus for first completion
     if is_first_attempt and percentage >= 70:
-        base_xp += 25
+        base_xp += 8
     
     # Perfect score bonus
     if percentage == 100:
-        base_xp += 15
+        base_xp += 5
     
     return base_xp
