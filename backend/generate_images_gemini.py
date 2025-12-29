@@ -292,6 +292,95 @@ IMPORTANT:
 - Professional illustration quality
 """
 
+def create_comic_background_prompt(comic_title: str, characters: list) -> str:
+    """Create prompt for cultural comic background scene."""
+    char_desc = " and ".join(characters) if characters else "local people"
+    
+    # Determine setting from title
+    setting_hints = {
+        'Baščaršij': 'the historic Baščaršija bazaar in Sarajevo with Ottoman architecture, copper shops, and cobblestone streets',
+        'Sebilj': 'the iconic Sebilj wooden fountain in the heart of Baščaršija, Sarajevo',
+        'Most': 'the famous Stari Most (Old Bridge) in Mostar over the emerald Neretva river',
+        'Univerzitet': 'the University of Sarajevo campus with historic academic buildings',
+        'željeznič': 'the historic Sarajevo railway station with its distinctive architecture',
+        'Ferhadija': 'the bustling Ferhadija pedestrian street in Sarajevo center',
+        'pijac': 'a traditional Bosnian outdoor market (pijaca) with fresh produce and local vendors',
+        'kafan': 'a traditional Bosnian kafana (tavern) with warm wooden interior',
+        'ćevabdžinic': 'a cozy Bosnian ćevabdžinica restaurant with grills and traditional decor',
+        'stan': 'a warm Bosnian apartment interior with traditional elements',
+        'doktor': 'a clean, welcoming doctor\'s office or clinic',
+        'nana': 'a cozy grandmother\'s traditional Bosnian home with warm hospitality',
+        'Jahorina': 'the beautiful Jahorina mountain with snow-capped peaks and forests'
+    }
+    
+    setting = 'a beautiful location in Bosnia and Herzegovina'
+    for key, desc in setting_hints.items():
+        if key.lower() in comic_title.lower():
+            setting = desc
+            break
+    
+    return f"""
+Create a stunning, cinematic wide-angle illustration of {setting}.
+
+{QUALITY_STYLE}
+
+Scene requirements:
+- Show TWO Bosnian people ({char_desc}) in traditional or smart casual clothing having a friendly conversation
+- Characters should be clearly visible, facing each other or slightly towards the viewer
+- One person on the LEFT side, one person on the RIGHT side of the scene
+- Warm, golden hour lighting creating an inviting atmosphere
+- Rich details of Bosnian architecture and culture in the background
+
+Character style:
+- Friendly, approachable expressions
+- Modern Bosnian people (not historical/ancient)
+- Natural poses, mid-conversation
+- Clear silhouettes that work well as scene setting
+
+Art style: Like a beautiful frame from a Pixar or DreamWorks animated film.
+Mood: Warm, friendly, cultural pride, welcoming.
+
+IMPORTANT:
+- NO text, labels, or speech bubbles
+- NO watermarks or signatures
+- Characters must be clearly visible and well-lit
+- Professional cinematic composition
+"""
+
+def create_avatar_prompt(name: str, is_female: bool, is_shopkeeper: bool) -> str:
+    """Create prompt for character avatar."""
+    gender = "woman" if is_female else "man"
+    
+    if is_shopkeeper:
+        role_desc = f"a friendly Bosnian {gender} shopkeeper or service worker"
+        clothing = "wearing a traditional apron or work attire, looking professional and welcoming"
+    else:
+        role_desc = f"a young Bosnian {gender}"
+        clothing = "wearing modern casual clothing with subtle traditional Bosnian elements"
+    
+    return f"""
+Create a portrait avatar of {role_desc} named {name}.
+
+Style: High-quality digital art portrait, like a character from a Pixar or DreamWorks animated movie.
+- Circular portrait composition (head and shoulders)
+- Warm, friendly expression with a slight smile
+- {clothing}
+- Soft, professional lighting from the front
+- Clean background (solid warm color or subtle gradient)
+
+Character features:
+- Friendly, approachable face
+- Natural skin tones
+- Modern Bosnian person (Mediterranean/Balkan features)
+- Well-groomed, professional appearance
+
+IMPORTANT:
+- NO text or labels
+- Portrait should work well as a small circular avatar (64x64 to 128x128 pixels)
+- Clear, recognizable face
+- Warm and inviting expression
+"""
+
 def generate_placeholder_svg(word: str, emoji: str) -> str:
     """Generate a placeholder SVG for words without AI-generated images."""
     svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
@@ -448,6 +537,8 @@ def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     CULTURE_DIR.mkdir(parents=True, exist_ok=True)
     DIALOGUE_DIR.mkdir(parents=True, exist_ok=True)
+    COMIC_BG_DIR.mkdir(parents=True, exist_ok=True)
+    AVATAR_DIR.mkdir(parents=True, exist_ok=True)
     
     # Check for GenAI client
     client = setup_genai_client()
@@ -518,6 +609,44 @@ def main():
     total_stats['skipped'] += s
     total_stats['errors'] += e
     
+    # 4. Generate comic background images
+    print("\n" + "=" * 50)
+    print("🎭 COMIC BACKGROUND IMAGES")
+    print("=" * 50)
+    comic_items = collect_comic_backgrounds()
+    print(f"Found {len(comic_items)} comic scenes")
+    
+    def comic_bg_prompt(item):
+        return create_comic_background_prompt(item['comic_title'], item.get('characters', []))
+    
+    g, ai, s, e = generate_images_for_type(
+        client, comic_items, COMIC_BG_DIR, COMIC_BG_MANIFEST,
+        comic_bg_prompt, 'title', 'comic_background'
+    )
+    total_stats['generated'] += g
+    total_stats['ai'] += ai
+    total_stats['skipped'] += s
+    total_stats['errors'] += e
+    
+    # 5. Generate character avatar images
+    print("\n" + "=" * 50)
+    print("👤 CHARACTER AVATAR IMAGES")
+    print("=" * 50)
+    avatar_items = collect_character_avatars()
+    print(f"Found {len(avatar_items)} unique characters")
+    
+    def avatar_prompt(item):
+        return create_avatar_prompt(item['name'], item.get('is_female', False), item.get('is_shopkeeper', False))
+    
+    g, ai, s, e = generate_images_for_type(
+        client, avatar_items, AVATAR_DIR, AVATAR_MANIFEST,
+        avatar_prompt, 'title', 'avatar'
+    )
+    total_stats['generated'] += g
+    total_stats['ai'] += ai
+    total_stats['skipped'] += s
+    total_stats['errors'] += e
+    
     # Summary
     print("\n" + "=" * 60)
     print("🎉 ALL GENERATION COMPLETE!")
@@ -529,6 +658,8 @@ def main():
     print(f"\n  📁 Vocabulary: {OUTPUT_DIR}")
     print(f"  📁 Culture: {CULTURE_DIR}")
     print(f"  📁 Dialogue: {DIALOGUE_DIR}")
+    print(f"  📁 Comic BG: {COMIC_BG_DIR}")
+    print(f"  📁 Avatars: {AVATAR_DIR}")
     print("=" * 60)
 
 if __name__ == "__main__":

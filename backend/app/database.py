@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
@@ -25,3 +25,26 @@ def get_db():
         yield db
     finally:
         db.close()
+
+def run_migrations():
+    """Run database migrations to add missing columns."""
+    with engine.connect() as conn:
+        # Check and add missing columns to lesson_progress table
+        try:
+            # Get existing columns
+            result = conn.execute(text("PRAGMA table_info(lesson_progress)"))
+            existing_columns = {row[1] for row in result.fetchall()}
+            
+            # Add saved_tab if missing
+            if 'saved_tab' not in existing_columns:
+                conn.execute(text("ALTER TABLE lesson_progress ADD COLUMN saved_tab VARCHAR"))
+                print("Migration: Added saved_tab column")
+            
+            # Add saved_exercise_type if missing
+            if 'saved_exercise_type' not in existing_columns:
+                conn.execute(text("ALTER TABLE lesson_progress ADD COLUMN saved_exercise_type VARCHAR"))
+                print("Migration: Added saved_exercise_type column")
+            
+            conn.commit()
+        except Exception as e:
+            print(f"Migration note: {e}")

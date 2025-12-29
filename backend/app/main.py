@@ -14,9 +14,12 @@ load_dotenv()
 app = FastAPI(title="Bosanski Jezik - Learn Bosnian", version="1.0.0")
 
 # Initialize database
-from app.database import engine, Base
+from app.database import engine, Base, run_migrations
 from app.models import User, LessonProgress, QuizAttempt, FinalTestAttempt
 Base.metadata.create_all(bind=engine)
+
+# Run database migrations for existing databases
+run_migrations()
 
 # Seed initial users
 from app.seed import seed_users
@@ -154,6 +157,34 @@ def get_lesson(lesson_id: int):
                 if img_info.get('type') == 'ai_generated':
                     enriched_lesson["dialogue_image_url"] = f"/images/dialogue/{img_info['filename']}"
             
+            # Enrich cultural_comic with generated images
+            if "cultural_comic" in enriched_lesson:
+                comic = enriched_lesson["cultural_comic"].copy()
+                comic_title = comic.get("title", "")
+                
+                # Add comic background image URL
+                comic_key = f"Comic - {comic_title}"
+                if comic_key in COMIC_BG_MANIFEST:
+                    img_info = COMIC_BG_MANIFEST[comic_key]
+                    if img_info.get('type') == 'ai_generated':
+                        comic["generated_image"] = f"/images/comic_backgrounds/{img_info['filename']}"
+                
+                # Enrich panels with avatar URLs
+                if "panels" in comic:
+                    enriched_panels = []
+                    for panel in comic["panels"]:
+                        panel_copy = panel.copy()
+                        name = panel.get("name", "")
+                        avatar_key = f"Avatar - {name}"
+                        if avatar_key in AVATAR_MANIFEST:
+                            img_info = AVATAR_MANIFEST[avatar_key]
+                            if img_info.get('type') == 'ai_generated':
+                                panel_copy["generated_avatar"] = f"/images/avatars/{img_info['filename']}"
+                        enriched_panels.append(panel_copy)
+                    comic["panels"] = enriched_panels
+                
+                enriched_lesson["cultural_comic"] = comic
+            
             return enriched_lesson
     raise HTTPException(status_code=404, detail="Lesson not found")
 
@@ -178,12 +209,16 @@ for base_path in ["/app/static", os.path.join(os.path.dirname(os.path.dirname(__
         IMAGES_DIR = os.path.join(base_path, "images", "vocabulary")
         CULTURE_DIR = os.path.join(base_path, "images", "culture")
         DIALOGUE_DIR = os.path.join(base_path, "images", "dialogue")
+        COMIC_BG_DIR = os.path.join(base_path, "images", "comic_backgrounds")
+        AVATAR_DIR = os.path.join(base_path, "images", "avatars")
         break
 
 AUDIO_MANIFEST = {}
 IMAGE_MANIFEST = {}
 CULTURE_MANIFEST = {}
 DIALOGUE_MANIFEST = {}
+COMIC_BG_MANIFEST = {}
+AVATAR_MANIFEST = {}
 
 def load_audio_manifest():
     global AUDIO_MANIFEST
@@ -194,7 +229,7 @@ def load_audio_manifest():
                 AUDIO_MANIFEST = json.load(f)
 
 def load_image_manifest():
-    global IMAGE_MANIFEST, CULTURE_MANIFEST, DIALOGUE_MANIFEST
+    global IMAGE_MANIFEST, CULTURE_MANIFEST, DIALOGUE_MANIFEST, COMIC_BG_MANIFEST, AVATAR_MANIFEST
     if IMAGES_DIR:
         manifest_path = os.path.join(IMAGES_DIR, "manifest.json")
         if os.path.exists(manifest_path):
@@ -210,6 +245,16 @@ def load_image_manifest():
         if os.path.exists(manifest_path):
             with open(manifest_path, 'r', encoding='utf-8') as f:
                 DIALOGUE_MANIFEST = json.load(f)
+    if COMIC_BG_DIR:
+        manifest_path = os.path.join(COMIC_BG_DIR, "manifest.json")
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                COMIC_BG_MANIFEST = json.load(f)
+    if AVATAR_DIR:
+        manifest_path = os.path.join(AVATAR_DIR, "manifest.json")
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                AVATAR_MANIFEST = json.load(f)
 
 load_audio_manifest()
 load_image_manifest()

@@ -2402,15 +2402,15 @@ function Lesson() {
                   
                   {/* Comic container with background */}
                   <div className="relative rounded-2xl overflow-hidden shadow-xl">
-                    {/* Background image - čaršija/kafana */}
+                    {/* Background image - generated or fallback */}
                     <div className="absolute inset-0">
                       <img 
-                        src={lesson.cultural_comic.image} 
+                        src={lesson.cultural_comic.generated_image || lesson.cultural_comic.image} 
                         alt={lesson.cultural_comic.title}
                         className="w-full h-full object-cover"
                         onError={(e) => {
                           e.target.onerror = null
-                          e.target.src = 'https://images.unsplash.com/photo-1592425104520-196dedfd6277?w=800'
+                          e.target.src = lesson.cultural_comic.image || 'https://images.unsplash.com/photo-1592425104520-196dedfd6277?w=800'
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
@@ -2424,16 +2424,20 @@ function Lesson() {
                           className={`flex ${panel.position === 'right' ? 'justify-end' : 'justify-start'}`}
                         >
                           <div className={`max-w-[85%] flex items-start gap-2 sm:gap-3 ${panel.position === 'right' ? 'flex-row-reverse' : ''}`}>
-                            {/* Character avatar with fes */}
+                            {/* Character avatar - generated or fallback */}
                             <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-white shadow-lg">
-                              {panel.avatar ? (
+                              {(panel.generated_avatar || panel.avatar) ? (
                                 <img 
-                                  src={panel.avatar} 
+                                  src={panel.generated_avatar || panel.avatar} 
                                   alt={panel.name}
                                   className="w-full h-full object-cover"
                                   onError={(e) => {
                                     e.target.onerror = null
-                                    e.target.parentElement.innerHTML = `<div class="w-full h-full bg-bosnia-blue flex items-center justify-center text-white text-xl">${panel.character}</div>`
+                                    if (panel.avatar && e.target.src !== panel.avatar) {
+                                      e.target.src = panel.avatar
+                                    } else {
+                                      e.target.parentElement.innerHTML = `<div class="w-full h-full bg-bosnia-blue flex items-center justify-center text-white text-xl">${panel.character}</div>`
+                                    }
                                   }}
                                 />
                               ) : (
