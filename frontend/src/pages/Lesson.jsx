@@ -1562,7 +1562,7 @@ function Lesson() {
                     }`}
                   >
                     <div 
-                      className={`relative rounded-xl min-h-[180px] flex flex-col justify-between hover:shadow-lg transition-shadow overflow-hidden border-2 ${
+                      className={`relative rounded-xl min-h-[240px] flex flex-col justify-between hover:shadow-lg transition-shadow overflow-hidden border-2 ${
                         flippedCards[index] ? 'border-green-300' : 'border-blue-200'
                       }`}
                       style={word.image_url ? {
