@@ -25,7 +25,9 @@ A1_LESSONS_BASE = [
             {"bosnian": "Hvala", "english": "Thank you", "pronunciation": "HVAH-lah", "example": "Hvala vam puno.", "example_translation": "Thank you very much.", "image_emoji": "🙏"},
             {"bosnian": "Molim", "english": "Please/You're welcome", "pronunciation": "MOH-leem", "example": "Molim vas, sjednite.", "example_translation": "Please, sit down.", "image_emoji": "😊"},
             {"bosnian": "Ja sam", "english": "I am", "pronunciation": "yah sahm", "example": "Ja sam student.", "example_translation": "I am a student.", "image_emoji": "👤"},
-            {"bosnian": "Zovem se", "english": "My name is", "pronunciation": "ZOH-vehm seh", "example": "Zovem se Amina.", "example_translation": "My name is Amina.", "image_emoji": "📛"}
+            {"bosnian": "Zovem se", "english": "My name is", "pronunciation": "ZOH-vehm seh", "example": "Zovem se Amina.", "example_translation": "My name is Amina.", "image_emoji": "📛"},
+            {"bosnian": "Drago mi je", "english": "Nice to meet you", "pronunciation": "DRAH-goh mee yeh", "example": "Drago mi je što sam te upoznao.", "example_translation": "Nice to meet you.", "image_emoji": "🤝"},
+            {"bosnian": "Kako si?", "english": "How are you?", "pronunciation": "KAH-koh see", "example": "Zdravo! Kako si danas?", "example_translation": "Hello! How are you today?", "image_emoji": "💬"}
         ],
         "grammar_explanation": """
 ## Lične zamjenice (Personal Pronouns)
@@ -279,7 +281,9 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"bosnian": "narandžasta", "english": "orange", "pronunciation": "nah-rahn-JAH-stah", "example": "Narandžasta narandža.", "example_translation": "An orange orange.", "image_emoji": "🟠"},
             {"bosnian": "ljubičasta", "english": "purple", "pronunciation": "lyoo-bee-CHAH-stah", "example": "Ljubičasti cvijet.", "example_translation": "A purple flower.", "image_emoji": "🟣"},
             {"bosnian": "smeđa", "english": "brown", "pronunciation": "SMEH-jah", "example": "Smeđi medvjed.", "example_translation": "A brown bear.", "image_emoji": "🟤"},
-            {"bosnian": "siva", "english": "gray", "pronunciation": "SEE-vah", "example": "Sivi oblak.", "example_translation": "A gray cloud.", "image_emoji": "🩶"}
+            {"bosnian": "siva", "english": "gray", "pronunciation": "SEE-vah", "example": "Sivi oblak.", "example_translation": "A gray cloud.", "image_emoji": "🩶"},
+            {"bosnian": "roza", "english": "pink", "pronunciation": "ROH-zah", "example": "Roza ruža.", "example_translation": "A pink rose.", "image_emoji": "🩷"},
+            {"bosnian": "zlatna", "english": "golden", "pronunciation": "ZLAHT-nah", "example": "Zlatni prsten.", "example_translation": "A golden ring.", "image_emoji": "🏆"}
         ],
         "grammar_explanation": """
 ## Pridjevi za boje - Rod (Gender Agreement)

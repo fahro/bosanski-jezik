@@ -21,7 +21,9 @@ A1_LESSONS_PART3 = [
             {"bosnian": "kafa", "english": "coffee", "pronunciation": "KAH-fah", "example": "Bosanska kafa je jaka.", "example_translation": "Bosnian coffee is strong.", "image_emoji": "☕"},
             {"bosnian": "čaj", "english": "tea", "pronunciation": "chahy", "example": "Pijem čaj sa medom.", "example_translation": "I drink tea with honey.", "image_emoji": "🍵"},
             {"bosnian": "sok", "english": "juice", "pronunciation": "sohk", "example": "Sok od narandže.", "example_translation": "Orange juice.", "image_emoji": "🧃"},
-            {"bosnian": "ćevapi", "english": "cevapi (grilled meat)", "pronunciation": "CHEH-vah-pee", "example": "Ćevapi su tradicionalno jelo.", "example_translation": "Cevapi are a traditional dish.", "image_emoji": "🥙"}
+            {"bosnian": "ćevapi", "english": "cevapi (grilled meat)", "pronunciation": "CHEH-vah-pee", "example": "Ćevapi su tradicionalno jelo.", "example_translation": "Cevapi are a traditional dish.", "image_emoji": "🥙"},
+            {"bosnian": "pita", "english": "pie/pastry", "pronunciation": "PEE-tah", "example": "Nana pravi burek i pitu.", "example_translation": "Grandma makes burek and pie.", "image_emoji": "🥧"},
+            {"bosnian": "salata", "english": "salad", "pronunciation": "sah-LAH-tah", "example": "Želim šopsku salatu.", "example_translation": "I want a Shopska salad.", "image_emoji": "🥗"}
         ],
         "grammar_explanation": """
 ## Glagol "voljeti" (to like/love)
@@ -126,7 +128,9 @@ A1_LESSONS_PART3 = [
             {"bosnian": "dnevna soba", "english": "living room", "pronunciation": "DNEHV-nah SOH-bah", "example": "Dnevna soba je prostrana.", "example_translation": "The living room is spacious.", "image_emoji": "🛋️"},
             {"bosnian": "sto", "english": "table", "pronunciation": "stoh", "example": "Sto je od drveta.", "example_translation": "The table is made of wood.", "image_emoji": "🪑"},
             {"bosnian": "stolica", "english": "chair", "pronunciation": "STOH-lee-tsah", "example": "Sjedim na stolici.", "example_translation": "I sit on the chair.", "image_emoji": "🪑"},
-            {"bosnian": "krevet", "english": "bed", "pronunciation": "KREH-veht", "example": "Krevet je udoban.", "example_translation": "The bed is comfortable.", "image_emoji": "🛏️"}
+            {"bosnian": "krevet", "english": "bed", "pronunciation": "KREH-veht", "example": "Krevet je udoban.", "example_translation": "The bed is comfortable.", "image_emoji": "🛏️"},
+            {"bosnian": "prozor", "english": "window", "pronunciation": "PROH-zohr", "example": "Prozor je otvoren.", "example_translation": "The window is open.", "image_emoji": "🪟"},
+            {"bosnian": "vrata", "english": "door", "pronunciation": "VRAH-tah", "example": "Zatvori vrata, molim.", "example_translation": "Close the door, please.", "image_emoji": "🚪"}
         ],
         "grammar_explanation": """
 ## Prijedlozi mjesta (Prepositions of Place)
@@ -224,7 +228,9 @@ A1_LESSONS_PART3 = [
             {"bosnian": "usta", "english": "mouth", "pronunciation": "OO-stah", "example": "Govorim ustima.", "example_translation": "I speak with my mouth.", "image_emoji": "👄"},
             {"bosnian": "srce", "english": "heart", "pronunciation": "SR-tseh", "example": "Srce kuca.", "example_translation": "The heart beats.", "image_emoji": "❤️"},
             {"bosnian": "stomak", "english": "stomach", "pronunciation": "STOH-mahk", "example": "Boli me stomak.", "example_translation": "My stomach hurts.", "image_emoji": "🫃"},
-            {"bosnian": "zub", "english": "tooth", "pronunciation": "zoob", "example": "Imam zube.", "example_translation": "I have a toothache.", "image_emoji": "🦷"}
+            {"bosnian": "zub", "english": "tooth", "pronunciation": "zoob", "example": "Imam zube.", "example_translation": "I have a toothache.", "image_emoji": "🦷"},
+            {"bosnian": "leđa", "english": "back", "pronunciation": "LEH-jah", "example": "Bole me leđa.", "example_translation": "My back hurts.", "image_emoji": "🔙"},
+            {"bosnian": "prst", "english": "finger", "pronunciation": "prst", "example": "Imam deset prstiju.", "example_translation": "I have ten fingers.", "image_emoji": "☝️"}
         ],
         "grammar_explanation": """
 ## Izražavanje boli - "Boli me..."

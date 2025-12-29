@@ -21,7 +21,9 @@ A1_LESSONS_PART2 = [
             {"bosnian": "sin", "english": "son", "pronunciation": "seen", "example": "On je moj sin.", "example_translation": "He is my son.", "image_emoji": "👦"},
             {"bosnian": "kći", "english": "daughter", "pronunciation": "kchee", "example": "Ona je moja kći.", "example_translation": "She is my daughter.", "image_emoji": "👧"},
             {"bosnian": "muž", "english": "husband", "pronunciation": "moozh", "example": "Moj muž je doktor.", "example_translation": "My husband is a doctor.", "image_emoji": "👨‍⚕️"},
-            {"bosnian": "žena", "english": "wife", "pronunciation": "ZHEH-nah", "example": "Moja žena je profesorica.", "example_translation": "My wife is a teacher.", "image_emoji": "👩‍🏫"}
+            {"bosnian": "žena", "english": "wife", "pronunciation": "ZHEH-nah", "example": "Moja žena je profesorica.", "example_translation": "My wife is a teacher.", "image_emoji": "👩‍🏫"},
+            {"bosnian": "ujak", "english": "uncle (mother's brother)", "pronunciation": "OO-yahk", "example": "Moj ujak živi u Tuzli.", "example_translation": "My uncle lives in Tuzla.", "image_emoji": "👨‍🦱"},
+            {"bosnian": "tetka", "english": "aunt", "pronunciation": "TEHT-kah", "example": "Moja tetka pravi kolače.", "example_translation": "My aunt makes cakes.", "image_emoji": "👩‍🦱"}
         ],
         "grammar_explanation": """
 ## Posvojne zamjenice (Possessive Pronouns)
@@ -116,7 +118,9 @@ A1_LESSONS_PART2 = [
             {"bosnian": "nedjelja", "english": "Sunday", "pronunciation": "NEH-dyeh-lyah", "example": "Nedjelja je dan odmora.", "example_translation": "Sunday is a day of rest.", "image_emoji": "😴"},
             {"bosnian": "danas", "english": "today", "pronunciation": "DAH-nahs", "example": "Danas je lijep dan.", "example_translation": "Today is a beautiful day.", "image_emoji": "📆"},
             {"bosnian": "sutra", "english": "tomorrow", "pronunciation": "SOO-trah", "example": "Sutra idem na posao.", "example_translation": "Tomorrow I go to work.", "image_emoji": "➡️"},
-            {"bosnian": "jučer", "english": "yesterday", "pronunciation": "YOO-chehr", "example": "Jučer sam bio bolestan.", "example_translation": "Yesterday I was sick.", "image_emoji": "⬅️"}
+            {"bosnian": "jučer", "english": "yesterday", "pronunciation": "YOO-chehr", "example": "Jučer sam bio bolestan.", "example_translation": "Yesterday I was sick.", "image_emoji": "⬅️"},
+            {"bosnian": "sedmica", "english": "week", "pronunciation": "SEHD-mee-tsah", "example": "Ova sedmica je bila naporna.", "example_translation": "This week was tiring.", "image_emoji": "📊"},
+            {"bosnian": "vikend", "english": "weekend", "pronunciation": "VEE-kehnd", "example": "Vikend provodim s porodicom.", "example_translation": "I spend the weekend with family.", "image_emoji": "🎊"}
         ],
         "grammar_explanation": """
 ## Dani u sedmici
@@ -212,7 +216,9 @@ A1_LESSONS_PART2 = [
             {"bosnian": "proljeće", "english": "spring", "pronunciation": "PROH-lyeh-cheh", "example": "U proljeće cvjetaju cvijeće.", "example_translation": "Flowers bloom in spring.", "image_emoji": "🌼"},
             {"bosnian": "ljeto", "english": "summer", "pronunciation": "LYEH-toh", "example": "Ljeto je toplo.", "example_translation": "Summer is warm.", "image_emoji": "🏖️"},
             {"bosnian": "jesen", "english": "autumn", "pronunciation": "YEH-sehn", "example": "U jesen lišće pada.", "example_translation": "Leaves fall in autumn.", "image_emoji": "🍂"},
-            {"bosnian": "zima", "english": "winter", "pronunciation": "ZEE-mah", "example": "Zimi pada snijeg.", "example_translation": "Snow falls in winter.", "image_emoji": "⛄"}
+            {"bosnian": "zima", "english": "winter", "pronunciation": "ZEE-mah", "example": "Zimi pada snijeg.", "example_translation": "Snow falls in winter.", "image_emoji": "⛄"},
+            {"bosnian": "godina", "english": "year", "pronunciation": "GOH-dee-nah", "example": "Ova godina je bila dobra.", "example_translation": "This year was good.", "image_emoji": "📅"},
+            {"bosnian": "mjesec", "english": "month", "pronunciation": "MYEH-sehts", "example": "Ovaj mjesec je juni.", "example_translation": "This month is June.", "image_emoji": "🗓️"}
         ],
         "grammar_explanation": """
 ## Mjeseci u godini

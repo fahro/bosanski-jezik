@@ -21,7 +21,9 @@ A1_LESSONS_PART4 = [
             {"bosnian": "prodavač", "english": "salesperson", "pronunciation": "proh-DAH-vahch", "example": "Prodavač radi u trgovini.", "example_translation": "The salesperson works in a store.", "image_emoji": "🧑‍💼"},
             {"bosnian": "vozač", "english": "driver", "pronunciation": "VOH-zahch", "example": "Vozač vozi autobus.", "example_translation": "The driver drives the bus.", "image_emoji": "🚗"},
             {"bosnian": "student", "english": "student", "pronunciation": "STOO-dehnt", "example": "Ja sam student.", "example_translation": "I am a student.", "image_emoji": "👨‍🎓"},
-            {"bosnian": "posao", "english": "job/work", "pronunciation": "POH-sao", "example": "Imam dobar posao.", "example_translation": "I have a good job.", "image_emoji": "💼"}
+            {"bosnian": "posao", "english": "job/work", "pronunciation": "POH-sao", "example": "Imam dobar posao.", "example_translation": "I have a good job.", "image_emoji": "💼"},
+            {"bosnian": "medicinska sestra", "english": "nurse", "pronunciation": "meh-dee-TSEEN-skah SEH-strah", "example": "Medicinska sestra radi u bolnici.", "example_translation": "The nurse works in the hospital.", "image_emoji": "👩‍⚕️"},
+            {"bosnian": "frizer", "english": "hairdresser", "pronunciation": "FREE-zehr", "example": "Frizer šiša kosu.", "example_translation": "The hairdresser cuts hair.", "image_emoji": "💇"}
         ],
         "grammar_explanation": """
 ## Glagol "raditi" (to work)
@@ -124,7 +126,9 @@ A1_LESSONS_PART4 = [
             {"bosnian": "noć", "english": "night", "pronunciation": "nohch", "example": "Noću spavam.", "example_translation": "I sleep at night.", "image_emoji": "🌙"},
             {"bosnian": "rano", "english": "early", "pronunciation": "RAH-noh", "example": "Rano ustajem.", "example_translation": "I wake up early.", "image_emoji": "⏰"},
             {"bosnian": "kasno", "english": "late", "pronunciation": "KAHS-noh", "example": "Kasno idem spavati.", "example_translation": "I go to sleep late.", "image_emoji": "🦉"},
-            {"bosnian": "pola", "english": "half", "pronunciation": "POH-lah", "example": "Pola sedam.", "example_translation": "Half past six.", "image_emoji": "🕡"}
+            {"bosnian": "pola", "english": "half", "pronunciation": "POH-lah", "example": "Pola sedam.", "example_translation": "Half past six.", "image_emoji": "🕡"},
+            {"bosnian": "sekunda", "english": "second", "pronunciation": "SEH-koon-dah", "example": "Samo jednu sekundu.", "example_translation": "Just one second.", "image_emoji": "⏰"},
+            {"bosnian": "ponoć", "english": "midnight", "pronunciation": "POH-nohch", "example": "U ponoć je Nova godina.", "example_translation": "At midnight it's New Year.", "image_emoji": "🕛"}
         ],
         "grammar_explanation": """
 ## Kako reći koliko je sati
@@ -222,7 +226,9 @@ A1_LESSONS_PART4 = [
             {"bosnian": "Baš lijepo", "english": "Very nice", "pronunciation": "bahsh LEE-yeh-poh", "example": "Baš lijepo vrijeme.", "example_translation": "Very nice weather.", "image_emoji": "😃"},
             {"bosnian": "Ne razumijem", "english": "I don't understand", "pronunciation": "neh rah-ZOO-mee-yehm", "example": "Izvinite, ne razumijem.", "example_translation": "Sorry, I don't understand.", "image_emoji": "❓"},
             {"bosnian": "Govori li...", "english": "Do you speak...", "pronunciation": "GOH-voh-ree lee", "example": "Govorite li engleski?", "example_translation": "Do you speak English?", "image_emoji": "🗣️"},
-            {"bosnian": "Polako, molim", "english": "Slowly, please", "pronunciation": "POH-lah-koh MOH-leem", "example": "Polako, molim. Ne razumijem.", "example_translation": "Slowly, please. I don't understand.", "image_emoji": "🐢"}
+            {"bosnian": "Polako, molim", "english": "Slowly, please", "pronunciation": "POH-lah-koh MOH-leem", "example": "Polako, molim. Ne razumijem.", "example_translation": "Slowly, please. I don't understand.", "image_emoji": "🐢"},
+            {"bosnian": "Slažem se", "english": "I agree", "pronunciation": "SLAH-zhem seh", "example": "Slažem se s tobom.", "example_translation": "I agree with you.", "image_emoji": "🤝"},
+            {"bosnian": "Žao mi je", "english": "I'm sorry", "pronunciation": "ZHAH-oh mee yeh", "example": "Žao mi je što kasnim.", "example_translation": "I'm sorry I'm late.", "image_emoji": "😢"}
         ],
         "grammar_explanation": """
 ## Korisne fraze za svakodnevnu komunikaciju
