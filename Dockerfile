@@ -24,6 +24,9 @@ COPY --from=frontend-builder /app/frontend/dist ./static
 # Copy audio files (generated with Azure TTS)
 COPY backend/static/audio ./static/audio
 
+# Copy AI-generated images (vocabulary, culture, dialogue, comic backgrounds, avatars)
+COPY backend/static/images ./static/images
+
 # Expose port (Railway uses dynamic PORT)
 EXPOSE ${PORT:-8000}
 
