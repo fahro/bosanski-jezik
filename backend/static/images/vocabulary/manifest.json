@@ -1,0 +1,782 @@
+{
+  "Zdravo": {
+    "filename": "zdravo_df94391b.svg",
+    "english": "Hello",
+    "emoji": "👋",
+    "type": "placeholder"
+  },
+  "Dobar dan": {
+    "filename": "dobar_dan_1dd99ba8.svg",
+    "english": "Good day",
+    "emoji": "☀️",
+    "type": "placeholder"
+  },
+  "Dobro jutro": {
+    "filename": "dobro_jutro_7dc4efc2.svg",
+    "english": "Good morning",
+    "emoji": "🌅",
+    "type": "placeholder"
+  },
+  "Dobro veče": {
+    "filename": "dobro_veče_ccc3f7a5.svg",
+    "english": "Good evening",
+    "emoji": "🌙",
+    "type": "placeholder"
+  },
+  "Laku noć": {
+    "filename": "laku_noć_afef30e9.svg",
+    "english": "Good night",
+    "emoji": "😴",
+    "type": "placeholder"
+  },
+  "Doviđenja": {
+    "filename": "doviđenja_dea78c64.svg",
+    "english": "Goodbye",
+    "emoji": "👋",
+    "type": "placeholder"
+  },
+  "Hvala": {
+    "filename": "hvala_c29b8a1d.svg",
+    "english": "Thank you",
+    "emoji": "🙏",
+    "type": "placeholder"
+  },
+  "Molim": {
+    "filename": "molim_b9ffdbeb.svg",
+    "english": "Please/You're welcome",
+    "emoji": "😊",
+    "type": "placeholder"
+  },
+  "Ja sam": {
+    "filename": "ja_sam_cc7f0fea.svg",
+    "english": "I am",
+    "emoji": "👤",
+    "type": "placeholder"
+  },
+  "Zovem se": {
+    "filename": "zovem_se_14954fd3.svg",
+    "english": "My name is",
+    "emoji": "📛",
+    "type": "placeholder"
+  },
+  "jedan": {
+    "filename": "jedan_68962601.svg",
+    "english": "one",
+    "emoji": "1️⃣",
+    "type": "placeholder"
+  },
+  "dva": {
+    "filename": "dva_c67ed9a0.svg",
+    "english": "two",
+    "emoji": "2️⃣",
+    "type": "placeholder"
+  },
+  "tri": {
+    "filename": "tri_d2cfe69a.svg",
+    "english": "three",
+    "emoji": "3️⃣",
+    "type": "placeholder"
+  },
+  "četiri": {
+    "filename": "četiri_406da4ab.svg",
+    "english": "four",
+    "emoji": "4️⃣",
+    "type": "placeholder"
+  },
+  "pet": {
+    "filename": "pet_6c43c0a8.svg",
+    "english": "five",
+    "emoji": "5️⃣",
+    "type": "placeholder"
+  },
+  "šest": {
+    "filename": "šest_2ddbabca.svg",
+    "english": "six",
+    "emoji": "6️⃣",
+    "type": "placeholder"
+  },
+  "sedam": {
+    "filename": "sedam_1794552d.svg",
+    "english": "seven",
+    "emoji": "7️⃣",
+    "type": "placeholder"
+  },
+  "osam": {
+    "filename": "osam_94d4c1a7.svg",
+    "english": "eight",
+    "emoji": "8️⃣",
+    "type": "placeholder"
+  },
+  "devet": {
+    "filename": "devet_eeefb960.svg",
+    "english": "nine",
+    "emoji": "9️⃣",
+    "type": "placeholder"
+  },
+  "deset": {
+    "filename": "deset_9d7addf0.svg",
+    "english": "ten",
+    "emoji": "🔟",
+    "type": "placeholder"
+  },
+  "jedanaest": {
+    "filename": "jedanaest_3577f8f0.svg",
+    "english": "eleven",
+    "emoji": "1️⃣1️⃣",
+    "type": "placeholder"
+  },
+  "dvanaest": {
+    "filename": "dvanaest_0fac7e7a.svg",
+    "english": "twelve",
+    "emoji": "1️⃣2️⃣",
+    "type": "placeholder"
+  },
+  "trinaest": {
+    "filename": "trinaest_fc2eaa24.svg",
+    "english": "thirteen",
+    "emoji": "1️⃣3️⃣",
+    "type": "placeholder"
+  },
+  "četrnaest": {
+    "filename": "četrnaest_406c4e09.svg",
+    "english": "fourteen",
+    "emoji": "1️⃣4️⃣",
+    "type": "placeholder"
+  },
+  "petnaest": {
+    "filename": "petnaest_a654399b.svg",
+    "english": "fifteen",
+    "emoji": "1️⃣5️⃣",
+    "type": "placeholder"
+  },
+  "šesnaest": {
+    "filename": "šesnaest_ecbbfa62.svg",
+    "english": "sixteen",
+    "emoji": "1️⃣6️⃣",
+    "type": "placeholder"
+  },
+  "sedamnaest": {
+    "filename": "sedamnaest_36996f0c.svg",
+    "english": "seventeen",
+    "emoji": "1️⃣7️⃣",
+    "type": "placeholder"
+  },
+  "osamnaest": {
+    "filename": "osamnaest_b47703f1.svg",
+    "english": "eighteen",
+    "emoji": "1️⃣8️⃣",
+    "type": "placeholder"
+  },
+  "devetnaest": {
+    "filename": "devetnaest_9d753b0e.svg",
+    "english": "nineteen",
+    "emoji": "1️⃣9️⃣",
+    "type": "placeholder"
+  },
+  "dvadeset": {
+    "filename": "dvadeset_dd6691c6.svg",
+    "english": "twenty",
+    "emoji": "2️⃣0️⃣",
+    "type": "placeholder"
+  },
+  "crvena": {
+    "filename": "crvena_651ceb77.svg",
+    "english": "red",
+    "emoji": "🔴",
+    "type": "placeholder"
+  },
+  "plava": {
+    "filename": "plava_f4aabd50.svg",
+    "english": "blue",
+    "emoji": "🔵",
+    "type": "placeholder"
+  },
+  "zelena": {
+    "filename": "zelena_c5e7c8f8.svg",
+    "english": "green",
+    "emoji": "🟢",
+    "type": "placeholder"
+  },
+  "žuta": {
+    "filename": "žuta_9d9bb9e4.svg",
+    "english": "yellow",
+    "emoji": "🟡",
+    "type": "placeholder"
+  },
+  "crna": {
+    "filename": "crna_5dd4439a.svg",
+    "english": "black",
+    "emoji": "⚫",
+    "type": "placeholder"
+  },
+  "bijela": {
+    "filename": "bijela_778429eb.svg",
+    "english": "white",
+    "emoji": "⚪",
+    "type": "placeholder"
+  },
+  "narandžasta": {
+    "filename": "narandžasta_e59d1ba5.svg",
+    "english": "orange",
+    "emoji": "🟠",
+    "type": "placeholder"
+  },
+  "ljubičasta": {
+    "filename": "ljubičasta_f5863009.svg",
+    "english": "purple",
+    "emoji": "🟣",
+    "type": "placeholder"
+  },
+  "smeđa": {
+    "filename": "smeđa_62925cd0.svg",
+    "english": "brown",
+    "emoji": "🟤",
+    "type": "placeholder"
+  },
+  "siva": {
+    "filename": "siva_1955b38f.svg",
+    "english": "gray",
+    "emoji": "🩶",
+    "type": "placeholder"
+  },
+  "majka": {
+    "filename": "majka_1bc3ae56.svg",
+    "english": "mother",
+    "emoji": "👩",
+    "type": "placeholder"
+  },
+  "otac": {
+    "filename": "otac_4797d804.svg",
+    "english": "father",
+    "emoji": "👨",
+    "type": "placeholder"
+  },
+  "brat": {
+    "filename": "brat_7273f433.svg",
+    "english": "brother",
+    "emoji": "👦",
+    "type": "placeholder"
+  },
+  "sestra": {
+    "filename": "sestra_84178c82.svg",
+    "english": "sister",
+    "emoji": "👧",
+    "type": "placeholder"
+  },
+  "nana": {
+    "filename": "nana_518d5f34.svg",
+    "english": "grandmother",
+    "emoji": "👵",
+    "type": "placeholder"
+  },
+  "djed": {
+    "filename": "djed_bbb38ab3.svg",
+    "english": "grandfather",
+    "emoji": "👴",
+    "type": "placeholder"
+  },
+  "sin": {
+    "filename": "sin_7d27e4a7.svg",
+    "english": "son",
+    "emoji": "👦",
+    "type": "placeholder"
+  },
+  "kći": {
+    "filename": "kći_0fb0aba9.svg",
+    "english": "daughter",
+    "emoji": "👧",
+    "type": "placeholder"
+  },
+  "muž": {
+    "filename": "muž_4f85a6ff.svg",
+    "english": "husband",
+    "emoji": "👨‍⚕️",
+    "type": "placeholder"
+  },
+  "žena": {
+    "filename": "žena_291fae44.svg",
+    "english": "wife",
+    "emoji": "👩‍🏫",
+    "type": "placeholder"
+  },
+  "ponedjeljak": {
+    "filename": "ponedjeljak_ffae5d19.svg",
+    "english": "Monday",
+    "emoji": "📅",
+    "type": "placeholder"
+  },
+  "utorak": {
+    "filename": "utorak_a0679671.svg",
+    "english": "Tuesday",
+    "emoji": "📅",
+    "type": "placeholder"
+  },
+  "srijeda": {
+    "filename": "srijeda_f6d400b0.svg",
+    "english": "Wednesday",
+    "emoji": "📅",
+    "type": "placeholder"
+  },
+  "četvrtak": {
+    "filename": "četvrtak_6614f2eb.svg",
+    "english": "Thursday",
+    "emoji": "📅",
+    "type": "placeholder"
+  },
+  "petak": {
+    "filename": "petak_807ac679.svg",
+    "english": "Friday",
+    "emoji": "🎉",
+    "type": "placeholder"
+  },
+  "subota": {
+    "filename": "subota_52bf24f3.svg",
+    "english": "Saturday",
+    "emoji": "🛍️",
+    "type": "placeholder"
+  },
+  "nedjelja": {
+    "filename": "nedjelja_f7cfa8a4.svg",
+    "english": "Sunday",
+    "emoji": "😴",
+    "type": "placeholder"
+  },
+  "danas": {
+    "filename": "danas_e3ef1f89.svg",
+    "english": "today",
+    "emoji": "📆",
+    "type": "placeholder"
+  },
+  "sutra": {
+    "filename": "sutra_80a7c19b.svg",
+    "english": "tomorrow",
+    "emoji": "➡️",
+    "type": "placeholder"
+  },
+  "jučer": {
+    "filename": "jučer_b7b8846f.svg",
+    "english": "yesterday",
+    "emoji": "⬅️",
+    "type": "placeholder"
+  },
+  "januar": {
+    "filename": "januar_6b9b5ed5.svg",
+    "english": "January",
+    "emoji": "❄️",
+    "type": "placeholder"
+  },
+  "februar": {
+    "filename": "februar_a9e655d8.svg",
+    "english": "February",
+    "emoji": "💝",
+    "type": "placeholder"
+  },
+  "mart": {
+    "filename": "mart_1722a280.svg",
+    "english": "March",
+    "emoji": "🌷",
+    "type": "placeholder"
+  },
+  "april": {
+    "filename": "april_37d153a0.svg",
+    "english": "April",
+    "emoji": "🌧️",
+    "type": "placeholder"
+  },
+  "maj": {
+    "filename": "maj_6991b3ed.svg",
+    "english": "May",
+    "emoji": "🌸",
+    "type": "placeholder"
+  },
+  "juni": {
+    "filename": "juni_582d74b3.svg",
+    "english": "June",
+    "emoji": "☀️",
+    "type": "placeholder"
+  },
+  "proljeće": {
+    "filename": "proljeće_0de2092f.svg",
+    "english": "spring",
+    "emoji": "🌼",
+    "type": "placeholder"
+  },
+  "ljeto": {
+    "filename": "ljeto_628f3bfc.svg",
+    "english": "summer",
+    "emoji": "🏖️",
+    "type": "placeholder"
+  },
+  "jesen": {
+    "filename": "jesen_66d14720.svg",
+    "english": "autumn",
+    "emoji": "🍂",
+    "type": "placeholder"
+  },
+  "zima": {
+    "filename": "zima_f6df56c3.svg",
+    "english": "winter",
+    "emoji": "⛄",
+    "type": "placeholder"
+  },
+  "hljeb": {
+    "filename": "hljeb_096b2356.svg",
+    "english": "bread",
+    "emoji": "🍞",
+    "type": "placeholder"
+  },
+  "meso": {
+    "filename": "meso_05646569.svg",
+    "english": "meat",
+    "emoji": "🥩",
+    "type": "placeholder"
+  },
+  "riba": {
+    "filename": "riba_25e801c1.svg",
+    "english": "fish",
+    "emoji": "🐟",
+    "type": "placeholder"
+  },
+  "povrće": {
+    "filename": "povrće_2ba54a5d.svg",
+    "english": "vegetables",
+    "emoji": "🥕",
+    "type": "placeholder"
+  },
+  "voće": {
+    "filename": "voće_389561dd.svg",
+    "english": "fruit",
+    "emoji": "🍎",
+    "type": "placeholder"
+  },
+  "voda": {
+    "filename": "voda_34205f5b.svg",
+    "english": "water",
+    "emoji": "💧",
+    "type": "placeholder"
+  },
+  "kafa": {
+    "filename": "kafa_d875fad9.svg",
+    "english": "coffee",
+    "emoji": "☕",
+    "type": "placeholder"
+  },
+  "čaj": {
+    "filename": "čaj_7cee5ff5.svg",
+    "english": "tea",
+    "emoji": "🍵",
+    "type": "placeholder"
+  },
+  "sok": {
+    "filename": "sok_85cc80d7.svg",
+    "english": "juice",
+    "emoji": "🧃",
+    "type": "placeholder"
+  },
+  "ćevapi": {
+    "filename": "ćevapi_90e0ba46.svg",
+    "english": "cevapi (grilled meat)",
+    "emoji": "🥙",
+    "type": "placeholder"
+  },
+  "kuća": {
+    "filename": "kuća_65abea8c.svg",
+    "english": "house",
+    "emoji": "🏠",
+    "type": "placeholder"
+  },
+  "stan": {
+    "filename": "stan_f52412c4.svg",
+    "english": "apartment",
+    "emoji": "🏢",
+    "type": "placeholder"
+  },
+  "soba": {
+    "filename": "soba_8ae46083.svg",
+    "english": "room",
+    "emoji": "🚪",
+    "type": "placeholder"
+  },
+  "kuhinja": {
+    "filename": "kuhinja_7299c091.svg",
+    "english": "kitchen",
+    "emoji": "🍳",
+    "type": "placeholder"
+  },
+  "kupatilo": {
+    "filename": "kupatilo_e8417d38.svg",
+    "english": "bathroom",
+    "emoji": "🚿",
+    "type": "placeholder"
+  },
+  "spavaća soba": {
+    "filename": "spavaća_soba_158b5eb5.svg",
+    "english": "bedroom",
+    "emoji": "🛏️",
+    "type": "placeholder"
+  },
+  "dnevna soba": {
+    "filename": "dnevna_soba_c4d8d667.svg",
+    "english": "living room",
+    "emoji": "🛋️",
+    "type": "placeholder"
+  },
+  "sto": {
+    "filename": "sto_1c38a0a5.svg",
+    "english": "table",
+    "emoji": "🪑",
+    "type": "placeholder"
+  },
+  "stolica": {
+    "filename": "stolica_1294fc4d.svg",
+    "english": "chair",
+    "emoji": "🪑",
+    "type": "placeholder"
+  },
+  "krevet": {
+    "filename": "krevet_ee1b2876.svg",
+    "english": "bed",
+    "emoji": "🛏️",
+    "type": "placeholder"
+  },
+  "glava": {
+    "filename": "glava_726d7a44.svg",
+    "english": "head",
+    "emoji": "🗣️",
+    "type": "placeholder"
+  },
+  "ruka": {
+    "filename": "ruka_4bda0ff4.svg",
+    "english": "arm/hand",
+    "emoji": "💪",
+    "type": "placeholder"
+  },
+  "noga": {
+    "filename": "noga_63095f76.svg",
+    "english": "leg/foot",
+    "emoji": "🦵",
+    "type": "placeholder"
+  },
+  "oko": {
+    "filename": "oko_1c1512b8.svg",
+    "english": "eye",
+    "emoji": "👁️",
+    "type": "placeholder"
+  },
+  "uho": {
+    "filename": "uho_8093809d.svg",
+    "english": "ear",
+    "emoji": "👂",
+    "type": "placeholder"
+  },
+  "nos": {
+    "filename": "nos_757aa470.svg",
+    "english": "nose",
+    "emoji": "👃",
+    "type": "placeholder"
+  },
+  "usta": {
+    "filename": "usta_7d5cd95c.svg",
+    "english": "mouth",
+    "emoji": "👄",
+    "type": "placeholder"
+  },
+  "srce": {
+    "filename": "srce_cabf9c94.svg",
+    "english": "heart",
+    "emoji": "❤️",
+    "type": "placeholder"
+  },
+  "stomak": {
+    "filename": "stomak_2cc39d58.svg",
+    "english": "stomach",
+    "emoji": "🫃",
+    "type": "placeholder"
+  },
+  "zub": {
+    "filename": "zub_896339aa.svg",
+    "english": "tooth",
+    "emoji": "🦷",
+    "type": "placeholder"
+  },
+  "doktor": {
+    "filename": "doktor_288d78dd.svg",
+    "english": "doctor",
+    "emoji": "👨‍⚕️",
+    "type": "placeholder"
+  },
+  "učitelj": {
+    "filename": "učitelj_74e53293.svg",
+    "english": "teacher",
+    "emoji": "👩‍🏫",
+    "type": "placeholder"
+  },
+  "inženjer": {
+    "filename": "inženjer_f13610fa.svg",
+    "english": "engineer",
+    "emoji": "👷",
+    "type": "placeholder"
+  },
+  "advokat": {
+    "filename": "advokat_0526ef90.svg",
+    "english": "lawyer",
+    "emoji": "⚖️",
+    "type": "placeholder"
+  },
+  "policajac": {
+    "filename": "policajac_7c1f251c.svg",
+    "english": "police officer",
+    "emoji": "👮",
+    "type": "placeholder"
+  },
+  "kuhar": {
+    "filename": "kuhar_eaf354a4.svg",
+    "english": "cook/chef",
+    "emoji": "👨‍🍳",
+    "type": "placeholder"
+  },
+  "prodavač": {
+    "filename": "prodavač_12874531.svg",
+    "english": "salesperson",
+    "emoji": "🧑‍💼",
+    "type": "placeholder"
+  },
+  "vozač": {
+    "filename": "vozač_e44af05e.svg",
+    "english": "driver",
+    "emoji": "🚗",
+    "type": "placeholder"
+  },
+  "student": {
+    "filename": "student_cd735028.svg",
+    "english": "student",
+    "emoji": "👨‍🎓",
+    "type": "placeholder"
+  },
+  "posao": {
+    "filename": "posao_da312671.svg",
+    "english": "job/work",
+    "emoji": "💼",
+    "type": "placeholder"
+  },
+  "sat": {
+    "filename": "sat_53e8254b.svg",
+    "english": "hour/clock",
+    "emoji": "🕐",
+    "type": "placeholder"
+  },
+  "minuta": {
+    "filename": "minuta_905295b3.svg",
+    "english": "minute",
+    "emoji": "⏱️",
+    "type": "placeholder"
+  },
+  "jutro": {
+    "filename": "jutro_43756519.svg",
+    "english": "morning",
+    "emoji": "🌅",
+    "type": "placeholder"
+  },
+  "podne": {
+    "filename": "podne_3ba440aa.svg",
+    "english": "noon",
+    "emoji": "☀️",
+    "type": "placeholder"
+  },
+  "poslijepodne": {
+    "filename": "poslijepodne_081c46f7.svg",
+    "english": "afternoon",
+    "emoji": "🌤️",
+    "type": "placeholder"
+  },
+  "veče": {
+    "filename": "veče_a1ddd911.svg",
+    "english": "evening",
+    "emoji": "🌆",
+    "type": "placeholder"
+  },
+  "noć": {
+    "filename": "noć_5a340ea7.svg",
+    "english": "night",
+    "emoji": "🌙",
+    "type": "placeholder"
+  },
+  "rano": {
+    "filename": "rano_4ac40909.svg",
+    "english": "early",
+    "emoji": "⏰",
+    "type": "placeholder"
+  },
+  "kasno": {
+    "filename": "kasno_b23b59f3.svg",
+    "english": "late",
+    "emoji": "🦉",
+    "type": "placeholder"
+  },
+  "pola": {
+    "filename": "pola_a1223486.svg",
+    "english": "half",
+    "emoji": "🕡",
+    "type": "placeholder"
+  },
+  "Izvini/Izvinite": {
+    "filename": "izvini_izvinite_48b953d1.svg",
+    "english": "Excuse me/Sorry",
+    "emoji": "🙏",
+    "type": "placeholder"
+  },
+  "Naravno": {
+    "filename": "naravno_7020f54e.svg",
+    "english": "Of course",
+    "emoji": "👍",
+    "type": "placeholder"
+  },
+  "Možda": {
+    "filename": "možda_e64481ee.svg",
+    "english": "Maybe",
+    "emoji": "🤔",
+    "type": "placeholder"
+  },
+  "Sigurno": {
+    "filename": "sigurno_77acc842.svg",
+    "english": "Certainly/Sure",
+    "emoji": "✅",
+    "type": "placeholder"
+  },
+  "Nema problema": {
+    "filename": "nema_problema_f1686999.svg",
+    "english": "No problem",
+    "emoji": "😊",
+    "type": "placeholder"
+  },
+  "Šteta": {
+    "filename": "šteta_5fee5ec8.svg",
+    "english": "Too bad/Pity",
+    "emoji": "😔",
+    "type": "placeholder"
+  },
+  "Baš lijepo": {
+    "filename": "baš_lijepo_56d077d1.svg",
+    "english": "Very nice",
+    "emoji": "😃",
+    "type": "placeholder"
+  },
+  "Ne razumijem": {
+    "filename": "ne_razumijem_5e7a3b8b.svg",
+    "english": "I don't understand",
+    "emoji": "❓",
+    "type": "placeholder"
+  },
+  "Govori li...": {
+    "filename": "govori_li____04daa33f.svg",
+    "english": "Do you speak...",
+    "emoji": "🗣️",
+    "type": "placeholder"
+  },
+  "Polako, molim": {
+    "filename": "polako__molim_80e3d1e6.svg",
+    "english": "Slowly, please",
+    "emoji": "🐢",
+    "type": "placeholder"
+  }
+}

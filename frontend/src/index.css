@@ -1,10 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bosnia-blue: #002395;
+  --bosnia-yellow: #FECB00;
+  --bosnia-gold: #FFD700;
+}
+
 body {
   font-family: 'Inter', sans-serif;
-  @apply bg-gray-50;
+  @apply bg-gradient-to-br from-slate-50 via-blue-50/30 to-yellow-50/20;
+  min-height: 100vh;
+}
+
+/* Glass morphism effects */
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.glass-dark {
+  background: rgba(0, 35, 149, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Premium card styles */
+.card-premium {
+  @apply bg-white rounded-2xl shadow-lg;
+  background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid rgba(0, 35, 149, 0.08);
+}
+
+.card-premium:hover {
+  @apply shadow-xl;
+  transform: translateY(-2px);
+  border-color: rgba(254, 203, 0, 0.3);
+}
+
+/* Bosnia themed buttons */
+.btn-bosnia {
+  @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  background: linear-gradient(135deg, #002395 0%, #0033CC 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 35, 149, 0.3);
+}
+
+.btn-bosnia:hover {
+  background: linear-gradient(135deg, #0033CC 0%, #002395 100%);
+  box-shadow: 0 6px 20px rgba(0, 35, 149, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-gold {
+  @apply px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  background: linear-gradient(135deg, #FECB00 0%, #FFD700 100%);
+  color: #002395;
+  box-shadow: 0 4px 15px rgba(254, 203, 0, 0.3);
+}
+
+.btn-gold:hover {
+  background: linear-gradient(135deg, #FFD700 0%, #FECB00 100%);
+  box-shadow: 0 6px 20px rgba(254, 203, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Gradient text */
+.text-gradient-bosnia {
+  background: linear-gradient(135deg, #002395 0%, #0033CC 50%, #002395 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-gold {
+  background: linear-gradient(135deg, #FECB00 0%, #FFD700 50%, #CC9F00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Decorative elements */
+.bosnia-pattern {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(254, 203, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 35, 149, 0.1) 0%, transparent 50%);
+}
+
+/* Star decorations like Bosnia flag */
+.star-decoration::before {
+  content: '★';
+  color: #FFD700;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
 .markdown-content h2 {

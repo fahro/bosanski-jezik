@@ -1,59 +1,26 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { progressApi, api } from '../api'
+import { progressApi } from '../api'
 import { 
   Trophy, Star, Zap, BookOpen, CheckCircle, Lock, 
-  ChevronRight, Award, Target, TrendingUp, Clock,
-  Play, RotateCcw, ArrowRight, PenTool, MessageSquare, Lightbulb, HelpCircle
+  ChevronRight, Award, Play, ArrowRight, Flame, Target
 } from 'lucide-react'
 
-// Lesson titles for display
-const LESSON_TITLES = {
-  1: { title: 'Pozdravi', subtitle: 'Greetings & Introductions' },
-  2: { title: 'Brojevi', subtitle: 'Numbers 1-20' },
-  3: { title: 'Boje', subtitle: 'Colors & Adjectives' },
-  4: { title: 'Porodica', subtitle: 'Family Members' },
-  5: { title: 'Dani', subtitle: 'Days of the Week' },
-  6: { title: 'Mjeseci', subtitle: 'Months & Seasons' },
-  7: { title: 'Hrana', subtitle: 'Food & Drink' },
-  8: { title: 'Kuća', subtitle: 'House & Apartment' },
-  9: { title: 'Tijelo', subtitle: 'Body & Health' },
-  10: { title: 'Zanimanja', subtitle: 'Jobs & Work' },
-  11: { title: 'Vrijeme', subtitle: 'Time & Clock' },
-  12: { title: 'Fraze', subtitle: 'Common Phrases' }
-}
-
-// Tab names for display
-const TAB_NAMES = {
-  vocabulary: 'Vokabular',
-  grammar: 'Gramatika',
-  exercises: 'Vježbe',
-  dialogue: 'Dijalog',
-  culture: 'Kultura',
-  quiz: 'Kviz'
-}
-
-const EXERCISE_NAMES = {
-  fillBlank: 'Popuni prazninu',
-  sentenceOrder: 'Složi rečenicu',
-  matching: 'Spoji parove',
-  translation: 'Prevedi',
-  writing: 'Piši'
-}
-
-const LEVEL_COLORS = {
-  1: 'from-gray-400 to-gray-500',
-  2: 'from-green-400 to-green-600',
-  3: 'from-blue-400 to-blue-600',
-  4: 'from-purple-400 to-purple-600',
-  5: 'from-yellow-400 to-yellow-600',
-  6: 'from-orange-400 to-orange-600',
-  7: 'from-red-400 to-red-600',
-  8: 'from-pink-400 to-pink-600',
-  9: 'from-indigo-400 to-indigo-600',
-  10: 'from-yellow-300 via-yellow-500 to-amber-600'
-}
+const LESSONS = [
+  { id: 1, title: 'Pozdravi', subtitle: 'Greetings', emoji: '👋' },
+  { id: 2, title: 'Brojevi', subtitle: 'Numbers', emoji: '🔢' },
+  { id: 3, title: 'Boje', subtitle: 'Colors', emoji: '🎨' },
+  { id: 4, title: 'Porodica', subtitle: 'Family', emoji: '👨‍👩‍👧‍👦' },
+  { id: 5, title: 'Dani', subtitle: 'Days', emoji: '📅' },
+  { id: 6, title: 'Mjeseci', subtitle: 'Months', emoji: '🗓️' },
+  { id: 7, title: 'Hrana', subtitle: 'Food', emoji: '🍽️' },
+  { id: 8, title: 'Kuća', subtitle: 'Home', emoji: '🏠' },
+  { id: 9, title: 'Tijelo', subtitle: 'Body', emoji: '🧍' },
+  { id: 10, title: 'Zanimanja', subtitle: 'Jobs', emoji: '💼' },
+  { id: 11, title: 'Vrijeme', subtitle: 'Time', emoji: '⏰' },
+  { id: 12, title: 'Fraze', subtitle: 'Phrases', emoji: '💬' }
+]
 
 export default function Dashboard() {
   const { user, stats, refreshStats, isAuthenticated } = useAuth()
@@ -84,260 +51,160 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-bosnia-blue border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-2 border-bosnia-blue border-t-transparent"></div>
       </div>
     )
   }
 
-  const levelColor = LEVEL_COLORS[stats?.current_level] || LEVEL_COLORS[1]
-  const xpProgress = stats ? ((stats.total_xp - (stats.xp_for_next_level - stats.xp_needed_for_next)) / stats.xp_needed_for_next) * 100 : 0
+  const xpProgress = stats?.xp_needed_for_next ? 
+    ((stats.xp_for_next_level - stats.xp_needed_for_next) / stats.xp_for_next_level) * 100 : 0
+
+  const currentLessonInfo = LESSONS.find(l => l.id === stats?.current_lesson_id)
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8">
-      {/* Header with User Info */}
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
-        <div className={`bg-gradient-to-r ${levelColor} p-6 text-white`}>
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold">
-                Dobrodošli, {user?.full_name || user?.username}! 👋
-              </h1>
-              <p className="opacity-90 mt-1">
-                Nastavite gdje ste stali
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="text-3xl font-bold flex items-center justify-end space-x-2">
-                <Star className="w-8 h-8 fill-current" />
-                <span>Nivo {stats?.current_level}</span>
+    <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
+      
+      {/* Welcome & Stats Header */}
+      <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          {/* Left - Welcome */}
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">
+              Zdravo, {user?.full_name?.split(' ')[0] || user?.username}! 👋
+            </h1>
+            <p className="text-gray-500 mt-1">Nastavi učiti bosanski jezik</p>
+          </div>
+          
+          {/* Right - Level & XP */}
+          <div className="flex items-center gap-6">
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1 text-bosnia-yellow">
+                <Flame className="w-5 h-5" />
+                <span className="text-2xl font-bold text-gray-900">{stats?.current_level || 1}</span>
               </div>
-              <p className="opacity-90">{stats?.level_name}</p>
+              <span className="text-xs text-gray-500">Nivo</span>
+            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1 text-bosnia-blue">
+                <Zap className="w-5 h-5" />
+                <span className="text-2xl font-bold text-gray-900">{stats?.total_xp || 0}</span>
+              </div>
+              <span className="text-xs text-gray-500">XP</span>
+            </div>
+            <div className="text-center">
+              <div className="flex items-center justify-center gap-1 text-green-500">
+                <CheckCircle className="w-5 h-5" />
+                <span className="text-2xl font-bold text-gray-900">{stats?.lessons_completed || 0}</span>
+              </div>
+              <span className="text-xs text-gray-500">Završeno</span>
             </div>
           </div>
         </div>
-
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
-          <div className="bg-blue-50 rounded-xl p-4 text-center">
-            <Zap className="w-8 h-8 text-blue-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-blue-800">{stats?.total_xp || 0}</div>
-            <div className="text-sm text-blue-600">Ukupno XP</div>
+        
+        {/* XP Progress */}
+        <div className="mt-6">
+          <div className="flex justify-between text-sm text-gray-500 mb-2">
+            <span>Nivo {stats?.current_level || 1}</span>
+            <span>Nivo {(stats?.current_level || 1) + 1}</span>
           </div>
-          <div className="bg-green-50 rounded-xl p-4 text-center">
-            <CheckCircle className="w-8 h-8 text-green-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-green-800">{stats?.lessons_completed || 0}/12</div>
-            <div className="text-sm text-green-600">Završene lekcije</div>
-          </div>
-          <div className="bg-purple-50 rounded-xl p-4 text-center">
-            <Target className="w-8 h-8 text-purple-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-purple-800">{stats?.quizzes_completed || 0}</div>
-            <div className="text-sm text-purple-600">Položeni kvizovi</div>
-          </div>
-          <div className="bg-yellow-50 rounded-xl p-4 text-center">
-            <TrendingUp className="w-8 h-8 text-yellow-600 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-yellow-800">{stats?.average_quiz_score?.toFixed(0) || 0}%</div>
-            <div className="text-sm text-yellow-600">Prosječan rezultat</div>
-          </div>
-        </div>
-
-        {/* XP Progress Bar */}
-        <div className="px-6 pb-6">
-          <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
-            <span>Napredak do nivoa {(stats?.current_level || 1) + 1}</span>
-            <span>{stats?.xp_needed_for_next || 0} XP preostalo</span>
-          </div>
-          <div className="h-4 bg-gray-200 rounded-full overflow-hidden">
+          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
             <div 
-              className={`h-full bg-gradient-to-r ${levelColor} transition-all duration-500`}
+              className="h-full bg-gradient-to-r from-bosnia-blue to-bosnia-yellow transition-all duration-500 rounded-full"
               style={{ width: `${Math.min(xpProgress, 100)}%` }}
             />
           </div>
+          <p className="text-xs text-gray-400 mt-1 text-right">
+            {stats?.xp_needed_for_next || 0} XP do sljedećeg nivoa
+          </p>
         </div>
       </div>
 
-      {/* Continue Learning - Enhanced */}
-      {stats?.current_lesson_id <= 12 && (
-        <div className="bg-gradient-to-r from-bosnia-blue to-blue-700 rounded-2xl shadow-lg overflow-hidden">
-          <div className="p-6 text-white">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div className="flex-1">
-                <h2 className="text-xl font-bold mb-2 flex items-center space-x-2">
-                  <Play className="w-6 h-6" />
-                  <span>Nastavite gdje ste stali</span>
-                </h2>
-                <div className="space-y-2">
-                  <p className="text-lg opacity-95">
-                    <span className="font-semibold">Lekcija {stats.current_lesson_id}:</span> {LESSON_TITLES[stats.current_lesson_id]?.title || 'Lekcija'}
-                  </p>
-                  <p className="text-sm opacity-80">
-                    {LESSON_TITLES[stats.current_lesson_id]?.subtitle}
-                  </p>
-                  {/* Show current position if saved */}
-                  {(() => {
-                    const currentLesson = lessonProgress.find(l => l.lesson_id === stats.current_lesson_id)
-                    if (currentLesson?.saved_tab) {
-                      const tabName = TAB_NAMES[currentLesson.saved_tab] || currentLesson.saved_tab
-                      const exerciseName = currentLesson.saved_exercise_type ? EXERCISE_NAMES[currentLesson.saved_exercise_type] : null
-                      return (
-                        <p className="text-sm bg-white/20 rounded-lg px-3 py-1 inline-block mt-2">
-                          📍 Pozicija: {tabName}{exerciseName ? ` → ${exerciseName}` : ''}
-                        </p>
-                      )
-                    }
-                    return null
-                  })()}
-                </div>
+      {/* Continue Learning Card */}
+      {stats?.current_lesson_id <= 12 && currentLessonInfo && (
+        <Link
+          to={`/lesson/${stats.current_lesson_id}`}
+          className="block bg-gradient-to-br from-bosnia-blue to-blue-600 rounded-3xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] group"
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center text-3xl">
+                {currentLessonInfo.emoji}
               </div>
-              <Link
-                to={`/lesson/${stats.current_lesson_id}`}
-                className="bg-white text-bosnia-blue px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all hover:scale-105 flex items-center space-x-2 shadow-lg"
-              >
-                <Play className="w-6 h-6" />
-                <span>Nastavi učenje</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
+              <div>
+                <p className="text-white/70 text-sm">Nastavi učiti</p>
+                <h2 className="text-xl font-bold">
+                  Lekcija {stats.current_lesson_id}: {currentLessonInfo.title}
+                </h2>
+                <p className="text-white/70 text-sm">{currentLessonInfo.subtitle}</p>
+              </div>
+            </div>
+            <div className="bg-white text-bosnia-blue p-4 rounded-2xl group-hover:scale-110 transition-transform">
+              <Play className="w-6 h-6" />
             </div>
           </div>
-          
-          {/* Progress indicators for current lesson */}
-          {(() => {
-            const currentLesson = lessonProgress.find(l => l.lesson_id === stats.current_lesson_id)
-            if (!currentLesson) return null
-            
-            const sections = [
-              { key: 'vocabulary_viewed', label: 'Vokabular', icon: BookOpen },
-              { key: 'grammar_viewed', label: 'Gramatika', icon: Lightbulb },
-              { key: 'dialogue_viewed', label: 'Dijalog', icon: MessageSquare },
-              { key: 'culture_viewed', label: 'Kultura', icon: Star },
-              { key: 'quiz_passed', label: 'Kviz', icon: HelpCircle }
-            ]
-            
-            return (
-              <div className="bg-white/10 px-6 py-3">
-                <div className="flex items-center justify-between gap-2 overflow-x-auto">
-                  {sections.map((section, idx) => {
-                    const Icon = section.icon
-                    const isDone = currentLesson[section.key]
-                    return (
-                      <div key={section.key} className="flex items-center">
-                        <div className={`flex items-center space-x-1 px-3 py-1 rounded-full text-xs ${
-                          isDone ? 'bg-green-400/30 text-white' : 'bg-white/10 text-white/60'
-                        }`}>
-                          <Icon className="w-3 h-3" />
-                          <span>{section.label}</span>
-                          {isDone && <CheckCircle className="w-3 h-3" />}
-                        </div>
-                        {idx < sections.length - 1 && (
-                          <ChevronRight className="w-4 h-4 text-white/40 mx-1" />
-                        )}
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )
-          })()}
-        </div>
+        </Link>
       )}
 
-      {/* Lesson Progress Grid */}
+      {/* Lessons Grid */}
       <div>
-        <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center space-x-2">
-          <BookOpen className="w-6 h-6" />
-          <span>Vaš napredak po lekcijama</span>
-        </h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {lessonProgress.map((lesson) => {
-            const isLocked = lesson.lesson_id > (stats?.current_lesson_id || 1) && !lesson.started
-            const isCurrent = lesson.lesson_id === stats?.current_lesson_id
-            const lessonInfo = LESSON_TITLES[lesson.lesson_id] || { title: `Lekcija ${lesson.lesson_id}`, subtitle: '' }
-            const progressPercent = lesson.completed ? 100 : 
-              ((lesson.vocabulary_viewed ? 20 : 0) +
-               (lesson.grammar_viewed ? 20 : 0) +
-               (lesson.dialogue_viewed ? 20 : 0) +
-               (lesson.culture_viewed ? 20 : 0) +
-               (lesson.quiz_completed ? 20 : 0))
+        <h2 className="text-lg font-semibold text-gray-900 mb-4">Sve lekcije</h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          {LESSONS.map((lesson) => {
+            const progress = lessonProgress.find(p => p.lesson_id === lesson.id)
+            const isLocked = lesson.id > (stats?.current_lesson_id || 1) && !progress?.started
+            const isCurrent = lesson.id === stats?.current_lesson_id
+            const isCompleted = progress?.completed
 
             return (
               <Link
-                key={lesson.lesson_id}
-                to={isLocked ? '#' : `/lesson/${lesson.lesson_id}`}
-                className={`bg-white rounded-xl shadow-md overflow-hidden transition-all ${
-                  isLocked ? 'opacity-60 cursor-not-allowed' : 'hover:shadow-lg hover:scale-[1.02]'
-                } ${isCurrent ? 'ring-2 ring-bosnia-blue ring-offset-2' : ''}`}
+                key={lesson.id}
+                to={isLocked ? '#' : `/lesson/${lesson.id}`}
+                onClick={(e) => isLocked && e.preventDefault()}
+                className={`
+                  relative bg-white rounded-2xl p-4 border-2 transition-all
+                  ${isCompleted ? 'border-green-200 bg-green-50/50' : 
+                    isCurrent ? 'border-bosnia-blue shadow-md' : 
+                    isLocked ? 'border-gray-100 opacity-50 cursor-not-allowed' : 
+                    'border-gray-100 hover:border-gray-200 hover:shadow-sm'}
+                `}
               >
-                <div className={`h-2 ${lesson.completed ? 'bg-green-500' : 'bg-gray-200'}`}>
-                  <div 
-                    className={`h-full transition-all ${lesson.completed ? 'bg-green-500' : 'bg-bosnia-blue'}`}
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        lesson.completed ? 'bg-green-100 text-green-700' :
-                        isCurrent ? 'bg-blue-100 text-blue-700' :
-                        isLocked ? 'bg-gray-100 text-gray-500' :
-                        'bg-gray-100 text-gray-600'
-                      }`}>
-                        {lesson.lesson_id}
-                      </span>
-                      {isCurrent && !lesson.completed && (
-                        <span className="text-xs bg-bosnia-blue text-white px-2 py-0.5 rounded-full animate-pulse">
-                          Trenutna
-                        </span>
-                      )}
-                    </div>
-                    {lesson.completed ? (
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                    ) : isLocked ? (
-                      <Lock className="w-5 h-5 text-gray-400" />
-                    ) : lesson.started ? (
-                      <Clock className="w-5 h-5 text-blue-500" />
-                    ) : null}
+                {/* Status badge */}
+                {isCompleted && (
+                  <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1">
+                    <CheckCircle className="w-4 h-4" />
                   </div>
-                  
-                  <h3 className="font-bold text-gray-800 mb-1">{lessonInfo.title}</h3>
-                  <p className="text-xs text-gray-500 mb-3">{lessonInfo.subtitle}</p>
-                  
-                  {/* Section progress indicators */}
-                  <div className="flex items-center space-x-1 mb-3">
-                    {[
-                      { key: 'vocabulary_viewed', label: 'V' },
-                      { key: 'grammar_viewed', label: 'G' },
-                      { key: 'dialogue_viewed', label: 'D' },
-                      { key: 'culture_viewed', label: 'K' },
-                      { key: 'quiz_passed', label: 'Q' }
-                    ].map(section => (
-                      <div
-                        key={section.key}
-                        className={`w-6 h-6 rounded text-xs flex items-center justify-center font-medium ${
-                          lesson[section.key] 
-                            ? 'bg-green-100 text-green-700' 
-                            : 'bg-gray-100 text-gray-400'
-                        }`}
-                        title={section.key.replace('_', ' ')}
-                      >
-                        {section.label}
-                      </div>
-                    ))}
+                )}
+                {isLocked && (
+                  <div className="absolute -top-2 -right-2 bg-gray-400 text-white rounded-full p-1">
+                    <Lock className="w-4 h-4" />
                   </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div>
-                      {lesson.best_quiz_percentage > 0 && (
-                        <div className="text-sm text-gray-500 flex items-center space-x-1">
-                          <Trophy className="w-4 h-4 text-yellow-500" />
-                          <span>{lesson.best_quiz_percentage.toFixed(0)}%</span>
-                        </div>
-                      )}
-                    </div>
-                    <div className={`text-sm font-medium ${lesson.xp_earned > 0 ? 'text-green-600' : 'text-gray-400'}`}>
-                      {lesson.xp_earned > 0 ? `+${lesson.xp_earned} XP` : '0 XP'}
-                    </div>
+                )}
+                {isCurrent && !isCompleted && (
+                  <div className="absolute -top-2 -right-2 bg-bosnia-blue text-white rounded-full px-2 py-0.5 text-xs font-medium">
+                    Trenutna
                   </div>
+                )}
+
+                <div className="text-center">
+                  <div className="text-3xl mb-2">{lesson.emoji}</div>
+                  <h3 className="font-semibold text-gray-900 text-sm">{lesson.title}</h3>
+                  <p className="text-xs text-gray-500">{lesson.subtitle}</p>
+                  
+                  {/* Mini progress */}
+                  {progress && !isLocked && (
+                    <div className="mt-3 flex justify-center gap-1">
+                      {['vocabulary_viewed', 'grammar_viewed', 'dialogue_viewed', 'culture_viewed', 'quiz_passed'].map((key, idx) => (
+                        <div 
+                          key={key}
+                          className={`w-2 h-2 rounded-full ${progress[key] ? 'bg-green-500' : 'bg-gray-200'}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                  
+                  {progress?.xp_earned > 0 && (
+                    <p className="text-xs text-green-600 font-medium mt-2">+{progress.xp_earned} XP</p>
+                  )}
                 </div>
               </Link>
             )
@@ -345,47 +212,50 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Final Test Section */}
-      <div className={`rounded-2xl shadow-lg overflow-hidden ${
+      {/* Final Test Card */}
+      <div className={`rounded-3xl p-6 ${
         stats?.can_take_final_test 
-          ? 'bg-gradient-to-r from-yellow-400 to-amber-500' 
-          : 'bg-gray-100'
+          ? 'bg-gradient-to-br from-bosnia-yellow to-amber-500 text-white' 
+          : 'bg-gray-50 border border-gray-100'
       }`}>
-        <div className="p-6">
-          <div className="flex items-center justify-between">
-            <div className={stats?.can_take_final_test ? 'text-white' : 'text-gray-600'}>
-              <div className="flex items-center space-x-3 mb-2">
-                <Award className="w-8 h-8" />
-                <h2 className="text-xl font-bold">Završni Test</h2>
-              </div>
-              <p className="opacity-90">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
+              stats?.can_take_final_test ? 'bg-white/20' : 'bg-gray-200'
+            }`}>
+              <Award className={`w-7 h-7 ${stats?.can_take_final_test ? 'text-white' : 'text-gray-400'}`} />
+            </div>
+            <div>
+              <h3 className={`font-bold text-lg ${stats?.can_take_final_test ? 'text-white' : 'text-gray-900'}`}>
+                Završni Test
+              </h3>
+              <p className={`text-sm ${stats?.can_take_final_test ? 'text-white/80' : 'text-gray-500'}`}>
                 {stats?.can_take_final_test 
-                  ? '120 pitanja iz svih lekcija - Jeste li spremni?' 
-                  : `Završite sve lekcije da otključate (${stats?.lessons_completed || 0}/12)`}
+                  ? '120 pitanja • Testiraj svoje znanje' 
+                  : `Završi sve lekcije (${stats?.lessons_completed || 0}/12)`}
               </p>
               {stats?.final_test_passed && (
-                <div className="mt-2 flex items-center space-x-2">
-                  <Trophy className="w-5 h-5" />
-                  <span>Položeno! Najbolji rezultat: {stats.best_final_score}%</span>
-                </div>
+                <p className="text-sm text-white/90 flex items-center gap-1 mt-1">
+                  <Trophy className="w-4 h-4" /> Najbolji: {stats.best_final_score}%
+                </p>
               )}
             </div>
-            
-            {stats?.can_take_final_test ? (
-              <Link
-                to="/final-test"
-                className="bg-white text-amber-600 px-6 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors flex items-center space-x-2"
-              >
-                {stats?.final_test_passed ? <RotateCcw className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-                <span>{stats?.final_test_passed ? 'Ponovi' : 'Započni'}</span>
-              </Link>
-            ) : (
-              <div className="bg-gray-200 text-gray-500 px-6 py-3 rounded-xl font-semibold flex items-center space-x-2">
-                <Lock className="w-5 h-5" />
-                <span>Zaključano</span>
-              </div>
-            )}
           </div>
+          
+          {stats?.can_take_final_test ? (
+            <Link
+              to="/final-test"
+              className="bg-white text-amber-600 px-5 py-3 rounded-xl font-semibold hover:bg-amber-50 transition-colors flex items-center gap-2"
+            >
+              <Play className="w-5 h-5" />
+              <span>Započni</span>
+            </Link>
+          ) : (
+            <div className="bg-gray-200 text-gray-400 px-5 py-3 rounded-xl font-medium flex items-center gap-2">
+              <Lock className="w-5 h-5" />
+              <span>Zaključano</span>
+            </div>
+          )}
         </div>
       </div>
     </div>
