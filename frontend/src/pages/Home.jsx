@@ -1,7 +1,20 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BookOpen, ArrowRight, Volume2, PenTool, CheckCircle, Play, Brain, Sparkles } from 'lucide-react'
+import { useAuth } from '../context/AuthContext'
 
 function Home() {
+  const { isAuthenticated, stats } = useAuth()
+  const navigate = useNavigate()
+
+  const handleStartLearning = (e) => {
+    e.preventDefault()
+    if (isAuthenticated && stats?.current_lesson_id) {
+      navigate(`/lesson/${stats.current_lesson_id}`)
+    } else {
+      navigate('/levels/a1')
+    }
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
       
@@ -25,14 +38,14 @@ function Home() {
         </p>
         
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link
-            to="/levels/a1"
+          <button
+            onClick={handleStartLearning}
             className="group inline-flex items-center gap-3 bg-bosnia-blue text-white px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-bosnia-blue/90 transition-all shadow-lg hover:shadow-xl"
           >
             <Play className="w-5 h-5" />
-            <span>Započni učenje</span>
+            <span>{isAuthenticated ? 'Nastavi učenje' : 'Započni učenje'}</span>
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
+          </button>
           <Link
             to="/register"
             className="inline-flex items-center gap-2 text-gray-600 px-6 py-4 rounded-2xl font-medium hover:bg-gray-100 transition-all"
@@ -136,19 +149,21 @@ function Home() {
       {/* CTA Section */}
       <div className="bg-gradient-to-br from-bosnia-blue to-blue-600 rounded-3xl p-8 md:p-12 text-center text-white">
         <h2 className="text-2xl md:text-3xl font-bold mb-4">
-          Spremni za početak?
+          {isAuthenticated ? 'Nastavi gdje si stao?' : 'Spremni za početak?'}
         </h2>
         <p className="text-blue-100 mb-8 max-w-lg mx-auto">
-          Počnite besplatno sa A1 nivoom i napredujte kroz 12 strukturiranih lekcija.
+          {isAuthenticated 
+            ? 'Nastavi učenje i napreduj kroz lekcije.' 
+            : 'Počnite besplatno sa A1 nivoom i napredujte kroz 12 strukturiranih lekcija.'}
         </p>
-        <Link
-          to="/levels/a1"
+        <button
+          onClick={handleStartLearning}
           className="inline-flex items-center gap-3 bg-white text-bosnia-blue px-8 py-4 rounded-2xl font-semibold hover:bg-blue-50 transition-all"
         >
           <Play className="w-5 h-5" />
-          <span>Počni sa A1 nivoom</span>
+          <span>{isAuthenticated ? 'Nastavi učenje' : 'Počni sa A1 nivoom'}</span>
           <ArrowRight className="w-5 h-5" />
-        </Link>
+        </button>
       </div>
     </div>
   )

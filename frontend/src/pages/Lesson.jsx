@@ -63,8 +63,6 @@ function Lesson() {
     checked: {}
   })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
-  const [showResumeDialog, setShowResumeDialog] = useState(false)
-  const [savedPosition, setSavedPosition] = useState(null)
 
   // Track previous lessonId to only reset state when lesson actually changes
   const prevLessonIdRef = useRef(null)
@@ -191,16 +189,14 @@ function Lesson() {
               setTranslationInputs(saved.translation)
             }
           }
-          // Check if there's a saved position to resume from
+          // Directly resume from saved position without asking
           if (!data.quiz_passed && (data.saved_tab || data.saved_exercise_type)) {
-            const position = {
-              tab: data.saved_tab,
-              exerciseType: data.saved_exercise_type
+            // Directly set the saved position
+            if (data.saved_tab) {
+              setActiveTab(data.saved_tab)
             }
-            // Only show resume dialog if not on vocabulary (starting position)
-            if (data.saved_tab && data.saved_tab !== 'vocabulary') {
-              setSavedPosition(position)
-              setShowResumeDialog(true)
+            if (data.saved_exercise_type) {
+              setActiveExerciseType(data.saved_exercise_type)
             }
           }
         })
@@ -258,20 +254,6 @@ function Lesson() {
       setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion - 1 }))
       setQuizWritingInput('')
     }
-  }
-
-  // Resume from saved position
-  const resumeFromSavedPosition = () => {
-    if (savedPosition) {
-      if (savedPosition.tab) setActiveTab(savedPosition.tab)
-      if (savedPosition.exerciseType) setActiveExerciseType(savedPosition.exerciseType)
-    }
-    setShowResumeDialog(false)
-  }
-
-  // Start from beginning
-  const startFromBeginning = () => {
-    setShowResumeDialog(false)
   }
 
   // Save all current exercise answers
@@ -1497,53 +1479,6 @@ function Lesson() {
             </button>
           ))}
         </div>
-
-        {/* Resume Dialog */}
-        {showResumeDialog && savedPosition && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 animate-scaleIn">
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 mx-auto bg-bosnia-blue/10 rounded-full flex items-center justify-center mb-4">
-                  <BookOpen className="w-8 h-8 text-bosnia-blue" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">Nastavite gdje ste stali?</h3>
-                <p className="text-gray-600">
-                  Pronašli smo vaš sačuvani napredak u ovoj lekciji.
-                </p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Zadnja pozicija: <span className="font-medium text-bosnia-blue">
-                    {savedPosition.tab === 'vocabulary' && 'Vokabular'}
-                    {savedPosition.tab === 'grammar' && 'Gramatika'}
-                    {savedPosition.tab === 'exercises' && `Vježbe - ${
-                      savedPosition.exerciseType === 'fillBlank' ? 'Popuni prazninu' :
-                      savedPosition.exerciseType === 'sentenceOrder' ? 'Složi rečenicu' :
-                      savedPosition.exerciseType === 'matching' ? 'Spoji parove' :
-                      savedPosition.exerciseType === 'translation' ? 'Prevedi' :
-                      savedPosition.exerciseType === 'writing' ? 'Piši' : 'Vježbe'
-                    }`}
-                    {savedPosition.tab === 'dialogue' && 'Dijalog'}
-                    {savedPosition.tab === 'culture' && 'Kultura'}
-                    {savedPosition.tab === 'quiz' && 'Kviz'}
-                  </span>
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  onClick={startFromBeginning}
-                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-                >
-                  Počni ispočetka
-                </button>
-                <button
-                  onClick={resumeFromSavedPosition}
-                  className="flex-1 px-4 py-3 bg-bosnia-blue text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
-                >
-                  Nastavi
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
 
         <div className="p-4 sm:p-6">
           {/* Vocabulary Tab */}
