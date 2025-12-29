@@ -237,22 +237,30 @@ function Lesson() {
     if (questionIndex >= 0 && questionIndex < lesson.quiz.length) {
       setQuizState(prev => ({ ...prev, currentQuestion: questionIndex }))
       setQuizWritingInput('')
+      // Save current quiz position
+      saveProgressToBackend(quizState.answers, questionIndex, null)
     }
   }
 
   // Go to next quiz question manually
   const goToNextQuestion = () => {
     if (quizState.currentQuestion < lesson.quiz.length - 1) {
-      setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))
+      const newQuestion = quizState.currentQuestion + 1
+      setQuizState(prev => ({ ...prev, currentQuestion: newQuestion }))
       setQuizWritingInput('')
+      // Save current quiz position
+      saveProgressToBackend(quizState.answers, newQuestion, null)
     }
   }
 
   // Go to previous quiz question
   const goToPrevQuestion = () => {
     if (quizState.currentQuestion > 0) {
-      setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion - 1 }))
+      const newQuestion = quizState.currentQuestion - 1
+      setQuizState(prev => ({ ...prev, currentQuestion: newQuestion }))
       setQuizWritingInput('')
+      // Save current quiz position
+      saveProgressToBackend(quizState.answers, newQuestion, null)
     }
   }
 
@@ -305,6 +313,13 @@ function Lesson() {
       score: newScore
     }))
     setQuizWritingInput('')
+    
+    // Save quiz progress after each answer
+    const quizAnswersToSave = {}
+    Object.entries(newAnswers).forEach(([idx, ans]) => {
+      quizAnswersToSave[idx] = ans
+    })
+    saveProgressToBackend(quizAnswersToSave, quizState.currentQuestion + 1, null)
   }
 
   // Handle writing quiz answers
@@ -2888,6 +2903,15 @@ function Lesson() {
           </button>
         )}
         {activeTab === 'exercises' && activeExerciseType === 'translation' && (
+          <button
+            onClick={() => { setActiveExerciseType('writing'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Piši</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'writing' && (
           <button
             onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
