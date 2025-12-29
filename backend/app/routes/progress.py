@@ -195,7 +195,9 @@ async def get_lesson_progress(
             "started": False,
             "saved_quiz_answers": None,
             "saved_quiz_position": 0,
-            "saved_exercise_answers": None
+            "saved_exercise_answers": None,
+            "saved_tab": None,
+            "saved_exercise_type": None
         }
     
     return {
@@ -216,7 +218,9 @@ async def get_lesson_progress(
         "started": True,
         "saved_quiz_answers": getattr(progress, 'saved_quiz_answers', None),
         "saved_quiz_position": getattr(progress, 'saved_quiz_position', 0),
-        "saved_exercise_answers": getattr(progress, 'saved_exercise_answers', None)
+        "saved_exercise_answers": getattr(progress, 'saved_exercise_answers', None),
+        "saved_tab": getattr(progress, 'saved_tab', None),
+        "saved_exercise_type": getattr(progress, 'saved_exercise_type', None)
     }
 
 @router.post("/lessons/{lesson_id}/view")
@@ -313,6 +317,12 @@ async def save_lesson_progress(
     # Save exercise progress
     if "exercise_answers" in save_data:
         progress.saved_exercise_answers = save_data["exercise_answers"]
+    
+    # Save current position (tab and exercise type)
+    if "current_tab" in save_data:
+        progress.saved_tab = save_data["current_tab"]
+    if "current_exercise_type" in save_data:
+        progress.saved_exercise_type = save_data["current_exercise_type"]
     
     progress.last_accessed = datetime.utcnow()
     db.commit()

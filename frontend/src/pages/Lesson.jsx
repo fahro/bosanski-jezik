@@ -29,7 +29,7 @@ function Lesson() {
   const [activeTab, setActiveTab] = useState('vocabulary')
   const [quizState, setQuizState] = useState({
     currentQuestion: 0,
-    answers: [],
+    answers: {},  // Changed to object: {questionIndex: {selected, correct, ...}}
     showResult: false,
     score: 0
   })
@@ -63,6 +63,8 @@ function Lesson() {
     checked: {}
   })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
+  const [showResumeDialog, setShowResumeDialog] = useState(false)
+  const [savedPosition, setSavedPosition] = useState(null)
 
   // Track previous lessonId to only reset state when lesson actually changes
   const prevLessonIdRef = useRef(null)
@@ -97,7 +99,7 @@ function Lesson() {
     
     // Reset all state when lesson changes
     setActiveTab('vocabulary')
-    setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
+    setQuizState({ currentQuestion: 0, answers: {}, showResult: false, score: 0 })
     setQuizResult(null)
     setFlippedCards({})
     setShowCultureTranslation(false)
@@ -148,7 +150,7 @@ function Lesson() {
             const totalQuestions = lesson?.quiz?.length || 15
             setQuizState({
               currentQuestion: totalQuestions,
-              answers: [],
+              answers: {},
               showResult: true,
               score: bestScore
             })
@@ -162,13 +164,12 @@ function Lesson() {
           }
           // Restore saved quiz progress if not passed yet
           else if (data.saved_quiz_answers) {
-            const savedAnswers = Object.entries(data.saved_quiz_answers).map(([idx, ans]) => ({
-              selected: ans.selected,
-              correct: ans.correct
-            }))
-            const savedScore = savedAnswers.filter(a => a.correct).length
+            // savedAnswers is already an object with question indices as keys
+            const savedAnswers = data.saved_quiz_answers
+            const savedScore = Object.values(savedAnswers).filter(a => a?.correct).length
+            const answeredCount = Object.keys(savedAnswers).length
             setQuizState({
-              currentQuestion: data.saved_quiz_position || savedAnswers.length,
+              currentQuestion: data.saved_quiz_position || answeredCount,
               answers: savedAnswers,
               showResult: false,
               score: savedScore
@@ -190,6 +191,18 @@ function Lesson() {
               setTranslationInputs(saved.translation)
             }
           }
+          // Check if there's a saved position to resume from
+          if (!data.quiz_passed && (data.saved_tab || data.saved_exercise_type)) {
+            const position = {
+              tab: data.saved_tab,
+              exerciseType: data.saved_exercise_type
+            }
+            // Only show resume dialog if not on vocabulary (starting position)
+            if (data.saved_tab && data.saved_tab !== 'vocabulary') {
+              setSavedPosition(position)
+              setShowResumeDialog(true)
+            }
+          }
         })
         .catch(err => {
           console.error('Error fetching lesson progress:', err)
@@ -202,17 +215,63 @@ function Lesson() {
   }
 
   // Save progress to backend
-  const saveProgressToBackend = async (quizAnswers, quizPosition, exerciseAnswers) => {
+  const saveProgressToBackend = async (quizAnswers, quizPosition, exerciseAnswers, currentTab = null, currentExerciseType = null) => {
     if (!isAuthenticated) return
     try {
       await progressApi.saveProgress(lessonId, {
         quiz_answers: quizAnswers,
         quiz_position: quizPosition,
-        exercise_answers: exerciseAnswers
+        exercise_answers: exerciseAnswers,
+        current_tab: currentTab || activeTab,
+        current_exercise_type: currentExerciseType || activeExerciseType
       })
     } catch (err) {
       console.error('Error saving progress:', err)
     }
+  }
+
+  // Save current position when changing tabs or exercise types
+  const saveCurrentPosition = () => {
+    if (!isAuthenticated) return
+    saveProgressToBackend(null, null, null, activeTab, activeExerciseType)
+  }
+
+  // Navigate to specific quiz question
+  const goToQuizQuestion = (questionIndex) => {
+    if (questionIndex >= 0 && questionIndex < lesson.quiz.length) {
+      setQuizState(prev => ({ ...prev, currentQuestion: questionIndex }))
+      setQuizWritingInput('')
+    }
+  }
+
+  // Go to next quiz question manually
+  const goToNextQuestion = () => {
+    if (quizState.currentQuestion < lesson.quiz.length - 1) {
+      setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))
+      setQuizWritingInput('')
+    }
+  }
+
+  // Go to previous quiz question
+  const goToPrevQuestion = () => {
+    if (quizState.currentQuestion > 0) {
+      setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion - 1 }))
+      setQuizWritingInput('')
+    }
+  }
+
+  // Resume from saved position
+  const resumeFromSavedPosition = () => {
+    if (savedPosition) {
+      if (savedPosition.tab) setActiveTab(savedPosition.tab)
+      if (savedPosition.exerciseType) setActiveExerciseType(savedPosition.exerciseType)
+    }
+    setShowResumeDialog(false)
+  }
+
+  // Start from beginning
+  const startFromBeginning = () => {
+    setShowResumeDialog(false)
   }
 
   // Save all current exercise answers
@@ -250,9 +309,13 @@ function Lesson() {
   const handleQuizAnswer = async (answerIndex) => {
     const currentQ = lesson.quiz[quizState.currentQuestion]
     const isCorrect = answerIndex === currentQ.correct_answer
-    const newScore = isCorrect ? quizState.score + 1 : quizState.score
     
-    const newAnswers = [...quizState.answers, { selected: answerIndex, correct: isCorrect }]
+    // Store answer at the correct question index
+    const newAnswers = { ...quizState.answers }
+    newAnswers[quizState.currentQuestion] = { selected: answerIndex, correct: isCorrect }
+    
+    // Recalculate score based on all answers
+    const newScore = Object.values(newAnswers).filter(a => a?.correct).length
     
     setQuizState(prev => ({
       ...prev,
@@ -268,14 +331,18 @@ function Lesson() {
     const userAnswer = quizWritingInput.toLowerCase().trim().replace(/[.!?,;:]+$/, '')
     const correctAnswer = currentQ.correct_answer_text.toLowerCase().trim().replace(/[.!?,;:]+$/, '')
     const isCorrect = userAnswer === correctAnswer
-    const newScore = isCorrect ? quizState.score + 1 : quizState.score
     
-    const newAnswers = [...quizState.answers, { 
+    // Store answer at the correct question index
+    const newAnswers = { ...quizState.answers }
+    newAnswers[quizState.currentQuestion] = { 
       selected: quizWritingInput, 
       correct: isCorrect,
       isWriting: true,
       correctText: currentQ.correct_answer_text
-    }]
+    }
+    
+    // Recalculate score based on all answers
+    const newScore = Object.values(newAnswers).filter(a => a?.correct).length
     
     setQuizState(prev => ({
       ...prev,
@@ -344,7 +411,7 @@ function Lesson() {
   }
 
   const resetQuiz = () => {
-    setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
+    setQuizState({ currentQuestion: 0, answers: {}, showResult: false, score: 0 })
     setShowQuizTranslation(false)
     setQuizResult(null)
     setQuizWritingInput('')
@@ -1365,8 +1432,8 @@ function Lesson() {
                 {/* Live quiz progress bar */}
                 {(() => {
                   const totalQuestions = lesson?.quiz?.length || 0
-                  const answeredQuestions = quizState.answers.length
-                  const correctAnswers = quizState.answers.filter(a => a.correct).length
+                  const answeredQuestions = Object.keys(quizState.answers).length
+                  const correctAnswers = Object.values(quizState.answers).filter(a => a?.correct).length
                   const currentPercentage = answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0
                   const projectedPercentage = totalQuestions > 0 ? Math.round((correctAnswers / totalQuestions) * 100) : 0
                   
@@ -1418,7 +1485,7 @@ function Lesson() {
           {tabs.map(tab => (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => { setActiveTab(tab.id); saveCurrentPosition() }}
               className={`flex items-center space-x-1 sm:space-x-2 px-3 sm:px-6 py-3 sm:py-4 font-medium transition-colors whitespace-nowrap text-sm sm:text-base ${
                 activeTab === tab.id
                   ? 'text-bosnia-blue border-b-2 border-bosnia-blue bg-blue-50'
@@ -1430,6 +1497,53 @@ function Lesson() {
             </button>
           ))}
         </div>
+
+        {/* Resume Dialog */}
+        {showResumeDialog && savedPosition && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 animate-scaleIn">
+              <div className="text-center mb-6">
+                <div className="w-16 h-16 mx-auto bg-bosnia-blue/10 rounded-full flex items-center justify-center mb-4">
+                  <BookOpen className="w-8 h-8 text-bosnia-blue" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">Nastavite gdje ste stali?</h3>
+                <p className="text-gray-600">
+                  Pronašli smo vaš sačuvani napredak u ovoj lekciji.
+                </p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Zadnja pozicija: <span className="font-medium text-bosnia-blue">
+                    {savedPosition.tab === 'vocabulary' && 'Vokabular'}
+                    {savedPosition.tab === 'grammar' && 'Gramatika'}
+                    {savedPosition.tab === 'exercises' && `Vježbe - ${
+                      savedPosition.exerciseType === 'fillBlank' ? 'Popuni prazninu' :
+                      savedPosition.exerciseType === 'sentenceOrder' ? 'Složi rečenicu' :
+                      savedPosition.exerciseType === 'matching' ? 'Spoji parove' :
+                      savedPosition.exerciseType === 'translation' ? 'Prevedi' :
+                      savedPosition.exerciseType === 'writing' ? 'Piši' : 'Vježbe'
+                    }`}
+                    {savedPosition.tab === 'dialogue' && 'Dijalog'}
+                    {savedPosition.tab === 'culture' && 'Kultura'}
+                    {savedPosition.tab === 'quiz' && 'Kviz'}
+                  </span>
+                </p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <button
+                  onClick={startFromBeginning}
+                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                >
+                  Počni ispočetka
+                </button>
+                <button
+                  onClick={resumeFromSavedPosition}
+                  className="flex-1 px-4 py-3 bg-bosnia-blue text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
+                >
+                  Nastavi
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <div className="p-4 sm:p-6">
           {/* Vocabulary Tab */}
@@ -2313,23 +2427,36 @@ function Lesson() {
               
               {!quizState.showResult ? (
                 <div className="max-w-2xl mx-auto">
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="text-gray-600">
+                  {/* Question number indicators - clickable */}
+                  <div className="mb-6">
+                    <div className="flex flex-wrap justify-center gap-2 mb-3">
+                      {lesson.quiz.map((_, i) => {
+                        const isAnswered = quizState.answers[i] !== undefined
+                        const isCorrect = quizState.answers[i]?.correct
+                        const isCurrent = i === quizState.currentQuestion
+                        
+                        return (
+                          <button
+                            key={i}
+                            onClick={() => goToQuizQuestion(i)}
+                            className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${
+                              isCurrent
+                                ? 'bg-bosnia-blue text-white ring-2 ring-offset-2 ring-bosnia-blue'
+                                : isAnswered
+                                  ? isCorrect
+                                    ? 'bg-green-500 text-white hover:bg-green-600'
+                                    : 'bg-red-500 text-white hover:bg-red-600'
+                                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                            }`}
+                            title={`Pitanje ${i + 1}${isAnswered ? (isCorrect ? ' - Tačno' : ' - Netačno') : ''}`}
+                          >
+                            {i + 1}
+                          </button>
+                        )
+                      })}
+                    </div>
+                    <div className="text-center text-gray-600 text-sm">
                       Pitanje {quizState.currentQuestion + 1} od {lesson.quiz.length}
-                    </span>
-                    <div className="flex space-x-1">
-                      {lesson.quiz.map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-3 h-3 rounded-full ${
-                            i < quizState.currentQuestion
-                              ? quizState.answers[i]?.correct ? 'bg-green-500' : 'bg-red-500'
-                              : i === quizState.currentQuestion
-                              ? 'bg-bosnia-blue'
-                              : 'bg-gray-200'
-                          }`}
-                        />
-                      ))}
                     </div>
                   </div>
 
@@ -2519,6 +2646,87 @@ function Lesson() {
                       </p>
                     </div>
                   )}
+
+                  {/* Navigation buttons for quiz */}
+                  <div className="flex justify-between items-center mt-6 pt-4 border-t border-gray-200">
+                    <button
+                      onClick={goToPrevQuestion}
+                      disabled={quizState.currentQuestion === 0}
+                      className={`inline-flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                        quizState.currentQuestion === 0
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                      }`}
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                      <span>Prethodno</span>
+                    </button>
+                    
+                    <span className="text-gray-500 text-sm">
+                      {Object.keys(quizState.answers).length} / {lesson.quiz.length} odgovoreno
+                    </span>
+                    
+                    <button
+                      onClick={goToNextQuestion}
+                      disabled={quizState.currentQuestion === lesson.quiz.length - 1}
+                      className={`inline-flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                        quizState.currentQuestion === lesson.quiz.length - 1
+                          ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                          : 'bg-bosnia-blue text-white hover:bg-blue-700'
+                      }`}
+                    >
+                      <span>Sljedeće</span>
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </div>
+
+                  {/* Finish quiz button - show when all questions are answered */}
+                  {Object.keys(quizState.answers).length === lesson.quiz.length && (
+                    <div className="mt-4 text-center">
+                      <button
+                        onClick={() => {
+                          const finalScore = Object.values(quizState.answers).filter(a => a?.correct).length
+                          setQuizState(prev => ({ ...prev, showResult: true, score: finalScore }))
+                          // Submit quiz result
+                          if (isAuthenticated) {
+                            progressApi.submitQuiz(
+                              lesson.id,
+                              finalScore,
+                              lesson.quiz.length,
+                              Object.fromEntries(Object.entries(quizState.answers).map(([i, a]) => [i, a.selected]))
+                            ).then(apiResult => {
+                              setQuizResult({
+                                pointsEarned: apiResult.xp_earned,
+                                isNewHighScore: apiResult.is_new_high_score,
+                                lessonCompleted: apiResult.lesson_completed,
+                                totalXp: apiResult.total_xp,
+                                currentLevel: apiResult.current_level,
+                                passed: apiResult.passed,
+                                percentage: apiResult.percentage
+                              })
+                              setLessonProgress(prev => ({
+                                ...prev,
+                                quiz_passed: apiResult.passed,
+                                best_quiz_percentage: apiResult.percentage
+                              }))
+                              refreshStats()
+                            }).catch(err => {
+                              console.error('Failed to save quiz result:', err)
+                              const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
+                              setQuizResult(result)
+                            })
+                          } else {
+                            const result = saveQuizScore(lesson.id, finalScore, lesson.quiz.length)
+                            setQuizResult(result)
+                          }
+                        }}
+                        className="inline-flex items-center space-x-2 bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors font-medium"
+                      >
+                        <Trophy className="w-5 h-5" />
+                        <span>Završi kviz</span>
+                      </button>
+                    </div>
+                  )}
                 </div>
               ) : (
                 <div className="max-w-md mx-auto text-center animate-scaleIn">
@@ -2642,7 +2850,7 @@ function Lesson() {
         {/* Guide through tabs, then next lesson after quiz completion */}
         {activeTab === 'vocabulary' && (
           <button
-            onClick={() => setActiveTab('grammar')}
+            onClick={() => { setActiveTab('grammar'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Gramatiku</span>
@@ -2651,7 +2859,7 @@ function Lesson() {
         )}
         {activeTab === 'grammar' && (
           <button
-            onClick={() => setActiveTab('exercises')}
+            onClick={() => { setActiveTab('exercises'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Vježbe</span>
@@ -2660,7 +2868,7 @@ function Lesson() {
         )}
         {activeTab === 'exercises' && activeExerciseType === 'fillBlank' && (
           <button
-            onClick={() => setActiveExerciseType('sentenceOrder')}
+            onClick={() => { setActiveExerciseType('sentenceOrder'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Složi rečenicu</span>
@@ -2669,7 +2877,7 @@ function Lesson() {
         )}
         {activeTab === 'exercises' && activeExerciseType === 'sentenceOrder' && (
           <button
-            onClick={() => setActiveExerciseType('matching')}
+            onClick={() => { setActiveExerciseType('matching'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Spoji parove</span>
@@ -2678,7 +2886,7 @@ function Lesson() {
         )}
         {activeTab === 'exercises' && activeExerciseType === 'matching' && (
           <button
-            onClick={() => setActiveExerciseType('translation')}
+            onClick={() => { setActiveExerciseType('translation'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Prevedi</span>
@@ -2687,7 +2895,7 @@ function Lesson() {
         )}
         {activeTab === 'exercises' && activeExerciseType === 'translation' && (
           <button
-            onClick={() => setActiveTab('dialogue')}
+            onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Dijalog</span>
@@ -2696,7 +2904,7 @@ function Lesson() {
         )}
         {activeTab === 'dialogue' && (
           <button
-            onClick={() => setActiveTab('culture')}
+            onClick={() => { setActiveTab('culture'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Kulturu</span>
@@ -2705,7 +2913,7 @@ function Lesson() {
         )}
         {activeTab === 'culture' && (
           <button
-            onClick={() => setActiveTab('quiz')}
+            onClick={() => { setActiveTab('quiz'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
             <span>Idite na Kviz</span>

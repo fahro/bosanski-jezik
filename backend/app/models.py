@@ -55,6 +55,8 @@ class LessonProgress(Base):
     saved_quiz_answers = Column(JSON, nullable=True)  # {questionIndex: answerIndex, ...}
     saved_quiz_position = Column(Integer, default=0)  # Current question index
     saved_exercise_answers = Column(JSON, nullable=True)  # {exerciseType: {id: answer}, ...}
+    saved_tab = Column(String, nullable=True)  # Current tab (vocabulary, grammar, exercises, etc.)
+    saved_exercise_type = Column(String, nullable=True)  # Current exercise type (fillBlank, sentenceOrder, etc.)
     
     # XP earned from this lesson
     xp_earned = Column(Integer, default=0)
