@@ -1561,65 +1561,89 @@ function Lesson() {
                       flippedCards[index] ? 'transform' : ''
                     }`}
                   >
-                    <div className={`bg-gradient-to-br ${
-                      flippedCards[index] 
-                        ? 'from-green-50 to-emerald-100 border-green-200' 
-                        : 'from-blue-50 to-indigo-100 border-blue-200'
-                    } border-2 rounded-xl p-4 min-h-[180px] flex flex-col justify-between hover:shadow-lg transition-shadow`}>
+                    <div 
+                      className={`relative rounded-xl min-h-[180px] flex flex-col justify-between hover:shadow-lg transition-shadow overflow-hidden border-2 ${
+                        flippedCards[index] ? 'border-green-300' : 'border-blue-200'
+                      }`}
+                      style={word.image_url ? {
+                        backgroundImage: `url(${word.image_url})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center'
+                      } : {}}
+                    >
+                      {/* Background overlay */}
+                      <div className={`absolute inset-0 ${
+                        word.image_url 
+                          ? (flippedCards[index] ? 'bg-gradient-to-t from-green-900/90 via-green-800/70 to-transparent' : 'bg-gradient-to-t from-blue-900/90 via-blue-800/70 to-transparent')
+                          : (flippedCards[index] ? 'bg-gradient-to-br from-green-50 to-emerald-100' : 'bg-gradient-to-br from-blue-50 to-indigo-100')
+                      }`}></div>
+                      
                       {!flippedCards[index] ? (
-                        <>
+                        <div className="relative z-10 p-4 flex flex-col justify-between h-full">
                           <div className="flex justify-between items-start">
-                            <div className="text-4xl mb-2">{word.image_emoji}</div>
+                            {!word.image_url && <div className="text-4xl">{word.image_emoji}</div>}
                             <button
                               onClick={(e) => {
                                 e.stopPropagation()
                                 speak(word.bosnian)
                               }}
-                              className="p-2 rounded-full bg-white/70 hover:bg-white shadow-sm hover:shadow transition-all text-bosnia-blue hover:text-blue-700"
+                              className={`p-2 rounded-full shadow-sm hover:shadow transition-all ml-auto ${
+                                word.image_url 
+                                  ? 'bg-white/20 hover:bg-white/40 text-white' 
+                                  : 'bg-white/70 hover:bg-white text-bosnia-blue hover:text-blue-700'
+                              }`}
                               title="Slušaj izgovor"
                             >
                               <Volume2 className="w-5 h-5" />
                             </button>
                           </div>
-                          <div>
-                            <div className="text-2xl font-bold text-gray-800">{word.bosnian}</div>
-                            <div className="text-sm text-gray-500 mt-1">{word.pronunciation}</div>
+                          <div className="mt-auto">
+                            <div className={`text-2xl font-bold ${word.image_url ? 'text-white drop-shadow-lg' : 'text-gray-800'}`}>{word.bosnian}</div>
+                            <div className={`text-sm mt-1 ${word.image_url ? 'text-white/80' : 'text-gray-500'}`}>{word.pronunciation}</div>
                           </div>
-                          <div className="text-xs text-blue-600 mt-2">Klikni za prijevod →</div>
-                        </>
+                          <div className={`text-xs mt-2 ${word.image_url ? 'text-white/70' : 'text-blue-600'}`}>Klikni za prijevod →</div>
+                        </div>
                       ) : (
-                        <>
+                        <div className="relative z-10 p-4 flex flex-col justify-between h-full">
                           <div className="flex justify-between items-start">
-                            <div className="text-lg font-semibold text-green-800">{word.english}</div>
+                            <div className={`text-lg font-semibold ${word.image_url ? 'text-white drop-shadow-lg' : 'text-green-800'}`}>{word.english}</div>
                             <button
                               onClick={(e) => {
                                 e.stopPropagation()
                                 speak(word.bosnian)
                               }}
-                              className="p-2 rounded-full bg-white/70 hover:bg-white shadow-sm hover:shadow transition-all text-green-600 hover:text-green-700"
+                              className={`p-2 rounded-full shadow-sm hover:shadow transition-all ${
+                                word.image_url 
+                                  ? 'bg-white/20 hover:bg-white/40 text-white' 
+                                  : 'bg-white/70 hover:bg-white text-green-600 hover:text-green-700'
+                              }`}
                               title="Slušaj riječ"
                             >
                               <Volume2 className="w-4 h-4" />
                             </button>
                           </div>
-                          <div className="mt-2 p-2 bg-white/50 rounded-lg">
+                          <div className={`mt-2 p-2 rounded-lg ${word.image_url ? 'bg-black/30' : 'bg-white/50'}`}>
                             <div className="flex justify-between items-start gap-2">
-                              <div className="text-sm text-gray-700 italic">"{word.example}"</div>
+                              <div className={`text-sm italic ${word.image_url ? 'text-white' : 'text-gray-700'}`}>"{word.example}"</div>
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation()
                                   speak(word.example)
                                 }}
-                                className="p-1.5 rounded-full bg-white/70 hover:bg-white shadow-sm hover:shadow transition-all text-green-600 hover:text-green-700 flex-shrink-0"
+                                className={`p-1.5 rounded-full shadow-sm hover:shadow transition-all flex-shrink-0 ${
+                                  word.image_url 
+                                    ? 'bg-white/20 hover:bg-white/40 text-white' 
+                                    : 'bg-white/70 hover:bg-white text-green-600 hover:text-green-700'
+                                }`}
                                 title="Slušaj rečenicu"
                               >
                                 <Volume2 className="w-3.5 h-3.5" />
                               </button>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1">{word.example_translation}</div>
+                            <div className={`text-xs mt-1 ${word.image_url ? 'text-white/80' : 'text-gray-500'}`}>{word.example_translation}</div>
                           </div>
-                          <div className="text-xs text-green-600 mt-2">← Klikni za bosanski</div>
-                        </>
+                          <div className={`text-xs mt-2 ${word.image_url ? 'text-white/70' : 'text-green-600'}`}>← Klikni za bosanski</div>
+                        </div>
                       )}
                     </div>
                   </div>
@@ -2260,7 +2284,21 @@ function Lesson() {
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Dijalog</h2>
               <p className="text-gray-600 mb-6">Pratite razgovor i učite iz konteksta</p>
               
-              <div className="space-y-4 max-w-2xl">
+              {/* Dialogue with Background Image */}
+              <div 
+                className="relative rounded-xl overflow-hidden p-6 min-h-[500px]"
+                style={lesson.dialogue_image_url ? {
+                  backgroundImage: `url(${lesson.dialogue_image_url})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                } : {}}
+              >
+                {/* Dark overlay for readability */}
+                {lesson.dialogue_image_url && (
+                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+                )}
+                
+                <div className="relative z-10 space-y-4 max-w-2xl mx-auto">
                 {lesson.dialogue.map((line, index) => (
                   <div
                     key={index}
@@ -2291,6 +2329,7 @@ function Lesson() {
                     </div>
                   </div>
                 ))}
+                </div>
               </div>
             </div>
           )}
@@ -2299,42 +2338,58 @@ function Lesson() {
           {activeTab === 'culture' && (
             <div className="animate-fadeIn">
               <h2 className="text-xl font-semibold text-gray-800 mb-4">Kulturna bilješka</h2>
+              
+              {/* Culture with Background Image */}
               <div 
-                className="bg-gradient-to-br from-amber-50 to-orange-100 rounded-xl p-6 border-2 border-amber-200 cursor-pointer hover:shadow-lg transition-shadow"
-                onClick={() => setShowCultureTranslation(!showCultureTranslation)}
+                className="relative rounded-xl overflow-hidden min-h-[400px]"
+                style={lesson.culture_image_url ? {
+                  backgroundImage: `url(${lesson.culture_image_url})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                } : {}}
               >
-                <div className="flex items-start space-x-4">
-                  <div className="text-4xl">🇧🇦</div>
-                  <div className="flex-1">
-                    <p className="text-gray-700 leading-relaxed">{lesson.cultural_note}</p>
+                {/* Dark overlay for readability */}
+                {lesson.culture_image_url && (
+                  <div className="absolute inset-0 bg-black/50"></div>
+                )}
+                
+                <div 
+                  className={`relative z-10 p-6 cursor-pointer hover:bg-white/10 transition-colors rounded-xl ${!lesson.culture_image_url ? 'bg-gradient-to-br from-amber-50 to-orange-100 border-2 border-amber-200' : ''}`}
+                  onClick={() => setShowCultureTranslation(!showCultureTranslation)}
+                >
+                  <div className="flex items-start space-x-4">
+                    <div className="text-4xl">🇧🇦</div>
+                    <div className="flex-1">
+                      <p className={`leading-relaxed ${lesson.culture_image_url ? 'text-white font-medium' : 'text-gray-700'}`}>{lesson.cultural_note}</p>
                     
                     {showCultureTranslation && lesson.cultural_note_en && (
-                      <div className="mt-4 pt-4 border-t border-amber-300">
-                        <div className="flex items-center space-x-2 text-amber-700 mb-2">
+                      <div className={`mt-4 pt-4 border-t ${lesson.culture_image_url ? 'border-white/30' : 'border-amber-300'}`}>
+                        <div className={`flex items-center space-x-2 mb-2 ${lesson.culture_image_url ? 'text-white/80' : 'text-amber-700'}`}>
                           <Globe className="w-4 h-4" />
                           <span className="font-medium text-sm">English translation:</span>
                         </div>
-                        <p className="text-amber-800 italic">{lesson.cultural_note_en}</p>
+                        <p className={`italic ${lesson.culture_image_url ? 'text-white/90' : 'text-amber-800'}`}>{lesson.cultural_note_en}</p>
                       </div>
                     )}
                     
                     {!lesson.cultural_note_en && showCultureTranslation && (
-                      <div className="mt-4 pt-4 border-t border-amber-300">
-                        <div className="flex items-center space-x-2 text-amber-700 mb-2">
+                      <div className={`mt-4 pt-4 border-t ${lesson.culture_image_url ? 'border-white/30' : 'border-amber-300'}`}>
+                        <div className={`flex items-center space-x-2 mb-2 ${lesson.culture_image_url ? 'text-white/80' : 'text-amber-700'}`}>
                           <Globe className="w-4 h-4" />
                           <span className="font-medium text-sm">English translation:</span>
                         </div>
-                        <p className="text-amber-800 italic">
+                        <p className={`italic ${lesson.culture_image_url ? 'text-white/90' : 'text-amber-800'}`}>
                           {lesson.cultural_note.includes('Bosni i Hercegovini') 
                             ? 'In Bosnia and Herzegovina, people often greet each other with "Merhaba" (from Turkish) or "Selam" in informal situations. The "Vi" form is used for older people and in formal situations as a sign of respect.'
                             : 'Click to see the English translation of this cultural note.'}
                         </p>
                       </div>
                     )}
+                    </div>
                   </div>
-                </div>
-                <div className="text-center mt-4 text-sm text-amber-600">
-                  {showCultureTranslation ? '← Klikni da sakriješ prijevod' : 'Klikni za prijevod na engleski →'}
+                  <div className={`text-center mt-4 text-sm ${lesson.culture_image_url ? 'text-white/70' : 'text-amber-600'}`}>
+                    {showCultureTranslation ? '← Klikni da sakriješ prijevod' : 'Klikni za prijevod na engleski →'}
+                  </div>
                 </div>
               </div>
 

@@ -124,7 +124,37 @@ def get_lessons_by_level(level_id: str):
 def get_lesson(lesson_id: int):
     for lesson in A1_LESSONS:
         if lesson["id"] == lesson_id:
-            return lesson
+            enriched_lesson = lesson.copy()
+            lesson_title = lesson.get("title", "")
+            
+            # Enrich vocabulary with image URLs
+            if "vocabulary" in enriched_lesson:
+                enriched_vocab = []
+                for word in enriched_lesson["vocabulary"]:
+                    word_copy = word.copy()
+                    bosnian = word.get("bosnian", "")
+                    if bosnian in IMAGE_MANIFEST:
+                        img_info = IMAGE_MANIFEST[bosnian]
+                        if img_info.get('type') == 'ai_generated':
+                            word_copy["image_url"] = f"/images/vocabulary/{img_info['filename']}"
+                    enriched_vocab.append(word_copy)
+                enriched_lesson["vocabulary"] = enriched_vocab
+            
+            # Add culture image URL
+            culture_key = f"Kultura - {lesson_title}"
+            if culture_key in CULTURE_MANIFEST:
+                img_info = CULTURE_MANIFEST[culture_key]
+                if img_info.get('type') == 'ai_generated':
+                    enriched_lesson["culture_image_url"] = f"/images/culture/{img_info['filename']}"
+            
+            # Add dialogue image URL
+            dialogue_key = f"Dijalog - {lesson_title}"
+            if dialogue_key in DIALOGUE_MANIFEST:
+                img_info = DIALOGUE_MANIFEST[dialogue_key]
+                if img_info.get('type') == 'ai_generated':
+                    enriched_lesson["dialogue_image_url"] = f"/images/dialogue/{img_info['filename']}"
+            
+            return enriched_lesson
     raise HTTPException(status_code=404, detail="Lesson not found")
 
 @app.post("/api/quiz/check")
@@ -139,11 +169,21 @@ import hashlib
 
 # Support both local development and Docker paths
 AUDIO_DIR = None
-for audio_path in ["/app/static/audio", os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "audio")]:
-    if os.path.exists(audio_path):
-        AUDIO_DIR = audio_path
+IMAGES_DIR = None
+STATIC_BASE = None
+for base_path in ["/app/static", os.path.join(os.path.dirname(os.path.dirname(__file__)), "static")]:
+    if os.path.exists(base_path):
+        STATIC_BASE = base_path
+        AUDIO_DIR = os.path.join(base_path, "audio")
+        IMAGES_DIR = os.path.join(base_path, "images", "vocabulary")
+        CULTURE_DIR = os.path.join(base_path, "images", "culture")
+        DIALOGUE_DIR = os.path.join(base_path, "images", "dialogue")
         break
+
 AUDIO_MANIFEST = {}
+IMAGE_MANIFEST = {}
+CULTURE_MANIFEST = {}
+DIALOGUE_MANIFEST = {}
 
 def load_audio_manifest():
     global AUDIO_MANIFEST
@@ -153,11 +193,39 @@ def load_audio_manifest():
             with open(manifest_path, 'r', encoding='utf-8') as f:
                 AUDIO_MANIFEST = json.load(f)
 
-load_audio_manifest()
+def load_image_manifest():
+    global IMAGE_MANIFEST, CULTURE_MANIFEST, DIALOGUE_MANIFEST
+    if IMAGES_DIR:
+        manifest_path = os.path.join(IMAGES_DIR, "manifest.json")
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                IMAGE_MANIFEST = json.load(f)
+    if CULTURE_DIR:
+        manifest_path = os.path.join(CULTURE_DIR, "manifest.json")
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                CULTURE_MANIFEST = json.load(f)
+    if DIALOGUE_DIR:
+        manifest_path = os.path.join(DIALOGUE_DIR, "manifest.json")
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as f:
+                DIALOGUE_MANIFEST = json.load(f)
 
-# Mount static audio directory
+load_audio_manifest()
+load_image_manifest()
+
+# Mount static directories
 if AUDIO_DIR and os.path.exists(AUDIO_DIR):
     app.mount("/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
+
+# Mount static images directory
+STATIC_IMAGES_BASE = None
+for base_path in ["/app/static/images", os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "images")]:
+    if os.path.exists(base_path):
+        STATIC_IMAGES_BASE = base_path
+        break
+if STATIC_IMAGES_BASE:
+    app.mount("/images", StaticFiles(directory=STATIC_IMAGES_BASE), name="images")
 
 @app.get("/api/audio/{text:path}")
 async def get_audio_url(text: str):

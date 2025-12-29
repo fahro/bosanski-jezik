@@ -1,782 +1,652 @@
 {
   "Zdravo": {
-    "filename": "zdravo_df94391b.svg",
-    "english": "Hello",
-    "emoji": "👋",
-    "type": "placeholder"
+    "filename": "zdravo_df94391b.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Dobar dan": {
-    "filename": "dobar_dan_1dd99ba8.svg",
-    "english": "Good day",
-    "emoji": "☀️",
-    "type": "placeholder"
+    "filename": "dobar_dan_1dd99ba8.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Dobro jutro": {
-    "filename": "dobro_jutro_7dc4efc2.svg",
-    "english": "Good morning",
-    "emoji": "🌅",
-    "type": "placeholder"
+    "filename": "dobro_jutro_7dc4efc2.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Dobro veče": {
-    "filename": "dobro_veče_ccc3f7a5.svg",
-    "english": "Good evening",
-    "emoji": "🌙",
-    "type": "placeholder"
+    "filename": "dobro_veče_ccc3f7a5.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Laku noć": {
-    "filename": "laku_noć_afef30e9.svg",
-    "english": "Good night",
-    "emoji": "😴",
-    "type": "placeholder"
+    "filename": "laku_noć_afef30e9.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Doviđenja": {
-    "filename": "doviđenja_dea78c64.svg",
-    "english": "Goodbye",
-    "emoji": "👋",
-    "type": "placeholder"
+    "filename": "doviđenja_dea78c64.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Hvala": {
-    "filename": "hvala_c29b8a1d.svg",
-    "english": "Thank you",
-    "emoji": "🙏",
-    "type": "placeholder"
+    "filename": "hvala_c29b8a1d.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Molim": {
-    "filename": "molim_b9ffdbeb.svg",
-    "english": "Please/You're welcome",
-    "emoji": "😊",
-    "type": "placeholder"
+    "filename": "molim_b9ffdbeb.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Ja sam": {
-    "filename": "ja_sam_cc7f0fea.svg",
-    "english": "I am",
-    "emoji": "👤",
-    "type": "placeholder"
+    "filename": "ja_sam_cc7f0fea.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "Zovem se": {
-    "filename": "zovem_se_14954fd3.svg",
-    "english": "My name is",
-    "emoji": "📛",
-    "type": "placeholder"
+    "filename": "zovem_se_14954fd3.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
   },
   "jedan": {
-    "filename": "jedan_68962601.svg",
-    "english": "one",
-    "emoji": "1️⃣",
-    "type": "placeholder"
+    "filename": "jedan_68962601.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "dva": {
-    "filename": "dva_c67ed9a0.svg",
-    "english": "two",
-    "emoji": "2️⃣",
-    "type": "placeholder"
+    "filename": "dva_c67ed9a0.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "tri": {
-    "filename": "tri_d2cfe69a.svg",
-    "english": "three",
-    "emoji": "3️⃣",
-    "type": "placeholder"
+    "filename": "tri_d2cfe69a.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "četiri": {
-    "filename": "četiri_406da4ab.svg",
-    "english": "four",
-    "emoji": "4️⃣",
-    "type": "placeholder"
+    "filename": "četiri_406da4ab.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "pet": {
-    "filename": "pet_6c43c0a8.svg",
-    "english": "five",
-    "emoji": "5️⃣",
-    "type": "placeholder"
+    "filename": "pet_6c43c0a8.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "šest": {
-    "filename": "šest_2ddbabca.svg",
-    "english": "six",
-    "emoji": "6️⃣",
-    "type": "placeholder"
+    "filename": "šest_2ddbabca.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "sedam": {
-    "filename": "sedam_1794552d.svg",
-    "english": "seven",
-    "emoji": "7️⃣",
-    "type": "placeholder"
+    "filename": "sedam_1794552d.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "osam": {
-    "filename": "osam_94d4c1a7.svg",
-    "english": "eight",
-    "emoji": "8️⃣",
-    "type": "placeholder"
+    "filename": "osam_94d4c1a7.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "devet": {
-    "filename": "devet_eeefb960.svg",
-    "english": "nine",
-    "emoji": "9️⃣",
-    "type": "placeholder"
+    "filename": "devet_eeefb960.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "deset": {
-    "filename": "deset_9d7addf0.svg",
-    "english": "ten",
-    "emoji": "🔟",
-    "type": "placeholder"
+    "filename": "deset_9d7addf0.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "jedanaest": {
-    "filename": "jedanaest_3577f8f0.svg",
-    "english": "eleven",
-    "emoji": "1️⃣1️⃣",
-    "type": "placeholder"
+    "filename": "jedanaest_3577f8f0.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "dvanaest": {
-    "filename": "dvanaest_0fac7e7a.svg",
-    "english": "twelve",
-    "emoji": "1️⃣2️⃣",
-    "type": "placeholder"
+    "filename": "dvanaest_0fac7e7a.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "trinaest": {
-    "filename": "trinaest_fc2eaa24.svg",
-    "english": "thirteen",
-    "emoji": "1️⃣3️⃣",
-    "type": "placeholder"
+    "filename": "trinaest_fc2eaa24.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "četrnaest": {
-    "filename": "četrnaest_406c4e09.svg",
-    "english": "fourteen",
-    "emoji": "1️⃣4️⃣",
-    "type": "placeholder"
+    "filename": "četrnaest_406c4e09.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "petnaest": {
-    "filename": "petnaest_a654399b.svg",
-    "english": "fifteen",
-    "emoji": "1️⃣5️⃣",
-    "type": "placeholder"
+    "filename": "petnaest_a654399b.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "šesnaest": {
-    "filename": "šesnaest_ecbbfa62.svg",
-    "english": "sixteen",
-    "emoji": "1️⃣6️⃣",
-    "type": "placeholder"
+    "filename": "šesnaest_ecbbfa62.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "sedamnaest": {
-    "filename": "sedamnaest_36996f0c.svg",
-    "english": "seventeen",
-    "emoji": "1️⃣7️⃣",
-    "type": "placeholder"
+    "filename": "sedamnaest_36996f0c.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "osamnaest": {
-    "filename": "osamnaest_b47703f1.svg",
-    "english": "eighteen",
-    "emoji": "1️⃣8️⃣",
-    "type": "placeholder"
+    "filename": "osamnaest_b47703f1.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "devetnaest": {
-    "filename": "devetnaest_9d753b0e.svg",
-    "english": "nineteen",
-    "emoji": "1️⃣9️⃣",
-    "type": "placeholder"
+    "filename": "devetnaest_9d753b0e.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "dvadeset": {
-    "filename": "dvadeset_dd6691c6.svg",
-    "english": "twenty",
-    "emoji": "2️⃣0️⃣",
-    "type": "placeholder"
+    "filename": "dvadeset_dd6691c6.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
   },
   "crvena": {
-    "filename": "crvena_651ceb77.svg",
-    "english": "red",
-    "emoji": "🔴",
-    "type": "placeholder"
+    "filename": "crvena_651ceb77.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "plava": {
-    "filename": "plava_f4aabd50.svg",
-    "english": "blue",
-    "emoji": "🔵",
-    "type": "placeholder"
+    "filename": "plava_f4aabd50.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "zelena": {
-    "filename": "zelena_c5e7c8f8.svg",
-    "english": "green",
-    "emoji": "🟢",
-    "type": "placeholder"
+    "filename": "zelena_c5e7c8f8.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "žuta": {
-    "filename": "žuta_9d9bb9e4.svg",
-    "english": "yellow",
-    "emoji": "🟡",
-    "type": "placeholder"
+    "filename": "žuta_9d9bb9e4.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "crna": {
-    "filename": "crna_5dd4439a.svg",
-    "english": "black",
-    "emoji": "⚫",
-    "type": "placeholder"
+    "filename": "crna_5dd4439a.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "bijela": {
-    "filename": "bijela_778429eb.svg",
-    "english": "white",
-    "emoji": "⚪",
-    "type": "placeholder"
+    "filename": "bijela_778429eb.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "narandžasta": {
-    "filename": "narandžasta_e59d1ba5.svg",
-    "english": "orange",
-    "emoji": "🟠",
-    "type": "placeholder"
+    "filename": "narandžasta_e59d1ba5.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "ljubičasta": {
-    "filename": "ljubičasta_f5863009.svg",
-    "english": "purple",
-    "emoji": "🟣",
-    "type": "placeholder"
+    "filename": "ljubičasta_f5863009.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "smeđa": {
-    "filename": "smeđa_62925cd0.svg",
-    "english": "brown",
-    "emoji": "🟤",
-    "type": "placeholder"
+    "filename": "smeđa_62925cd0.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "siva": {
-    "filename": "siva_1955b38f.svg",
-    "english": "gray",
-    "emoji": "🩶",
-    "type": "placeholder"
+    "filename": "siva_1955b38f.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
   },
   "majka": {
-    "filename": "majka_1bc3ae56.svg",
-    "english": "mother",
-    "emoji": "👩",
-    "type": "placeholder"
+    "filename": "majka_1bc3ae56.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "otac": {
-    "filename": "otac_4797d804.svg",
-    "english": "father",
-    "emoji": "👨",
-    "type": "placeholder"
+    "filename": "otac_4797d804.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "brat": {
-    "filename": "brat_7273f433.svg",
-    "english": "brother",
-    "emoji": "👦",
-    "type": "placeholder"
+    "filename": "brat_7273f433.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "sestra": {
-    "filename": "sestra_84178c82.svg",
-    "english": "sister",
-    "emoji": "👧",
-    "type": "placeholder"
+    "filename": "sestra_84178c82.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "nana": {
-    "filename": "nana_518d5f34.svg",
-    "english": "grandmother",
-    "emoji": "👵",
-    "type": "placeholder"
+    "filename": "nana_518d5f34.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "djed": {
-    "filename": "djed_bbb38ab3.svg",
-    "english": "grandfather",
-    "emoji": "👴",
-    "type": "placeholder"
+    "filename": "djed_bbb38ab3.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "sin": {
-    "filename": "sin_7d27e4a7.svg",
-    "english": "son",
-    "emoji": "👦",
-    "type": "placeholder"
+    "filename": "sin_7d27e4a7.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "kći": {
-    "filename": "kći_0fb0aba9.svg",
-    "english": "daughter",
-    "emoji": "👧",
-    "type": "placeholder"
+    "filename": "kći_0fb0aba9.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "muž": {
-    "filename": "muž_4f85a6ff.svg",
-    "english": "husband",
-    "emoji": "👨‍⚕️",
-    "type": "placeholder"
+    "filename": "muž_4f85a6ff.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "žena": {
-    "filename": "žena_291fae44.svg",
-    "english": "wife",
-    "emoji": "👩‍🏫",
-    "type": "placeholder"
+    "filename": "žena_291fae44.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
   },
   "ponedjeljak": {
-    "filename": "ponedjeljak_ffae5d19.svg",
-    "english": "Monday",
-    "emoji": "📅",
-    "type": "placeholder"
+    "filename": "ponedjeljak_ffae5d19.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "utorak": {
-    "filename": "utorak_a0679671.svg",
-    "english": "Tuesday",
-    "emoji": "📅",
-    "type": "placeholder"
+    "filename": "utorak_a0679671.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "srijeda": {
-    "filename": "srijeda_f6d400b0.svg",
-    "english": "Wednesday",
-    "emoji": "📅",
-    "type": "placeholder"
+    "filename": "srijeda_f6d400b0.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "četvrtak": {
-    "filename": "četvrtak_6614f2eb.svg",
-    "english": "Thursday",
-    "emoji": "📅",
-    "type": "placeholder"
+    "filename": "četvrtak_6614f2eb.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "petak": {
-    "filename": "petak_807ac679.svg",
-    "english": "Friday",
-    "emoji": "🎉",
-    "type": "placeholder"
+    "filename": "petak_807ac679.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "subota": {
-    "filename": "subota_52bf24f3.svg",
-    "english": "Saturday",
-    "emoji": "🛍️",
-    "type": "placeholder"
+    "filename": "subota_52bf24f3.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "nedjelja": {
-    "filename": "nedjelja_f7cfa8a4.svg",
-    "english": "Sunday",
-    "emoji": "😴",
-    "type": "placeholder"
+    "filename": "nedjelja_f7cfa8a4.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "danas": {
-    "filename": "danas_e3ef1f89.svg",
-    "english": "today",
-    "emoji": "📆",
-    "type": "placeholder"
+    "filename": "danas_e3ef1f89.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "sutra": {
-    "filename": "sutra_80a7c19b.svg",
-    "english": "tomorrow",
-    "emoji": "➡️",
-    "type": "placeholder"
+    "filename": "sutra_80a7c19b.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "jučer": {
-    "filename": "jučer_b7b8846f.svg",
-    "english": "yesterday",
-    "emoji": "⬅️",
-    "type": "placeholder"
+    "filename": "jučer_b7b8846f.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
   },
   "januar": {
-    "filename": "januar_6b9b5ed5.svg",
-    "english": "January",
-    "emoji": "❄️",
-    "type": "placeholder"
+    "filename": "januar_6b9b5ed5.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "februar": {
-    "filename": "februar_a9e655d8.svg",
-    "english": "February",
-    "emoji": "💝",
-    "type": "placeholder"
+    "filename": "februar_a9e655d8.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "mart": {
-    "filename": "mart_1722a280.svg",
-    "english": "March",
-    "emoji": "🌷",
-    "type": "placeholder"
+    "filename": "mart_1722a280.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "april": {
-    "filename": "april_37d153a0.svg",
-    "english": "April",
-    "emoji": "🌧️",
-    "type": "placeholder"
+    "filename": "april_37d153a0.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "maj": {
-    "filename": "maj_6991b3ed.svg",
-    "english": "May",
-    "emoji": "🌸",
-    "type": "placeholder"
+    "filename": "maj_6991b3ed.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "juni": {
-    "filename": "juni_582d74b3.svg",
-    "english": "June",
-    "emoji": "☀️",
-    "type": "placeholder"
+    "filename": "juni_582d74b3.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "proljeće": {
-    "filename": "proljeće_0de2092f.svg",
-    "english": "spring",
-    "emoji": "🌼",
-    "type": "placeholder"
+    "filename": "proljeće_0de2092f.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "ljeto": {
-    "filename": "ljeto_628f3bfc.svg",
-    "english": "summer",
-    "emoji": "🏖️",
-    "type": "placeholder"
+    "filename": "ljeto_628f3bfc.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "jesen": {
-    "filename": "jesen_66d14720.svg",
-    "english": "autumn",
-    "emoji": "🍂",
-    "type": "placeholder"
+    "filename": "jesen_66d14720.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "zima": {
-    "filename": "zima_f6df56c3.svg",
-    "english": "winter",
-    "emoji": "⛄",
-    "type": "placeholder"
+    "filename": "zima_f6df56c3.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
   },
   "hljeb": {
-    "filename": "hljeb_096b2356.svg",
-    "english": "bread",
-    "emoji": "🍞",
-    "type": "placeholder"
+    "filename": "hljeb_096b2356.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "meso": {
-    "filename": "meso_05646569.svg",
-    "english": "meat",
-    "emoji": "🥩",
-    "type": "placeholder"
+    "filename": "meso_05646569.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "riba": {
-    "filename": "riba_25e801c1.svg",
-    "english": "fish",
-    "emoji": "🐟",
-    "type": "placeholder"
+    "filename": "riba_25e801c1.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "povrće": {
-    "filename": "povrće_2ba54a5d.svg",
-    "english": "vegetables",
-    "emoji": "🥕",
-    "type": "placeholder"
+    "filename": "povrće_2ba54a5d.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "voće": {
-    "filename": "voće_389561dd.svg",
-    "english": "fruit",
-    "emoji": "🍎",
-    "type": "placeholder"
+    "filename": "voće_389561dd.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "voda": {
-    "filename": "voda_34205f5b.svg",
-    "english": "water",
-    "emoji": "💧",
-    "type": "placeholder"
+    "filename": "voda_34205f5b.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "kafa": {
-    "filename": "kafa_d875fad9.svg",
-    "english": "coffee",
-    "emoji": "☕",
-    "type": "placeholder"
+    "filename": "kafa_d875fad9.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "čaj": {
-    "filename": "čaj_7cee5ff5.svg",
-    "english": "tea",
-    "emoji": "🍵",
-    "type": "placeholder"
+    "filename": "čaj_7cee5ff5.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "sok": {
-    "filename": "sok_85cc80d7.svg",
-    "english": "juice",
-    "emoji": "🧃",
-    "type": "placeholder"
+    "filename": "sok_85cc80d7.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "ćevapi": {
-    "filename": "ćevapi_90e0ba46.svg",
-    "english": "cevapi (grilled meat)",
-    "emoji": "🥙",
-    "type": "placeholder"
+    "filename": "ćevapi_90e0ba46.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
   },
   "kuća": {
-    "filename": "kuća_65abea8c.svg",
-    "english": "house",
-    "emoji": "🏠",
-    "type": "placeholder"
+    "filename": "kuća_65abea8c.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "stan": {
-    "filename": "stan_f52412c4.svg",
-    "english": "apartment",
-    "emoji": "🏢",
-    "type": "placeholder"
+    "filename": "stan_f52412c4.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "soba": {
-    "filename": "soba_8ae46083.svg",
-    "english": "room",
-    "emoji": "🚪",
-    "type": "placeholder"
+    "filename": "soba_8ae46083.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "kuhinja": {
-    "filename": "kuhinja_7299c091.svg",
-    "english": "kitchen",
-    "emoji": "🍳",
-    "type": "placeholder"
+    "filename": "kuhinja_7299c091.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "kupatilo": {
-    "filename": "kupatilo_e8417d38.svg",
-    "english": "bathroom",
-    "emoji": "🚿",
-    "type": "placeholder"
+    "filename": "kupatilo_e8417d38.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "spavaća soba": {
-    "filename": "spavaća_soba_158b5eb5.svg",
-    "english": "bedroom",
-    "emoji": "🛏️",
-    "type": "placeholder"
+    "filename": "spavaća_soba_158b5eb5.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "dnevna soba": {
-    "filename": "dnevna_soba_c4d8d667.svg",
-    "english": "living room",
-    "emoji": "🛋️",
-    "type": "placeholder"
+    "filename": "dnevna_soba_c4d8d667.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "sto": {
-    "filename": "sto_1c38a0a5.svg",
-    "english": "table",
-    "emoji": "🪑",
-    "type": "placeholder"
+    "filename": "sto_1c38a0a5.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "stolica": {
-    "filename": "stolica_1294fc4d.svg",
-    "english": "chair",
-    "emoji": "🪑",
-    "type": "placeholder"
+    "filename": "stolica_1294fc4d.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "krevet": {
-    "filename": "krevet_ee1b2876.svg",
-    "english": "bed",
-    "emoji": "🛏️",
-    "type": "placeholder"
+    "filename": "krevet_ee1b2876.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
   },
   "glava": {
-    "filename": "glava_726d7a44.svg",
-    "english": "head",
-    "emoji": "🗣️",
-    "type": "placeholder"
+    "filename": "glava_726d7a44.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "ruka": {
-    "filename": "ruka_4bda0ff4.svg",
-    "english": "arm/hand",
-    "emoji": "💪",
-    "type": "placeholder"
+    "filename": "ruka_4bda0ff4.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "noga": {
-    "filename": "noga_63095f76.svg",
-    "english": "leg/foot",
-    "emoji": "🦵",
-    "type": "placeholder"
+    "filename": "noga_63095f76.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "oko": {
-    "filename": "oko_1c1512b8.svg",
-    "english": "eye",
-    "emoji": "👁️",
-    "type": "placeholder"
+    "filename": "oko_1c1512b8.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "uho": {
-    "filename": "uho_8093809d.svg",
-    "english": "ear",
-    "emoji": "👂",
-    "type": "placeholder"
+    "filename": "uho_8093809d.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "nos": {
-    "filename": "nos_757aa470.svg",
-    "english": "nose",
-    "emoji": "👃",
-    "type": "placeholder"
+    "filename": "nos_757aa470.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "usta": {
-    "filename": "usta_7d5cd95c.svg",
-    "english": "mouth",
-    "emoji": "👄",
-    "type": "placeholder"
+    "filename": "usta_7d5cd95c.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "srce": {
-    "filename": "srce_cabf9c94.svg",
-    "english": "heart",
-    "emoji": "❤️",
-    "type": "placeholder"
+    "filename": "srce_cabf9c94.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "stomak": {
-    "filename": "stomak_2cc39d58.svg",
-    "english": "stomach",
-    "emoji": "🫃",
-    "type": "placeholder"
+    "filename": "stomak_2cc39d58.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "zub": {
-    "filename": "zub_896339aa.svg",
-    "english": "tooth",
-    "emoji": "🦷",
-    "type": "placeholder"
+    "filename": "zub_896339aa.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
   },
   "doktor": {
-    "filename": "doktor_288d78dd.svg",
-    "english": "doctor",
-    "emoji": "👨‍⚕️",
-    "type": "placeholder"
+    "filename": "doktor_288d78dd.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "učitelj": {
-    "filename": "učitelj_74e53293.svg",
-    "english": "teacher",
-    "emoji": "👩‍🏫",
-    "type": "placeholder"
+    "filename": "učitelj_74e53293.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "inženjer": {
-    "filename": "inženjer_f13610fa.svg",
-    "english": "engineer",
-    "emoji": "👷",
-    "type": "placeholder"
+    "filename": "inženjer_f13610fa.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "advokat": {
-    "filename": "advokat_0526ef90.svg",
-    "english": "lawyer",
-    "emoji": "⚖️",
-    "type": "placeholder"
+    "filename": "advokat_0526ef90.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "policajac": {
-    "filename": "policajac_7c1f251c.svg",
-    "english": "police officer",
-    "emoji": "👮",
-    "type": "placeholder"
+    "filename": "policajac_7c1f251c.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "kuhar": {
-    "filename": "kuhar_eaf354a4.svg",
-    "english": "cook/chef",
-    "emoji": "👨‍🍳",
-    "type": "placeholder"
+    "filename": "kuhar_eaf354a4.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "prodavač": {
-    "filename": "prodavač_12874531.svg",
-    "english": "salesperson",
-    "emoji": "🧑‍💼",
-    "type": "placeholder"
+    "filename": "prodavač_12874531.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "vozač": {
-    "filename": "vozač_e44af05e.svg",
-    "english": "driver",
-    "emoji": "🚗",
-    "type": "placeholder"
+    "filename": "vozač_e44af05e.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "student": {
-    "filename": "student_cd735028.svg",
-    "english": "student",
-    "emoji": "👨‍🎓",
-    "type": "placeholder"
+    "filename": "student_cd735028.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "posao": {
-    "filename": "posao_da312671.svg",
-    "english": "job/work",
-    "emoji": "💼",
-    "type": "placeholder"
+    "filename": "posao_da312671.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
   },
   "sat": {
-    "filename": "sat_53e8254b.svg",
-    "english": "hour/clock",
-    "emoji": "🕐",
-    "type": "placeholder"
+    "filename": "sat_53e8254b.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "minuta": {
-    "filename": "minuta_905295b3.svg",
-    "english": "minute",
-    "emoji": "⏱️",
-    "type": "placeholder"
+    "filename": "minuta_905295b3.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "jutro": {
-    "filename": "jutro_43756519.svg",
-    "english": "morning",
-    "emoji": "🌅",
-    "type": "placeholder"
+    "filename": "jutro_43756519.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "podne": {
-    "filename": "podne_3ba440aa.svg",
-    "english": "noon",
-    "emoji": "☀️",
-    "type": "placeholder"
+    "filename": "podne_3ba440aa.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "poslijepodne": {
-    "filename": "poslijepodne_081c46f7.svg",
-    "english": "afternoon",
-    "emoji": "🌤️",
-    "type": "placeholder"
+    "filename": "poslijepodne_081c46f7.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "veče": {
-    "filename": "veče_a1ddd911.svg",
-    "english": "evening",
-    "emoji": "🌆",
-    "type": "placeholder"
+    "filename": "veče_a1ddd911.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "noć": {
-    "filename": "noć_5a340ea7.svg",
-    "english": "night",
-    "emoji": "🌙",
-    "type": "placeholder"
+    "filename": "noć_5a340ea7.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "rano": {
-    "filename": "rano_4ac40909.svg",
-    "english": "early",
-    "emoji": "⏰",
-    "type": "placeholder"
+    "filename": "rano_4ac40909.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "kasno": {
-    "filename": "kasno_b23b59f3.svg",
-    "english": "late",
-    "emoji": "🦉",
-    "type": "placeholder"
+    "filename": "kasno_b23b59f3.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "pola": {
-    "filename": "pola_a1223486.svg",
-    "english": "half",
-    "emoji": "🕡",
-    "type": "placeholder"
+    "filename": "pola_a1223486.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
   },
   "Izvini/Izvinite": {
-    "filename": "izvini_izvinite_48b953d1.svg",
-    "english": "Excuse me/Sorry",
-    "emoji": "🙏",
-    "type": "placeholder"
+    "filename": "izvini_izvinite_48b953d1.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Naravno": {
-    "filename": "naravno_7020f54e.svg",
-    "english": "Of course",
-    "emoji": "👍",
-    "type": "placeholder"
+    "filename": "naravno_7020f54e.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Možda": {
-    "filename": "možda_e64481ee.svg",
-    "english": "Maybe",
-    "emoji": "🤔",
-    "type": "placeholder"
+    "filename": "možda_e64481ee.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Sigurno": {
-    "filename": "sigurno_77acc842.svg",
-    "english": "Certainly/Sure",
-    "emoji": "✅",
-    "type": "placeholder"
+    "filename": "sigurno_77acc842.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Nema problema": {
-    "filename": "nema_problema_f1686999.svg",
-    "english": "No problem",
-    "emoji": "😊",
-    "type": "placeholder"
+    "filename": "nema_problema_f1686999.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Šteta": {
-    "filename": "šteta_5fee5ec8.svg",
-    "english": "Too bad/Pity",
-    "emoji": "😔",
-    "type": "placeholder"
+    "filename": "šteta_5fee5ec8.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Baš lijepo": {
-    "filename": "baš_lijepo_56d077d1.svg",
-    "english": "Very nice",
-    "emoji": "😃",
-    "type": "placeholder"
+    "filename": "baš_lijepo_56d077d1.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Ne razumijem": {
-    "filename": "ne_razumijem_5e7a3b8b.svg",
-    "english": "I don't understand",
-    "emoji": "❓",
-    "type": "placeholder"
+    "filename": "ne_razumijem_5e7a3b8b.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Govori li...": {
-    "filename": "govori_li____04daa33f.svg",
-    "english": "Do you speak...",
-    "emoji": "🗣️",
-    "type": "placeholder"
+    "filename": "govori_li____04daa33f.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   },
   "Polako, molim": {
-    "filename": "polako__molim_80e3d1e6.svg",
-    "english": "Slowly, please",
-    "emoji": "🐢",
-    "type": "placeholder"
+    "filename": "polako__molim_80e3d1e6.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   }
 }
