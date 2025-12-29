@@ -33,6 +33,7 @@ function Lesson() {
     showResult: false,
     score: 0
   })
+  const [quizWritingInput, setQuizWritingInput] = useState('')
   const [flippedCards, setFlippedCards] = useState({})
   const [showCultureTranslation, setShowCultureTranslation] = useState(false)
   const [showQuizTranslation, setShowQuizTranslation] = useState(false)
@@ -53,6 +54,13 @@ function Lesson() {
   const [translationExercises, setTranslationExercises] = useState({
     answers: {},
     showResults: false
+  })
+  const [writingExercises, setWritingExercises] = useState({
+    answers: {},
+    showResults: false,
+    isPlayingAudio: false,
+    currentAudioIndex: -1,
+    checked: {}
   })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
 
@@ -98,6 +106,7 @@ function Lesson() {
     setSentenceExercises({ answers: {}, showResults: false })
     setMatchingExercises({ answers: {}, showResults: false })
     setTranslationExercises({ answers: {}, showResults: false })
+    setWritingExercises({ answers: {}, showResults: false, isPlayingAudio: false, currentAudioIndex: -1, checked: {} })
     setActiveExerciseType('fillBlank')
     setTranslationInputs({})
     setMatchedPairs({})
@@ -250,6 +259,34 @@ function Lesson() {
       answers: newAnswers,
       score: newScore
     }))
+    setQuizWritingInput('')
+  }
+
+  // Handle writing quiz answers
+  const handleQuizWritingSubmit = async () => {
+    const currentQ = lesson.quiz[quizState.currentQuestion]
+    const userAnswer = quizWritingInput.toLowerCase().trim().replace(/[.!?,;:]+$/, '')
+    const correctAnswer = currentQ.correct_answer_text.toLowerCase().trim().replace(/[.!?,;:]+$/, '')
+    const isCorrect = userAnswer === correctAnswer
+    const newScore = isCorrect ? quizState.score + 1 : quizState.score
+    
+    const newAnswers = [...quizState.answers, { 
+      selected: quizWritingInput, 
+      correct: isCorrect,
+      isWriting: true,
+      correctText: currentQ.correct_answer_text
+    }]
+    
+    setQuizState(prev => ({
+      ...prev,
+      answers: newAnswers,
+      score: newScore
+    }))
+
+    // Play audio for the correct answer
+    setTimeout(() => {
+      speak(currentQ.correct_answer_text)
+    }, 300)
 
     // Save quiz progress after each answer
     const quizAnswersToSave = {}
@@ -259,6 +296,7 @@ function Lesson() {
     saveProgressToBackend(quizAnswersToSave, quizState.currentQuestion + 1, null)
 
     setTimeout(async () => {
+      setQuizWritingInput('')
       if (quizState.currentQuestion < lesson.quiz.length - 1) {
         setQuizState(prev => ({ ...prev, currentQuestion: prev.currentQuestion + 1 }))
       } else {
@@ -302,13 +340,14 @@ function Lesson() {
           setQuizResult(result)
         }
       }
-    }, 500)
+    }, 2000)
   }
 
   const resetQuiz = () => {
     setQuizState({ currentQuestion: 0, answers: [], showResult: false, score: 0 })
     setShowQuizTranslation(false)
     setQuizResult(null)
+    setQuizWritingInput('')
   }
 
   // Lesson-specific exercise data
@@ -343,6 +382,18 @@ function Lesson() {
         { id: 2, english: "She is a teacher", bosnian: "Ona je učiteljica", options: ["On je učitelj", "Ona je učiteljica", "Mi smo učitelji", "Ti si učenik"] },
         { id: 3, english: "We are friends", bosnian: "Mi smo prijatelji", options: ["Ja sam prijatelj", "Mi smo prijatelji", "Vi ste prijatelji", "Oni su prijatelji"] },
         { id: 4, english: "You are welcome", bosnian: "Vi ste dobrodošli", options: ["Ti si dobrodošao", "Vi ste dobrodošli", "Mi smo dobrodošli", "Oni su dobrodošli"] }
+      ],
+      writing: [
+        { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?" },
+        { id: 2, english: "I am fine, thank you.", bosnian: "Ja sam dobro, hvala." },
+        { id: 3, english: "Nice to meet you.", bosnian: "Drago mi je." },
+        { id: 4, english: "What is your name?", bosnian: "Kako se zoveš?" },
+        { id: 5, english: "My name is Ahmed.", bosnian: "Ja se zovem Ahmed." },
+        { id: 6, english: "Where are you from?", bosnian: "Odakle si?" },
+        { id: 7, english: "I am from Bosnia.", bosnian: "Ja sam iz Bosne." },
+        { id: 8, english: "Good morning!", bosnian: "Dobro jutro!" },
+        { id: 9, english: "Goodbye!", bosnian: "Doviđenja!" },
+        { id: 10, english: "See you tomorrow.", bosnian: "Vidimo se sutra." }
       ]
     },
     // Lesson 2: Numbers (with ordinals and noun agreement)
@@ -375,6 +426,18 @@ function Lesson() {
         { id: 2, english: "I have two sisters", bosnian: "Imam dvije sestre", options: ["Imam jednu sestru", "Imam dvije sestre", "Imam tri sestre", "Imam pet sestara"] },
         { id: 3, english: "One man and two women", bosnian: "Jedan čovjek i dvije žene", options: ["Dva čovjeka i jedna žena", "Jedan čovjek i dvije žene", "Tri čovjeka i pet žena", "Pet ljudi"] },
         { id: 4, english: "The third lesson", bosnian: "Treća lekcija", options: ["Prva lekcija", "Druga lekcija", "Treća lekcija", "Četvrta lekcija"] }
+      ],
+      writing: [
+        { id: 1, english: "I have one brother.", bosnian: "Imam jednog brata." },
+        { id: 2, english: "She has two sisters.", bosnian: "Ona ima dvije sestre." },
+        { id: 3, english: "This is my first day.", bosnian: "Ovo je moj prvi dan." },
+        { id: 4, english: "I bought three apples.", bosnian: "Kupio sam tri jabuke." },
+        { id: 5, english: "There are five students.", bosnian: "Ima pet učenika." },
+        { id: 6, english: "This is the second lesson.", bosnian: "Ovo je druga lekcija." },
+        { id: 7, english: "I am twenty years old.", bosnian: "Imam dvadeset godina." },
+        { id: 8, english: "One coffee, please.", bosnian: "Jednu kafu, molim." },
+        { id: 9, english: "I have four children.", bosnian: "Imam četvero djece." },
+        { id: 10, english: "This is the third time.", bosnian: "Ovo je treći put." }
       ]
     },
     // Lesson 3: Colors & Adjective Agreement (rod pridjeva)
@@ -407,6 +470,18 @@ function Lesson() {
         { id: 2, english: "The Old Bridge is white", bosnian: "Stari Most je bijel", options: ["Stari Most je crn", "Stari Most je bijel", "Stari Most je zelen", "Stari Most je plav"] },
         { id: 3, english: "I love black coffee", bosnian: "Volim crnu kafu", options: ["Volim bijelu kafu", "Volim crnu kafu", "Volim zelenu kafu", "Volim crvenu kafu"] },
         { id: 4, english: "The green mountains", bosnian: "Zelene planine", options: ["Crvene planine", "Plave planine", "Zelene planine", "Bijele planine"] }
+      ],
+      writing: [
+        { id: 1, english: "The flag is blue and yellow.", bosnian: "Zastava je plava i žuta." },
+        { id: 2, english: "The white mosque is beautiful.", bosnian: "Bijela džamija je lijepa." },
+        { id: 3, english: "Bosnian coffee is black.", bosnian: "Bosanska kafa je crna." },
+        { id: 4, english: "The red carpet is traditional.", bosnian: "Crveni ćilim je tradicionalan." },
+        { id: 5, english: "The sky is blue.", bosnian: "Nebo je plavo." },
+        { id: 6, english: "I like green color.", bosnian: "Volim zelenu boju." },
+        { id: 7, english: "The Old Bridge is white.", bosnian: "Stari Most je bijel." },
+        { id: 8, english: "She has black hair.", bosnian: "Ona ima crnu kosu." },
+        { id: 9, english: "The yellow sun is shining.", bosnian: "Žuto sunce sija." },
+        { id: 10, english: "The green river is cold.", bosnian: "Zelena rijeka je hladna." }
       ]
     },
     // Lesson 4: Family (Possessive pronouns - moj/moja/moje, tvoj/tvoja, njegov/njena, naš/naša)
@@ -415,12 +490,12 @@ function Lesson() {
         { id: 1, sentence: "_____ majka pravi pitu.", answer: "Moja", translation: "My mother makes pie.", options: ["Moj", "Moja", "Moje", "Tvoja"] },
         { id: 2, sentence: "Gdje je _____ otac?", answer: "tvoj", translation: "Where is your father?", options: ["moj", "tvoj", "njegov", "naš"] },
         { id: 3, sentence: "_____ sestra je mlađa od mene.", answer: "Njegova", translation: "His sister is younger than him.", options: ["Moja", "Tvoja", "Njegova", "Njena"] },
-        { id: 4, sentence: "_____ baka živi u Zenici.", answer: "Naša", translation: "Our grandmother lives in Zenica.", options: ["Moja", "Tvoja", "Njegova", "Naša"] },
+        { id: 4, sentence: "_____ nana živi u Zenici.", answer: "Naša", translation: "Our grandmother lives in Zenica.", options: ["Moja", "Tvoja", "Njegova", "Naša"] },
         { id: 5, sentence: "Ovo je _____ dijete.", answer: "njeno", translation: "This is her child.", options: ["moje", "tvoje", "njegovo", "njeno"] },
         { id: 6, sentence: "_____ djed čita novine.", answer: "Moj", translation: "My grandfather reads newspapers.", options: ["Moj", "Moja", "Moje", "Moji"] }
       ],
       sentenceOrder: [
-        { id: 1, scrambled: ["pravi", "baka", "pitu", "Moja"], correct: ["Moja", "baka", "pravi", "pitu"], translation: "My grandmother makes pie." },
+        { id: 1, scrambled: ["pravi", "nana", "pitu", "Moja"], correct: ["Moja", "nana", "pravi", "pitu"], translation: "My grandmother makes pie." },
         { id: 2, scrambled: ["je", "sin", "Njegov", "visok"], correct: ["Njegov", "sin", "je", "visok"], translation: "His son is tall." },
         { id: 3, scrambled: ["u", "živi", "Naša", "Sarajevu", "porodica"], correct: ["Naša", "porodica", "živi", "u", "Sarajevu"], translation: "Our family lives in Sarajevo." },
         { id: 4, scrambled: ["kći", "Njena", "studentica", "je"], correct: ["Njena", "kći", "je", "studentica"], translation: "Her daughter is a student." }
@@ -430,13 +505,25 @@ function Lesson() {
         { id: 2, bosnian: "Tvoja sestra", english: "Your sister" },
         { id: 3, bosnian: "Njegov otac", english: "His father" },
         { id: 4, bosnian: "Njena majka", english: "Her mother" },
-        { id: 5, bosnian: "Naša baka", english: "Our grandmother" },
+        { id: 5, bosnian: "Naša nana", english: "Our grandmother" },
         { id: 6, bosnian: "Njihov djed", english: "Their grandfather" }
       ],
       translation: [
-        { id: 1, english: "My grandmother makes the best pie", bosnian: "Moja baka pravi najbolju pitu", options: ["Moja baka pravi najbolju pitu", "Tvoja baka pravi pitu", "Njegova majka pravi pitu", "Naša sestra pravi pitu"] },
+        { id: 1, english: "My grandmother makes the best pie", bosnian: "Moja nana pravi najbolju pitu", options: ["Moja nana pravi najbolju pitu", "Tvoja nana pravi pitu", "Njegova majka pravi pitu", "Naša sestra pravi pitu"] },
         { id: 2, english: "His wife is a teacher", bosnian: "Njegova žena je učiteljica", options: ["Moja žena je učiteljica", "Tvoja žena je učiteljica", "Njegova žena je učiteljica", "Njena žena je učiteljica"] },
         { id: 3, english: "Our family is big", bosnian: "Naša porodica je velika", options: ["Moja porodica je velika", "Tvoja porodica je velika", "Naša porodica je velika", "Njihova porodica je velika"] }
+      ],
+      writing: [
+        { id: 1, english: "My mother makes pie.", bosnian: "Moja majka pravi pitu." },
+        { id: 2, english: "Where is your father?", bosnian: "Gdje je tvoj otac?" },
+        { id: 3, english: "His sister is young.", bosnian: "Njegova sestra je mlada." },
+        { id: 4, english: "Our grandmother lives in Zenica.", bosnian: "Naša nana živi u Zenici." },
+        { id: 5, english: "This is her child.", bosnian: "Ovo je njeno dijete." },
+        { id: 6, english: "My grandfather reads newspapers.", bosnian: "Moj djed čita novine." },
+        { id: 7, english: "Her daughter is a student.", bosnian: "Njena kći je studentica." },
+        { id: 8, english: "Our family is big.", bosnian: "Naša porodica je velika." },
+        { id: 9, english: "My brother is tall.", bosnian: "Moj brat je visok." },
+        { id: 10, english: "Their son works in Sarajevo.", bosnian: "Njihov sin radi u Sarajevu." }
       ]
     },
     // Lesson 5: Days of the Week (danas/sutra/jučer, u + dan, redoslijed dana)
@@ -444,7 +531,7 @@ function Lesson() {
       fillBlank: [
         { id: 1, sentence: "_____ je petak. Sutra je subota!", answer: "Danas", translation: "Today is Friday. Tomorrow is Saturday!", options: ["Danas", "Sutra", "Jučer", "Preksutra"] },
         { id: 2, sentence: "U _____ idem na pijacu Markale.", answer: "subotu", translation: "On Saturday I go to Markale market.", options: ["ponedjeljak", "srijedu", "subotu", "nedjelju"] },
-        { id: 3, sentence: "_____ sam bio kod bake.", answer: "Jučer", translation: "Yesterday I was at grandma's.", options: ["Danas", "Sutra", "Jučer", "Prekosutra"] },
+        { id: 3, sentence: "_____ sam bio kod nane.", answer: "Jučer", translation: "Yesterday I was at grandma's.", options: ["Danas", "Sutra", "Jučer", "Prekosutra"] },
         { id: 4, sentence: "Koji dan dolazi poslije utorka? _____.", answer: "Srijeda", translation: "Which day comes after Tuesday? Wednesday.", options: ["Ponedjeljak", "Srijeda", "Četvrtak", "Petak"] },
         { id: 5, sentence: "U _____ radim, a u nedjelju odmaram.", answer: "ponedjeljak", translation: "On Monday I work, and on Sunday I rest.", options: ["ponedjeljak", "subotu", "nedjelju", "petak"] },
         { id: 6, sentence: "_____ je dan prije subote.", answer: "Petak", translation: "Friday is the day before Saturday.", options: ["Četvrtak", "Petak", "Nedjelja", "Srijeda"] }
@@ -453,7 +540,7 @@ function Lesson() {
         { id: 1, scrambled: ["dan", "je", "Koji", "danas"], correct: ["Koji", "je", "danas", "dan"], translation: "What day is it today?" },
         { id: 2, scrambled: ["je", "petak", "Danas"], correct: ["Danas", "je", "petak"], translation: "Today is Friday." },
         { id: 3, scrambled: ["subotu", "U", "pijacu", "idem", "na"], correct: ["U", "subotu", "idem", "na", "pijacu"], translation: "On Saturday I go to the market." },
-        { id: 4, scrambled: ["bio", "Jučer", "sam", "kod", "bake"], correct: ["Jučer", "sam", "bio", "kod", "bake"], translation: "Yesterday I was at grandma's." },
+        { id: 4, scrambled: ["bio", "Jučer", "sam", "kod", "nane"], correct: ["Jučer", "sam", "bio", "kod", "nane"], translation: "Yesterday I was at grandma's." },
         { id: 5, scrambled: ["je", "Sutra", "nedjelja"], correct: ["Sutra", "je", "nedjelja"], translation: "Tomorrow is Sunday." }
       ],
       matching: [
@@ -469,6 +556,18 @@ function Lesson() {
         { id: 2, english: "Tomorrow is Saturday", bosnian: "Sutra je subota", options: ["Danas je subota", "Sutra je subota", "Jučer je bila subota", "Sutra je petak"] },
         { id: 3, english: "On Friday I go to the market", bosnian: "U petak idem na pijacu", options: ["U petak idem na pijacu", "U subotu idem na pijacu", "Danas idem na pijacu", "Jučer sam išao na pijacu"] },
         { id: 4, english: "Yesterday was Thursday", bosnian: "Jučer je bio četvrtak", options: ["Jučer je bio četvrtak", "Danas je četvrtak", "Sutra je četvrtak", "Jučer je bila srijeda"] }
+      ],
+      writing: [
+        { id: 1, english: "What day is it today?", bosnian: "Koji je danas dan?" },
+        { id: 2, english: "Today is Friday.", bosnian: "Danas je petak." },
+        { id: 3, english: "Tomorrow is Saturday.", bosnian: "Sutra je subota." },
+        { id: 4, english: "Yesterday I was at grandma's.", bosnian: "Jučer sam bio kod nane." },
+        { id: 5, english: "On Saturday I go to the market.", bosnian: "U subotu idem na pijacu." },
+        { id: 6, english: "On Monday I work.", bosnian: "U ponedjeljak radim." },
+        { id: 7, english: "Sunday is a day of rest.", bosnian: "Nedjelja je dan odmora." },
+        { id: 8, english: "Wednesday comes after Tuesday.", bosnian: "Srijeda dolazi poslije utorka." },
+        { id: 9, english: "Friday is before Saturday.", bosnian: "Petak je prije subote." },
+        { id: 10, english: "I love weekends.", bosnian: "Volim vikende." }
       ]
     },
     // Lesson 6: Months and Seasons (u + mjesec, godišnja doba, rođendan)
@@ -501,6 +600,18 @@ function Lesson() {
         { id: 2, english: "My birthday is in December", bosnian: "Moj rođendan je u decembru", options: ["Moj rođendan je u maju", "Moj rođendan je u decembru", "Moj rođendan je u julu", "Moj rođendan je u martu"] },
         { id: 3, english: "Snow falls in winter", bosnian: "Snijeg pada zimi", options: ["Snijeg pada ljeti", "Snijeg pada zimi", "Snijeg pada u proljeće", "Snijeg pada u jesen"] },
         { id: 4, english: "In July we go to Neum", bosnian: "U julu idemo u Neum", options: ["U januaru idemo u Neum", "U julu idemo u Neum", "U martu idemo u Neum", "U oktobru idemo u Neum"] }
+      ],
+      writing: [
+        { id: 1, english: "When is your birthday?", bosnian: "Kada je tvoj rođendan?" },
+        { id: 2, english: "My birthday is in May.", bosnian: "Moj rođendan je u maju." },
+        { id: 3, english: "In January snow falls.", bosnian: "U januaru pada snijeg." },
+        { id: 4, english: "Summer is warm.", bosnian: "Ljeto je toplo." },
+        { id: 5, english: "Spring begins in March.", bosnian: "Proljeće počinje u martu." },
+        { id: 6, english: "In July we go to the sea.", bosnian: "U julu idemo na more." },
+        { id: 7, english: "Winter is cold.", bosnian: "Zima je hladna." },
+        { id: 8, english: "In autumn leaves fall.", bosnian: "U jesen lišće pada." },
+        { id: 9, english: "December is cold.", bosnian: "Decembar je hladan." },
+        { id: 10, english: "I love spring.", bosnian: "Volim proljeće." }
       ]
     },
     // Lesson 7: Food and Drink (volim/ne volim, želim, koliko košta, naručivanje)
@@ -533,6 +644,18 @@ function Lesson() {
         { id: 2, english: "I don't like onions", bosnian: "Ne volim luk", options: ["Volim luk", "Ne volim luk", "Želim luk", "Imam luk"] },
         { id: 3, english: "How much does coffee cost?", bosnian: "Koliko košta kafa?", options: ["Koliko košta kafa?", "Gdje je kafa?", "Želim kafu", "Volim kafu"] },
         { id: 4, english: "What would you like to eat?", bosnian: "Šta želite jesti?", options: ["Šta želite jesti?", "Šta volite jesti?", "Koliko košta?", "Gdje je restoran?"] }
+      ],
+      writing: [
+        { id: 1, english: "I love cevapi with onions.", bosnian: "Volim ćevape sa lukom." },
+        { id: 2, english: "I don't like fish.", bosnian: "Ne volim ribu." },
+        { id: 3, english: "I want one Bosnian coffee, please.", bosnian: "Želim jednu bosansku kafu, molim." },
+        { id: 4, english: "How much does burek cost?", bosnian: "Koliko košta burek?" },
+        { id: 5, english: "The bill, please.", bosnian: "Račun, molim." },
+        { id: 6, english: "What would you like to drink?", bosnian: "Šta želite piti?" },
+        { id: 7, english: "I am hungry.", bosnian: "Gladan sam." },
+        { id: 8, english: "The food is delicious.", bosnian: "Hrana je ukusna." },
+        { id: 9, english: "Can I get water?", bosnian: "Mogu li dobiti vodu?" },
+        { id: 10, english: "I want pie with cheese.", bosnian: "Želim pitu sa sirom." }
       ]
     },
     // Lesson 8: House and Apartment (prijedlozi mjesta: u, na, ispod, iznad, pored, između, iza, ispred)
@@ -565,6 +688,18 @@ function Lesson() {
         { id: 2, english: "I live in an apartment", bosnian: "Živim u stanu", options: ["Živim u kući", "Živim u stanu", "Imam stan", "Volim stan"] },
         { id: 3, english: "The kitchen is next to the living room", bosnian: "Kuhinja je pored dnevne sobe", options: ["Kuhinja je pored dnevne sobe", "Kuhinja je iza dnevne sobe", "Kuhinja je u dnevnoj sobi", "Kuhinja je ispod dnevne sobe"] },
         { id: 4, english: "The cat is under the table", bosnian: "Mačka je ispod stola", options: ["Mačka je na stolu", "Mačka je ispod stola", "Mačka je pored stola", "Mačka je iza stola"] }
+      ],
+      writing: [
+        { id: 1, english: "I live in an apartment in Sarajevo.", bosnian: "Živim u stanu u Sarajevu." },
+        { id: 2, english: "The book is on the table.", bosnian: "Knjiga je na stolu." },
+        { id: 3, english: "The cat is under the bed.", bosnian: "Mačka je ispod kreveta." },
+        { id: 4, english: "The picture is above the door.", bosnian: "Slika je iznad vrata." },
+        { id: 5, english: "The bathroom is next to the bedroom.", bosnian: "Kupatilo je pored spavaće sobe." },
+        { id: 6, english: "Where do you live?", bosnian: "Gdje živiš?" },
+        { id: 7, english: "I live in a big house.", bosnian: "Živim u velikoj kući." },
+        { id: 8, english: "The garden is behind the house.", bosnian: "Vrt je iza kuće." },
+        { id: 9, english: "The chair is between the table and the wall.", bosnian: "Stolica je između stola i zida." },
+        { id: 10, english: "The kitchen is in my apartment.", bosnian: "Kuhinja je u mom stanu." }
       ]
     },
     // Lesson 9: Body and Health (boli me..., bole me..., dijelovi tijela, kako se osjećate)
@@ -597,6 +732,18 @@ function Lesson() {
         { id: 2, english: "I am tired", bosnian: "Umoran sam", options: ["Umoran sam", "Bolestan sam", "Sretan sam", "Gladan sam"] },
         { id: 3, english: "My eyes hurt", bosnian: "Bole me oči", options: ["Boli me oko", "Bole me oči", "Imam oči", "Vidim oči"] },
         { id: 4, english: "How are you feeling?", bosnian: "Kako se osjećate?", options: ["Kako se osjećate?", "Kako se zovete?", "Gdje živite?", "Šta radite?"] }
+      ],
+      writing: [
+        { id: 1, english: "My head hurts.", bosnian: "Boli me glava." },
+        { id: 2, english: "My eyes hurt.", bosnian: "Bole me oči." },
+        { id: 3, english: "I am sick today.", bosnian: "Bolestan sam danas." },
+        { id: 4, english: "How are you feeling?", bosnian: "Kako se osjećate?" },
+        { id: 5, english: "I am tired.", bosnian: "Umoran sam." },
+        { id: 6, english: "My stomach hurts.", bosnian: "Boli me stomak." },
+        { id: 7, english: "I need rest.", bosnian: "Trebam odmor." },
+        { id: 8, english: "I am not well.", bosnian: "Loše sam." },
+        { id: 9, english: "My throat hurts.", bosnian: "Boli me grlo." },
+        { id: 10, english: "I feel good.", bosnian: "Osjećam se dobro." }
       ]
     },
     // Lesson 10: Jobs and Work
@@ -621,6 +768,18 @@ function Lesson() {
       translation: [
         { id: 1, english: "What do you do?", bosnian: "Čime se baviš?", options: ["Čime se baviš?", "Kako si?", "Gdje živiš?", "Koliko imaš godina?"] },
         { id: 2, english: "I work as an engineer", bosnian: "Radim kao inženjer", options: ["Radim kao inženjer", "Radim kao doktor", "Radim kao učitelj", "Radim kao kuhar"] }
+      ],
+      writing: [
+        { id: 1, english: "I work as a teacher.", bosnian: "Radim kao učitelj." },
+        { id: 2, english: "She is a doctor.", bosnian: "Ona je doktorica." },
+        { id: 3, english: "My father works in a hospital.", bosnian: "Moj otac radi u bolnici." },
+        { id: 4, english: "What do you do?", bosnian: "Čime se baviš?" },
+        { id: 5, english: "I work at a school.", bosnian: "Radim u školi." },
+        { id: 6, english: "He is an engineer.", bosnian: "On je inženjer." },
+        { id: 7, english: "My mother is a cook.", bosnian: "Moja majka je kuharica." },
+        { id: 8, english: "I am a student.", bosnian: "Ja sam student." },
+        { id: 9, english: "Where do you work?", bosnian: "Gdje radiš?" },
+        { id: 10, english: "She works in an office.", bosnian: "Ona radi u kancelariji." }
       ]
     },
     // Lesson 11: Time
@@ -645,6 +804,18 @@ function Lesson() {
       translation: [
         { id: 1, english: "What time is it?", bosnian: "Koliko je sati?", options: ["Koliko je sati?", "Koji je dan?", "Kako si?", "Gdje si?"] },
         { id: 2, english: "It's half past two", bosnian: "Pola tri je", options: ["Dva sata je", "Pola tri je", "Tri sata je", "Četvrt tri je"] }
+      ],
+      writing: [
+        { id: 1, english: "What time is it?", bosnian: "Koliko je sati?" },
+        { id: 2, english: "It is eight o'clock.", bosnian: "Sada je osam sati." },
+        { id: 3, english: "It is half past nine.", bosnian: "Pola deset je." },
+        { id: 4, english: "The movie starts at five.", bosnian: "Film počinje u pet." },
+        { id: 5, english: "Good morning!", bosnian: "Dobro jutro!" },
+        { id: 6, english: "Good evening!", bosnian: "Dobro veče!" },
+        { id: 7, english: "Good night!", bosnian: "Laku noć!" },
+        { id: 8, english: "It is noon.", bosnian: "Sada je podne." },
+        { id: 9, english: "I wake up at seven.", bosnian: "Buđim se u sedam." },
+        { id: 10, english: "I go to sleep at eleven.", bosnian: "Idem spavati u jedanaest." }
       ]
     },
     // Lesson 12: Basic Phrases
@@ -669,6 +840,18 @@ function Lesson() {
       translation: [
         { id: 1, english: "Do you speak English?", bosnian: "Govorite li engleski?", options: ["Govorite li engleski?", "Govorite li bosanski?", "Razumijete li?", "Možete li?"] },
         { id: 2, english: "I don't understand", bosnian: "Ne razumijem", options: ["Ne razumijem", "Ne znam", "Ne mogu", "Ne volim"] }
+      ],
+      writing: [
+        { id: 1, english: "Excuse me, I don't understand.", bosnian: "Izvinite, ne razumijem." },
+        { id: 2, english: "Do you speak English?", bosnian: "Govorite li engleski?" },
+        { id: 3, english: "You're welcome!", bosnian: "Nema na čemu!" },
+        { id: 4, english: "Can you help me?", bosnian: "Možete li mi pomoći?" },
+        { id: 5, english: "I don't understand Bosnian.", bosnian: "Ne razumijem bosanski." },
+        { id: 6, english: "Slowly, please.", bosnian: "Polako, molim." },
+        { id: 7, english: "Of course!", bosnian: "Naravno!" },
+        { id: 8, english: "No problem.", bosnian: "Nema problema." },
+        { id: 9, english: "Maybe tomorrow.", bosnian: "Možda sutra." },
+        { id: 10, english: "Thank you very much.", bosnian: "Hvala lijepo." }
       ]
     }
   }
@@ -679,6 +862,7 @@ function Lesson() {
   const sentenceOrderingList = currentExercises.sentenceOrder
   const matchingList = currentExercises.matching
   const translationList = currentExercises.translation
+  const writingList = currentExercises.writing || []
 
   // Get options for fill-blank based on lesson
   const getVerbOptions = () => {
@@ -899,6 +1083,127 @@ function Lesson() {
     return correct
   }
 
+  // Writing exercise handlers
+  const handleWritingInput = (id, value) => {
+    setWritingExercises(prev => ({
+      ...prev,
+      answers: { ...prev.answers, [id]: value }
+    }))
+  }
+
+  const normalizeText = (text) => {
+    if (!text) return ''
+    return text.toLowerCase().trim()
+      .replace(/[.!?,;:]+$/, '') // Remove trailing punctuation
+      .replace(/\s+/g, ' ') // Normalize spaces
+  }
+
+  // Calculate similarity score between two strings (Levenshtein-based percentage)
+  const calculateSimilarity = (userText, correctText) => {
+    const user = normalizeText(userText)
+    const correct = normalizeText(correctText)
+    
+    if (user === correct) return 100
+    if (!user) return 0
+    
+    // Simple word-based scoring
+    const userWords = user.split(' ')
+    const correctWords = correct.split(' ')
+    
+    let matchedWords = 0
+    userWords.forEach(word => {
+      if (correctWords.some(cw => cw === word || cw.includes(word) || word.includes(cw))) {
+        matchedWords++
+      }
+    })
+    
+    const wordScore = (matchedWords / Math.max(correctWords.length, userWords.length)) * 100
+    
+    // Character similarity bonus
+    let charMatches = 0
+    const minLen = Math.min(user.length, correct.length)
+    for (let i = 0; i < minLen; i++) {
+      if (user[i] === correct[i]) charMatches++
+    }
+    const charScore = (charMatches / Math.max(user.length, correct.length)) * 100
+    
+    return Math.round((wordScore * 0.6 + charScore * 0.4))
+  }
+
+  // Get rating based on similarity score
+  const getScoreRating = (score) => {
+    if (score === 100) return { emoji: '🌟', text: 'Savršeno!', color: 'text-green-600' }
+    if (score >= 80) return { emoji: '👏', text: 'Odlično!', color: 'text-green-500' }
+    if (score >= 60) return { emoji: '👍', text: 'Dobro!', color: 'text-yellow-600' }
+    if (score >= 40) return { emoji: '💪', text: 'Nastavi vježbati!', color: 'text-orange-500' }
+    return { emoji: '📚', text: 'Pokušaj ponovo', color: 'text-red-500' }
+  }
+
+  // Submit single sentence for checking
+  const submitWritingSentence = (id) => {
+    const item = writingList.find(w => w.id === id)
+    if (!item) return
+    
+    const userAnswer = writingExercises.answers[id] || ''
+    const score = calculateSimilarity(userAnswer, item.bosnian)
+    
+    setWritingExercises(prev => ({
+      ...prev,
+      checked: { ...prev.checked, [id]: { score, submitted: true } }
+    }))
+    
+    // Play audio after short delay
+    setTimeout(() => {
+      speak(item.bosnian)
+    }, 300)
+  }
+
+  // Handle Enter key press to submit
+  const handleWritingKeyPress = (e, id) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      submitWritingSentence(id)
+    }
+  }
+
+  const resetWritingExercises = () => {
+    setWritingExercises({ answers: {}, showResults: false, isPlayingAudio: false, currentAudioIndex: -1, checked: {} })
+  }
+
+  const getWritingScore = () => {
+    let total = 0
+    let count = 0
+    writingList.forEach(item => {
+      if (writingExercises.checked?.[item.id]?.submitted) {
+        total += writingExercises.checked[item.id].score
+        count++
+      }
+    })
+    return count > 0 ? Math.round(total / count) : 0
+  }
+
+  const getCompletedCount = () => {
+    return writingList.filter(item => writingExercises.checked?.[item.id]?.submitted).length
+  }
+
+  const playAllWritingAudio = async () => {
+    if (writingExercises.isPlayingAudio) return
+    
+    setWritingExercises(prev => ({ ...prev, isPlayingAudio: true, currentAudioIndex: 0 }))
+    
+    for (let i = 0; i < writingList.length; i++) {
+      setWritingExercises(prev => ({ ...prev, currentAudioIndex: i }))
+      await new Promise(resolve => {
+        speak(writingList[i].bosnian)
+        // Wait for speech to complete (estimate based on text length)
+        const waitTime = Math.max(2000, writingList[i].bosnian.length * 80)
+        setTimeout(resolve, waitTime)
+      })
+    }
+    
+    setWritingExercises(prev => ({ ...prev, isPlayingAudio: false, currentAudioIndex: -1 }))
+  }
+
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
@@ -985,7 +1290,8 @@ function Lesson() {
     { id: 'fillBlank', label: 'Popuni prazninu', icon: '✏️' },
     { id: 'sentenceOrder', label: 'Složi rečenicu', icon: '🔀' },
     { id: 'matching', label: 'Spoji parove', icon: '🔗' },
-    { id: 'translation', label: 'Prevedi', icon: '🌍' }
+    { id: 'translation', label: 'Prevedi', icon: '🌍' },
+    { id: 'writing', label: 'Piši', icon: '✍️' }
   ]
 
   return (
@@ -1683,6 +1989,154 @@ function Lesson() {
                   </div>
                 </div>
               )}
+
+              {/* Writing Exercises */}
+              {activeExerciseType === 'writing' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">✍️ Piši na bosanskom - {lesson?.title || 'Vježba'}</h3>
+                  <p className="text-gray-600 mb-4">Napiši prijevod i pritisni Enter za provjeru. Zvuk će se automatski pustiti.</p>
+
+                  {/* Progress indicator */}
+                  <div className="mb-4 p-3 bg-gray-50 rounded-lg flex items-center justify-between">
+                    <span className="text-gray-600">Napredak: <strong>{getCompletedCount()}</strong> / {writingList.length}</span>
+                    {getCompletedCount() > 0 && (
+                      <span className="text-bosnia-blue font-medium">Prosječna ocjena: <strong>{getWritingScore()}%</strong></span>
+                    )}
+                  </div>
+
+                  <div className="space-y-4">
+                    {writingList.map((exercise) => {
+                      const userAnswer = writingExercises.answers[exercise.id] || ''
+                      const checkedData = writingExercises.checked?.[exercise.id]
+                      const isChecked = checkedData?.submitted
+                      const score = checkedData?.score || 0
+                      const rating = getScoreRating(score)
+                      const isCurrentlyPlaying = writingExercises.currentAudioIndex === writingList.indexOf(exercise)
+
+                      return (
+                        <div
+                          key={exercise.id}
+                          className={`p-4 rounded-xl border-2 transition-all ${
+                            isChecked
+                              ? score === 100 ? 'bg-green-50 border-green-300' 
+                                : score >= 60 ? 'bg-yellow-50 border-yellow-300' 
+                                : 'bg-red-50 border-red-300'
+                              : isCurrentlyPlaying ? 'bg-blue-50 border-blue-400 ring-2 ring-blue-300' : 'bg-white border-gray-200'
+                          }`}
+                        >
+                          {/* English sentence to translate */}
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="flex items-center space-x-2">
+                              <span className={`px-2 py-1 rounded text-sm font-bold ${isChecked ? 'bg-gray-500' : 'bg-bosnia-blue'} text-white`}>#{exercise.id}</span>
+                              <span className="text-lg font-medium text-gray-800">🇬🇧 {exercise.english}</span>
+                            </div>
+                            {isChecked && (
+                              <div className={`flex items-center space-x-1 px-3 py-1 rounded-full ${score === 100 ? 'bg-green-100' : score >= 60 ? 'bg-yellow-100' : 'bg-red-100'}`}>
+                                <span className="text-lg">{rating.emoji}</span>
+                                <span className={`font-bold ${rating.color}`}>{score}%</span>
+                              </div>
+                            )}
+                          </div>
+                          
+                          {/* Input field with submit button */}
+                          <div className="flex space-x-2">
+                            <div className="relative flex-1">
+                              <input
+                                type="text"
+                                value={userAnswer}
+                                onChange={(e) => handleWritingInput(exercise.id, e.target.value)}
+                                onKeyPress={(e) => handleWritingKeyPress(e, exercise.id)}
+                                disabled={isChecked}
+                                placeholder="Napiši prijevod na bosanskom i pritisni Enter..."
+                                className={`w-full px-4 py-3 rounded-lg border-2 text-lg transition-all ${
+                                  isChecked
+                                    ? score === 100 
+                                      ? 'bg-green-100 border-green-400 text-green-700' 
+                                      : score >= 60 
+                                        ? 'bg-yellow-100 border-yellow-400 text-yellow-700'
+                                        : 'bg-red-100 border-red-400 text-red-700'
+                                    : 'border-gray-300 focus:border-bosnia-blue focus:ring-2 focus:ring-blue-200'
+                                }`}
+                              />
+                            </div>
+                            {!isChecked && (
+                              <button
+                                onClick={() => submitWritingSentence(exercise.id)}
+                                disabled={!userAnswer.trim()}
+                                className={`px-4 py-3 rounded-lg font-medium transition-all ${
+                                  userAnswer.trim() 
+                                    ? 'bg-green-500 text-white hover:bg-green-600' 
+                                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                }`}
+                              >
+                                <CheckCircle className="w-6 h-6" />
+                              </button>
+                            )}
+                            {isChecked && (
+                              <button
+                                onClick={() => speak(exercise.bosnian)}
+                                className="px-4 py-3 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition-all"
+                                title="Slušaj ponovo"
+                              >
+                                <Volume2 className="w-6 h-6" />
+                              </button>
+                            )}
+                          </div>
+                          
+                          {/* Show result after checking */}
+                          {isChecked && (
+                            <div className="mt-3 p-3 bg-white rounded-lg border border-gray-200">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className={`font-medium ${rating.color}`}>{rating.emoji} {rating.text}</span>
+                              </div>
+                              <div className="space-y-1">
+                                <div className="flex items-start space-x-2">
+                                  <span className="text-gray-500 text-sm w-20">Tvoj odgovor:</span>
+                                  <span className={`${score === 100 ? 'text-green-600' : 'text-gray-700'}`}>{userAnswer}</span>
+                                </div>
+                                <div className="flex items-start space-x-2">
+                                  <span className="text-gray-500 text-sm w-20">Tačno:</span>
+                                  <span className="text-green-600 font-medium">{exercise.bosnian}</span>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  {/* Bottom controls */}
+                  <div className="flex flex-col items-center space-y-4 mt-6">
+                    {getCompletedCount() === writingList.length && (
+                      <div className="text-center space-y-4 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
+                        <div className="text-2xl font-bold text-gray-800">
+                          {getWritingScore() >= 80 ? '🎉' : getWritingScore() >= 50 ? '👍' : '💪'} Završeno!
+                        </div>
+                        <div className="text-xl">Prosječna ocjena: <strong className="text-bosnia-blue">{getWritingScore()}%</strong></div>
+                        
+                        {/* Play all audio button */}
+                        <button 
+                          onClick={playAllWritingAudio}
+                          disabled={writingExercises.isPlayingAudio}
+                          className={`px-6 py-3 rounded-lg font-medium transition-colors inline-flex items-center space-x-2 ${
+                            writingExercises.isPlayingAudio 
+                              ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                              : 'bg-purple-500 text-white hover:bg-purple-600'
+                          }`}
+                        >
+                          <Volume2 className="w-5 h-5" />
+                          <span>{writingExercises.isPlayingAudio ? 'Reproducira se...' : 'Slušaj sve rečenice'}</span>
+                        </button>
+                        
+                        <button onClick={resetWritingExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                          <RefreshCw className="w-5 h-5" /><span>Vježbaj ponovo</span>
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -1923,55 +2377,135 @@ function Lesson() {
                     )}
                   </div>
 
-                  <div className="space-y-3">
-                    {lesson.quiz[quizState.currentQuestion].options.map((option, i) => {
-                      const currentAnswer = quizState.answers[quizState.currentQuestion]
-                      const isSelected = currentAnswer?.selected === i
-                      const isCorrect = i === lesson.quiz[quizState.currentQuestion].correct_answer
-                      const showFeedback = currentAnswer !== undefined
+                  {/* Writing question type */}
+                  {lesson.quiz[quizState.currentQuestion].question_type === 'writing' ? (
+                    <div className="space-y-4">
+                      {(() => {
+                        const currentAnswer = quizState.answers[quizState.currentQuestion]
+                        const showFeedback = currentAnswer !== undefined
+                        
+                        return (
+                          <>
+                            <div className="flex space-x-2">
+                              <input
+                                type="text"
+                                value={quizWritingInput}
+                                onChange={(e) => setQuizWritingInput(e.target.value)}
+                                onKeyPress={(e) => e.key === 'Enter' && !showFeedback && quizWritingInput.trim() && handleQuizWritingSubmit()}
+                                disabled={showFeedback}
+                                placeholder="Napiši odgovor na bosanskom..."
+                                className={`flex-1 px-4 py-3 rounded-lg border-2 text-lg transition-all ${
+                                  showFeedback
+                                    ? currentAnswer.correct
+                                      ? 'bg-green-100 border-green-400 text-green-700'
+                                      : 'bg-red-100 border-red-400 text-red-700'
+                                    : 'border-gray-300 focus:border-bosnia-blue focus:ring-2 focus:ring-blue-200'
+                                }`}
+                              />
+                              {!showFeedback && (
+                                <button
+                                  onClick={handleQuizWritingSubmit}
+                                  disabled={!quizWritingInput.trim()}
+                                  className={`px-4 py-3 rounded-lg font-medium transition-all ${
+                                    quizWritingInput.trim()
+                                      ? 'bg-green-500 text-white hover:bg-green-600'
+                                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                  }`}
+                                >
+                                  <CheckCircle className="w-6 h-6" />
+                                </button>
+                              )}
+                              {showFeedback && (
+                                <button
+                                  onClick={() => speak(currentAnswer.correctText)}
+                                  className="px-4 py-3 rounded-lg bg-purple-500 text-white hover:bg-purple-600 transition-all"
+                                  title="Slušaj tačan odgovor"
+                                >
+                                  <Volume2 className="w-6 h-6" />
+                                </button>
+                              )}
+                            </div>
+                            
+                            {showFeedback && (
+                              <div className={`p-4 rounded-lg ${currentAnswer.correct ? 'bg-green-50' : 'bg-red-50'}`}>
+                                <div className="flex items-center space-x-2 mb-2">
+                                  {currentAnswer.correct ? (
+                                    <CheckCircle className="w-5 h-5 text-green-600" />
+                                  ) : (
+                                    <XCircle className="w-5 h-5 text-red-600" />
+                                  )}
+                                  <span className={`font-medium ${currentAnswer.correct ? 'text-green-700' : 'text-red-700'}`}>
+                                    {currentAnswer.correct ? 'Tačno!' : 'Netačno!'}
+                                  </span>
+                                </div>
+                                {!currentAnswer.correct && (
+                                  <div className="space-y-1 text-sm">
+                                    <p className="text-gray-600">Tvoj odgovor: <span className="text-red-600">{currentAnswer.selected}</span></p>
+                                    <p className="text-gray-600">Tačan odgovor: <span className="text-green-600 font-medium">{currentAnswer.correctText}</span></p>
+                                  </div>
+                                )}
+                                <p className="text-sm mt-2 text-gray-600">
+                                  {lesson.quiz[quizState.currentQuestion].explanation}
+                                </p>
+                              </div>
+                            )}
+                          </>
+                        )
+                      })()}
+                    </div>
+                  ) : (
+                    /* Multiple choice questions */
+                    <div className="space-y-3">
+                      {lesson.quiz[quizState.currentQuestion].options.map((option, i) => {
+                        const currentAnswer = quizState.answers[quizState.currentQuestion]
+                        const isSelected = currentAnswer?.selected === i
+                        const isCorrect = i === lesson.quiz[quizState.currentQuestion].correct_answer
+                        const showFeedback = currentAnswer !== undefined
 
-                      return (
-                        <div
-                          key={i}
-                          className={`w-full p-4 rounded-xl text-left transition-all ${
-                            showFeedback
-                              ? isCorrect
-                                ? 'bg-green-100 border-2 border-green-500'
-                                : isSelected
-                                ? 'bg-red-100 border-2 border-red-500'
-                                : 'bg-gray-100 border-2 border-transparent'
-                              : 'bg-white border-2 border-gray-200 hover:border-bosnia-blue hover:bg-blue-50'
-                          }`}
-                        >
-                          <div className="flex items-center justify-between">
-                            <button
-                              onClick={() => !showFeedback && handleQuizAnswer(i)}
-                              disabled={showFeedback}
-                              className="flex-1 text-left"
-                            >
-                              {option}
-                            </button>
-                            <div className="flex items-center gap-2">
+                        return (
+                          <div
+                            key={i}
+                            className={`w-full p-4 rounded-xl text-left transition-all ${
+                              showFeedback
+                                ? isCorrect
+                                  ? 'bg-green-100 border-2 border-green-500'
+                                  : isSelected
+                                  ? 'bg-red-100 border-2 border-red-500'
+                                  : 'bg-gray-100 border-2 border-transparent'
+                                : 'bg-white border-2 border-gray-200 hover:border-bosnia-blue hover:bg-blue-50'
+                            }`}
+                          >
+                            <div className="flex items-center justify-between">
                               <button
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  speak(option)
-                                }}
-                                className="p-1.5 rounded-full hover:bg-gray-200 text-gray-500 hover:text-bosnia-blue transition-all"
-                                title="Slušaj"
+                                onClick={() => !showFeedback && handleQuizAnswer(i)}
+                                disabled={showFeedback}
+                                className="flex-1 text-left"
                               >
-                                <Volume2 className="w-4 h-4" />
+                                {option}
                               </button>
-                              {showFeedback && isCorrect && <CheckCircle className="w-5 h-5 text-green-600" />}
-                              {showFeedback && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-600" />}
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    speak(option)
+                                  }}
+                                  className="p-1.5 rounded-full hover:bg-gray-200 text-gray-500 hover:text-bosnia-blue transition-all"
+                                  title="Slušaj"
+                                >
+                                  <Volume2 className="w-4 h-4" />
+                                </button>
+                                {showFeedback && isCorrect && <CheckCircle className="w-5 h-5 text-green-600" />}
+                                {showFeedback && isSelected && !isCorrect && <XCircle className="w-5 h-5 text-red-600" />}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      )
-                    })}
-                  </div>
+                        )
+                      })}
+                    </div>
+                  )}
 
-                  {quizState.answers[quizState.currentQuestion] && (
+                  {/* Feedback for multiple choice questions */}
+                  {lesson.quiz[quizState.currentQuestion].question_type !== 'writing' && quizState.answers[quizState.currentQuestion] && (
                     <div className={`mt-4 p-4 rounded-lg ${
                       quizState.answers[quizState.currentQuestion].correct 
                         ? 'bg-green-50 text-green-800' 

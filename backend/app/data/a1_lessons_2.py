@@ -16,7 +16,7 @@ A1_LESSONS_PART2 = [
             {"bosnian": "otac", "english": "father", "pronunciation": "OH-tahts", "example": "Moj otac radi.", "example_translation": "My father works.", "image_emoji": "👨"},
             {"bosnian": "brat", "english": "brother", "pronunciation": "braht", "example": "Imam jednog brata.", "example_translation": "I have one brother.", "image_emoji": "👦"},
             {"bosnian": "sestra", "english": "sister", "pronunciation": "SEH-strah", "example": "Moja sestra je mlađa.", "example_translation": "My sister is younger.", "image_emoji": "👧"},
-            {"bosnian": "baka", "english": "grandmother", "pronunciation": "BAH-kah", "example": "Baka pravi pitu.", "example_translation": "Grandmother makes pie.", "image_emoji": "👵"},
+            {"bosnian": "nana", "english": "grandmother", "pronunciation": "NAH-nah", "example": "Nana pravi pitu.", "example_translation": "Grandmother makes pie.", "image_emoji": "👵"},
             {"bosnian": "djed", "english": "grandfather", "pronunciation": "jed", "example": "Djed čita novine.", "example_translation": "Grandfather reads newspaper.", "image_emoji": "👴"},
             {"bosnian": "sin", "english": "son", "pronunciation": "seen", "example": "On je moj sin.", "example_translation": "He is my son.", "image_emoji": "👦"},
             {"bosnian": "kći", "english": "daughter", "pronunciation": "kchee", "example": "Ona je moja kći.", "example_translation": "She is my daughter.", "image_emoji": "👧"},
@@ -49,14 +49,14 @@ A1_LESSONS_PART2 = [
 """,
         "cultural_note": "Porodica je vrlo važna u bosanskoj kulturi. Višegeneracijske porodice često žive zajedno ili blizu jedni drugih. Vikendi su obično rezervisani za porodična okupljanja, često uz tradicionalnu bosansku kafu i kolače.",
         "cultural_comic": {
-            "title": "Porodični ručak kod bake u Zenici",
+            "title": "Porodični ručak kod nane u Zenici",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/72/d5/92/bosnian-traditional-house.jpg?w=1200",
             "panels": [
-                {"character": "👵", "name": "Baka Fatima", "text": "Moj sin Emir i njegova žena dolaze na ručak!", "translation": "My son Emir and his wife are coming for lunch!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"},
+                {"character": "👵", "name": "Nana Fatima", "text": "Moj sin Emir i njegova žena dolaze na ručak!", "translation": "My son Emir and his wife are coming for lunch!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"},
                 {"character": "👴", "name": "Djed Hasan", "text": "Odlično! A gdje su naši unuci?", "translation": "Excellent! And where are our grandchildren?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=70"},
                 {"character": "👨", "name": "Emir", "text": "Moja kći Amina je sa mojom sestrom. Moj sin Tarik je ovdje.", "translation": "My daughter Amina is with my sister. My son Tarik is here.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
                 {"character": "👩", "name": "Žena Sanela", "text": "Tvoja majka pravi najbolju pitu! Njena pita je poznata!", "translation": "Your mother makes the best pie! Her pie is famous!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👵", "name": "Baka Fatima", "text": "Hvala, snaho! Naša porodica voli jesti zajedno.", "translation": "Thank you, daughter-in-law! Our family loves eating together.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"}
+                {"character": "👵", "name": "Nana Fatima", "text": "Hvala, snaho! Naša porodica voli jesti zajedno.", "translation": "Thank you, daughter-in-law! Our family loves eating together.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=23"}
             ]
         },
         "dialogue": [
@@ -72,9 +72,9 @@ A1_LESSONS_PART2 = [
             {"id": 3, "type": "translate", "instruction": "Prevedite: 'My grandfather is old'", "content": {"text": "My grandfather is old"}, "answer": "Moj djed je star", "hint": "Djed = grandfather, star = old"}
         ],
         "quiz": [
-            {"id": 1, "question": "Kako se kaže 'mother' na bosanskom?", "options": ["sestra", "baka", "majka", "žena"], "correct_answer": 2, "explanation": "'Majka' znači 'mother'. Također se koristi 'mama' neformalno.", "question_type": "vocabulary"},
+            {"id": 1, "question": "Kako se kaže 'mother' na bosanskom?", "options": ["sestra", "nana", "majka", "žena"], "correct_answer": 2, "explanation": "'Majka' znači 'mother'. Također se koristi 'mama' neformalno.", "question_type": "vocabulary"},
             {"id": 2, "question": "Koja je pravilna posvojna zamjenica: '_____ otac' (my, m.r.)?", "options": ["moja", "moj", "moje", "moji"], "correct_answer": 1, "explanation": "'Otac' je muškog roda, pa koristimo 'moj'.", "question_type": "grammar"},
-            {"id": 3, "question": "Šta znači 'baka'?", "options": ["mother", "sister", "grandmother", "aunt"], "correct_answer": 2, "explanation": "'Baka' znači 'grandmother'.", "question_type": "vocabulary"},
+            {"id": 3, "question": "Šta znači 'nana'?", "options": ["mother", "sister", "grandmother", "aunt"], "correct_answer": 2, "explanation": "'Nana' znači 'grandmother'.", "question_type": "vocabulary"},
             {"id": 4, "question": "Kako se kaže 'brothers' (množina)?", "options": ["brat", "braća", "bratu", "bratovi"], "correct_answer": 1, "explanation": "'Braća' je množina od 'brat'.", "question_type": "grammar"},
             {"id": 5, "question": "Koji član porodice je 'muž'?", "options": ["father", "brother", "husband", "son"], "correct_answer": 2, "explanation": "'Muž' znači 'husband'.", "question_type": "vocabulary"},
             {"id": 6, "question": "Kako se kaže 'father' na bosanskom?", "options": ["majka", "otac", "brat", "djed"], "correct_answer": 1, "explanation": "'Otac' znači 'father'. Neformalno 'tata'.", "question_type": "vocabulary"},
@@ -89,7 +89,9 @@ A1_LESSONS_PART2 = [
             {"id": 15, "question": "Šta znači 'Imam jednog brata'?", "options": ["I have one sister", "I have one brother", "I have two brothers", "I have no brothers"], "correct_answer": 1, "explanation": "'Imam jednog brata' = I have one brother.", "question_type": "translation"},
             {"id": 16, "question": "Koja je pravilna forma: '_____ majka' (her)?", "options": ["njen", "njena", "njeno", "njeni"], "correct_answer": 1, "explanation": "'Majka' je ženskog roda, pa koristimo 'njena'.", "question_type": "grammar"},
             {"id": 17, "question": "Kako se kaže 'grandchildren'?", "options": ["djeca", "unuci", "sinovi", "kćeri"], "correct_answer": 1, "explanation": "'Unuci' znači 'grandchildren'.", "question_type": "vocabulary"},
-            {"id": 18, "question": "Šta znači 'Moja porodica je velika'?", "options": ["My family is small", "My family is big", "My family is happy", "My family is here"], "correct_answer": 1, "explanation": "'Velika' znači 'big'.", "question_type": "translation"}
+            {"id": 18, "question": "Šta znači 'Moja porodica je velika'?", "options": ["My family is small", "My family is big", "My family is happy", "My family is here"], "correct_answer": 1, "explanation": "'Velika' znači 'big'.", "question_type": "translation"},
+            {"id": 19, "question": "Napiši na bosanskom: 'mother'", "question_type": "writing", "correct_answer_text": "majka", "explanation": "'Majka' znači 'mother'."},
+            {"id": 20, "question": "Napiši na bosanskom: 'My brother is tall'", "question_type": "writing", "correct_answer_text": "Moj brat je visok", "explanation": "'Brat' je muškog roda, pa koristimo 'moj'."}
         ]
     },
     {
@@ -183,7 +185,9 @@ A1_LESSONS_PART2 = [
             {"id": 15, "question": "Kako se kaže 'Sunday' na bosanskom?", "options": ["subota", "nedjelja", "petak", "četvrtak"], "correct_answer": 1, "explanation": "'Nedjelja' znači 'Sunday'.", "question_type": "vocabulary"},
             {"id": 16, "question": "Koji dan dolazi prije srijede?", "options": ["ponedjeljak", "utorak", "četvrtak", "petak"], "correct_answer": 1, "explanation": "Utorak dolazi prije srijede.", "question_type": "sequence"},
             {"id": 17, "question": "Kako se kaže 'Tuesday' na bosanskom?", "options": ["ponedjeljak", "utorak", "srijeda", "četvrtak"], "correct_answer": 1, "explanation": "'Utorak' znači 'Tuesday'.", "question_type": "vocabulary"},
-            {"id": 18, "question": "Šta znači 'Petak je moj omiljeni dan'?", "options": ["Friday is my worst day", "Friday is my favorite day", "I hate Friday", "Friday is boring"], "correct_answer": 1, "explanation": "'Omiljeni' znači 'favorite'.", "question_type": "translation"}
+            {"id": 18, "question": "Šta znači 'Petak je moj omiljeni dan'?", "options": ["Friday is my worst day", "Friday is my favorite day", "I hate Friday", "Friday is boring"], "correct_answer": 1, "explanation": "'Omiljeni' znači 'favorite'.", "question_type": "translation"},
+            {"id": 19, "question": "Napiši na bosanskom: 'Monday'", "question_type": "writing", "correct_answer_text": "ponedjeljak", "explanation": "'Ponedjeljak' znači 'Monday'."},
+            {"id": 20, "question": "Napiši na bosanskom: 'Today is Friday'", "question_type": "writing", "correct_answer_text": "Danas je petak", "explanation": "'Danas' znači 'today'."}
         ]
     },
     {
@@ -280,7 +284,9 @@ A1_LESSONS_PART2 = [
             {"id": 15, "question": "Šta znači 'U proljeće cvjetaju cvijeće'?", "options": ["Flowers bloom in spring", "Flowers die in spring", "It rains in spring", "It snows in spring"], "correct_answer": 0, "explanation": "'Cvjetaju' znači 'bloom'.", "question_type": "translation"},
             {"id": 16, "question": "Kako se kaže 'July' na bosanskom?", "options": ["juni", "juli", "august", "septembar"], "correct_answer": 1, "explanation": "'Juli' znači 'July'.", "question_type": "vocabulary"},
             {"id": 17, "question": "Kada pada lišće?", "options": ["u proljeće", "u ljeto", "u jesen", "u zimu"], "correct_answer": 2, "explanation": "Lišće pada u jesen.", "question_type": "context"},
-            {"id": 18, "question": "Koji je prvi mjesec u godini?", "options": ["decembar", "januar", "februar", "mart"], "correct_answer": 1, "explanation": "Januar je prvi mjesec.", "question_type": "sequence"}
+            {"id": 18, "question": "Koji je prvi mjesec u godini?", "options": ["decembar", "januar", "februar", "mart"], "correct_answer": 1, "explanation": "Januar je prvi mjesec.", "question_type": "sequence"},
+            {"id": 19, "question": "Napiši na bosanskom: 'winter'", "question_type": "writing", "correct_answer_text": "zima", "explanation": "'Zima' znači 'winter'."},
+            {"id": 20, "question": "Napiši na bosanskom: 'Summer is warm'", "question_type": "writing", "correct_answer_text": "Ljeto je toplo", "explanation": "'Ljeto' znači 'summer', 'toplo' znači 'warm'."}
         ]
     }
 ]

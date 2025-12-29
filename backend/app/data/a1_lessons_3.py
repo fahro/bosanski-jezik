@@ -99,7 +99,9 @@ A1_LESSONS_PART3 = [
             {"id": 15, "question": "Koja je pravilna forma: 'Mi _____ ribu' (voljeti)?", "options": ["volim", "voliš", "voli", "volimo"], "correct_answer": 3, "explanation": "'Mi volimo' - prva osoba množine.", "question_type": "grammar"},
             {"id": 16, "question": "Kako se kaže 'fruit' na bosanskom?", "options": ["povrće", "voće", "meso", "riba"], "correct_answer": 1, "explanation": "'Voće' znači 'fruit'.", "question_type": "vocabulary"},
             {"id": 17, "question": "Šta znači 'Račun, molim'?", "options": ["Menu, please", "Water, please", "The bill, please", "More, please"], "correct_answer": 2, "explanation": "'Račun' znači 'bill/check'.", "question_type": "translation"},
-            {"id": 18, "question": "Kako se kaže 'I want' na bosanskom?", "options": ["Imam", "Želim", "Volim", "Mogu"], "correct_answer": 1, "explanation": "'Želim' znači 'I want'.", "question_type": "vocabulary"}
+            {"id": 18, "question": "Kako se kaže 'I want' na bosanskom?", "options": ["Imam", "Želim", "Volim", "Mogu"], "correct_answer": 1, "explanation": "'Želim' znači 'I want'.", "question_type": "vocabulary"},
+            {"id": 19, "question": "Napiši na bosanskom: 'water'", "question_type": "writing", "correct_answer_text": "voda", "explanation": "'Voda' znači 'water'."},
+            {"id": 20, "question": "Napiši na bosanskom: 'I love coffee'", "question_type": "writing", "correct_answer_text": "Volim kafu", "explanation": "'Volim' znači 'I love'."}
         ]
     },
     {
@@ -195,7 +197,9 @@ A1_LESSONS_PART3 = [
             {"id": 12, "question": "Koja je pravilna forma: 'Ti _____ u kući' (živjeti)?", "options": ["živim", "živiš", "živi", "živimo"], "correct_answer": 1, "explanation": "'Ti živiš' - druga osoba jednine.", "question_type": "grammar"},
             {"id": 13, "question": "Koji prijedlog znači 'between'?", "options": ["pored", "ispod", "između", "ispred"], "correct_answer": 2, "explanation": "'Između' znači 'between'.", "question_type": "grammar"},
             {"id": 14, "question": "Kako se kaže 'bed' na bosanskom?", "options": ["sto", "stolica", "krevet", "ormar"], "correct_answer": 2, "explanation": "'Krevet' znači 'bed'.", "question_type": "vocabulary"},
-            {"id": 15, "question": "Šta znači 'ispred kuće'?", "options": ["behind the house", "in the house", "in front of the house", "above the house"], "correct_answer": 2, "explanation": "'Ispred kuće' znači 'in front of the house'.", "question_type": "grammar"}
+            {"id": 15, "question": "Šta znači 'ispred kuće'?", "options": ["behind the house", "in the house", "in front of the house", "above the house"], "correct_answer": 2, "explanation": "'Ispred kuće' znači 'in front of the house'.", "question_type": "grammar"},
+            {"id": 16, "question": "Napiši na bosanskom: 'kitchen'", "question_type": "writing", "correct_answer_text": "kuhinja", "explanation": "'Kuhinja' znači 'kitchen'."},
+            {"id": 17, "question": "Napiši na bosanskom: 'I live in an apartment'", "question_type": "writing", "correct_answer_text": "Živim u stanu", "explanation": "'Živim' znači 'I live'."}
         ]
     },
     {
@@ -297,7 +301,9 @@ Konstrukcija za izražavanje boli:
             {"id": 12, "question": "Šta znači 'Loše sam'?", "options": ["I'm fine", "I'm not well", "I'm happy", "I'm hungry"], "correct_answer": 1, "explanation": "'Loše sam' znači 'I'm not well'.", "question_type": "vocabulary"},
             {"id": 13, "question": "Koja je množina od 'zub'?", "options": ["zuba", "zubi", "zubovi", "zube"], "correct_answer": 1, "explanation": "'Zubi' je množina od 'zub'.", "question_type": "grammar"},
             {"id": 14, "question": "Kako se kaže 'heart' na bosanskom?", "options": ["glava", "srce", "stomak", "ruka"], "correct_answer": 1, "explanation": "'Srce' znači 'heart'.", "question_type": "vocabulary"},
-            {"id": 15, "question": "Šta kažete doktoru kada vas boli glava?", "options": ["Boli me noga", "Boli me glava", "Dobro sam", "Umoran sam"], "correct_answer": 1, "explanation": "'Boli me glava' = My head hurts.", "question_type": "usage"}
+            {"id": 15, "question": "Šta kažete doktoru kada vas boli glava?", "options": ["Boli me noga", "Boli me glava", "Dobro sam", "Umoran sam"], "correct_answer": 1, "explanation": "'Boli me glava' = My head hurts.", "question_type": "usage"},
+            {"id": 16, "question": "Napiši na bosanskom: 'head'", "question_type": "writing", "correct_answer_text": "glava", "explanation": "'Glava' znači 'head'."},
+            {"id": 17, "question": "Napiši na bosanskom: 'My stomach hurts'", "question_type": "writing", "correct_answer_text": "Boli me stomak", "explanation": "'Boli me' se koristi za izražavanje boli."}
         ]
     }
 ]

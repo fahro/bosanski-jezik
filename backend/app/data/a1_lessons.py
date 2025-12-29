@@ -99,7 +99,10 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"id": 12, "question": "Kako se kaže 'Good night'?", "options": ["Dobro jutro", "Dobar dan", "Dobro veče", "Laku noć"], "correct_answer": 3, "explanation": "'Laku noć' se koristi kad idete spavati.", "question_type": "vocabulary"},
             {"id": 13, "question": "Šta znači 'Molim'?", "options": ["Thank you", "Please / You're welcome", "Hello", "Goodbye"], "correct_answer": 1, "explanation": "'Molim' može značiti 'Please' ili 'You're welcome'.", "question_type": "vocabulary"},
             {"id": 14, "question": "Koja je pravilna forma: 'Mi ___ prijatelji'?", "options": ["sam", "ste", "smo", "su"], "correct_answer": 2, "explanation": "'Mi smo' - 'smo' je prva osoba množine glagola 'biti'.", "question_type": "grammar"},
-            {"id": 15, "question": "Kako kažemo 'I am from Sarajevo'?", "options": ["Idem u Sarajevo", "Ja sam iz Sarajeva", "Volim Sarajevo", "Živim u Sarajevu"], "correct_answer": 1, "explanation": "'Ja sam iz Sarajeva' - koristimo 'iz' + genitiv za porijeklo.", "question_type": "usage"}
+            {"id": 15, "question": "Kako kažemo 'I am from Sarajevo'?", "options": ["Idem u Sarajevo", "Ja sam iz Sarajeva", "Volim Sarajevo", "Živim u Sarajevu"], "correct_answer": 1, "explanation": "'Ja sam iz Sarajeva' - koristimo 'iz' + genitiv za porijeklo.", "question_type": "usage"},
+            {"id": 16, "question": "Napiši na bosanskom: 'Hello'", "question_type": "writing", "correct_answer_text": "Zdravo", "explanation": "'Zdravo' je neformalni pozdrav na bosanskom."},
+            {"id": 17, "question": "Napiši na bosanskom: 'Thank you'", "question_type": "writing", "correct_answer_text": "Hvala", "explanation": "'Hvala' je izraz zahvalnosti."},
+            {"id": 18, "question": "Napiši na bosanskom: 'Good morning'", "question_type": "writing", "correct_answer_text": "Dobro jutro", "explanation": "'Dobro jutro' se koristi kao jutarnji pozdrav."}
         ]
     },
     {
@@ -248,7 +251,10 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
             {"id": 22, "question": "Koji broj je između 'sedamnaest' i 'devetnaest'?", "options": ["šesnaest", "osamnaest", "dvadeset", "petnaest"], "correct_answer": 1, "explanation": "Između 17 i 19 je 18 (osamnaest).", "question_type": "sequence"},
             {"id": 23, "question": "Kako se kaže 'nineteen' na bosanskom?", "options": ["devet", "devetnaest", "dvadeset", "osamnaest"], "correct_answer": 1, "explanation": "'Devetnaest' = devet + na + est = 19.", "question_type": "numbers"},
             {"id": 24, "question": "5 + 8 = ?", "options": ["dvanaest", "trinaest", "četrnaest", "petnaest"], "correct_answer": 1, "explanation": "Pet plus osam jednako trinaest (5 + 8 = 13).", "question_type": "math"},
-            {"id": 25, "question": "10 + 10 = ?", "options": ["deset", "petnaest", "dvadeset", "jedanaest"], "correct_answer": 2, "explanation": "Deset plus deset jednako dvadeset (10 + 10 = 20).", "question_type": "math"}
+            {"id": 25, "question": "10 + 10 = ?", "options": ["deset", "petnaest", "dvadeset", "jedanaest"], "correct_answer": 2, "explanation": "Deset plus deset jednako dvadeset (10 + 10 = 20).", "question_type": "math"},
+            {"id": 26, "question": "Napiši broj 7 na bosanskom:", "question_type": "writing", "correct_answer_text": "sedam", "explanation": "'Sedam' je broj 7."},
+            {"id": 27, "question": "Napiši broj 15 na bosanskom:", "question_type": "writing", "correct_answer_text": "petnaest", "explanation": "'Petnaest' = pet + na + est = 15."},
+            {"id": 28, "question": "Napiši na bosanskom: 'I have three apples'", "question_type": "writing", "correct_answer_text": "Imam tri jabuke", "explanation": "S brojevima 2-4 imenica ide u poseban oblik."}
         ]
     },
     {
@@ -336,7 +342,10 @@ Pridjevi za boje se mijenjaju prema rodu imenice:
             {"id": 12, "question": "Šta znači 'siva'?", "options": ["white", "black", "gray", "brown"], "correct_answer": 2, "explanation": "'Siva' znači 'gray'. Sivi oblak.", "question_type": "vocabulary"},
             {"id": 13, "question": "Koje boje je sunce?", "options": ["crveno", "zeleno", "plavo", "žuto"], "correct_answer": 3, "explanation": "Sunce je žuto. 'Žuto sunce' - yellow sun.", "question_type": "context"},
             {"id": 14, "question": "Kako se kaže 'blue' na bosanskom?", "options": ["plava", "crvena", "zelena", "žuta"], "correct_answer": 0, "explanation": "'Plava' znači 'blue'. Plavo nebo.", "question_type": "vocabulary"},
-            {"id": 15, "question": "Koja je pravilna forma: '_____ vino' (crven)?", "options": ["crven", "crvena", "crveno", "crveni"], "correct_answer": 2, "explanation": "'Vino' je srednjeg roda, pa koristimo 'crveno'.", "question_type": "grammar"}
+            {"id": 15, "question": "Koja je pravilna forma: '_____ vino' (crven)?", "options": ["crven", "crvena", "crveno", "crveni"], "correct_answer": 2, "explanation": "'Vino' je srednjeg roda, pa koristimo 'crveno'.", "question_type": "grammar"},
+            {"id": 16, "question": "Napiši na bosanskom: 'red'", "question_type": "writing", "correct_answer_text": "crvena", "explanation": "'Crvena' znači 'red'."},
+            {"id": 17, "question": "Napiši na bosanskom: 'The sky is blue'", "question_type": "writing", "correct_answer_text": "Nebo je plavo", "explanation": "'Nebo' je srednjeg roda, pa koristimo 'plavo'."},
+            {"id": 18, "question": "Napiši na bosanskom: 'white house'", "question_type": "writing", "correct_answer_text": "bijela kuća", "explanation": "'Kuća' je ženskog roda, pa koristimo 'bijela'."}
         ]
     }
 ]

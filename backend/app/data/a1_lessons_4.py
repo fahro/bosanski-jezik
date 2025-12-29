@@ -97,7 +97,9 @@ A1_LESSONS_PART4 = [
             {"id": 15, "question": "Kako se kaže 'driver' na bosanskom?", "options": ["kuhar", "prodavač", "vozač", "student"], "correct_answer": 2, "explanation": "'Vozač' znači 'driver'.", "question_type": "vocabulary"},
             {"id": 16, "question": "Koji je ženski oblik od 'student'?", "options": ["studenta", "studentica", "studentka", "studenti"], "correct_answer": 1, "explanation": "'Studentica' je ženski oblik od 'student'.", "question_type": "grammar"},
             {"id": 17, "question": "Šta znači 'Gdje radiš?'", "options": ["Where do you live?", "Where do you work?", "What do you do?", "Who are you?"], "correct_answer": 1, "explanation": "'Gdje radiš?' = Where do you work?", "question_type": "translation"},
-            {"id": 18, "question": "Kako se kaže 'lawyer' na bosanskom?", "options": ["doktor", "advokat", "inžnjer", "policajac"], "correct_answer": 1, "explanation": "'Advokat' znači 'lawyer'.", "question_type": "vocabulary"}
+            {"id": 18, "question": "Kako se kaže 'lawyer' na bosanskom?", "options": ["doktor", "advokat", "inžnjer", "policajac"], "correct_answer": 1, "explanation": "'Advokat' znači 'lawyer'.", "question_type": "vocabulary"},
+            {"id": 19, "question": "Napiši na bosanskom: 'teacher'", "question_type": "writing", "correct_answer_text": "učitelj", "explanation": "'Učitelj' znači 'teacher'."},
+            {"id": 20, "question": "Napiši na bosanskom: 'I work in a school'", "question_type": "writing", "correct_answer_text": "Radim u školi", "explanation": "'Radim' znači 'I work'."}
         ]
     },
     {
@@ -193,7 +195,9 @@ A1_LESSONS_PART4 = [
             {"id": 15, "question": "Šta je 'pola tri'?", "options": ["3:30", "2:30", "3:00", "2:00"], "correct_answer": 1, "explanation": "'Pola tri' = 2:30 (half to three).", "question_type": "time"},
             {"id": 16, "question": "Kako se kaže 'minute' na bosanskom?", "options": ["sat", "minuta", "sekunda", "dan"], "correct_answer": 1, "explanation": "'Minuta' znači 'minute'.", "question_type": "vocabulary"},
             {"id": 17, "question": "Šta znači 'U koliko sati?'", "options": ["What day?", "What time?", "At what time?", "How long?"], "correct_answer": 2, "explanation": "'U koliko sati?' = At what time?", "question_type": "translation"},
-            {"id": 18, "question": "Kako se kaže 'morning' na bosanskom?", "options": ["veče", "noć", "jutro", "podne"], "correct_answer": 2, "explanation": "'Jutro' znači 'morning'.", "question_type": "vocabulary"}
+            {"id": 18, "question": "Kako se kaže 'morning' na bosanskom?", "options": ["veče", "noć", "jutro", "podne"], "correct_answer": 2, "explanation": "'Jutro' znači 'morning'.", "question_type": "vocabulary"},
+            {"id": 19, "question": "Napiši na bosanskom: 'What time is it?'", "question_type": "writing", "correct_answer_text": "Koliko je sati", "explanation": "'Koliko je sati?' je pitanje o vremenu."},
+            {"id": 20, "question": "Napiši na bosanskom: 'in the morning'", "question_type": "writing", "correct_answer_text": "ujutro", "explanation": "'Ujutro' znači 'in the morning'."}
         ]
     },
     {
@@ -294,7 +298,9 @@ A1_LESSONS_PART4 = [
             {"id": 15, "question": "Kako se kaže 'I disagree' na bosanskom?", "options": ["Slažem se", "Ne slažem se", "Možda", "Naravno"], "correct_answer": 1, "explanation": "'Ne slažem se' znači 'I disagree'.", "question_type": "vocabulary"},
             {"id": 16, "question": "Šta znači 'Baš lijepo'?", "options": ["Very bad", "Very nice", "Very big", "Very small"], "correct_answer": 1, "explanation": "'Baš lijepo' znači 'Very nice'.", "question_type": "vocabulary"},
             {"id": 17, "question": "Kako se kaže 'Where is...?' na bosanskom?", "options": ["Koliko je...?", "Gdje je...?", "Kada je...?", "Šta je...?"], "correct_answer": 1, "explanation": "'Gdje je...?' znači 'Where is...?'.", "question_type": "vocabulary"},
-            {"id": 18, "question": "Šta znači 'Polako, molim'?", "options": ["Quickly, please", "Slowly, please", "Loudly, please", "Again, please"], "correct_answer": 1, "explanation": "'Polako' znači 'slowly'.", "question_type": "translation"}
+            {"id": 18, "question": "Šta znači 'Polako, molim'?", "options": ["Quickly, please", "Slowly, please", "Loudly, please", "Again, please"], "correct_answer": 1, "explanation": "'Polako' znači 'slowly'.", "question_type": "translation"},
+            {"id": 19, "question": "Napiši na bosanskom: 'I don't understand'", "question_type": "writing", "correct_answer_text": "Ne razumijem", "explanation": "'Ne razumijem' znači 'I don't understand'."},
+            {"id": 20, "question": "Napiši na bosanskom: 'Thank you very much'", "question_type": "writing", "correct_answer_text": "Hvala vam puno", "explanation": "'Hvala vam puno' je formalni oblik zahvalnosti."}
         ]
     }
 ]

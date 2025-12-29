@@ -17,12 +17,19 @@ load_dotenv()
 
 # Import lesson data
 from app.data.a1_lessons import A1_LESSONS
+from app.data.a1_lessons_2 import A1_LESSONS_PART2
+from app.data.a1_lessons_3 import A1_LESSONS_PART3
+from app.data.a1_lessons_4 import A1_LESSONS_PART4
+from app.data.writing_exercises import WRITING_EXERCISES
+
+# Combine all lessons
+ALL_LESSONS = A1_LESSONS + A1_LESSONS_PART2 + A1_LESSONS_PART3 + A1_LESSONS_PART4
 
 AUDIO_DIR = Path(__file__).parent / "static" / "audio"
 MANIFEST_FILE = AUDIO_DIR / "manifest.json"
 
 # Gender mapping for speakers/characters
-FEMALE_NAMES = {'Amina', 'Ana', 'Maja', 'Amra', 'Sara', 'Sabina', 'Lejla', 'Naida', 'Baka', 'Majka', 'Sestra', 'Kći', 'Žena', 'Snaha'}
+FEMALE_NAMES = {'Amina', 'Ana', 'Maja', 'Amra', 'Sara', 'Sabina', 'Lejla', 'Naida', 'Nana', 'Majka', 'Sestra', 'Kći', 'Žena', 'Snaha'}
 MALE_NAMES = {'Emir', 'Ahmed', 'Kenan', 'Prodavač', 'Kupac', 'Dućandžija', 'Tarik', 'Haris', 'Djed', 'Otac', 'Brat', 'Sin', 'Muž', 'Doktor'}
 
 # Azure TTS Bosnian voices - Native speakers!
@@ -172,7 +179,7 @@ def main():
     
     print("Collecting all Bosnian text from lessons...")
     
-    for lesson in A1_LESSONS:
+    for lesson in ALL_LESSONS:
         lesson_id = lesson["id"]
         print(f"\nLesson {lesson_id}: {lesson['title']}")
         
@@ -245,6 +252,13 @@ def main():
             panel_name = panel.get("name", "")
             if panel_text:
                 texts_to_generate.append((panel_text, panel_name, True))
+    
+    # 7. Writing exercises - sentences from all lessons
+    print("\nCollecting writing exercise sentences...")
+    for lesson_id, sentences in WRITING_EXERCISES.items():
+        print(f"  Lesson {lesson_id}: {len(sentences)} writing sentences")
+        for sentence in sentences:
+            texts_to_generate.append((sentence, None, False))
     
     # Remove duplicates while preserving order and keeping speaker info
     seen = {}
