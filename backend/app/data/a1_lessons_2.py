@@ -49,7 +49,32 @@ A1_LESSONS_PART2 = [
 - sin → sinovi (sons)
 - kći → kćeri (daughters)
 """,
+        "grammar_explanation_en": """
+## Possessive Pronouns
+
+| Person | Masculine | Feminine | Neuter |
+|--------|-----------|----------|--------|
+| I | moj | moja | moje |
+| you | tvoj | tvoja | tvoje |
+| he | njegov | njegova | njegovo |
+| she | njen/njena | njena | njeno |
+| we | naš | naša | naše |
+| you (formal) | vaš | vaša | vaše |
+| they | njihov | njihova | njihovo |
+
+### Examples:
+- **Moj** brat je visok. (My brother is tall.)
+- **Moja** sestra je pametna. (My sister is smart.)
+- **Moje** dijete je malo. (My child is small.)
+
+## Plural of Family Members
+- brat → braća (brothers)
+- sestra → sestre (sisters)
+- sin → sinovi (sons)
+- kći → kćeri (daughters)
+""",
         "cultural_note": "Porodica je vrlo važna u bosanskoj kulturi. Višegeneracijske porodice često žive zajedno ili blizu jedni drugih. Vikendi su obično rezervisani za porodična okupljanja, često uz tradicionalnu bosansku kafu i kolače.",
+        "cultural_note_en": "Family is very important in Bosnian culture. Multi-generational families often live together or close to each other. Weekends are usually reserved for family gatherings, often with traditional Bosnian coffee and cakes.",
         "cultural_comic": {
             "title": "Porodični ručak kod nane u Zenici",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/72/d5/92/bosnian-traditional-house.jpg?w=1200",
@@ -147,7 +172,33 @@ A1_LESSONS_PART2 = [
 - **Kada?** - When?
 - **U koji dan?** - On which day?
 """,
+        "grammar_explanation_en": """
+## Days of the Week
+
+| Day | Bosnian | With preposition |
+|-----|---------|------------------|
+| Monday | ponedjeljak | u ponedjeljak |
+| Tuesday | utorak | u utorak |
+| Wednesday | srijeda | u srijedu |
+| Thursday | četvrtak | u četvrtak |
+| Friday | petak | u petak |
+| Saturday | subota | u subotu |
+| Sunday | nedjelja | u nedjelju |
+
+## Time Expressions
+- **danas** - today
+- **sutra** - tomorrow
+- **jučer** - yesterday
+- **prekosutra** - day after tomorrow
+- **prekjučer** - day before yesterday
+
+## Asking About Time
+- **Koji je danas dan?** - What day is it today?
+- **Kada?** - When?
+- **U koji dan?** - On which day?
+""",
         "cultural_note": "U Bosni i Hercegovini, sedmica počinje ponedjeljkom. Petak je posebno važan dan za muslimane (džuma), a nedjelja za katolike i pravoslavce. Subota je tradicionalno dan za porodična okupljanja i odlazak na pijacu.",
+        "cultural_note_en": "In Bosnia and Herzegovina, the week begins on Monday. Friday is a particularly important day for Muslims (Juma prayer), and Sunday for Catholics and Orthodox Christians. Saturday is traditionally a day for family gatherings and going to the market.",
         "cultural_comic": {
             "title": "Sedmični planovi na pijacu Markale",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/5a/c2/58/markale-market.jpg?w=1200",
@@ -248,7 +299,36 @@ A1_LESSONS_PART2 = [
 - **u** + mjesec: u januaru, u maju
 - **u** + godišnje doba: u proljeće, u ljeto (ALI: zimi, u jesen)
 """,
+        "grammar_explanation_en": """
+## Months of the Year
+
+| Month | Bosnian |
+|-------|---------|
+| January | januar |
+| February | februar |
+| March | mart |
+| April | april |
+| May | maj |
+| June | juni |
+| July | juli |
+| August | august |
+| September | septembar |
+| October | oktobar |
+| November | novembar |
+| December | decembar |
+
+## Seasons
+- **proljeće** - spring (March, April, May)
+- **ljeto** - summer (June, July, August)
+- **jesen** - autumn (September, October, November)
+- **zima** - winter (December, January, February)
+
+## Prepositions for Time
+- **u** + month: u januaru (in January), u maju (in May)
+- **u** + season: u proljeće (in spring), u ljeto (in summer) (BUT: zimi - in winter, u jesen - in autumn)
+""",
         "cultural_note": "Bosna ima četiri izražena godišnja doba. Zime mogu biti veoma hladne sa puno snijega, posebno u planinskim krajevima. Ljeta su topla i suha. Tradicionalni bosanski kalendar također uključuje islamske i pravoslavne praznike koji se obilježavaju po lunarnom kalendaru.",
+        "cultural_note_en": "Bosnia has four distinct seasons. Winters can be very cold with lots of snow, especially in mountainous areas. Summers are warm and dry. The traditional Bosnian calendar also includes Islamic and Orthodox holidays that are celebrated according to the lunar calendar.",
         "cultural_comic": {
             "title": "Četiri godišnja doba u Bosni",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/15/6d/b5/jahorina.jpg?w=1200",

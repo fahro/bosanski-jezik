@@ -58,7 +58,41 @@ A1_LESSONS_PART3 = [
 - Koliko košta? - How much does it cost?
 - Račun, molim. - The bill, please.
 """,
+        "grammar_explanation_en": """
+## Verb "voljeti" (to like/love)
+
+| Person | Conjugation |
+|--------|-------------|
+| I | volim |
+| You | voliš |
+| He/She | voli |
+| We | volimo |
+| You (formal) | volite |
+| They | vole |
+
+## Verb "željeti" (to want)
+
+| Person | Conjugation |
+|--------|-------------|
+| I | želim |
+| You | želiš |
+| He/She | želi |
+| We | želimo |
+| You (formal) | želite |
+| They | žele |
+
+### Examples:
+- **Volim** kafu. (I like coffee.)
+- **Želim** ćevape. (I want cevapi.)
+- **Ne volim** ribu. (I don't like fish.)
+
+## Useful Restaurant Phrases
+- Mogu li dobiti...? - Can I get...?
+- Koliko košta? - How much does it cost?
+- Račun, molim. - The bill, please.
+""",
         "cultural_note": "Bosanska kuhinja je bogata i ukusna. Ćevapi, burek i pita su najpoznatija jela. Bosanska kafa se priprema na poseban način i servira u fildžanu (mala šoljica) sa rahat-lokumom ili šećerom. Nikada ne žurite sa kafom - to je društveni ritual!",
+        "cultural_note_en": "Bosnian cuisine is rich and delicious. Cevapi, burek, and pita are the most famous dishes. Bosnian coffee is prepared in a special way and served in a fildzan (small cup) with rahat-lokum (Turkish delight) or sugar. Never rush with coffee - it's a social ritual!",
         "cultural_comic": {
             "title": "Naručivanje u ćevabdžinici Željo",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0d/c8/7c/8e/cevabdzinica-zeljo.jpg?w=1200",
@@ -161,7 +195,37 @@ A1_LESSONS_PART3 = [
 - Živim **u** stanu. (I live in an apartment.)
 - Knjiga je **na** stolu. (The book is on the table.)
 """,
+        "grammar_explanation_en": """
+## Prepositions of Place
+
+| Preposition | Meaning | Example |
+|-------------|---------|---------|
+| u | in | u kući (in the house) |
+| na | on | na stolu (on the table) |
+| ispod | under | ispod stola (under the table) |
+| iznad | above | iznad vrata (above the door) |
+| pored | next to | pored prozora (next to the window) |
+| između | between | između stolica (between chairs) |
+| iza | behind | iza kuće (behind the house) |
+| ispred | in front of | ispred kuće (in front of the house) |
+
+## Verb "živjeti" (to live)
+
+| Person | Conjugation |
+|--------|-------------|
+| I | živim |
+| You | živiš |
+| He/She | živi |
+| We | živimo |
+| You (formal) | živite |
+| They | žive |
+
+### Examples:
+- Živim **u** stanu. (I live in an apartment.)
+- Knjiga je **na** stolu. (The book is on the table.)
+""",
         "cultural_note": "U Bosni, mnogi ljudi žive u stanovima u gradovima, dok su kuće češće u manjim mjestima. Tradicionalne bosanske kuće imaju 'avliju' (dvorište) i često 'čardak' (drveni balkon). Gostoprimstvo je vrlo važno - gosti se uvijek dočekuju kafom i slatkišima.",
+        "cultural_note_en": "In Bosnia, many people live in apartments in cities, while houses are more common in smaller towns. Traditional Bosnian houses have an 'avlija' (courtyard) and often a 'cardak' (wooden balcony). Hospitality is very important - guests are always welcomed with coffee and sweets.",
         "cultural_comic": {
             "title": "Obilazak novog stana u Sarajevu",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/45/5d/83/traditional-bosnian-house.jpg?w=1200",
@@ -262,7 +326,38 @@ Konstrukcija za izražavanje boli:
 - **Bolestan/bolesna sam.** - I'm sick.
 - **Umoran/umorna sam.** - I'm tired.
 """,
+        "grammar_explanation_en": """
+## Expressing Pain - "Boli me..."
+
+Construction for expressing pain:
+**Boli me + body part**
+
+| Bosnian | English |
+|---------|---------|
+| Boli me glava. | My head hurts. |
+| Boli me stomak. | My stomach hurts. |
+| Boli me zub. | My tooth hurts. |
+| Bole me oči. | My eyes hurt. |
+| Bole me leđa. | My back hurts. |
+
+## Plural of Body Parts
+
+| Singular | Plural |
+|----------|--------|
+| ruka (arm) | ruke |
+| noga (leg) | noge |
+| oko (eye) | oči |
+| uho (ear) | uši |
+| zub (tooth) | zubi |
+
+## How Are You Feeling?
+- **Dobro sam.** - I'm fine.
+- **Loše sam.** - I'm not well.
+- **Bolestan/bolesna sam.** - I'm sick. (m/f)
+- **Umoran/umorna sam.** - I'm tired. (m/f)
+""",
         "cultural_note": "U Bosni i Hercegovini zdravstvena zaštita je dostupna svima. Kada ste bolesni, uobičajeno je da vas posjete prijatelji i porodica sa hranom i podrškom. Tradicionalni lijekovi poput čaja od kamilice, meda i limuna još uvijek su popularni za prehladu.",
+        "cultural_note_en": "In Bosnia and Herzegovina, healthcare is accessible to everyone. When you are sick, it is common for friends and family to visit you with food and support. Traditional remedies such as chamomile tea, honey, and lemon are still popular for colds.",
         "cultural_comic": {
             "title": "Posjeta doktoru - Boli me glava",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/c5/ab/c5/clinical-center-university.jpg?w=1200",

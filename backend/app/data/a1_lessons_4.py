@@ -53,7 +53,36 @@ A1_LESSONS_PART4 = [
 - **Gdje radiš?** - Where do you work?
 - **Radim u...** - I work at/in...
 """,
+        "grammar_explanation_en": """
+## Verb "raditi" (to work)
+
+| Person | Conjugation |
+|--------|-------------|
+| I | radim |
+| You | radiš |
+| He/She | radi |
+| We | radimo |
+| You (formal) | radite |
+| They | rade |
+
+## Masculine and Feminine Forms of Professions
+
+| Masculine | Feminine | English |
+|-----------|----------|---------|
+| doktor | doktorica | doctor |
+| učitelj | učiteljica | teacher |
+| kuhar | kuharica | cook |
+| prodavač | prodavačica | salesperson |
+| student | studentica | student |
+
+## Useful Phrases
+- **Čime se baviš?** - What do you do (for work)?
+- **Radim kao...** - I work as a...
+- **Gdje radiš?** - Where do you work?
+- **Radim u...** - I work at/in...
+""",
         "cultural_note": "U Bosni i Hercegovini, tradicionalno je uobičajeno pitati ljude čime se bave. Obrazovanje i profesionalni uspjeh su cijenjeni. Mnogi mladi Bosanci i Bosanke studiraju na univerzitetima u Sarajevu, Banja Luci, Tuzli i Mostaru.",
+        "cultural_note_en": "In Bosnia and Herzegovina, it is traditionally common to ask people what they do for a living. Education and professional success are valued. Many young Bosnians study at universities in Sarajevo, Banja Luka, Tuzla, and Mostar.",
         "cultural_comic": {
             "title": "Na Univerzitetu u Sarajevu",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/4a/e5/c9/university-of-sarajevo.jpg?w=1200",
@@ -158,7 +187,36 @@ A1_LESSONS_PART4 = [
 - **Koliko je sati?** - What time is it?
 - **U koliko sati?** - At what time?
 """,
+        "grammar_explanation_en": """
+## How to Tell Time
+
+### Full Hours
+- **Jedan sat** - One o'clock
+- **Dva sata** - Two o'clock
+- **Pet sati** - Five o'clock
+- **Dvanaest sati** - Twelve o'clock
+
+### Half Hours
+- **Pola jedan** - 12:30 (half to one)
+- **Pola dva** - 1:30 (half to two)
+- **Pola tri** - 2:30 (half to three)
+
+### Quarter Hours
+- **Četvrt** - quarter past
+- **Tri četvrti** or **do** - quarter to
+
+### Examples:
+- 8:00 → **Osam sati** (Eight o'clock)
+- 8:15 → **Osam i četvrt** (Eight fifteen)
+- 8:30 → **Pola devet** (Half to nine - literally 8:30)
+- 8:45 → **Četvrt do devet** (Quarter to nine)
+
+## Asking About Time
+- **Koliko je sati?** - What time is it?
+- **U koliko sati?** - At what time?
+""",
         "cultural_note": "Bosanci koriste 24-satni format u službenim situacijama (npr. vozni red), ali u svakodnevnom govoru češće koriste 12-satni format. 'Pola' se računa unaprijed, tako da 'pola pet' znači 4:30, a ne 5:30!",
+        "cultural_note_en": "Bosnians use the 24-hour format in official situations (e.g., train schedules), but in everyday speech, they more often use the 12-hour format. 'Pola' (half) is counted forward, so 'pola pet' means 4:30, not 5:30!",
         "cultural_comic": {
             "title": "Na željezničkoj stanici u Sarajevu",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/a5/d5/aa/sarajevo-railway-station.jpg?w=1200",
@@ -262,7 +320,40 @@ A1_LESSONS_PART4 = [
 | Možeš li...? | Možete li...? |
 | Hvala ti | Hvala vam |
 """,
+        "grammar_explanation_en": """
+## Useful Phrases for Everyday Communication
+
+### Asking for Help
+- **Možete li mi pomoći?** - Can you help me?
+- **Gdje je...?** - Where is...?
+- **Kako da dođem do...?** - How do I get to...?
+
+### Expressing Opinions
+- **Mislim da...** - I think that...
+- **Slažem se** - I agree
+- **Ne slažem se** - I disagree
+
+### Expressing Feelings
+- **Drago mi je** - I'm glad / Nice to meet you
+- **Žao mi je** - I'm sorry
+- **Sviđa mi se** - I like it
+
+### Questions and Answers
+- **Da** - Yes
+- **Ne** - No
+- **Možda** - Maybe
+- **Naravno** - Of course
+- **Nema na čemu** - You're welcome
+
+## Formal vs. Informal
+| Informal | Formal |
+|----------|--------|
+| Izvini (Sorry) | Izvinite |
+| Možeš li...? (Can you...?) | Možete li...? |
+| Hvala ti (Thank you) | Hvala vam |
+""",
         "cultural_note": "Bosanci su poznati po gostoprimstvu. Ako vas neko pozove na kafu, nemojte odbiti - to je dio tradicije. Fraza 'Nema na čemu' doslovno znači 'There is nothing (to thank for)', što odražava skromnost bosanske kulture.",
+        "cultural_note_en": "Bosnians are known for their hospitality. If someone invites you for coffee, don't refuse - it's part of the tradition. The phrase 'Nema na čemu' literally means 'There is nothing (to thank for)', which reflects the modesty of Bosnian culture.",
         "cultural_comic": {
             "title": "Turist u Sarajevu traži pomoć",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/d3/a7/fe/ferhadija-street.jpg?w=1200",

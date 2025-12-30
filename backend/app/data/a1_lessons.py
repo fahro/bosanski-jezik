@@ -62,7 +62,41 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 - **On je** visok. (He is tall.)
 - **Mi smo** prijatelji. (We are friends.)
 """,
+        "grammar_explanation_en": """
+## Personal Pronouns
+
+In Bosnian, we have the following personal pronouns:
+
+| Bosnian | English |
+|---------|---------|
+| Ja | I |
+| Ti | You (informal) |
+| On | He |
+| Ona | She |
+| Ono | It |
+| Mi | We |
+| Vi | You (formal/plural) |
+| Oni/One/Ona | They |
+
+## Verb "biti" (To be) - Present Tense
+
+| Person | Verb |
+|--------|------|
+| Ja (I) | sam |
+| Ti (You) | si |
+| On/Ona/Ono (He/She/It) | je |
+| Mi (We) | smo |
+| Vi (You) | ste |
+| Oni/One/Ona (They) | su |
+
+### Examples:
+- **Ja sam** učenik. (I am a student.)
+- **Ti si** dobar. (You are good.)
+- **On je** visok. (He is tall.)
+- **Mi smo** prijatelji. (We are friends.)
+""",
         "cultural_note": "U Bosni i Hercegovini, ljudi se često pozdravljaju sa 'Merhaba' (iz turskog) ili 'Selam' u neformalnim situacijama. 'Vi' forma se koristi za starije osobe i u formalnim situacijama kao znak poštovanja.",
+        "cultural_note_en": "In Bosnia and Herzegovina, people often greet each other with 'Merhaba' (from Turkish) or 'Selam' in informal situations. The 'Vi' form is used for older people and in formal situations as a sign of respect.",
         "cultural_comic": {
             "title": "Kod Sebilj fontane u Baščaršiji",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/d3/a8/13/bascarsija.jpg?w=1200",
@@ -204,7 +238,71 @@ U bosanskom jeziku imamo sljedeće lične zamjenice:
 - Ovo je moj **prvi** dan u školi.
 - Kupila sam **tri** jabuke.
 """,
+        "grammar_explanation_en": """
+## Basic Numbers 1-20
+
+| Number | Bosnian | Pronunciation |
+|--------|---------|---------------|
+| 1 | jedan | YEH-dahn |
+| 2 | dva | dvah |
+| 3 | tri | tree |
+| 4 | četiri | CHEH-tee-ree |
+| 5 | pet | peht |
+| 6 | šest | shehst |
+| 7 | sedam | SEH-dahm |
+| 8 | osam | OH-sahm |
+| 9 | devet | DEH-veht |
+| 10 | deset | DEH-seht |
+| 11 | jedanaest | yeh-DAH-nah-ehst |
+| 12 | dvanaest | DVAH-nah-ehst |
+| 13 | trinaest | TREE-nah-ehst |
+| 14 | četrnaest | cheh-TR-nah-ehst |
+| 15 | petnaest | PEHT-nah-ehst |
+| 16 | šesnaest | SHEHST-nah-ehst |
+| 17 | sedamnaest | SEH-dahm-nah-ehst |
+| 18 | osamnaest | OH-sahm-nah-ehst |
+| 19 | devetnaest | DEH-veht-nah-ehst |
+| 20 | dvadeset | DVAH-deh-seht |
+
+## Ordinal Numbers
+
+| Number | Masculine | Feminine | Neuter |
+|--------|-----------|----------|--------|
+| 1st | prvi | prva | prvo |
+| 2nd | drugi | druga | drugo |
+| 3rd | treći | treća | treće |
+| 4th | četvrti | četvrta | četvrto |
+| 5th | peti | peta | peto |
+
+### Examples:
+- **prvi** dan (m) - first day
+- **druga** lekcija (f) - second lesson  
+- **treće** dijete (n) - third child
+
+## Number Agreement with Nouns
+
+### Number 1 - agrees in gender:
+- **jedan** čovjek (m) - one man
+- **jedna** žena (f) - one woman
+- **jedno** dijete (n) - one child
+
+### Numbers 2, 3, 4 - noun in singular (special form):
+- **dva/dvije** čovjeka - two men
+- **tri** žene - three women
+- **četiri** djeteta - four children
+
+### Numbers 5-20 - noun in genitive plural:
+- **pet** ljudi - five people
+- **šest** žena - six women
+- **deset** djece - ten children
+
+## Examples in Sentences:
+- Imam **jednu** sestru i **dva** brata. (I have one sister and two brothers.)
+- Ovo je moj **prvi** dan u školi. (This is my first day at school.)
+- Kupila sam **tri** jabuke. (I bought three apples.)
+""",
         "cultural_note": "U Bosni i Hercegovini koristi se konvertibilna marka (KM) kao valuta. Kada kupujete na pijaci, često ćete čuti cijene u markama. Pregovaranje o cijeni je uobičajeno na tradicionalnim pijacama.",
+        "cultural_note_en": "In Bosnia and Herzegovina, the convertible mark (KM) is used as currency. When shopping at the market, you will often hear prices in marks. Bargaining is common at traditional markets.",
         "cultural_comic": {
             "title": "Na Baščaršiji - kupovina u dućanu",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/9a/e4/1c/bascarsija.jpg?w=1200",
@@ -308,7 +406,31 @@ Pridjevi za boje se mijenjaju prema rodu imenice:
 - **Koje boje je...?** - What color is...?
 - Koje boje je tvoja kuća? - What color is your house?
 """,
+        "grammar_explanation_en": """
+## Color Adjectives - Gender Agreement
+
+Color adjectives change according to the gender of the noun:
+
+| Color | Masculine | Feminine | Neuter |
+|-------|-----------|----------|--------|
+| red | crven | crvena | crveno |
+| blue | plav | plava | plavo |
+| green | zelen | zelena | zeleno |
+| yellow | žut | žuta | žuto |
+| black | crn | crna | crno |
+| white | bijel | bijela | bijelo |
+
+### Examples:
+- **crven** auto (m) - a red car
+- **crvena** haljina (f) - a red dress
+- **crveno** vino (n) - red wine
+
+## Asking About Colors
+- **Koje boje je...?** - What color is...?
+- Koje boje je tvoja kuća? - What color is your house?
+""",
         "cultural_note": "Bosna i Hercegovina ima zastavu sa plavom bojom i žutim trokutom sa bijelim zvijezdama. Plava i žuta su nacionalne boje. Tradicionalna bosanska ćilimska umjetnost koristi živopisne crvene, plave i zelene boje.",
+        "cultural_note_en": "Bosnia and Herzegovina has a flag with blue color and a yellow triangle with white stars. Blue and yellow are the national colors. Traditional Bosnian carpet art uses vivid red, blue, and green colors.",
         "cultural_comic": {
             "title": "Kod Starog Mosta u Mostaru",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/10/e9/c5/83/stari-most.jpg?w=1200",

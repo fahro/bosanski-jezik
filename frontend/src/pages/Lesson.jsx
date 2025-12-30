@@ -37,6 +37,7 @@ function Lesson() {
   const [flippedCards, setFlippedCards] = useState({})
   const [showCultureTranslation, setShowCultureTranslation] = useState(false)
   const [showQuizTranslation, setShowQuizTranslation] = useState(false)
+  const [showGrammarTranslation, setShowGrammarTranslation] = useState(false)
   const [grammarExercises, setGrammarExercises] = useState({
     answers: {},
     showResults: false,
@@ -63,6 +64,7 @@ function Lesson() {
     checked: {}
   })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
+  const [showDialogTranslation, setShowDialogTranslation] = useState(true)
 
   // Track previous lessonId to only reset state when lesson actually changes
   const prevLessonIdRef = useRef(null)
@@ -102,6 +104,7 @@ function Lesson() {
     setFlippedCards({})
     setShowCultureTranslation(false)
     setShowQuizTranslation(false)
+    setShowGrammarTranslation(false)
     setGrammarExercises({ answers: {}, showResults: false, draggedItem: null })
     setSentenceExercises({ answers: {}, showResults: false })
     setMatchingExercises({ answers: {}, showResults: false })
@@ -113,6 +116,7 @@ function Lesson() {
     setSelectedBosnian(null)
     setWordPositions({})
     setShowFillBlankTranslation(false)
+    setShowDialogTranslation(true)
     
     api.get(`/api/lessons/${lessonId}`)
       .then(data => {
@@ -1512,19 +1516,19 @@ function Lesson() {
                     }`}
                   >
                     <div 
-                      className={`relative rounded-xl min-h-[240px] flex flex-col justify-between hover:shadow-lg transition-shadow overflow-hidden border-2 ${
-                        flippedCards[index] ? 'border-green-300' : 'border-blue-200'
-                      }`}
+                      className={`relative rounded-xl min-h-[240px] flex flex-col justify-between hover:shadow-xl transition-all duration-300 overflow-hidden border-2 ${
+                        flippedCards[index] ? 'border-green-400' : 'border-white/50'
+                      } ${word.image_url ? 'shadow-lg' : ''}`}
                       style={word.image_url ? {
                         backgroundImage: `url(${word.image_url})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center'
                       } : {}}
                     >
-                      {/* Background overlay */}
+                      {/* Background overlay - minimal for better image visibility */}
                       <div className={`absolute inset-0 ${
                         word.image_url 
-                          ? (flippedCards[index] ? 'bg-gradient-to-t from-green-900/90 via-green-800/70 to-transparent' : 'bg-gradient-to-t from-blue-900/90 via-blue-800/70 to-transparent')
+                          ? 'bg-gradient-to-t from-black/50 via-transparent to-black/10'
                           : (flippedCards[index] ? 'bg-gradient-to-br from-green-50 to-emerald-100' : 'bg-gradient-to-br from-blue-50 to-indigo-100')
                       }`}></div>
                       
@@ -1537,62 +1541,64 @@ function Lesson() {
                                 e.stopPropagation()
                                 speak(word.bosnian)
                               }}
-                              className={`p-2 rounded-full shadow-sm hover:shadow transition-all ml-auto ${
+                              className={`p-2 rounded-full transition-all ml-auto ${
                                 word.image_url 
-                                  ? 'bg-white/20 hover:bg-white/40 text-white' 
-                                  : 'bg-white/70 hover:bg-white text-bosnia-blue hover:text-blue-700'
+                                  ? 'bg-white/30 backdrop-blur-sm hover:bg-white/50 text-white shadow-lg' 
+                                  : 'bg-white/70 hover:bg-white text-bosnia-blue hover:text-blue-700 shadow-sm'
                               }`}
                               title="Slušaj izgovor"
                             >
                               <Volume2 className="w-5 h-5" />
                             </button>
                           </div>
-                          <div className="mt-auto">
-                            <div className={`text-2xl font-bold ${word.image_url ? 'text-white drop-shadow-lg' : 'text-gray-800'}`}>{word.bosnian}</div>
-                            <div className={`text-sm mt-1 ${word.image_url ? 'text-white/80' : 'text-gray-500'}`}>{word.pronunciation}</div>
+                          <div className={`mt-auto ${word.image_url ? 'bg-black/40 backdrop-blur-sm -mx-4 -mb-4 p-4 pt-3' : ''}`}>
+                            <div className={`text-2xl font-bold ${word.image_url ? 'text-white [text-shadow:_0_2px_8px_rgb(0_0_0_/_60%)]' : 'text-gray-800'}`}>{word.bosnian}</div>
+                            <div className={`text-sm mt-1 ${word.image_url ? 'text-white/90' : 'text-gray-500'}`}>{word.pronunciation}</div>
+                            <div className={`text-xs mt-2 ${word.image_url ? 'text-white/80' : 'text-blue-600'}`}>Klikni za prijevod →</div>
                           </div>
-                          <div className={`text-xs mt-2 ${word.image_url ? 'text-white/70' : 'text-blue-600'}`}>Klikni za prijevod →</div>
                         </div>
                       ) : (
                         <div className="relative z-10 p-4 flex flex-col justify-between h-full">
-                          <div className="flex justify-between items-start">
-                            <div className={`text-lg font-semibold ${word.image_url ? 'text-white drop-shadow-lg' : 'text-green-800'}`}>{word.english}</div>
+                          <div className={`flex justify-between items-start ${word.image_url ? 'bg-black/40 backdrop-blur-sm -mx-4 -mt-4 p-4 pb-2' : ''}`}>
+                            <div className={`text-lg font-bold ${word.image_url ? 'text-white [text-shadow:_0_2px_8px_rgb(0_0_0_/_60%)]' : 'text-green-800'}`}>{word.english}</div>
                             <button
                               onClick={(e) => {
                                 e.stopPropagation()
                                 speak(word.bosnian)
                               }}
-                              className={`p-2 rounded-full shadow-sm hover:shadow transition-all ${
+                              className={`p-2 rounded-full transition-all ${
                                 word.image_url 
-                                  ? 'bg-white/20 hover:bg-white/40 text-white' 
-                                  : 'bg-white/70 hover:bg-white text-green-600 hover:text-green-700'
+                                  ? 'bg-white/30 hover:bg-white/50 text-white' 
+                                  : 'bg-white/70 hover:bg-white text-green-600 hover:text-green-700 shadow-sm'
                               }`}
                               title="Slušaj riječ"
                             >
                               <Volume2 className="w-4 h-4" />
                             </button>
                           </div>
-                          <div className={`mt-2 p-2 rounded-lg ${word.image_url ? 'bg-black/30' : 'bg-white/50'}`}>
-                            <div className="flex justify-between items-start gap-2">
-                              <div className={`text-sm italic ${word.image_url ? 'text-white' : 'text-gray-700'}`}>"{word.example}"</div>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  speak(word.example)
-                                }}
-                                className={`p-1.5 rounded-full shadow-sm hover:shadow transition-all flex-shrink-0 ${
-                                  word.image_url 
-                                    ? 'bg-white/20 hover:bg-white/40 text-white' 
-                                    : 'bg-white/70 hover:bg-white text-green-600 hover:text-green-700'
-                                }`}
-                                title="Slušaj rečenicu"
-                              >
-                                <Volume2 className="w-3.5 h-3.5" />
-                              </button>
+                          <div className={`mt-auto ${word.image_url ? 'bg-black/40 backdrop-blur-sm -mx-4 -mb-4 p-4 pt-3 rounded-b-xl' : ''}`}>
+                            <div className={`p-3 rounded-lg ${word.image_url ? 'bg-white/10' : 'bg-white/50'}`}>
+                              <div className="flex justify-between items-center gap-3">
+                                <div className={`text-base italic leading-relaxed ${word.image_url ? 'text-white' : 'text-gray-700'}`}>"{word.example}"</div>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation()
+                                    speak(word.example)
+                                  }}
+                                  className={`p-3 rounded-full transition-all flex-shrink-0 ${
+                                    word.image_url 
+                                      ? 'bg-white/40 hover:bg-white/60 text-white shadow-lg' 
+                                      : 'bg-white hover:bg-green-50 text-green-600 hover:text-green-700 shadow-md'
+                                  }`}
+                                  title="Slušaj rečenicu"
+                                >
+                                  <Volume2 className="w-5 h-5" />
+                                </button>
+                              </div>
+                              <div className={`text-sm mt-2 ${word.image_url ? 'text-white/90' : 'text-gray-500'}`}>{word.example_translation}</div>
                             </div>
-                            <div className={`text-xs mt-1 ${word.image_url ? 'text-white/80' : 'text-gray-500'}`}>{word.example_translation}</div>
+                            <div className={`text-xs mt-2 ${word.image_url ? 'text-white/80' : 'text-green-600'}`}>← Klikni za bosanski</div>
                           </div>
-                          <div className={`text-xs mt-2 ${word.image_url ? 'text-white/70' : 'text-green-600'}`}>← Klikni za bosanski</div>
                         </div>
                       )}
                     </div>
@@ -1605,12 +1611,32 @@ function Lesson() {
           {/* Grammar Tab */}
           {activeTab === 'grammar' && (
             <div className="animate-fadeIn markdown-content">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Gramatika</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-gray-800">Gramatika</h2>
+                <button
+                  onClick={() => setShowGrammarTranslation(!showGrammarTranslation)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    showGrammarTranslation 
+                      ? 'bg-bosnia-blue text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>{showGrammarTranslation ? '🇬🇧 Show Bosnian' : '🇬🇧 Show English'}</span>
+                </button>
+              </div>
               <div className="prose max-w-none">
                 <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                  {lesson.grammar_explanation}
+                  {showGrammarTranslation && lesson.grammar_explanation_en 
+                    ? lesson.grammar_explanation_en 
+                    : lesson.grammar_explanation}
                 </ReactMarkdown>
               </div>
+              {showGrammarTranslation && !lesson.grammar_explanation_en && (
+                <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-xl text-center">
+                  <p className="text-yellow-700">⚠️ Engleski prijevod još nije dostupan za ovu lekciju.</p>
+                </div>
+              )}
               <div className="mt-6 p-4 bg-blue-50 rounded-xl text-center">
                 <p className="text-blue-700">💡 Želite vježbati? Posjetite tab <strong>"Vježbajmo"</strong> za interaktivne vježbe!</p>
               </div>
@@ -2231,7 +2257,20 @@ function Lesson() {
           {/* Dialogue Tab */}
           {activeTab === 'dialogue' && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Dijalog</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-gray-800">Dijalog</h2>
+                <button
+                  onClick={() => setShowDialogTranslation(!showDialogTranslation)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    showDialogTranslation 
+                      ? 'bg-bosnia-blue text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>{showDialogTranslation ? '🇬🇧 Hide English' : '🇬🇧 Show English'}</span>
+                </button>
+              </div>
               <p className="text-gray-600 mb-6">Pratite razgovor i učite iz konteksta</p>
               
               {/* Dialogue with Background Image */}
@@ -2275,7 +2314,11 @@ function Lesson() {
                         </button>
                       </div>
                       <div className="text-gray-800 cursor-pointer hover:text-blue-700" onClick={() => speak(line.text)}>{line.text}</div>
-                      <div className="text-sm text-gray-500 mt-2 italic">{line.translation}</div>
+                      {showDialogTranslation && (
+                        <div className="text-sm text-gray-500 mt-2 italic border-t border-gray-200 pt-2">
+                          🇬🇧 {line.translation}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -2287,7 +2330,20 @@ function Lesson() {
           {/* Culture Tab */}
           {activeTab === 'culture' && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Kulturna bilješka</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-gray-800">Kulturna bilješka</h2>
+                <button
+                  onClick={() => setShowCultureTranslation(!showCultureTranslation)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    showCultureTranslation 
+                      ? 'bg-bosnia-blue text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>{showCultureTranslation ? '🇬🇧 Hide English' : '🇬🇧 Show English'}</span>
+                </button>
+              </div>
               
               {/* Culture with Background Image */}
               <div 
@@ -2304,8 +2360,7 @@ function Lesson() {
                 )}
                 
                 <div 
-                  className={`relative z-10 p-6 cursor-pointer hover:bg-white/10 transition-colors rounded-xl ${!lesson.culture_image_url ? 'bg-gradient-to-br from-amber-50 to-orange-100 border-2 border-amber-200' : ''}`}
-                  onClick={() => setShowCultureTranslation(!showCultureTranslation)}
+                  className={`relative z-10 p-6 rounded-xl ${!lesson.culture_image_url ? 'bg-gradient-to-br from-amber-50 to-orange-100 border-2 border-amber-200' : ''}`}
                 >
                   <div className="flex items-start space-x-4">
                     <div className="text-4xl">🇧🇦</div>
@@ -2336,9 +2391,6 @@ function Lesson() {
                       </div>
                     )}
                     </div>
-                  </div>
-                  <div className={`text-center mt-4 text-sm ${lesson.culture_image_url ? 'text-white/70' : 'text-amber-600'}`}>
-                    {showCultureTranslation ? '← Klikni da sakriješ prijevod' : 'Klikni za prijevod na engleski →'}
                   </div>
                 </div>
               </div>
@@ -2432,7 +2484,20 @@ function Lesson() {
           {/* Quiz Tab */}
           {activeTab === 'quiz' && (
             <div className="animate-fadeIn">
-              <h2 className="text-xl font-semibold text-gray-800 mb-4">Kviz</h2>
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-semibold text-gray-800">Kviz</h2>
+                <button
+                  onClick={() => setShowQuizTranslation(!showQuizTranslation)}
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-all ${
+                    showQuizTranslation 
+                      ? 'bg-bosnia-blue text-white' 
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  <Globe className="w-4 h-4" />
+                  <span>{showQuizTranslation ? '🇬🇧 Hide English' : '🇬🇧 Show English'}</span>
+                </button>
+              </div>
               
               {!quizState.showResult ? (
                 <div className="max-w-2xl mx-auto">
@@ -2485,15 +2550,6 @@ function Lesson() {
                         <Volume2 className="w-5 h-5" />
                       </button>
                     </div>
-                    
-                    {/* Translation toggle */}
-                    <button
-                      onClick={() => setShowQuizTranslation(!showQuizTranslation)}
-                      className="mt-3 text-sm text-blue-600 hover:text-blue-800 flex items-center space-x-1"
-                    >
-                      <Globe className="w-4 h-4" />
-                      <span>{showQuizTranslation ? 'Sakrij prijevod' : 'Prikaži prijevod'}</span>
-                    </button>
                     
                     {showQuizTranslation && lesson.quiz[quizState.currentQuestion].question_en && (
                       <p className="mt-2 text-gray-500 italic text-sm">
