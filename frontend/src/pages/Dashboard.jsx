@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { progressApi } from '../api'
+import { progressApi, api } from '../api'
 import { 
   Trophy, Star, Zap, BookOpen, CheckCircle, Lock, 
   ChevronRight, Award, Play, ArrowRight, Flame, Target
 } from 'lucide-react'
 
-const LESSONS = [
+const A1_LESSONS = [
   { id: 1, title: 'Pozdravi', subtitle: 'Greetings', emoji: '👋' },
   { id: 2, title: 'Brojevi', subtitle: 'Numbers', emoji: '🔢' },
   { id: 3, title: 'Boje', subtitle: 'Colors', emoji: '🎨' },
@@ -22,10 +22,32 @@ const LESSONS = [
   { id: 12, title: 'Fraze', subtitle: 'Phrases', emoji: '💬' }
 ]
 
+const A2_LESSONS = [
+  { id: 1, title: 'U restoranu', subtitle: 'At the Restaurant', emoji: '🍽️' },
+  { id: 2, title: 'Kupovina', subtitle: 'Shopping', emoji: '🛒' },
+  { id: 3, title: 'Opis ljudi', subtitle: 'Describing People', emoji: '👤' },
+  { id: 4, title: 'Putovanje', subtitle: 'Travel', emoji: '✈️' },
+  { id: 5, title: 'Zdravlje', subtitle: 'Health', emoji: '🏥' },
+  { id: 6, title: 'Vrijeme', subtitle: 'Weather', emoji: '🌤️' },
+  { id: 7, title: 'Posao', subtitle: 'Work', emoji: '💼' },
+  { id: 8, title: 'Stanovanje', subtitle: 'Housing', emoji: '🏠' },
+  { id: 9, title: 'Hobiji', subtitle: 'Hobbies', emoji: '🎨' },
+  { id: 10, title: 'Telefon', subtitle: 'Phone', emoji: '📱' },
+  { id: 11, title: 'Usluge', subtitle: 'Services', emoji: '🏦' },
+  { id: 12, title: 'Planovi', subtitle: 'Plans', emoji: '📋' }
+]
+
+const LEVEL_INFO = {
+  a1: { name: 'A1 - Početnik', color: '#22c55e', lessons: A1_LESSONS },
+  a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS }
+}
+
 export default function Dashboard() {
   const { user, stats, refreshStats, isAuthenticated } = useAuth()
   const [lessonProgress, setLessonProgress] = useState([])
   const [loading, setLoading] = useState(true)
+  const [selectedLevel, setSelectedLevel] = useState('a1')
+  const [availableLevels, setAvailableLevels] = useState(['a1'])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -33,12 +55,32 @@ export default function Dashboard() {
       navigate('/login')
       return
     }
-    loadProgress()
+    checkAvailableLevels()
+    loadProgress(selectedLevel)
   }, [isAuthenticated])
 
-  const loadProgress = async () => {
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadProgress(selectedLevel)
+    }
+  }, [selectedLevel])
+
+  const checkAvailableLevels = async () => {
     try {
-      const progress = await progressApi.getAllProgress()
+      // Check access to A2
+      const a2Access = await progressApi.checkLevelAccess('a2')
+      if (a2Access.has_access) {
+        setAvailableLevels(['a1', 'a2'])
+      }
+    } catch (error) {
+      console.error('Failed to check level access:', error)
+    }
+  }
+
+  const loadProgress = async (level) => {
+    try {
+      setLoading(true)
+      const progress = await progressApi.getAllProgress(level)
       setLessonProgress(progress)
       await refreshStats()
     } catch (error) {
@@ -59,7 +101,27 @@ export default function Dashboard() {
   const xpProgress = stats?.xp_needed_for_next ? 
     ((stats.xp_for_next_level - stats.xp_needed_for_next) / stats.xp_for_next_level) * 100 : 0
 
-  const currentLessonInfo = LESSONS.find(l => l.id === stats?.current_lesson_id)
+  const currentLevelInfo = LEVEL_INFO[selectedLevel]
+  const LESSONS = currentLevelInfo?.lessons || A1_LESSONS
+  
+  // Calculate current lesson for selected level based on progress
+  const getCurrentLessonForLevel = () => {
+    if (!lessonProgress || lessonProgress.length === 0) return 1
+    
+    // Find the first incomplete lesson or the next one after all completed
+    const completedLessons = lessonProgress.filter(p => p.completed).map(p => p.lesson_id)
+    const maxCompleted = completedLessons.length > 0 ? Math.max(...completedLessons) : 0
+    
+    // Find first lesson that's started but not completed
+    const inProgressLesson = lessonProgress.find(p => p.started && !p.completed)
+    if (inProgressLesson) return inProgressLesson.lesson_id
+    
+    // Otherwise return next lesson after max completed
+    return Math.min(maxCompleted + 1, 12)
+  }
+  
+  const currentLessonIdForLevel = getCurrentLessonForLevel()
+  const currentLessonInfo = LESSONS.find(l => l.id === currentLessonIdForLevel)
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
@@ -119,11 +181,42 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Continue Learning Card */}
-      {stats?.current_lesson_id <= 12 && currentLessonInfo && (
+      {/* Level Switcher - only show if user has access to multiple levels */}
+      {availableLevels.length > 1 && (
+        <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex gap-2">
+          {availableLevels.map((level) => {
+            const info = LEVEL_INFO[level]
+            const isActive = selectedLevel === level
+            return (
+              <button
+                key={level}
+                onClick={() => setSelectedLevel(level)}
+                className={`flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl transition-all ${
+                  isActive 
+                    ? 'text-white shadow-md' 
+                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                }`}
+                style={isActive ? { backgroundColor: info.color } : {}}
+              >
+                <span className="font-bold text-lg">{level.toUpperCase()}</span>
+                <span className={`text-sm ${isActive ? 'text-white/80' : 'text-gray-500'}`}>
+                  {info.name.split(' - ')[1]}
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Continue Learning Card - Works for both A1 and A2 */}
+      {currentLessonIdForLevel <= 12 && currentLessonInfo && (
         <Link
-          to={`/lesson/${stats.current_lesson_id}`}
-          className="block bg-gradient-to-br from-bosnia-blue to-blue-600 rounded-3xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] group"
+          to={`/lesson/${currentLessonIdForLevel}?level=${selectedLevel}`}
+          className={`block rounded-3xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] group ${
+            selectedLevel === 'a1' 
+              ? 'bg-gradient-to-br from-green-500 to-green-600' 
+              : 'bg-gradient-to-br from-bosnia-blue to-blue-600'
+          }`}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -133,12 +226,14 @@ export default function Dashboard() {
               <div>
                 <p className="text-white/70 text-sm">Nastavi učiti</p>
                 <h2 className="text-xl font-bold">
-                  Lekcija {stats.current_lesson_id}: {currentLessonInfo.title}
+                  Lekcija {currentLessonIdForLevel}: {currentLessonInfo.title}
                 </h2>
                 <p className="text-white/70 text-sm">{currentLessonInfo.subtitle}</p>
               </div>
             </div>
-            <div className="bg-white text-bosnia-blue p-4 rounded-2xl group-hover:scale-110 transition-transform">
+            <div className={`p-4 rounded-2xl group-hover:scale-110 transition-transform ${
+              selectedLevel === 'a1' ? 'bg-white text-green-600' : 'bg-white text-bosnia-blue'
+            }`}>
               <Play className="w-6 h-6" />
             </div>
           </div>
@@ -147,18 +242,27 @@ export default function Dashboard() {
 
       {/* Lessons Grid */}
       <div>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Sve lekcije</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-lg font-semibold text-gray-900">
+            {currentLevelInfo?.name || 'Lekcije'}
+          </h2>
+          <span className="text-sm text-gray-500">
+            {lessonProgress.filter(p => p.completed).length}/{LESSONS.length} završeno
+          </span>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {LESSONS.map((lesson) => {
             const progress = lessonProgress.find(p => p.lesson_id === lesson.id)
-            const isLocked = lesson.id > (stats?.current_lesson_id || 1) && !progress?.started
-            const isCurrent = lesson.id === stats?.current_lesson_id
+            // For A2, check progress differently - first lesson always available, others need previous completed
+            const completedCount = lessonProgress.filter(p => p.completed).length
+            const isLocked = lesson.id > 1 && !progress?.started && completedCount < lesson.id - 1
+            const isCurrent = lesson.id === currentLessonIdForLevel
             const isCompleted = progress?.completed
 
             return (
               <Link
                 key={lesson.id}
-                to={isLocked ? '#' : `/lesson/${lesson.id}`}
+                to={isLocked ? '#' : `/lesson/${lesson.id}?level=${selectedLevel}`}
                 onClick={(e) => isLocked && e.preventDefault()}
                 className={`
                   relative bg-white rounded-2xl p-4 border-2 transition-all
@@ -212,7 +316,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Final Test Card */}
+      {/* Final Test Card - Only show for A1 */}
+      {selectedLevel === 'a1' && (
       <div className={`rounded-3xl p-6 ${
         stats?.can_take_final_test 
           ? 'bg-gradient-to-br from-bosnia-yellow to-amber-500 text-white' 
@@ -258,6 +363,7 @@ export default function Dashboard() {
           )}
         </div>
       </div>
+      )}
     </div>
   )
 }

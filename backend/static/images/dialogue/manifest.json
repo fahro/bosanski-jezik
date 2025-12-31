@@ -1,8 +1,8 @@
 {
   "Dijalog - Pozdravi i Upoznavanje": {
-    "filename": "dijalog___pozdravi_i_upoznavanje_fc5f2568.svg",
+    "filename": "dijalog___pozdravi_i_upoznavanje_fc5f2568.png",
     "lesson_id": 1,
-    "type": "placeholder"
+    "type": "ai_generated"
   },
   "Dijalog - Brojevi od 1 do 20": {
     "filename": "dijalog___brojevi_od_1_do_20_897d1641.png",
@@ -56,6 +56,66 @@
   },
   "Dijalog - Osnovne Fraze i Izrazi": {
     "filename": "dijalog___osnovne_fraze_i_izrazi_b04037f9.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "Dijalog - U restoranu": {
+    "filename": "dijalog___u_restoranu_0f54ac08.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "Dijalog - Kupovina u trgovini": {
+    "filename": "dijalog___kupovina_u_trgovini_0d1fa230.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "Dijalog - Opis ljudi i karaktera": {
+    "filename": "dijalog___opis_ljudi_i_karaktera_f29a019e.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "Dijalog - Putovanje i transport": {
+    "filename": "dijalog___putovanje_i_transport_554ac117.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "Dijalog - Zdravlje i tijelo": {
+    "filename": "dijalog___zdravlje_i_tijelo_e9896d90.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "Dijalog - Vrijeme i godišnja doba": {
+    "filename": "dijalog___vrijeme_i_godišnja_doba_64f3e899.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "Dijalog - Posao i zanimanja": {
+    "filename": "dijalog___posao_i_zanimanja_2313336d.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "Dijalog - Stanovanje i dom": {
+    "filename": "dijalog___stanovanje_i_dom_32fd9ee5.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "Dijalog - Hobiji i slobodno vrijeme": {
+    "filename": "dijalog___hobiji_i_slobodno_vrijeme_97f45c42.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "Dijalog - Telefon i komunikacija": {
+    "filename": "dijalog___telefon_i_komunikacija_140042bb.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "Dijalog - Usluge i servisi": {
+    "filename": "dijalog___usluge_i_servisi_2418b1ea.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "Dijalog - Planovi i namjere": {
+    "filename": "dijalog___planovi_i_namjere_c050ff38.png",
     "lesson_id": 12,
     "type": "ai_generated"
   }

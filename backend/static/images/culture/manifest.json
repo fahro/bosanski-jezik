@@ -45,9 +45,9 @@
     "type": "ai_generated"
   },
   "Kultura - Zanimanja i Posao": {
-    "filename": "kultura___zanimanja_i_posao_c82321a0.svg",
+    "filename": "kultura___zanimanja_i_posao_c82321a0.png",
     "lesson_id": 10,
-    "type": "placeholder"
+    "type": "ai_generated"
   },
   "Kultura - Vrijeme i Sat": {
     "filename": "kultura___vrijeme_i_sat_66f8d1e1.png",
@@ -56,6 +56,66 @@
   },
   "Kultura - Osnovne Fraze i Izrazi": {
     "filename": "kultura___osnovne_fraze_i_izrazi_4cef667f.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "Kultura - U restoranu": {
+    "filename": "kultura___u_restoranu_ed39ade9.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "Kultura - Kupovina u trgovini": {
+    "filename": "kultura___kupovina_u_trgovini_5f442949.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "Kultura - Opis ljudi i karaktera": {
+    "filename": "kultura___opis_ljudi_i_karaktera_16f5dbba.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "Kultura - Putovanje i transport": {
+    "filename": "kultura___putovanje_i_transport_c2a0f616.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "Kultura - Zdravlje i tijelo": {
+    "filename": "kultura___zdravlje_i_tijelo_ded7b623.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "Kultura - Vrijeme i godišnja doba": {
+    "filename": "kultura___vrijeme_i_godišnja_doba_a3183299.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "Kultura - Posao i zanimanja": {
+    "filename": "kultura___posao_i_zanimanja_5ac454a9.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "Kultura - Stanovanje i dom": {
+    "filename": "kultura___stanovanje_i_dom_e87fa302.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "Kultura - Hobiji i slobodno vrijeme": {
+    "filename": "kultura___hobiji_i_slobodno_vrijeme_43fef2ee.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "Kultura - Telefon i komunikacija": {
+    "filename": "kultura___telefon_i_komunikacija_0aac93bc.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "Kultura - Usluge i servisi": {
+    "filename": "kultura___usluge_i_servisi_3f433724.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "Kultura - Planovi i namjere": {
+    "filename": "kultura___planovi_i_namjere_eec709ab.png",
     "lesson_id": 12,
     "type": "ai_generated"
   }

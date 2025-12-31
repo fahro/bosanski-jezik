@@ -22,10 +22,10 @@ function LessonList() {
         setLevel(levelData)
         setLessons(lessonsData)
 
-        // Fetch progress if authenticated
+        // Fetch progress if authenticated (pass levelId to get correct level progress)
         if (isAuthenticated) {
           try {
-            const progress = await progressApi.getAllProgress()
+            const progress = await progressApi.getAllProgress(levelId)
             setLessonProgress(progress)
           } catch (err) {
             console.error('Error fetching progress:', err)
@@ -194,7 +194,7 @@ function LessonList() {
               return (
                 <Link
                   key={lesson.id}
-                  to={`/lesson/${lesson.id}`}
+                  to={`/lesson/${lesson.id}?level=${levelId}`}
                   className={`block bg-white rounded-xl p-5 shadow-md hover:shadow-lg transition-all transform hover:-translate-y-1 animate-slideIn ${
                     completed ? 'border-l-4 border-green-500' : ''
                   }`}

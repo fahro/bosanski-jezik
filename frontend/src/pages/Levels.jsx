@@ -1,23 +1,44 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, ChevronRight, Lock } from 'lucide-react'
-import { api } from '../api'
+import { BookOpen, ChevronRight, Lock, CheckCircle } from 'lucide-react'
+import { api, progressApi } from '../api'
 
 function Levels() {
   const [levels, setLevels] = useState([])
+  const [levelAccess, setLevelAccess] = useState({})
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    api.get('/api/levels')
-      .then(data => {
-        setLevels(data)
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error('Error fetching levels:', err)
-        setLoading(false)
-      })
+    loadLevels()
   }, [])
+
+  const loadLevels = async () => {
+    try {
+      const levelsData = await api.get('/api/levels')
+      setLevels(levelsData)
+      
+      // Check access for each level
+      const accessPromises = levelsData.map(async (level) => {
+        try {
+          const access = await progressApi.checkLevelAccess(level.id)
+          return { id: level.id, ...access }
+        } catch (err) {
+          return { id: level.id, has_access: level.id === 'a1' }
+        }
+      })
+      
+      const accessResults = await Promise.all(accessPromises)
+      const accessMap = {}
+      accessResults.forEach(result => {
+        accessMap[result.id] = result
+      })
+      setLevelAccess(accessMap)
+    } catch (err) {
+      console.error('Error fetching levels:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -36,7 +57,9 @@ function Levels() {
 
       <div className="space-y-4">
         {levels.map((level, index) => {
-          const isAvailable = level.id === 'a1'
+          const access = levelAccess[level.id] || { has_access: false }
+          const isAvailable = access.has_access
+          const isComingSoon = access.coming_soon
           
           return (
             <div
@@ -72,19 +95,29 @@ function Levels() {
                 </Link>
               ) : (
                 <div
-                  className="block bg-gray-100 rounded-xl p-6 border-l-4 border-gray-300 opacity-60"
+                  className={`block rounded-xl p-6 border-l-4 ${
+                    isComingSoon 
+                      ? 'bg-gray-100 border-gray-300 opacity-60' 
+                      : 'bg-gray-50 border-gray-200 cursor-pointer hover:bg-gray-100'
+                  }`}
+                  onClick={() => !isComingSoon && alert(access.reason || 'Nivo zaključan')}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
-                      <div className="w-16 h-16 rounded-xl flex items-center justify-center bg-gray-300 text-white font-bold text-xl">
+                      <div 
+                        className="w-16 h-16 rounded-xl flex items-center justify-center text-white font-bold text-xl"
+                        style={{ backgroundColor: isComingSoon ? '#9ca3af' : level.color, opacity: isComingSoon ? 1 : 0.7 }}
+                      >
                         {level.id.toUpperCase()}
                       </div>
                       <div>
-                        <h2 className="text-xl font-semibold text-gray-500">{level.name}</h2>
-                        <p className="text-gray-400">{level.description}</p>
+                        <h2 className={`text-xl font-semibold ${isComingSoon ? 'text-gray-500' : 'text-gray-700'}`}>
+                          {level.name}
+                        </h2>
+                        <p className={isComingSoon ? 'text-gray-400' : 'text-gray-500'}>{level.description}</p>
                         <div className="flex items-center space-x-2 mt-2 text-sm text-gray-400">
                           <Lock className="w-4 h-4" />
-                          <span>Uskoro dostupno</span>
+                          <span>{isComingSoon ? 'Uskoro dostupno' : access.requirement || 'Zaključano'}</span>
                         </div>
                       </div>
                     </div>

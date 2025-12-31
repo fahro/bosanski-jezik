@@ -758,5 +758,610 @@
     "filename": "žao_mi_je_b2d84102.png",
     "lesson_id": 12,
     "type": "ai_generated"
+  },
+  "jelovnik": {
+    "filename": "jelovnik_61f710f1.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "naručiti": {
+    "filename": "naručiti_e3d791ef.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "predjelo": {
+    "filename": "predjelo_807b0071.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "glavno jelo": {
+    "filename": "glavno_jelo_34618291.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "desert": {
+    "filename": "desert_3fd6b621.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "piće": {
+    "filename": "piće_4b69fef9.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "račun": {
+    "filename": "račun_5510cf19.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "napojnica": {
+    "filename": "napojnica_7843267c.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "konobar": {
+    "filename": "konobar_88c9a08c.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "rezervacija": {
+    "filename": "rezervacija_f01b4fa8.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "specijalitet": {
+    "filename": "specijalitet_7c1fb27f.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "preporučiti": {
+    "filename": "preporučiti_3df1be40.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "cijena": {
+    "filename": "cijena_dfd20769.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "popust": {
+    "filename": "popust_7528e64f.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "veličina": {
+    "filename": "veličina_cf6427e0.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "blagajna": {
+    "filename": "blagajna_7ee39e14.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "kusur": {
+    "filename": "kusur_27ebc75b.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "gotovina": {
+    "filename": "gotovina_b6700c9a.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "kartica": {
+    "filename": "kartica_4ff1f426.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "prodavnica": {
+    "filename": "prodavnica_193c5962.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "probati": {
+    "filename": "probati_6f77ca43.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "kabina": {
+    "filename": "kabina_53da5eb9.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "jeftino": {
+    "filename": "jeftino_8fef791c.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "skupo": {
+    "filename": "skupo_1e72670d.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "visok": {
+    "filename": "visok_31d17c72.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "nizak": {
+    "filename": "nizak_e2f0f43f.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "mršav": {
+    "filename": "mršav_0389acfa.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "debeo": {
+    "filename": "debeo_612bbd7c.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "lijep": {
+    "filename": "lijep_eaa271c5.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "pametan": {
+    "filename": "pametan_f5a6173a.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "glup": {
+    "filename": "glup_a43b168b.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "vrijedan": {
+    "filename": "vrijedan_6184ad57.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "lijen": {
+    "filename": "lijen_f4b0fb91.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "veseo": {
+    "filename": "veseo_5a98b5fa.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "tužan": {
+    "filename": "tužan_6808e32a.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "ljubazan": {
+    "filename": "ljubazan_42e0625b.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "autobus": {
+    "filename": "autobus_4bff2b64.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "voz": {
+    "filename": "voz_430c414a.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "tramvaj": {
+    "filename": "tramvaj_d849f34a.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "avion": {
+    "filename": "avion_9424fa90.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "stanica": {
+    "filename": "stanica_5c17a092.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "karta": {
+    "filename": "karta_63954d27.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "polazak": {
+    "filename": "polazak_73507c0f.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "dolazak": {
+    "filename": "dolazak_4a775c83.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "peron": {
+    "filename": "peron_47a270bf.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "povratna karta": {
+    "filename": "povratna_karta_e8f55c63.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "kasni": {
+    "filename": "kasni_1064fd5b.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "red vožnje": {
+    "filename": "red_vožnje_f0d36549.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "grlo": {
+    "filename": "grlo_907fe88e.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "temperatura": {
+    "filename": "temperatura_ee9cf3b7.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "kašalj": {
+    "filename": "kašalj_e9767a65.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "prehlada": {
+    "filename": "prehlada_bcf4acb1.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "lijek": {
+    "filename": "lijek_981b6a37.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "apoteka": {
+    "filename": "apoteka_c883703f.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "recept": {
+    "filename": "recept_e75d4fcd.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "sunčano": {
+    "filename": "sunčano_e93380c2.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "oblačno": {
+    "filename": "oblačno_580b86f4.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "kiša": {
+    "filename": "kiša_a9f469a5.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "snijeg": {
+    "filename": "snijeg_7a0ae895.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "vjetar": {
+    "filename": "vjetar_26c35f97.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "toplo": {
+    "filename": "toplo_6f4fd8c6.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "hladno": {
+    "filename": "hladno_9df83794.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "prognoza": {
+    "filename": "prognoza_1faea939.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "zanimanje": {
+    "filename": "zanimanje_a930b337.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "nastavnik": {
+    "filename": "nastavnik_c18dd3b2.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "inžinjer": {
+    "filename": "inžinjer_835665d3.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "plata": {
+    "filename": "plata_e0b95c14.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "firma": {
+    "filename": "firma_6fa8e2d8.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "radno vrijeme": {
+    "filename": "radno_vrijeme_28bba5ef.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "kolega": {
+    "filename": "kolega_659501e9.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "namještaj": {
+    "filename": "namještaj_5e016f3a.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "kirija": {
+    "filename": "kirija_1d7ada05.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "balkon": {
+    "filename": "balkon_10a76d54.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "kat/sprat": {
+    "filename": "kat_sprat_f9032667.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "lift": {
+    "filename": "lift_969beeb6.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "hobi": {
+    "filename": "hobi_973156d0.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "čitanje": {
+    "filename": "čitanje_d5f45338.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "plivanje": {
+    "filename": "plivanje_28b19f9a.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "trčanje": {
+    "filename": "trčanje_c0048a00.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "fudbal": {
+    "filename": "fudbal_6902c9b7.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "košarka": {
+    "filename": "košarka_0b864319.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "muzika": {
+    "filename": "muzika_73832e5f.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "kuhanje": {
+    "filename": "kuhanje_54161db2.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "fotografija": {
+    "filename": "fotografija_912882e2.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "planinarenje": {
+    "filename": "planinarenje_f0bb5286.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "šetnja": {
+    "filename": "šetnja_30db1c8c.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "vrtlarenje": {
+    "filename": "vrtlarenje_f8cb8d03.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "telefon": {
+    "filename": "telefon_15a957ee.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "poziv": {
+    "filename": "poziv_66529860.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "poruka": {
+    "filename": "poruka_9d8947ae.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "zvati": {
+    "filename": "zvati_d9e93f2f.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "javiti se": {
+    "filename": "javiti_se_6ccc9425.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "email": {
+    "filename": "email_0c83f57c.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "aplikacija": {
+    "filename": "aplikacija_78dfd5f6.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "internet": {
+    "filename": "internet_c3581516.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "lozinka": {
+    "filename": "lozinka_8aa87050.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "priključiti": {
+    "filename": "priključiti_3f1886c9.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "prekinuti": {
+    "filename": "prekinuti_539899ed.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "broj telefona": {
+    "filename": "broj_telefona_cff51126.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "banka": {
+    "filename": "banka_f6a63dfa.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "podići novac": {
+    "filename": "podići_novac_c4c4e24f.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "pošta": {
+    "filename": "pošta_efb5ed31.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "paket": {
+    "filename": "paket_ec8527e6.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "pismo": {
+    "filename": "pismo_e7b33dab.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "marka": {
+    "filename": "marka_f3e1902a.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "šišanje": {
+    "filename": "šišanje_c844e6ab.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "zakazati": {
+    "filename": "zakazati_431cd919.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "termin": {
+    "filename": "termin_1a36d8dd.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "čekaonica": {
+    "filename": "čekaonica_681097e7.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "plan": {
+    "filename": "plan_5fc25157.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "namjera": {
+    "filename": "namjera_41c13298.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "odluka": {
+    "filename": "odluka_f6be01ee.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "cilj": {
+    "filename": "cilj_fa91ef9c.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "san": {
+    "filename": "san_9f5a44a7.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "nadam se": {
+    "filename": "nadam_se_ce4a0eb4.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "planiram": {
+    "filename": "planiram_9c5a7a2c.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "želja": {
+    "filename": "želja_df2c3906.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "dogovor": {
+    "filename": "dogovor_f30c8815.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "obećanje": {
+    "filename": "obećanje_2939e618.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "možda": {
+    "filename": "možda_f1862f2e.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
+  },
+  "sigurno": {
+    "filename": "sigurno_a63f1aef.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   }
 }

@@ -45,6 +45,11 @@ def run_migrations():
                 conn.execute(text("ALTER TABLE lesson_progress ADD COLUMN saved_exercise_type VARCHAR"))
                 print("Migration: Added saved_exercise_type column")
             
+            # Add level column if missing (for multi-level support: a1, a2, b1, etc.)
+            if 'level' not in existing_columns:
+                conn.execute(text("ALTER TABLE lesson_progress ADD COLUMN level VARCHAR(10) DEFAULT 'a1'"))
+                print("Migration: Added level column")
+            
             conn.commit()
         except Exception as e:
             print(f"Migration note: {e}")

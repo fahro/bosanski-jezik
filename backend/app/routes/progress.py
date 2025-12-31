@@ -31,12 +31,14 @@ class QuizSubmission(BaseModel):
     score: int
     total_questions: int
     answers: Optional[dict] = None
+    level: str = "a1"
 
 class ExerciseSubmission(BaseModel):
     lesson_id: int
     score: int
     total_exercises: int
     exercise_type: Optional[str] = None
+    level: str = "a1"
 
 class UserStatsResponse(BaseModel):
     total_xp: int
@@ -110,12 +112,14 @@ async def get_user_stats(
 
 @router.get("/lessons")
 async def get_all_lesson_progress(
+    level: str = "a1",
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
-    """Get progress for all lessons."""
+    """Get progress for all lessons of a specific level."""
     progress_records = db.query(LessonProgress).filter(
-        LessonProgress.user_id == current_user.id
+        LessonProgress.user_id == current_user.id,
+        LessonProgress.level == level
     ).all()
     
     # Create a dict for easy lookup
@@ -167,13 +171,15 @@ async def get_all_lesson_progress(
 @router.get("/lessons/{lesson_id}")
 async def get_lesson_progress(
     lesson_id: int,
+    level: str = "a1",
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
     """Get progress for a specific lesson."""
     progress = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
-        LessonProgress.lesson_id == lesson_id
+        LessonProgress.lesson_id == lesson_id,
+        LessonProgress.level == level
     ).first()
     
     if not progress:
@@ -227,19 +233,22 @@ async def get_lesson_progress(
 async def update_lesson_view(
     lesson_id: int,
     view_data: dict,
+    level: str = "a1",
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
     """Update which sections of a lesson have been viewed."""
     progress = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
-        LessonProgress.lesson_id == lesson_id
+        LessonProgress.lesson_id == lesson_id,
+        LessonProgress.level == level
     ).first()
     
     if not progress:
         progress = LessonProgress(
             user_id=current_user.id,
-            lesson_id=lesson_id
+            lesson_id=lesson_id,
+            level=level
         )
         db.add(progress)
     
@@ -292,19 +301,22 @@ async def update_lesson_view(
 async def save_lesson_progress(
     lesson_id: int,
     save_data: dict,
+    level: str = "a1",
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
     """Save quiz and exercise answers for resuming later."""
     progress = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
-        LessonProgress.lesson_id == lesson_id
+        LessonProgress.lesson_id == lesson_id,
+        LessonProgress.level == level
     ).first()
     
     if not progress:
         progress = LessonProgress(
             user_id=current_user.id,
-            lesson_id=lesson_id
+            lesson_id=lesson_id,
+            level=level
         )
         db.add(progress)
     
@@ -341,13 +353,15 @@ async def submit_quiz(
     # Get or create lesson progress
     progress = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
-        LessonProgress.lesson_id == submission.lesson_id
+        LessonProgress.lesson_id == submission.lesson_id,
+        LessonProgress.level == submission.level
     ).first()
     
     if not progress:
         progress = LessonProgress(
             user_id=current_user.id,
-            lesson_id=submission.lesson_id
+            lesson_id=submission.lesson_id,
+            level=submission.level
         )
         db.add(progress)
     
@@ -426,13 +440,15 @@ async def submit_exercises(
     # Get or create lesson progress
     progress = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
-        LessonProgress.lesson_id == submission.lesson_id
+        LessonProgress.lesson_id == submission.lesson_id,
+        LessonProgress.level == submission.level
     ).first()
     
     if not progress:
         progress = LessonProgress(
             user_id=current_user.id,
-            lesson_id=submission.lesson_id
+            lesson_id=submission.lesson_id,
+            level=submission.level
         )
         db.add(progress)
     
@@ -503,3 +519,49 @@ async def get_all_levels():
         }
         for level, config in LEVEL_CONFIG.items()
     ]
+
+@router.get("/level-access/{level}")
+async def check_level_access(
+    level: str,
+    current_user: User = Depends(get_current_user_required),
+    db: Session = Depends(get_db)
+):
+    """Check if user has access to a specific course level (a1, a2, b1, etc.)."""
+    # A1 is always accessible
+    if level == "a1":
+        return {"has_access": True, "level": level, "reason": "A1 je početni nivo"}
+    
+    # A2 requires passing A1 final test
+    if level == "a2":
+        # Check if user has any A2 progress (meaning they passed A1 final test)
+        a2_progress = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "a2"
+        ).first()
+        
+        if a2_progress:
+            return {"has_access": True, "level": level, "reason": "Položili ste završni test A1 nivoa"}
+        
+        # Check if user passed A1 final test
+        passed_a1 = db.query(FinalTestAttempt).filter(
+            FinalTestAttempt.user_id == current_user.id,
+            FinalTestAttempt.passed == True
+        ).first()
+        
+        if passed_a1:
+            return {"has_access": True, "level": level, "reason": "Položili ste završni test A1 nivoa"}
+        
+        return {
+            "has_access": False, 
+            "level": level, 
+            "reason": "Morate položiti završni test A1 nivoa da biste otključali A2",
+            "requirement": "Položite završni test A1 nivoa sa minimalno 70%"
+        }
+    
+    # For other levels (B1, B2, C1, C2) - not yet implemented
+    return {
+        "has_access": False, 
+        "level": level, 
+        "reason": f"Nivo {level.upper()} još nije dostupan",
+        "coming_soon": True
+    }

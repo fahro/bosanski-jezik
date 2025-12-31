@@ -58,32 +58,37 @@ export const authApi = {
 }
 
 export const progressApi = {
-  getLessonProgress: async (lessonId) => {
-    return api.get(`/api/progress/lessons/${lessonId}`)
+  getLessonProgress: async (lessonId, level = 'a1') => {
+    return api.get(`/api/progress/lessons/${lessonId}?level=${level}`)
   },
-  getAllProgress: async () => {
-    return api.get('/api/progress/lessons')
+  getAllProgress: async (level = 'a1') => {
+    return api.get(`/api/progress/lessons?level=${level}`)
   },
-  updateView: async (lessonId, viewData) => {
-    return api.post(`/api/progress/lessons/${lessonId}/view`, viewData)
+  checkLevelAccess: async (level) => {
+    return api.get(`/api/progress/level-access/${level}`)
   },
-  submitQuiz: async (lessonId, score, totalQuestions, answers) => {
+  updateView: async (lessonId, viewData, level = 'a1') => {
+    return api.post(`/api/progress/lessons/${lessonId}/view?level=${level}`, viewData)
+  },
+  submitQuiz: async (lessonId, score, totalQuestions, answers, level = 'a1') => {
     return api.post('/api/progress/quiz/submit', {
       lesson_id: lessonId,
       score,
       total_questions: totalQuestions,
-      answers
+      answers,
+      level
     })
   },
-  submitExercises: async (lessonId, score, totalExercises) => {
+  submitExercises: async (lessonId, score, totalExercises, level = 'a1') => {
     return api.post('/api/progress/exercises/submit', {
       lesson_id: lessonId,
       score,
-      total_exercises: totalExercises
+      total_exercises: totalExercises,
+      level
     })
   },
-  saveProgress: async (lessonId, data) => {
-    return api.post(`/api/progress/lessons/${lessonId}/save-progress`, data)
+  saveProgress: async (lessonId, data, level = 'a1') => {
+    return api.post(`/api/progress/lessons/${lessonId}/save-progress?level=${level}`, data)
   }
 }
 

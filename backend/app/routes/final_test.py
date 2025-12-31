@@ -12,41 +12,75 @@ from app.models import (
 )
 from app.auth import get_current_user_required
 from app.data.a1_lessons import A1_LESSONS
+from app.data.a2_lessons import A2_LESSONS
 
 router = APIRouter(prefix="/api/final-test", tags=["final_test"])
 
 class FinalTestSubmission(BaseModel):
-    answers: dict  # {question_id: selected_answer_index}
+    answers: dict  # {question_id: selected_answer_index or written_text}
+    writing_answers: dict = {}  # {question_id: written_text}
     time_taken_seconds: Optional[int] = None
 
+def normalize_text(text: str) -> str:
+    """Normalize text for comparison (lowercase, strip, remove extra spaces)."""
+    return ' '.join(text.lower().strip().split())
+
+def check_writing_answer(user_answer: str, correct_answer: str) -> bool:
+    """Check if writing answer is correct (case-insensitive, trimmed)."""
+    return normalize_text(user_answer) == normalize_text(correct_answer)
+
 def get_final_test_questions():
-    """Generate 120 questions - 10 from each of the 12 lessons."""
+    """Generate questions - 8 multiple choice + 2 writing from each of the 12 lessons."""
     all_questions = []
     
     for lesson in A1_LESSONS:
         lesson_id = lesson["id"]
         quiz = lesson.get("quiz", [])
         
-        # Get 10 random questions from each lesson
-        if len(quiz) >= 10:
-            selected = random.sample(quiz, 10)
-        else:
-            # If less than 10, take all and repeat some
-            selected = quiz.copy()
-            while len(selected) < 10:
-                selected.append(random.choice(quiz))
+        # Separate multiple choice and writing questions
+        mc_questions = [q for q in quiz if q.get("question_type") != "writing"]
+        writing_questions = [q for q in quiz if q.get("question_type") == "writing"]
         
-        # Add lesson info to each question
-        for i, q in enumerate(selected):
+        # Get 8 multiple choice questions
+        if len(mc_questions) >= 8:
+            selected_mc = random.sample(mc_questions, 8)
+        else:
+            selected_mc = mc_questions.copy()
+            while len(selected_mc) < 8 and mc_questions:
+                selected_mc.append(random.choice(mc_questions))
+        
+        # Get 2 writing questions
+        if len(writing_questions) >= 2:
+            selected_writing = random.sample(writing_questions, 2)
+        elif len(writing_questions) == 1:
+            selected_writing = writing_questions.copy()
+        else:
+            selected_writing = []
+        
+        # Add multiple choice questions
+        for q in selected_mc:
             all_questions.append({
                 "id": f"{lesson_id}_{q['id']}",
                 "lesson_id": lesson_id,
                 "lesson_title": lesson["title"],
                 "question": q["question"],
-                "options": q["options"],
-                "correct_answer": q["correct_answer"],
+                "options": q.get("options", []),
+                "correct_answer": q.get("correct_answer"),
                 "explanation": q["explanation"],
                 "question_type": q.get("question_type", "vocabulary")
+            })
+        
+        # Add writing questions
+        for q in selected_writing:
+            all_questions.append({
+                "id": f"{lesson_id}_{q['id']}_w",
+                "lesson_id": lesson_id,
+                "lesson_title": lesson["title"],
+                "question": q["question"],
+                "options": [],  # No options for writing
+                "correct_answer_text": q.get("correct_answer_text", ""),
+                "explanation": q["explanation"],
+                "question_type": "writing"
             })
     
     # Shuffle all questions
@@ -76,6 +110,12 @@ async def check_eligibility(
     passed = any(a.passed for a in attempts)
     best_score = max((a.percentage for a in attempts), default=None)
     
+    # Check if A2 is unlocked (user has passed the final test)
+    a2_unlocked = db.query(LessonProgress).filter(
+        LessonProgress.user_id == current_user.id,
+        LessonProgress.level == "a2"
+    ).first() is not None
+    
     return {
         "eligible": lessons_completed >= 12,
         "lessons_completed": lessons_completed,
@@ -84,7 +124,8 @@ async def check_eligibility(
         "missing_lessons": [i for i in range(1, 13) if i not in completed_lessons],
         "previous_attempts": len(attempts),
         "passed": passed,
-        "best_score": round(best_score, 1) if best_score else None
+        "best_score": round(best_score, 1) if best_score else None,
+        "a2_unlocked": a2_unlocked
     }
 
 @router.get("/questions")
@@ -107,9 +148,15 @@ async def get_questions(
     
     questions = get_final_test_questions()
     
+    # Count question types
+    mc_count = sum(1 for q in questions if q["question_type"] != "writing")
+    writing_count = sum(1 for q in questions if q["question_type"] == "writing")
+    
     # Return questions without correct answers
     return {
         "total_questions": len(questions),
+        "multiple_choice_count": mc_count,
+        "writing_count": writing_count,
         "time_limit_minutes": 60,
         "passing_percentage": 70,
         "questions": [
@@ -118,12 +165,11 @@ async def get_questions(
                 "lesson_id": q["lesson_id"],
                 "lesson_title": q["lesson_title"],
                 "question": q["question"],
-                "options": q["options"],
+                "options": q["options"] if q["question_type"] != "writing" else [],
                 "question_type": q["question_type"]
             }
             for q in questions
-        ],
-        "_answer_key": {q["id"]: q["correct_answer"] for q in questions}  # Store for validation
+        ]
     }
 
 @router.post("/submit")
@@ -147,25 +193,54 @@ async def submit_final_test(
     
     # Generate the same questions to get correct answers
     questions = get_final_test_questions()
-    answer_key = {q["id"]: q["correct_answer"] for q in questions}
+    
+    # Build answer keys for both types
+    mc_answer_key = {q["id"]: q["correct_answer"] for q in questions if q["question_type"] != "writing"}
+    writing_answer_key = {q["id"]: q.get("correct_answer_text", "") for q in questions if q["question_type"] == "writing"}
     
     # Calculate score
     score = 0
+    writing_score = 0
+    mc_score = 0
     lesson_scores = {}
+    writing_results = []  # Track writing answers for feedback
     
     for q in questions:
         q_id = q["id"]
         lesson_id = q["lesson_id"]
         
         if lesson_id not in lesson_scores:
-            lesson_scores[lesson_id] = {"correct": 0, "total": 0}
+            lesson_scores[lesson_id] = {"correct": 0, "total": 0, "writing_correct": 0, "writing_total": 0}
         
         lesson_scores[lesson_id]["total"] += 1
         
-        if str(q_id) in submission.answers:
-            if submission.answers[str(q_id)] == answer_key[q_id]:
+        if q["question_type"] == "writing":
+            lesson_scores[lesson_id]["writing_total"] += 1
+            # Check writing answer
+            user_answer = submission.writing_answers.get(str(q_id), "")
+            correct_answer = writing_answer_key.get(q_id, "")
+            is_correct = check_writing_answer(user_answer, correct_answer)
+            
+            writing_results.append({
+                "question_id": q_id,
+                "question": q["question"],
+                "user_answer": user_answer,
+                "correct_answer": correct_answer,
+                "is_correct": is_correct
+            })
+            
+            if is_correct:
                 score += 1
+                writing_score += 1
                 lesson_scores[lesson_id]["correct"] += 1
+                lesson_scores[lesson_id]["writing_correct"] += 1
+        else:
+            # Check multiple choice answer
+            if str(q_id) in submission.answers:
+                if submission.answers[str(q_id)] == mc_answer_key.get(q_id):
+                    score += 1
+                    mc_score += 1
+                    lesson_scores[lesson_id]["correct"] += 1
     
     total_questions = len(questions)
     percentage = (score / total_questions) * 100 if total_questions > 0 else 0
@@ -186,7 +261,8 @@ async def submit_final_test(
         FinalTestAttempt.passed == True
     ).count()
     
-    if passed and previous_passes == 0:
+    first_time_pass = passed and previous_passes == 0
+    if first_time_pass:
         xp_earned += 200  # First-time pass bonus
     
     # Create attempt record
@@ -207,6 +283,32 @@ async def submit_final_test(
     current_user.current_level = calculate_level(current_user.total_xp)
     current_user.last_activity = datetime.utcnow()
     
+    # UNLOCK A2 LEVEL: When user passes final test for the first time, create A2 progress entries
+    a2_unlocked = False
+    if first_time_pass:
+        # Check if A2 progress already exists
+        existing_a2 = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "a2"
+        ).first()
+        
+        if not existing_a2:
+            # Create initial A2 progress for lesson 1 (unlocked, not completed)
+            a2_progress = LessonProgress(
+                user_id=current_user.id,
+                lesson_id=1,
+                level="a2",
+                completed=False,
+                vocabulary_viewed=False,
+                grammar_viewed=False,
+                dialogue_viewed=False,
+                culture_viewed=False,
+                exercises_completed=False,
+                quiz_completed=False
+            )
+            db.add(a2_progress)
+            a2_unlocked = True
+    
     db.commit()
     
     # Prepare detailed results
@@ -221,6 +323,10 @@ async def submit_final_test(
             "percentage": round((scores["correct"] / scores["total"]) * 100, 1) if scores["total"] > 0 else 0
         })
     
+    # Calculate writing stats
+    total_writing = len(writing_results)
+    writing_percentage = (writing_score / total_writing * 100) if total_writing > 0 else 0
+    
     return {
         "success": True,
         "score": score,
@@ -232,7 +338,18 @@ async def submit_final_test(
         "current_level": current_user.current_level,
         "lesson_results": lesson_results,
         "time_taken_seconds": submission.time_taken_seconds,
-        "certificate_eligible": passed
+        "certificate_eligible": passed,
+        # Writing-specific results
+        "writing_score": writing_score,
+        "writing_total": total_writing,
+        "writing_percentage": round(writing_percentage, 1),
+        "writing_results": writing_results,
+        # Multiple choice stats
+        "mc_score": mc_score,
+        "mc_total": total_questions - total_writing,
+        # A2 unlock status
+        "a2_unlocked": a2_unlocked,
+        "first_time_pass": first_time_pass
     }
 
 @router.get("/history")
