@@ -963,15 +963,34 @@ function Lesson() {
         }))
       )
     
-    const translation = lesson.exercises
-      .filter(ex => ex.type === 'translate')
+    const translateExercises = lesson.exercises.filter(ex => ex.type === 'translate')
+    const allBosnianAnswers = translateExercises.map(ex => ex.answer)
+    
+    const translation = translateExercises.map(ex => {
+      // Generate options: correct answer + 3 random distractors from other exercises
+      const correctAnswer = ex.answer
+      const otherAnswers = allBosnianAnswers.filter(a => a !== correctAnswer)
+      const shuffledOthers = otherAnswers.sort(() => Math.random() - 0.5).slice(0, 3)
+      const options = [correctAnswer, ...shuffledOthers].sort(() => Math.random() - 0.5)
+      
+      return {
+        id: ex.id,
+        english: ex.content?.text || '',
+        bosnian: ex.answer,
+        options: options.length >= 2 ? options : [correctAnswer, 'Opcija A', 'Opcija B', 'Opcija C']
+      }
+    })
+    
+    const writing = lesson.exercises
+      .filter(ex => ex.type === 'writing')
       .map(ex => ({
         id: ex.id,
         english: ex.content?.text || '',
-        bosnian: ex.answer
+        bosnian: ex.answer,
+        hint: ex.hint || ''
       }))
     
-    return { fillBlank, sentenceOrder, matching, translation, writing: [] }
+    return { fillBlank, sentenceOrder, matching, translation, writing }
   }, [lesson?.exercises])
   
   // Get exercises for current lesson (use API data if available, fallback to hardcoded)
@@ -1803,7 +1822,9 @@ function Lesson() {
                       const currentWords = wordPositions[exercise.id] || exercise.scrambled
                       const usedIndices = sentenceExercises.answers[exercise.id]?.usedIndices || []
                       const builtSentence = sentenceExercises.answers[exercise.id]?.built || []
-                      const isCorrect = sentenceExercises.showResults && JSON.stringify(builtSentence) === JSON.stringify(exercise.correct)
+                      // Normalize sentences by joining and removing spaces before punctuation
+                      const normalizeSentence = (words) => words.join(' ').replace(/\s+([.,!?])/g, '$1')
+                      const isCorrect = sentenceExercises.showResults && normalizeSentence(builtSentence) === normalizeSentence(exercise.correct)
                       const showResult = sentenceExercises.showResults
 
                       const handleWordClick = (word, idx) => {
