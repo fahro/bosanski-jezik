@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useMemo } from 'react'
 import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
@@ -928,12 +928,58 @@ function Lesson() {
     }
   }
 
-  // Get exercises for current lesson (fallback to lesson 1 if not found)
-  const currentExercises = exercisesByLesson[lesson?.id] || exercisesByLesson[1]
-  const grammarExercisesList = currentExercises.fillBlank
-  const sentenceOrderingList = currentExercises.sentenceOrder
-  const matchingList = currentExercises.matching
-  const translationList = currentExercises.translation
+  // Transform API exercises to frontend format, with fallback to hardcoded exercises
+  const apiExercises = useMemo(() => {
+    if (!lesson?.exercises || lesson.exercises.length === 0) {
+      return null // Will use hardcoded fallback
+    }
+    
+    const fillBlank = lesson.exercises
+      .filter(ex => ex.type === 'fill_blank')
+      .map(ex => ({
+        id: ex.id,
+        sentence: ex.content?.sentence || '',
+        answer: ex.answer,
+        translation: ex.hint || '',
+        options: ex.content?.options || []
+      }))
+    
+    const sentenceOrder = lesson.exercises
+      .filter(ex => ex.type === 'sentence_order')
+      .map(ex => ({
+        id: ex.id,
+        scrambled: ex.content?.words || [],
+        correct: ex.answer?.split(' ') || [],
+        translation: ex.hint || ''
+      }))
+    
+    const matching = lesson.exercises
+      .filter(ex => ex.type === 'matching')
+      .flatMap(ex => 
+        (ex.content?.pairs || []).map((pair, idx) => ({
+          id: `${ex.id}-${idx}`,
+          bosnian: pair[0],
+          english: pair[1]
+        }))
+      )
+    
+    const translation = lesson.exercises
+      .filter(ex => ex.type === 'translate')
+      .map(ex => ({
+        id: ex.id,
+        english: ex.content?.text || '',
+        bosnian: ex.answer
+      }))
+    
+    return { fillBlank, sentenceOrder, matching, translation, writing: [] }
+  }, [lesson?.exercises])
+  
+  // Get exercises for current lesson (use API data if available, fallback to hardcoded)
+  const currentExercises = apiExercises || exercisesByLesson[lesson?.id] || exercisesByLesson[1]
+  const grammarExercisesList = currentExercises.fillBlank || []
+  const sentenceOrderingList = currentExercises.sentenceOrder || []
+  const matchingList = currentExercises.matching || []
+  const translationList = currentExercises.translation || []
   const writingList = currentExercises.writing || []
 
   // Get options for fill-blank based on lesson
@@ -1551,34 +1597,22 @@ function Lesson() {
                         </div>
                       ) : (
                         <div className={`p-4 ${word.image_url ? 'bg-green-50' : 'bg-green-50/80'}`}>
-                          <div className="flex justify-between items-start mb-2">
-                            <div className="text-lg font-bold text-green-800">{word.english}</div>
+                          <div className="text-lg font-bold text-green-800 mb-2">{word.english}</div>
+                          <div className="flex items-center gap-3">
                             <button
                               onClick={(e) => {
                                 e.stopPropagation()
-                                speak(word.bosnian)
+                                speak(word.example)
                               }}
-                              className="p-1.5 rounded-full bg-white hover:bg-green-100 text-green-600 shadow-sm transition-all"
-                              title="Slušaj riječ"
+                              className="p-3 rounded-xl bg-white hover:bg-green-100 text-green-600 shadow-md hover:shadow-lg transition-all flex-shrink-0"
+                              title="Slušaj rečenicu"
                             >
-                              <Volume2 className="w-4 h-4" />
+                              <Volume2 className="w-6 h-6" />
                             </button>
-                          </div>
-                          <div className="p-2.5 rounded-lg bg-white/70">
-                            <div className="flex justify-between items-center gap-2">
+                            <div className="flex-1 min-w-0">
                               <div className="text-sm italic text-gray-700 leading-relaxed">"{word.example}"</div>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  speak(word.example)
-                                }}
-                                className="p-2 rounded-full bg-green-100 hover:bg-green-200 text-green-600 shadow-sm transition-all flex-shrink-0"
-                                title="Slušaj rečenicu"
-                              >
-                                <Volume2 className="w-4 h-4" />
-                              </button>
+                              <div className="text-xs text-gray-500 mt-1">{word.example_translation}</div>
                             </div>
-                            <div className="text-xs text-gray-500 mt-1.5">{word.example_translation}</div>
                           </div>
                           <div className="text-xs text-green-600 mt-2">← Klikni za bosanski</div>
                         </div>
