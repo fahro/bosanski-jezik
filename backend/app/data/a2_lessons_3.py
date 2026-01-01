@@ -1,165 +1,153 @@
 A2_LESSONS_PART3 = [
     {
         "id": 7,
-        "title": "Posao i zanimanja",
-        "description": "Naučite kako razgovarati o poslu, zanimanjima i radnom mjestu",
+        "title": "Razgovor za posao i karijera",
+        "description": "Naučite kako se pripremiti za razgovor za posao i razgovarati o karijeri",
         "level": "a2",
         "module": 5,
         "objectives": [
-            "Opisati svoje zanimanje",
-            "Pitati o nečijem poslu",
-            "Razgovarati o radnom vremenu",
-            "Opisati radne obaveze"
+            "Pripremiti se za razgovor za posao",
+            "Opisati radno iskustvo",
+            "Razgovarati o kvalifikacijama",
+            "Pitati o uslovima zaposlenja"
         ],
         "vocabulary": [
-            {"bosnian": "posao", "english": "job/work", "pronunciation": "POH-sah-oh", "example": "Imam dobar posao.", "example_translation": "I have a good job.", "image_emoji": "💼"},
-            {"bosnian": "zanimanje", "english": "occupation", "pronunciation": "zah-nee-MAH-nyeh", "example": "Koje je tvoje zanimanje?", "example_translation": "What is your occupation?", "image_emoji": "👔"},
-            {"bosnian": "nastavnik", "english": "teacher", "pronunciation": "nah-STAHV-neek", "example": "On je nastavnik matematike.", "example_translation": "He is a math teacher.", "image_emoji": "👨‍🏫"},
-            {"bosnian": "doktor", "english": "doctor", "pronunciation": "DOHK-tor", "example": "Moja majka je doktor.", "example_translation": "My mother is a doctor.", "image_emoji": "👩‍⚕️"},
-            {"bosnian": "inžinjer", "english": "engineer", "pronunciation": "een-ZHEE-nyehr", "example": "Radim kao inžinjer.", "example_translation": "I work as an engineer.", "image_emoji": "👷"},
-            {"bosnian": "advokat", "english": "lawyer", "pronunciation": "ahd-VOH-kaht", "example": "Trebam advokata.", "example_translation": "I need a lawyer.", "image_emoji": "⚖️"},
-            {"bosnian": "prodavač", "english": "salesperson", "pronunciation": "proh-DAH-vahch", "example": "Ona je prodavačica u butiku.", "example_translation": "She is a salesperson in a boutique.", "image_emoji": "🛒"},
-            {"bosnian": "kuhar", "english": "chef/cook", "pronunciation": "KOO-har", "example": "Kuhar priprema ručak.", "example_translation": "The chef is preparing lunch.", "image_emoji": "👨‍🍳"},
-            {"bosnian": "plata", "english": "salary", "pronunciation": "PLAH-tah", "example": "Kolika je plata?", "example_translation": "What is the salary?", "image_emoji": "💰"},
-            {"bosnian": "firma", "english": "company", "pronunciation": "FEER-mah", "example": "Radim u velikoj firmi.", "example_translation": "I work in a big company.", "image_emoji": "🏢"},
-            {"bosnian": "radno vrijeme", "english": "working hours", "pronunciation": "RAHD-noh VREE-yeh-meh", "example": "Radno vrijeme je od 8 do 16.", "example_translation": "Working hours are from 8 to 4.", "image_emoji": "⏰"},
-            {"bosnian": "kolega", "english": "colleague", "pronunciation": "koh-LEH-gah", "example": "Moj kolega je vrlo ljubazan.", "example_translation": "My colleague is very kind.", "image_emoji": "🤝"}
+            {"bosnian": "razgovor za posao", "english": "job interview", "pronunciation": "RAHZ-goh-vohr zah POH-sao", "example": "Imam razgovor za posao sutra.", "example_translation": "I have a job interview tomorrow.", "image_emoji": "🤝"},
+            {"bosnian": "CV/biografija", "english": "CV/resume", "pronunciation": "tseh-veh / bee-oh-GRAH-fee-yah", "example": "Pošaljite vaš CV na email.", "example_translation": "Send your CV to the email.", "image_emoji": "📄"},
+            {"bosnian": "radno iskustvo", "english": "work experience", "pronunciation": "RAHD-noh EES-koos-tvoh", "example": "Imam pet godina radnog iskustva.", "example_translation": "I have five years of work experience.", "image_emoji": "💼"},
+            {"bosnian": "kvalifikacije", "english": "qualifications", "pronunciation": "kvah-lee-fee-KAH-tsee-yeh", "example": "Koje su vaše kvalifikacije?", "example_translation": "What are your qualifications?", "image_emoji": "🎓"},
+            {"bosnian": "zaposlenje", "english": "employment", "pronunciation": "zah-POHS-leh-nyeh", "example": "Tražim stalno zaposlenje.", "example_translation": "I'm looking for permanent employment.", "image_emoji": "📋"},
+            {"bosnian": "ugovor", "english": "contract", "pronunciation": "OO-goh-vohr", "example": "Potpisao sam ugovor na godinu dana.", "example_translation": "I signed a one-year contract.", "image_emoji": "📝"},
+            {"bosnian": "direktor", "english": "director/manager", "pronunciation": "dee-REHK-tohr", "example": "Direktor će vas primiti.", "example_translation": "The director will see you.", "image_emoji": "👔"},
+            {"bosnian": "kandidat", "english": "candidate", "pronunciation": "kahn-dee-DAHT", "example": "Ima mnogo kandidata za ovu poziciju.", "example_translation": "There are many candidates for this position.", "image_emoji": "👥"},
+            {"bosnian": "pozicija", "english": "position", "pronunciation": "poh-ZEE-tsee-yah", "example": "Konkurišem za poziciju menadžera.", "example_translation": "I'm applying for the manager position.", "image_emoji": "📌"},
+            {"bosnian": "vještine", "english": "skills", "pronunciation": "VYEHSH-tee-neh", "example": "Koje vještine imate?", "example_translation": "What skills do you have?", "image_emoji": "🛠️"},
+            {"bosnian": "unapređenje", "english": "promotion", "pronunciation": "oo-nah-PREH-djeh-nyeh", "example": "Dobio sam unapređenje prošle godine.", "example_translation": "I got a promotion last year.", "image_emoji": "📈"},
+            {"bosnian": "otkaz", "english": "dismissal/termination", "pronunciation": "OHT-kahz", "example": "Dao sam otkaz prošlog mjeseca.", "example_translation": "I resigned last month.", "image_emoji": "🚪"}
         ],
         "grammar_explanation": """
-## Instrumentalni padež - "Radim kao..." (Instrumental Case)
+## Perfekt - prošlo vrijeme (Past Tense)
 
-Za izražavanje zanimanja koristimo instrumental:
+Za opis radnog iskustva koristimo perfekt:
 
-| Nominativ | Instrumental |
-|-----------|--------------|
-| nastavnik | kao nastavnikom |
-| doktor | kao doktorom |
-| inžinjer | kao inžinjerom |
+| Osoba | Glagol "raditi" |
+|-------|-----------------|
+| Ja (m.) | radio sam |
+| Ja (ž.) | radila sam |
+| On | radio je |
+| Ona | radila je |
+| Mi | radili smo |
+| Oni | radili su |
 
 ### Primjeri:
-- Radim **kao** nastavnik. (I work as a teacher.)
-- On radi **kao** kuhar. (He works as a chef.)
+- **Radio sam** kao programer tri godine. (I worked as a programmer for three years.)
+- **Radila je** u banci pet godina. (She worked in a bank for five years.)
 
-## Prezent glagola "raditi" (to work)
+## Korisne fraze za intervju
 
-| Osoba | Oblik |
-|-------|-------|
-| Ja | radim |
-| Ti | radiš |
-| On/Ona | radi |
-| Mi | radimo |
-| Vi | radite |
-| Oni | rade |
-
-### Pitanja o poslu:
-- **Šta radiš?** - What do you do? (informal)
-- **Gdje radiš?** - Where do you work?
-- **Koliko dugo radiš?** - How long have you been working?
+- **Imam iskustva u...** - I have experience in...
+- **Završio/la sam...** - I graduated from...
+- **Moje prednosti su...** - My strengths are...
+- **Volim timski rad.** - I like teamwork.
 """,
         "grammar_explanation_en": """
-## Instrumental Case - "I work as..."
+## Perfect Tense - Past Tense
 
-To express occupation, we use the instrumental case:
+To describe work experience, we use the perfect tense:
 
-| Nominative | Instrumental |
-|------------|--------------|
-| nastavnik (teacher) | kao nastavnikom |
-| doktor (doctor) | kao doktorom |
-| inžinjer (engineer) | kao inžinjerom |
+| Person | Verb "raditi" (to work) |
+|--------|------------------------|
+| I (m.) | radio sam |
+| I (f.) | radila sam |
+| He | radio je |
+| She | radila je |
+| We | radili smo |
+| They | radili su |
 
 ### Examples:
-- Radim **kao** nastavnik. (I work as a teacher.)
-- On radi **kao** kuhar. (He works as a chef.)
+- **Radio sam** kao programer tri godine. (I worked as a programmer for three years.)
+- **Radila je** u banci pet godina. (She worked in a bank for five years.)
 
-## Present Tense of "raditi" (to work)
+## Useful Interview Phrases
 
-| Person | Form |
-|--------|------|
-| Ja (I) | radim |
-| Ti (You) | radiš |
-| On/Ona (He/She) | radi |
-| Mi (We) | radimo |
-| Vi (You pl.) | radite |
-| Oni (They) | rade |
-
-### Questions about work:
-- **Šta radiš?** - What do you do? (informal)
-- **Gdje radiš?** - Where do you work?
-- **Koliko dugo radiš?** - How long have you been working?
+- **Imam iskustva u...** - I have experience in...
+- **Završio/la sam...** - I graduated from...
+- **Moje prednosti su...** - My strengths are...
+- **Volim timski rad.** - I like teamwork.
 """,
-        "cultural_note": "U Bosni i Hercegovini, javni sektor je veliki poslodavac. Mnogi mladi ljudi traže posao u inostranstvu zbog ekonomske situacije. Konekcije i poznanstva često igraju ulogu u pronalaženju posla - 'veze' su važne!",
-        "cultural_note_en": "In Bosnia and Herzegovina, the public sector is a major employer. Many young people look for jobs abroad due to the economic situation. Connections and acquaintances often play a role in finding a job - 'connections' are important!",
+        "cultural_note": "U Bosni i Hercegovini, razgovori za posao su često formalni. Važno je doći na vrijeme i obući se pristojno. Osobne preporuke i 'veze' još uvijek igraju važnu ulogu u zapošljavanju. Diplome i certifikati su vrlo cijenjeni.",
+        "cultural_note_en": "In Bosnia and Herzegovina, job interviews are often formal. It's important to arrive on time and dress appropriately. Personal recommendations and 'connections' still play an important role in employment. Diplomas and certificates are highly valued.",
         "cultural_comic": {
-            "title": "Razgovor za posao",
+            "title": "Na razgovoru za posao",
             "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/d3/a8/13/bascarsija.jpg?w=1200",
             "panels": [
-                {"character": "👨‍💼", "name": "Direktor", "text": "Dobar dan! Koje je vaše zanimanje?", "translation": "Good day! What is your occupation?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
-                {"character": "👩", "name": "Amela", "text": "Ja sam inžinjer informatike.", "translation": "I am a computer engineer.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👨‍💼", "name": "Direktor", "text": "Odlično! Gdje ste prije radili?", "translation": "Excellent! Where did you work before?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
-                {"character": "👩", "name": "Amela", "text": "Radila sam u IT firmi tri godine.", "translation": "I worked in an IT company for three years.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
-                {"character": "👨‍💼", "name": "Direktor", "text": "Super! Radno vrijeme je od 9 do 17. Plata je dobra.", "translation": "Great! Working hours are 9 to 5. The salary is good.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"}
+                {"character": "👨‍💼", "name": "Direktor", "text": "Dobar dan! Recite mi nešto o sebi.", "translation": "Good day! Tell me something about yourself.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Kandidatkinja", "text": "Završila sam ekonomiju i imam tri godine iskustva.", "translation": "I graduated in economics and have three years of experience.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨‍💼", "name": "Direktor", "text": "Koje su vaše glavne vještine?", "translation": "What are your main skills?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"},
+                {"character": "👩", "name": "Kandidatkinja", "text": "Dobra sam u timskom radu i govorim engleski.", "translation": "I'm good at teamwork and speak English.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨‍💼", "name": "Direktor", "text": "Odlično! Možete li početi sljedeći mjesec?", "translation": "Excellent! Can you start next month?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=59"}
             ]
         },
         "dialogue": [
-            {"speaker": "Lejla", "text": "Zdravo! Šta radiš? Gdje si zaposlena?", "translation": "Hi! What do you do? Where are you employed?"},
-            {"speaker": "Merima", "text": "Radim kao nastavnica engleskog u osnovnoj školi.", "translation": "I work as an English teacher in elementary school."},
-            {"speaker": "Lejla", "text": "Super! Voliš li svoj posao?", "translation": "Great! Do you like your job?"},
-            {"speaker": "Merima", "text": "Da, volim raditi s djecom. A ti?", "translation": "Yes, I love working with children. And you?"},
-            {"speaker": "Lejla", "text": "Ja sam programer. Radim od kuće.", "translation": "I'm a programmer. I work from home."},
-            {"speaker": "Merima", "text": "To zvuči odlično! Kakvo je radno vrijeme?", "translation": "That sounds great! What are the working hours?"}
+            {"speaker": "Direktor", "text": "Dobar dan! Sjednite, molim vas.", "translation": "Good day! Please, have a seat."},
+            {"speaker": "Amina", "text": "Hvala. Drago mi je što sam dobila priliku za razgovor.", "translation": "Thank you. I'm glad I got the opportunity for an interview."},
+            {"speaker": "Direktor", "text": "Vidim da imate dobro radno iskustvo. Gdje ste prije radili?", "translation": "I see you have good work experience. Where did you work before?"},
+            {"speaker": "Amina", "text": "Radila sam u marketinškoj agenciji dvije godine.", "translation": "I worked in a marketing agency for two years."},
+            {"speaker": "Direktor", "text": "Zašto želite promijeniti posao?", "translation": "Why do you want to change jobs?"},
+            {"speaker": "Amina", "text": "Želim nove izazove i mogućnost za napredovanje.", "translation": "I want new challenges and opportunity for advancement."}
         ],
         "exercises": [
-            {"id": 1, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "_____ kao nastavnik.", "options": ["Radim", "Radiš", "Radi", "Radimo"]}, "answer": "Radim", "hint": "Prva osoba jednine"},
-            {"id": 2, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "On _____ u velikoj firmi.", "options": ["radim", "radiš", "radi", "radimo"]}, "answer": "radi", "hint": "Treća osoba jednine"},
-            {"id": 3, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Moj _____ je programer.", "options": ["posao", "kolega", "plata", "firma"]}, "answer": "kolega", "hint": "Colleague = ?"},
-            {"id": 4, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Kolika je tvoja _____?", "options": ["posao", "zanimanje", "plata", "firma"]}, "answer": "plata", "hint": "Salary = ?"},
-            {"id": 5, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Radno _____ je od 8 do 16 sati.", "options": ["vrijeme", "mjesto", "dan", "sat"]}, "answer": "vrijeme", "hint": "Working hours"},
-            {"id": 6, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Ona _____ kao medicinska sestra.", "options": ["radim", "radiš", "radi", "radimo"]}, "answer": "radi", "hint": "Treća osoba jednine"},
-            {"id": 7, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Koji je tvoj _____?", "options": ["posao", "kolega", "plata", "vrijeme"]}, "answer": "posao", "hint": "Job = ?"},
-            {"id": 8, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "_____ u banci već pet godina.", "options": ["Radim", "Radiš", "Radi", "Radimo"]}, "answer": "Radim", "hint": "Prva osoba jednine"},
-            {"id": 9, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Moja _____ je veća ove godine.", "options": ["posao", "kolega", "plata", "firma"]}, "answer": "plata", "hint": "Salary = ?"},
-            {"id": 10, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "_____ kao programer u IT firmi.", "options": ["Radim", "Radiš", "Radi", "Rade"]}, "answer": "Radim", "hint": "Prva osoba jednine"},
-            {"id": 11, "type": "matching", "instruction": "Povežite zanimanja sa opisima", "content": {"pairs": [["doktor", "liječi ljude"], ["kuhar", "priprema hranu"], ["nastavnik", "podučava učenike"], ["advokat", "brani klijente"], ["prodavač", "prodaje robu"]]},"answer": "correct_pairs", "hint": "Šta svako zanimanje radi?"},
-            {"id": 12, "type": "matching", "instruction": "Povežite riječi sa značenjima", "content": {"pairs": [["posao", "job"], ["plata", "salary"], ["firma", "company"], ["kolega", "colleague"], ["zanimanje", "occupation"]]},"answer": "correct_pairs", "hint": "Poslovni termini"},
-            {"id": 13, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "What do you do for work?"}, "answer": "Čime se baviš?", "hint": "Koristite 'baviti se'"},
-            {"id": 14, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "I work as a doctor."}, "answer": "Radim kao doktor.", "hint": "Kao = as"},
-            {"id": 15, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "Where do you work?"}, "answer": "Gdje radiš?", "hint": "Gdje = where"},
-            {"id": 16, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "What is your salary?"}, "answer": "Kolika je tvoja plata?", "hint": "Plata = salary"},
-            {"id": 17, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "I work in a big company."}, "answer": "Radim u velikoj firmi.", "hint": "Firma = company"},
-            {"id": 18, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["u", "Radim", "firmi", "velikoj", "."]}, "answer": "Radim u velikoj firmi.", "hint": "Počnite s 'Radim'"},
-            {"id": 19, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["kao", "Radim", "nastavnik", "."]}, "answer": "Radim kao nastavnik.", "hint": "Opis zanimanja"},
-            {"id": 20, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["posao", "tvoj", "Koji", "je", "?"]}, "answer": "Koji je tvoj posao?", "hint": "Pitanje o poslu"},
-            {"id": 21, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["plata", "Kolika", "tvoja", "je", "?"]}, "answer": "Kolika je tvoja plata?", "hint": "Pitanje o plati"},
-            {"id": 22, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["kuće", "od", "Radim", "."]}, "answer": "Radim od kuće.", "hint": "Rad od kuće"},
-            {"id": 23, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["radno", "je", "Kakvo", "vrijeme", "?"]}, "answer": "Kakvo je radno vrijeme?", "hint": "Pitanje o radnom vremenu"},
-            {"id": 24, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["programer", "je", "kolega", "Moj", "."]}, "answer": "Moj kolega je programer.", "hint": "Opis kolege"},
-            {"id": 25, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["radiš", "Gdje", "?"]}, "answer": "Gdje radiš?", "hint": "Pitanje o mjestu rada"},
-            {"id": 26, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["sati", "osam", "Radim", "dnevno", "."]}, "answer": "Radim osam sati dnevno.", "hint": "Radno vrijeme"},
-            {"id": 27, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["posao", "dobar", "Imam", "."]}, "answer": "Imam dobar posao.", "hint": "O poslu"},
-            {"id": 28, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "job"}, "answer": "posao", "hint": "Rad"},
-            {"id": 29, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "salary"}, "answer": "plata", "hint": "Primanja"},
-            {"id": 30, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "colleague"}, "answer": "kolega", "hint": "Radni prijatelj"},
-            {"id": 31, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "company"}, "answer": "firma", "hint": "Preduzeće"},
-            {"id": 32, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I work from home"}, "answer": "Radim od kuće", "hint": "Rad na daljinu"},
-            {"id": 33, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "What is your job?"}, "answer": "Koji je tvoj posao?", "hint": "Pitanje o zanimanju"},
-            {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "working hours"}, "answer": "radno vrijeme", "hint": "Sati rada"},
-            {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "programmer"}, "answer": "programer", "hint": "IT zanimanje"},
-            {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "Where do you work?"}, "answer": "Gdje radiš?", "hint": "Pitanje o mjestu rada"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "teacher"}, "answer": "nastavnik", "hint": "Obrazovanje"}
+            {"id": 1, "type": "fill_blank", "instruction": "Popunite prazninu perfektom", "content": {"sentence": "_____ sam u banci pet godina. (raditi, m.)", "options": ["Radio", "Radila", "Radili", "Radile"]}, "answer": "Radio", "hint": "Muški rod jednine"},
+            {"id": 2, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Imam razgovor za _____ sutra.", "options": ["posao", "radi", "raditi", "rad"]}, "answer": "posao", "hint": "Job interview"},
+            {"id": 3, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Pošaljite vaš _____ na email.", "options": ["CV", "ugovor", "otkaz", "poziciju"]}, "answer": "CV", "hint": "Resume"},
+            {"id": 4, "type": "fill_blank", "instruction": "Popunite prazninu perfektom", "content": {"sentence": "Ona je _____ ekonomiju na univerzitetu. (završiti)", "options": ["završio", "završila", "završili", "završile"]}, "answer": "završila", "hint": "Ženski rod"},
+            {"id": 5, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Koje su vaše _____?", "options": ["vještine", "vještin", "vještinu", "vještinama"]}, "answer": "vještine", "hint": "Skills"},
+            {"id": 6, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Konkurišem za _____ menadžera.", "options": ["poziciju", "pozicija", "pozicije", "poziciji"]}, "answer": "poziciju", "hint": "Position (akuzativ)"},
+            {"id": 7, "type": "fill_blank", "instruction": "Popunite prazninu perfektom", "content": {"sentence": "Mi _____ u toj firmi deset godina. (raditi)", "options": ["radili smo", "radio sam", "radila je", "rade"]}, "answer": "radili smo", "hint": "Prvo lice množine"},
+            {"id": 8, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Dobio sam _____ prošle godine.", "options": ["unapređenje", "otkaz", "CV", "vještine"]}, "answer": "unapređenje", "hint": "Promotion"},
+            {"id": 9, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Potpisao sam _____ na godinu dana.", "options": ["ugovor", "CV", "posao", "razgovor"]}, "answer": "ugovor", "hint": "Contract"},
+            {"id": 10, "type": "fill_blank", "instruction": "Popunite prazninu", "content": {"sentence": "Imam pet godina radnog _____.", "options": ["iskustva", "iskustvo", "iskustvu", "iskustvom"]}, "answer": "iskustva", "hint": "Genitiv"},
+            {"id": 11, "type": "matching", "instruction": "Povežite riječi sa značenjima", "content": {"pairs": [["CV", "resume"], ["ugovor", "contract"], ["vještine", "skills"], ["unapređenje", "promotion"], ["otkaz", "dismissal"]]},"answer": "correct_pairs", "hint": "Karijerni termini"},
+            {"id": 12, "type": "matching", "instruction": "Povežite fraze sa značenjima", "content": {"pairs": [["razgovor za posao", "job interview"], ["radno iskustvo", "work experience"], ["timski rad", "teamwork"], ["stalno zaposlenje", "permanent employment"], ["radni ugovor", "work contract"]]},"answer": "correct_pairs", "hint": "Fraze za posao"},
+            {"id": 13, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "I have a job interview tomorrow."}, "answer": "Imam razgovor za posao sutra.", "hint": "Razgovor za posao = job interview"},
+            {"id": 14, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "I worked in a bank for five years."}, "answer": "Radio sam u banci pet godina.", "hint": "Koristite perfekt"},
+            {"id": 15, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "What are your qualifications?"}, "answer": "Koje su vaše kvalifikacije?", "hint": "Kvalifikacije = qualifications"},
+            {"id": 16, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "I got a promotion."}, "answer": "Dobio sam unapređenje.", "hint": "Unapređenje = promotion"},
+            {"id": 17, "type": "translate", "instruction": "Prevedite na bosanski", "content": {"text": "Send your CV."}, "answer": "Pošaljite vaš CV.", "hint": "CV = resume"},
+            {"id": 18, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["posao", "za", "razgovor", "Imam", "sutra", "."]}, "answer": "Imam razgovor za posao sutra.", "hint": "Job interview"},
+            {"id": 19, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["sam", "u", "Radio", "banci", "."]}, "answer": "Radio sam u banci.", "hint": "Perfekt"},
+            {"id": 20, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["vaše", "su", "Koje", "vještine", "?"]}, "answer": "Koje su vaše vještine?", "hint": "Pitanje o vještinama"},
+            {"id": 21, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["sam", "unapređenje", "Dobio", "."]}, "answer": "Dobio sam unapređenje.", "hint": "Got promotion"},
+            {"id": 22, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["ugovor", "Potpisao", "sam", "."]}, "answer": "Potpisao sam ugovor.", "hint": "Signed contract"},
+            {"id": 23, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["iskustva", "radnog", "pet", "Imam", "godina", "."]}, "answer": "Imam pet godina radnog iskustva.", "hint": "Work experience"},
+            {"id": 24, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["ekonomiju", "sam", "Završila", "."]}, "answer": "Završila sam ekonomiju.", "hint": "Graduated"},
+            {"id": 25, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["posao", "promijeniti", "Želim", "."]}, "answer": "Želim promijeniti posao.", "hint": "Change job"},
+            {"id": 26, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["sebi", "o", "mi", "Recite", "nešto", "."]}, "answer": "Recite mi nešto o sebi.", "hint": "Tell about yourself"},
+            {"id": 27, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["kandidata", "Ima", "mnogo", "."]}, "answer": "Ima mnogo kandidata.", "hint": "Many candidates"},
+            {"id": 28, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "job interview"}, "answer": "razgovor za posao", "hint": "Intervju"},
+            {"id": 29, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "work experience"}, "answer": "radno iskustvo", "hint": "Iskustvo na poslu"},
+            {"id": 30, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "contract"}, "answer": "ugovor", "hint": "Dokument"},
+            {"id": 31, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "promotion"}, "answer": "unapređenje", "hint": "Napredovanje"},
+            {"id": 32, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "skills"}, "answer": "vještine", "hint": "Sposobnosti"},
+            {"id": 33, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "candidate"}, "answer": "kandidat", "hint": "Osoba koja konkuriše"},
+            {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "qualifications"}, "answer": "kvalifikacije", "hint": "Obrazovanje i iskustvo"},
+            {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I worked (m.)"}, "answer": "radio sam", "hint": "Perfekt"},
+            {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "position"}, "answer": "pozicija", "hint": "Radno mjesto"},
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "director"}, "answer": "direktor", "hint": "Šef firme"}
         ],
         "quiz": [
-            {"id": 1, "question": "Kako se kaže 'job' na bosanskom?", "options": ["plata", "posao", "firma", "kolega"], "correct_answer": 1, "explanation": "'Posao' znači 'job' ili 'work'.", "question_type": "vocabulary"},
-            {"id": 2, "question": "Koji je pravilan oblik: 'On _____ kao doktor'?", "options": ["radim", "radiš", "radi", "radimo"], "correct_answer": 2, "explanation": "'Radi' je treća osoba jednine.", "question_type": "grammar"},
-            {"id": 3, "question": "Šta znači 'plata'?", "options": ["Job", "Company", "Salary", "Colleague"], "correct_answer": 2, "explanation": "'Plata' je novac koji dobijete za posao.", "question_type": "vocabulary"},
-            {"id": 4, "question": "Kako kažemo 'teacher' (muški rod)?", "options": ["nastavnica", "nastavnik", "učenik", "profesor"], "correct_answer": 1, "explanation": "'Nastavnik' je muški rod.", "question_type": "vocabulary"},
-            {"id": 5, "question": "Šta znači 'radno vrijeme'?", "options": ["Free time", "Working hours", "Lunch break", "Vacation"], "correct_answer": 1, "explanation": "'Radno vrijeme' su sati kada radite.", "question_type": "vocabulary"},
-            {"id": 6, "question": "Kako pitamo 'Where do you work?'", "options": ["Šta radiš?", "Gdje radiš?", "Kada radiš?", "Zašto radiš?"], "correct_answer": 1, "explanation": "'Gdje' znači 'where'.", "question_type": "usage"},
-            {"id": 7, "question": "Šta je 'firma'?", "options": ["Worker", "Company", "Office", "Manager"], "correct_answer": 1, "explanation": "'Firma' je preduzeće gdje ljudi rade.", "question_type": "vocabulary"},
-            {"id": 8, "question": "Koji je ženski rod od 'prodavač'?", "options": ["prodavačka", "prodavačica", "prodaja", "prodavač"], "correct_answer": 1, "explanation": "'Prodavačica' je ženski rod.", "question_type": "grammar"},
-            {"id": 9, "question": "Šta znači 'kolega'?", "options": ["Boss", "Client", "Colleague", "Employee"], "correct_answer": 2, "explanation": "'Kolega' je osoba s kojom radite.", "question_type": "vocabulary"},
-            {"id": 10, "question": "Napiši na bosanskom: 'I work as an engineer'", "question_type": "writing", "correct_answer_text": "Radim kao inžinjer", "explanation": "'Kao' = as."},
-            {"id": 11, "question": "Napiši na bosanskom: 'What is your job?'", "question_type": "writing", "correct_answer_text": "Koji je tvoj posao", "explanation": "'Posao' = job."},
-            {"id": 12, "question": "Napiši na bosanskom: 'She works in a company'", "question_type": "writing", "correct_answer_text": "Ona radi u firmi", "explanation": "'U firmi' = in a company."}
+            {"id": 1, "question": "Kako se kaže 'job interview' na bosanskom?", "options": ["radno vrijeme", "razgovor za posao", "radni ugovor", "radno iskustvo"], "correct_answer": 1, "explanation": "'Razgovor za posao' je intervju za zaposlenje.", "question_type": "vocabulary"},
+            {"id": 2, "question": "Koji je pravilan perfekt: 'Ona _____ u firmi' (raditi)?", "options": ["radio je", "radila je", "radili su", "radile su"], "correct_answer": 1, "explanation": "'Radila je' je ženski rod perfekta.", "question_type": "grammar"},
+            {"id": 3, "question": "Šta znači 'unapređenje'?", "options": ["Dismissal", "Contract", "Promotion", "Interview"], "correct_answer": 2, "explanation": "'Unapređenje' je napredovanje na poslu.", "question_type": "vocabulary"},
+            {"id": 4, "question": "Kako kažemo 'work experience'?", "options": ["radno vrijeme", "radni ugovor", "radno iskustvo", "radna snaga"], "correct_answer": 2, "explanation": "'Radno iskustvo' je prethodni rad.", "question_type": "vocabulary"},
+            {"id": 5, "question": "Šta je 'CV'?", "options": ["Contract", "Resume", "Interview", "Promotion"], "correct_answer": 1, "explanation": "'CV' je dokument sa vašom biografijom.", "question_type": "vocabulary"},
+            {"id": 6, "question": "Kako pitamo 'What are your skills?'", "options": ["Koje su vaše vještine?", "Koji je vaš posao?", "Kolika je plata?", "Gdje radite?"], "correct_answer": 0, "explanation": "'Vještine' znači 'skills'.", "question_type": "usage"},
+            {"id": 7, "question": "Šta znači 'ugovor'?", "options": ["Interview", "Experience", "Contract", "Position"], "correct_answer": 2, "explanation": "'Ugovor' je formalni dokument o zaposlenju.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Koji je perfekt od 'završiti' za 'ja' (m.)?", "options": ["završila sam", "završio sam", "završili smo", "završio je"], "correct_answer": 1, "explanation": "'Završio sam' je muški rod.", "question_type": "grammar"},
+            {"id": 9, "question": "Šta znači 'kandidat'?", "options": ["Director", "Candidate", "Employee", "Manager"], "correct_answer": 1, "explanation": "'Kandidat' je osoba koja konkuriše za posao.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Napiši na bosanskom: 'I have work experience'", "question_type": "writing", "correct_answer_text": "Imam radno iskustvo", "explanation": "'Radno iskustvo' = work experience."},
+            {"id": 11, "question": "Napiši na bosanskom: 'I signed a contract'", "question_type": "writing", "correct_answer_text": "Potpisao sam ugovor", "explanation": "'Potpisao sam' = I signed."},
+            {"id": 12, "question": "Napiši na bosanskom: 'What are your qualifications?'", "question_type": "writing", "correct_answer_text": "Koje su vaše kvalifikacije", "explanation": "'Kvalifikacije' = qualifications."}
         ]
     },
     {
