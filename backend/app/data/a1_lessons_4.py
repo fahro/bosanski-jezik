@@ -339,7 +339,7 @@ A1_LESSONS_PART4 = [
         ],
         "vocabulary": [
             {"bosnian": "Izvini/Izvinite", "english": "Excuse me/Sorry", "pronunciation": "eez-VEE-nee/eez-VEE-nee-teh", "example": "Izvinite, gdje je banka?", "example_translation": "Excuse me, where is the bank?", "image_emoji": "🙏"},
-            {"bosnian": "Naravno", "english": "Of course", "pronunciation": "nah-RAHV-noh", "example": "Naravno, pomognut ću ti.", "example_translation": "Of course, I will help you.", "image_emoji": "👍"},
+            {"bosnian": "Naravno", "english": "Of course", "pronunciation": "nah-RAHV-noh", "example": "Naravno, pomoći ću ti.", "example_translation": "Of course, I will help you.", "image_emoji": "👍"},
             {"bosnian": "Možda", "english": "Maybe", "pronunciation": "MOHZH-dah", "example": "Možda sutra.", "example_translation": "Maybe tomorrow.", "image_emoji": "🤔"},
             {"bosnian": "Sigurno", "english": "Certainly/Sure", "pronunciation": "SEE-goor-noh", "example": "Sigurno ću doći.", "example_translation": "I will certainly come.", "image_emoji": "✅"},
             {"bosnian": "Nema problema", "english": "No problem", "pronunciation": "NEH-mah proh-BLEH-mah", "example": "Nema problema, nije teško.", "example_translation": "No problem, it's not hard.", "image_emoji": "😊"},

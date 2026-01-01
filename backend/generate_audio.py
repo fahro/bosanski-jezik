@@ -73,11 +73,21 @@ def sanitize_filename(text: str, max_length: int = 50) -> str:
     
     return text
 
+def normalize_text_for_audio(text: str) -> str:
+    """Normalize text before generating audio filename - strip trailing punctuation."""
+    # Strip trailing punctuation like ... ! ? .
+    text = text.strip()
+    while text and text[-1] in '.!?…':
+        text = text[:-1]
+    return text.strip()
+
 def get_audio_filename(text: str) -> str:
     """Generate a readable filename based on text content."""
-    safe_name = sanitize_filename(text)
+    # Normalize text first to ensure consistent filenames
+    normalized_text = normalize_text_for_audio(text)
+    safe_name = sanitize_filename(normalized_text)
     # Add short hash suffix to ensure uniqueness
-    text_hash = hashlib.md5(text.encode('utf-8')).hexdigest()[:6]
+    text_hash = hashlib.md5(normalized_text.encode('utf-8')).hexdigest()[:6]
     return f"{safe_name}_{text_hash}.mp3"
 
 def get_voice_for_speaker(speaker: str) -> str:

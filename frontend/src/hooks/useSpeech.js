@@ -26,10 +26,20 @@ function sanitizeFilename(text, maxLength = 50) {
   return result
 }
 
+// Normalize text - strip trailing punctuation for consistent filenames
+function normalizeTextForAudio(text) {
+  text = text.trim()
+  while (text && '.!?…'.includes(text[text.length - 1])) {
+    text = text.slice(0, -1)
+  }
+  return text.trim()
+}
+
 // Generate filename matching the Python script
 function getAudioFilename(text) {
-  const safeName = sanitizeFilename(text)
-  const hash = SparkMD5.hash(text).substring(0, 6)
+  const normalizedText = normalizeTextForAudio(text)
+  const safeName = sanitizeFilename(normalizedText)
+  const hash = SparkMD5.hash(normalizedText).substring(0, 6)
   return `${safeName}_${hash}.mp3`
 }
 
