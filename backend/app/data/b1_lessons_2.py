@@ -140,9 +140,16 @@ Relative pronouns connect the main and subordinate clause:
             {"id": 3, "question": "Koja zamjenica znači 'whose'?", "options": ["koji", "što", "čiji", "gdje"], "correct_answer": 2, "explanation": "'Čiji' izražava posvojnost.", "question_type": "grammar"},
             {"id": 4, "question": "Šta znači 'stipendija'?", "options": ["Exam", "Grade", "Scholarship", "Lecture"], "correct_answer": 2, "explanation": "'Stipendija' je finansijska pomoć za studij.", "question_type": "vocabulary"},
             {"id": 5, "question": "Popunite: 'Knjiga _____ čitam'", "options": ["koji", "koju", "čiji", "gdje"], "correct_answer": 1, "explanation": "'Koju' - ženski rod, akuzativ.", "question_type": "grammar"},
-            {"id": 6, "question": "Napiši: 'The student who studies'", "question_type": "writing", "correct_answer_text": "Student koji uči", "explanation": "Relativna rečenica sa 'koji'."},
-            {"id": 7, "question": "Napiši: 'I have an exam'", "question_type": "writing", "correct_answer_text": "Imam ispit", "explanation": "'Ispit' = exam."},
-            {"id": 8, "question": "Napiši: 'The school where I studied'", "question_type": "writing", "correct_answer_text": "Škola gdje sam učio", "explanation": "'Gdje' za mjesto."}
+            {"id": 6, "question": "Kako kažemo 'university'?", "options": ["škola", "fakultet", "gimnazija", "vrtić"], "correct_answer": 1, "explanation": "'Fakultet' = university.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Šta znači 'diploma'?", "options": ["Exam", "Diploma/degree", "Grade", "Lecture"], "correct_answer": 1, "explanation": "'Diploma' = diploma/degree.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Koja relativna zamjenica se koristi za ženski rod?", "options": ["koji", "koja", "koje", "čiji"], "correct_answer": 1, "explanation": "'Koja' se koristi za ženski rod.", "question_type": "grammar"},
+            {"id": 9, "question": "Šta znači 'predavanje'?", "options": ["Exam", "Lecture", "Grade", "Book"], "correct_answer": 1, "explanation": "'Predavanje' = lecture.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Kako kažemo 'knowledge'?", "options": ["učenje", "obrazovanje", "znanje", "škola"], "correct_answer": 2, "explanation": "'Znanje' = knowledge.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši: 'The student who studies'", "question_type": "writing", "correct_answer_text": "Student koji uči", "explanation": "Relativna rečenica sa 'koji'."},
+            {"id": 12, "question": "Napiši: 'I have an exam'", "question_type": "writing", "correct_answer_text": "Imam ispit", "explanation": "'Ispit' = exam."},
+            {"id": 13, "question": "Napiši: 'The school where I studied'", "question_type": "writing", "correct_answer_text": "Škola gdje sam učio", "explanation": "'Gdje' za mjesto."},
+            {"id": 14, "question": "Napiši relativnu zamjenicu za srednji rod", "question_type": "writing", "correct_answer_text": "koje", "explanation": "'Koje' za srednji rod."},
+            {"id": 15, "question": "Napiši: 'The book that I read'", "question_type": "writing", "correct_answer_text": "Knjiga koju čitam", "explanation": "'Koju' - ženski rod, akuzativ."}
         ]
     },
     {
@@ -281,9 +288,16 @@ The first conditional expresses real possibilities in the future:
             {"id": 3, "question": "Šta znači 'zagađenje'?", "options": ["Protection", "Pollution", "Recycling", "Energy"], "correct_answer": 1, "explanation": "'Zagađenje' = pollution.", "question_type": "vocabulary"},
             {"id": 4, "question": "Kako kažemo 'We should recycle'?", "options": ["Moramo reciklirati", "Trebalo bi reciklirati", "Hoćemo reciklirati", "Možemo reciklirati"], "correct_answer": 1, "explanation": "'Trebalo bi' = we should.", "question_type": "grammar"},
             {"id": 5, "question": "Šta su 'klimatske promjene'?", "options": ["Weather forecast", "Climate change", "Global warming", "Air pollution"], "correct_answer": 1, "explanation": "'Klimatske promjene' = climate change.", "question_type": "vocabulary"},
-            {"id": 6, "question": "Napiši: 'If we recycle'", "question_type": "writing", "correct_answer_text": "Ako budemo reciklirali", "explanation": "Kondicional I sa 'ako'."},
-            {"id": 7, "question": "Napiši: 'We must protect the environment'", "question_type": "writing", "correct_answer_text": "Moramo zaštititi okoliš", "explanation": "'Zaštititi' = to protect."},
-            {"id": 8, "question": "Napiši: 'Pollution is a problem'", "question_type": "writing", "correct_answer_text": "Zagađenje je problem", "explanation": "'Zagađenje' = pollution."}
+            {"id": 6, "question": "Kako kažemo 'forest'?", "options": ["rijeka", "planina", "šuma", "more"], "correct_answer": 2, "explanation": "'Šuma' = forest.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Šta znači 'recikliranje'?", "options": ["Pollution", "Recycling", "Protection", "Warming"], "correct_answer": 1, "explanation": "'Recikliranje' = recycling.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Kako kažemo 'renewable energy'?", "options": ["zagađenje", "obnovljiva energija", "solarna energija", "nuklearna energija"], "correct_answer": 1, "explanation": "'Obnovljiva energija' = renewable energy.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Šta znači 'globalno zatopljenje'?", "options": ["Climate change", "Global warming", "Pollution", "Recycling"], "correct_answer": 1, "explanation": "'Globalno zatopljenje' = global warming.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Kako kažemo 'to protect'?", "options": ["zagaditi", "zaštititi", "reciklirati", "zagrijati"], "correct_answer": 1, "explanation": "'Zaštititi' = to protect.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši: 'If we recycle'", "question_type": "writing", "correct_answer_text": "Ako budemo reciklirali", "explanation": "Kondicional I sa 'ako'."},
+            {"id": 12, "question": "Napiši: 'We must protect the environment'", "question_type": "writing", "correct_answer_text": "Moramo zaštititi okoliš", "explanation": "'Zaštititi' = to protect."},
+            {"id": 13, "question": "Napiši: 'Pollution is a problem'", "question_type": "writing", "correct_answer_text": "Zagađenje je problem", "explanation": "'Zagađenje' = pollution."},
+            {"id": 14, "question": "Napiši: 'We should use solar energy'", "question_type": "writing", "correct_answer_text": "Trebalo bi koristiti solarnu energiju", "explanation": "'Solarna energija' = solar energy."},
+            {"id": 15, "question": "Napiši: 'Climate change is real'", "question_type": "writing", "correct_answer_text": "Klimatske promjene su stvarne", "explanation": "'Klimatske promjene' = climate change."}
         ]
     },
     {
@@ -433,9 +447,16 @@ The vocative is used for addressing someone:
             {"id": 3, "question": "Koji je vokativ od 'prijatelj'?", "options": ["prijatelja", "prijatelju", "prijatelj", "prijateljem"], "correct_answer": 1, "explanation": "Vokativ muškog roda: prijatelju.", "question_type": "grammar"},
             {"id": 4, "question": "Šta znači 'gostoprimstvo'?", "options": ["Cooking", "Hospitality", "Tradition", "Festival"], "correct_answer": 1, "explanation": "'Gostoprimstvo' = hospitality.", "question_type": "vocabulary"},
             {"id": 5, "question": "Kako kažemo 'Let's drink'?", "options": ["Pij!", "Pijte!", "Pijmo!", "Pijem!"], "correct_answer": 2, "explanation": "'Pijmo' je imperativ za 'mi'.", "question_type": "grammar"},
-            {"id": 6, "question": "Napiši: 'Come here!' (informal)", "question_type": "writing", "correct_answer_text": "Dođi ovamo", "explanation": "Imperativ od 'doći'."},
-            {"id": 7, "question": "Napiši: 'Welcome, brother!'", "question_type": "writing", "correct_answer_text": "Dobro došao, brate", "explanation": "Vokativ od 'brat'."},
-            {"id": 8, "question": "Napiši: 'Try the coffee!' (formal)", "question_type": "writing", "correct_answer_text": "Probajte kahvu", "explanation": "Imperativ za 'vi'."}
+            {"id": 6, "question": "Šta znači 'tradicija'?", "options": ["Custom", "Tradition", "Holiday", "Festival"], "correct_answer": 1, "explanation": "'Tradicija' = tradition.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koji je vokativ od 'sestra'?", "options": ["sestre", "sestro", "sestra", "sestri"], "correct_answer": 1, "explanation": "Vokativ ženskog roda: sestro.", "question_type": "grammar"},
+            {"id": 8, "question": "Šta znači 'praznik'?", "options": ["Tradition", "Custom", "Holiday", "Wedding"], "correct_answer": 2, "explanation": "'Praznik' = holiday.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako se tvori imperativ za 'mi'?", "options": ["nastavak -i", "nastavak -ite", "nastavak -imo", "nastavak -j"], "correct_answer": 2, "explanation": "Za 'mi' koristimo nastavak -imo.", "question_type": "grammar"},
+            {"id": 10, "question": "Šta znači 'običaj'?", "options": ["Tradition", "Custom", "Holiday", "Food"], "correct_answer": 1, "explanation": "'Običaj' = custom.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši: 'Come here!' (informal)", "question_type": "writing", "correct_answer_text": "Dođi ovamo", "explanation": "Imperativ od 'doći'."},
+            {"id": 12, "question": "Napiši: 'Welcome, brother!'", "question_type": "writing", "correct_answer_text": "Dobro došao, brate", "explanation": "Vokativ od 'brat'."},
+            {"id": 13, "question": "Napiši: 'Try the coffee!' (formal)", "question_type": "writing", "correct_answer_text": "Probajte kahvu", "explanation": "Imperativ za 'vi'."},
+            {"id": 14, "question": "Napiši imperativ od 'jesti' za 'ti'", "question_type": "writing", "correct_answer_text": "jedi", "explanation": "Imperativ: jedi."},
+            {"id": 15, "question": "Napiši vokativ od 'dijete'", "question_type": "writing", "correct_answer_text": "dijete", "explanation": "Vokativ srednjeg roda ostaje isti."}
         ]
     },
     {
@@ -593,9 +614,16 @@ Reflexive verbs have the reflexive pronoun "se":
             {"id": 3, "question": "Koji glagol znači 'to be afraid'?", "options": ["radovati se", "bojati se", "nadati se", "ljutiti se"], "correct_answer": 1, "explanation": "'Bojati se' = to be afraid.", "question_type": "vocabulary"},
             {"id": 4, "question": "Kako se kaže 'I feel happy'?", "options": ["Osjećam sretno", "Osjećam se sretno", "Osjećaj sretno", "Osjeća se sretno"], "correct_answer": 1, "explanation": "Koristimo povratni glagol 'osjećati se'.", "question_type": "grammar"},
             {"id": 5, "question": "Šta znači 'ljubav'?", "options": ["Hate", "Fear", "Love", "Sadness"], "correct_answer": 2, "explanation": "'Ljubav' = love.", "question_type": "vocabulary"},
-            {"id": 6, "question": "Napiši: 'I feel sad'", "question_type": "writing", "correct_answer_text": "Osjećam se tužno", "explanation": "Povratni glagol + pridjev."},
-            {"id": 7, "question": "Napiši: 'I'm afraid of'", "question_type": "writing", "correct_answer_text": "Bojim se", "explanation": "'Bojati se' je povratni glagol."},
-            {"id": 8, "question": "Napiši: 'I'm looking forward to'", "question_type": "writing", "correct_answer_text": "Radujem se", "explanation": "'Radovati se' + dativ."}
+            {"id": 6, "question": "Kako kažemo 'sadness'?", "options": ["sreća", "tuga", "strah", "ljutnja"], "correct_answer": 1, "explanation": "'Tuga' = sadness.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koji glagol znači 'to hope'?", "options": ["bojati se", "ljutiti se", "nadati se", "osjećati se"], "correct_answer": 2, "explanation": "'Nadati se' = to hope.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Šta znači 'strah'?", "options": ["Happiness", "Fear", "Love", "Hope"], "correct_answer": 1, "explanation": "'Strah' = fear.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako kažemo 'anger'?", "options": ["sreća", "tuga", "ljutnja", "nada"], "correct_answer": 2, "explanation": "'Ljutnja' = anger.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Koji glagol znači 'to be happy about'?", "options": ["bojati se", "radovati se", "ljutiti se", "nadati se"], "correct_answer": 1, "explanation": "'Radovati se' = to be happy about.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši: 'I feel sad'", "question_type": "writing", "correct_answer_text": "Osjećam se tužno", "explanation": "Povratni glagol + pridjev."},
+            {"id": 12, "question": "Napiši: 'I'm afraid of'", "question_type": "writing", "correct_answer_text": "Bojim se", "explanation": "'Bojati se' je povratni glagol."},
+            {"id": 13, "question": "Napiši: 'I'm looking forward to'", "question_type": "writing", "correct_answer_text": "Radujem se", "explanation": "'Radovati se' + dativ."},
+            {"id": 14, "question": "Napiši: 'I hope'", "question_type": "writing", "correct_answer_text": "Nadam se", "explanation": "'Nadati se' = to hope."},
+            {"id": 15, "question": "Napiši: 'I'm angry'", "question_type": "writing", "correct_answer_text": "Ljutim se", "explanation": "'Ljutiti se' = to be angry."}
         ]
     }
 ]

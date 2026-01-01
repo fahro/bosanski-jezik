@@ -316,10 +316,15 @@ The passive is used when the action is more important than the doer:
             {"id": 4, "question": "Šta znači 'lažna vijest'?", "options": ["True news", "Old news", "Fake news", "Breaking news"], "correct_answer": 2, "explanation": "'Lažna vijest' je neistinita informacija.", "question_type": "vocabulary"},
             {"id": 5, "question": "Kako kažemo 'The article was written'?", "options": ["Članak je pisao", "Članak je napisan", "Članak piše", "Članak je napisao"], "correct_answer": 1, "explanation": "Pasiv: 'je napisan'.", "question_type": "grammar"},
             {"id": 6, "question": "Šta su 'društvene mreže'?", "options": ["Television", "Radio", "Social media", "Newspaper"], "correct_answer": 2, "explanation": "'Društvene mreže' su Facebook, Instagram itd.", "question_type": "vocabulary"},
-            {"id": 7, "question": "Napiši: 'The news was published'", "question_type": "writing", "correct_answer_text": "Vijest je objavljena", "explanation": "Pasiv sa 'objavljen/a'."},
-            {"id": 8, "question": "Napiši: 'He said he was going'", "question_type": "writing", "correct_answer_text": "Rekao je da ide", "explanation": "Indirektni govor sa 'da'."},
-            {"id": 9, "question": "Napiši: 'I read the newspaper'", "question_type": "writing", "correct_answer_text": "Čitam novine", "explanation": "'Novine' = newspaper."},
-            {"id": 10, "question": "Napiši: 'Did you see the interview?'", "question_type": "writing", "correct_answer_text": "Jesi li vidio intervju", "explanation": "'Intervju' = interview."}
+            {"id": 7, "question": "Šta znači 'novinar'?", "options": ["News", "Journalist", "Article", "Source"], "correct_answer": 1, "explanation": "'Novinar' = journalist.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Koji je trpni pridjev od 'napisati'?", "options": ["napisao", "napisan", "napisuje", "pisao"], "correct_answer": 1, "explanation": "'Napisan' je trpni pridjev.", "question_type": "grammar"},
+            {"id": 9, "question": "Šta znači 'izvještaj'?", "options": ["Event", "Report", "Source", "Headline"], "correct_answer": 1, "explanation": "'Izvještaj' = report.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Kako kažemo 'headline'?", "options": ["članak", "naslov", "izvještaj", "vijest"], "correct_answer": 1, "explanation": "'Naslov' = headline.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Šta znači 'emisija'?", "options": ["Newspaper", "Radio", "Show/broadcast", "Article"], "correct_answer": 2, "explanation": "'Emisija' = show/broadcast.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Kako se kaže 'source' na bosanskom?", "options": ["izvor", "vijest", "članak", "novinar"], "correct_answer": 0, "explanation": "'Izvor' = source.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Napiši: 'The news was published'", "question_type": "writing", "correct_answer_text": "Vijest je objavljena", "explanation": "Pasiv sa 'objavljen/a'."},
+            {"id": 14, "question": "Napiši: 'He said he was going'", "question_type": "writing", "correct_answer_text": "Rekao je da ide", "explanation": "Indirektni govor sa 'da'."},
+            {"id": 15, "question": "Napiši: 'I read the newspaper'", "question_type": "writing", "correct_answer_text": "Čitam novine", "explanation": "'Novine' = newspaper."}
         ]
     }
 ]

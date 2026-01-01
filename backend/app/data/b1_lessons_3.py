@@ -106,7 +106,19 @@ B1_LESSONS_PART3 = [
         "quiz": [
             {"id": 1, "question": "Koji je komparativ od 'dobar'?", "options": ["dobri", "bolji", "najbolji", "dobar"], "correct_answer": 1, "explanation": "'Bolji' je komparativ.", "question_type": "grammar"},
             {"id": 2, "question": "Kako se kaže 'literature'?", "options": ["muzika", "umjetnost", "književnost", "film"], "correct_answer": 2, "explanation": "'Književnost' = literature.", "question_type": "vocabulary"},
-            {"id": 3, "question": "Napiši superlativ od 'velik'", "question_type": "writing", "correct_answer_text": "najveći", "explanation": "naj- + veći."}
+            {"id": 3, "question": "Kako se tvori superlativ?", "options": ["naj- + pozitiv", "naj- + komparativ", "-iji + pozitiv", "-ji + pozitiv"], "correct_answer": 1, "explanation": "Superlativ: naj- + komparativ.", "question_type": "grammar"},
+            {"id": 4, "question": "Šta znači 'umjetnost'?", "options": ["Music", "Art", "Film", "Theater"], "correct_answer": 1, "explanation": "'Umjetnost' = art.", "question_type": "vocabulary"},
+            {"id": 5, "question": "Koji je komparativ od 'lijep'?", "options": ["lijepi", "ljepši", "najljepši", "lijepo"], "correct_answer": 1, "explanation": "'Ljepši' je komparativ.", "question_type": "grammar"},
+            {"id": 6, "question": "Šta znači 'koncert'?", "options": ["Movie", "Concert", "Theater", "Gallery"], "correct_answer": 1, "explanation": "'Koncert' = concert.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koji je superlativ od 'dobar'?", "options": ["bolji", "dobri", "najbolji", "najdobri"], "correct_answer": 2, "explanation": "'Najbolji' je superlativ.", "question_type": "grammar"},
+            {"id": 8, "question": "Šta znači 'izložba'?", "options": ["Concert", "Exhibition", "Film", "Book"], "correct_answer": 1, "explanation": "'Izložba' = exhibition.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako kažemo 'theater'?", "options": ["kino", "pozorište", "galerija", "muzej"], "correct_answer": 1, "explanation": "'Pozorište' = theater.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Šta znači 'pisac'?", "options": ["Painter", "Writer", "Singer", "Actor"], "correct_answer": 1, "explanation": "'Pisac' = writer.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši superlativ od 'velik'", "question_type": "writing", "correct_answer_text": "najveći", "explanation": "naj- + veći."},
+            {"id": 12, "question": "Napiši komparativ od 'lijep'", "question_type": "writing", "correct_answer_text": "ljepši", "explanation": "lijep → ljepši."},
+            {"id": 13, "question": "Napiši superlativ od 'dobar'", "question_type": "writing", "correct_answer_text": "najbolji", "explanation": "naj- + bolji."},
+            {"id": 14, "question": "Napiši: 'This film is better'", "question_type": "writing", "correct_answer_text": "Ovaj film je bolji", "explanation": "Komparativ."},
+            {"id": 15, "question": "Napiši: 'the most beautiful painting'", "question_type": "writing", "correct_answer_text": "najljepša slika", "explanation": "Superlativ ženskog roda."}
         ]
     },
     {
@@ -212,7 +224,19 @@ Genitive plural is used with numbers 5+:
         "quiz": [
             {"id": 1, "question": "Koji je genitiv množine od 'marka'?", "options": ["marke", "maraka", "markama", "marka"], "correct_answer": 1, "explanation": "'Maraka' za 5+.", "question_type": "grammar"},
             {"id": 2, "question": "Šta znači 'štednja'?", "options": ["Loan", "Savings", "Tax", "Price"], "correct_answer": 1, "explanation": "'Štednja' = savings.", "question_type": "vocabulary"},
-            {"id": 3, "question": "Napiši: '100 marks'", "question_type": "writing", "correct_answer_text": "sto maraka", "explanation": "Genitiv množine."}
+            {"id": 3, "question": "Koji broj koristi genitiv množine?", "options": ["1", "2-4", "5+", "0"], "correct_answer": 2, "explanation": "Brojevi 5+ koriste genitiv množine.", "question_type": "grammar"},
+            {"id": 4, "question": "Šta znači 'kredit'?", "options": ["Savings", "Loan", "Tax", "Price"], "correct_answer": 1, "explanation": "'Kredit' = loan.", "question_type": "vocabulary"},
+            {"id": 5, "question": "Koji je genitiv množine od 'euro'?", "options": ["euri", "eura", "eurima", "euro"], "correct_answer": 1, "explanation": "'Eura' za 5+.", "question_type": "grammar"},
+            {"id": 6, "question": "Šta znači 'porez'?", "options": ["Price", "Tax", "Loan", "Savings"], "correct_answer": 1, "explanation": "'Porez' = tax.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Kako kažemo 'price'?", "options": ["porez", "cijena", "kredit", "štednja"], "correct_answer": 1, "explanation": "'Cijena' = price.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Šta znači 'inflacija'?", "options": ["Savings", "Inflation", "Tax", "Price"], "correct_answer": 1, "explanation": "'Inflacija' = inflation.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako kažemo 'investment'?", "options": ["štednja", "investicija", "kredit", "porez"], "correct_answer": 1, "explanation": "'Investicija' = investment.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Šta znači 'račun' u banci?", "options": ["Bill only", "Account", "Tax", "Loan"], "correct_answer": 1, "explanation": "'Račun' = account (or bill).", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši: '100 marks'", "question_type": "writing", "correct_answer_text": "sto maraka", "explanation": "Genitiv množine."},
+            {"id": 12, "question": "Napiši: '5 euros'", "question_type": "writing", "correct_answer_text": "pet eura", "explanation": "Genitiv množine."},
+            {"id": 13, "question": "Napiši: 'I have savings'", "question_type": "writing", "correct_answer_text": "Imam štednju", "explanation": "'Štednja' = savings."},
+            {"id": 14, "question": "Napiši: 'The price is high'", "question_type": "writing", "correct_answer_text": "Cijena je visoka", "explanation": "'Cijena' = price."},
+            {"id": 15, "question": "Napiši: '20 years'", "question_type": "writing", "correct_answer_text": "dvadeset godina", "explanation": "Genitiv množine od 'godina'."}
         ]
     },
     {
@@ -317,7 +341,19 @@ Impersonal constructions don't have a specific subject:
         "quiz": [
             {"id": 1, "question": "Kako kažemo 'It is said that'?", "options": ["Kaže se da", "Kažem da", "Kaži da", "Kazati da"], "correct_answer": 0, "explanation": "'Kaže se' je bezlična konstrukcija.", "question_type": "grammar"},
             {"id": 2, "question": "Šta znači 'izbori'?", "options": ["Government", "Elections", "Law", "Party"], "correct_answer": 1, "explanation": "'Izbori' = elections.", "question_type": "vocabulary"},
-            {"id": 3, "question": "Napiši: 'One should vote'", "question_type": "writing", "correct_answer_text": "Treba glasati", "explanation": "Bezlična konstrukcija."}
+            {"id": 3, "question": "Kako se tvori bezlična konstrukcija?", "options": ["ja + glagol", "glagol u 3. licu + se", "ti + glagol", "mi + glagol"], "correct_answer": 1, "explanation": "Bezlično: glagol u 3. licu + se.", "question_type": "grammar"},
+            {"id": 4, "question": "Šta znači 'vlada'?", "options": ["Parliament", "Government", "President", "Law"], "correct_answer": 1, "explanation": "'Vlada' = government.", "question_type": "vocabulary"},
+            {"id": 5, "question": "Kako kažemo 'One must'?", "options": ["Moram", "Mora se", "Moraš", "Moraju"], "correct_answer": 1, "explanation": "'Mora se' je bezlična konstrukcija.", "question_type": "grammar"},
+            {"id": 6, "question": "Šta znači 'demokratija'?", "options": ["Dictatorship", "Democracy", "Monarchy", "Republic"], "correct_answer": 1, "explanation": "'Demokratija' = democracy.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Kako kažemo 'freedom'?", "options": ["pravo", "sloboda", "zakon", "vlada"], "correct_answer": 1, "explanation": "'Sloboda' = freedom.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Šta znači 'zakon'?", "options": ["Government", "Law", "Freedom", "Right"], "correct_answer": 1, "explanation": "'Zakon' = law.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako kažemo 'It is considered'?", "options": ["Smatram", "Smatra se", "Smatraš", "Smatraju"], "correct_answer": 1, "explanation": "'Smatra se' je bezlična konstrukcija.", "question_type": "grammar"},
+            {"id": 10, "question": "Šta znači 'glasati'?", "options": ["To speak", "To vote", "To decide", "To govern"], "correct_answer": 1, "explanation": "'Glasati' = to vote.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Napiši: 'One should vote'", "question_type": "writing", "correct_answer_text": "Treba glasati", "explanation": "Bezlična konstrukcija."},
+            {"id": 12, "question": "Napiši: 'It is said that'", "question_type": "writing", "correct_answer_text": "Kaže se da", "explanation": "Bezlična konstrukcija."},
+            {"id": 13, "question": "Napiši: 'The law was adopted'", "question_type": "writing", "correct_answer_text": "Zakon je usvojen", "explanation": "Pasiv."},
+            {"id": 14, "question": "Napiši: 'Freedom is important'", "question_type": "writing", "correct_answer_text": "Sloboda je važna", "explanation": "'Sloboda' = freedom."},
+            {"id": 15, "question": "Napiši: 'One must respect the law'", "question_type": "writing", "correct_answer_text": "Mora se poštovati zakon", "explanation": "Bezlična konstrukcija."}
         ]
     },
     {
@@ -347,86 +383,155 @@ Impersonal constructions don't have a specific subject:
             {"bosnian": "vještačka inteligencija", "english": "artificial intelligence", "pronunciation": "VYEHSH-tahch-kah een-teh-lee-GEHN-tsee-yah", "example": "AI mijenja svijet.", "example_translation": "AI is changing the world.", "image_emoji": "🤖"}
         ],
         "grammar_explanation": """
-## Anglicizmi i neologizmi
+## Anglicizmi i njihova adaptacija u bosanskom
 
-Bosanski jezik koristi mnoge anglicizme za tehnologiju:
+Bosanski jezik koristi mnoge anglicizme za tehnologiju. Evo kako se oni prilagođavaju:
 
-| Anglicizam | Bosanski ekvivalent |
+### 1. Direktno preuzimanje (bez promjene)
+| Anglicizam | Upotreba u rečenici |
 |------------|---------------------|
-| internet | internet (isti) |
-| download | preuzeti |
-| upload | postaviti |
-| e-mail | e-pošta / mejl |
-| software | softver / program |
-| hardware | hardver / oprema |
+| internet | Surfam **internetom**. |
+| link | Pošalji mi **link**. |
+| server | **Server** ne radi. |
+| laptop | Kupila sam novi **laptop**. |
 
-### Adaptacija:
-- **Google** → guglati (to google)
-- **chat** → četovati (to chat)
-- **like** → lajkovati (to like)
+### 2. Fonetska adaptacija
+| Engleski | Bosanski | Primjer |
+|----------|----------|---------|
+| email | mejl | Poslat ću ti **mejl**. |
+| website | websajt | Otvori taj **websajt**. |
+| software | softver | Instaliraj novi **softver**. |
+| hardware | hardver | **Hardver** je zastario. |
+
+### 3. Glagolska adaptacija (-ati, -ovati, -irati)
+| Engleski | Bosanski glagol | Konjugacija (prezent) |
+|----------|-----------------|----------------------|
+| to google | guglati | guglam, guglaš, gugla, guglamo, guglate, guglaju |
+| to chat | četovati | četujem, četuješ, četuje, četujemo, četujete, četuju |
+| to like | lajkovati | lajkujem, lajkuješ, lajkuje, lajkujemo, lajkujete, lajkuju |
+| to share | šerovati | šerujem, šeruješ, šeruje, šerujemo, šerujete, šeruju |
+
+### 4. Bosanski ekvivalenti (preporučeni)
+| Anglicizam | Bosanski | Primjer |
+|------------|----------|---------|
+| download | preuzeti | **Preuzmi** fajl. |
+| upload | postaviti | **Postavi** sliku. |
+| save | sačuvati | **Sačuvaj** dokument. |
+| delete | obrisati | **Obriši** fajl. |
+| search | pretražiti | **Pretraži** na internetu. |
+
+### Padeži s IT terminima:
+- **Lokativ** (na, u): Radim na **računaru**. Čitam na **internetu**. Čuvam u **oblaku**.
+- **Akuzativ** (direktni objekt): Preuzimam **aplikaciju**. Zaboravio sam **lozinku**.
+- **Instrumental** (s, sa): Surfam **internetom**. Komuniciram **mejlom**.
 """,
         "grammar_explanation_en": """
-## Anglicisms and Neologisms
+## Anglicisms and their adaptation in Bosnian
 
-Bosnian uses many anglicisms for technology:
+Bosnian uses many anglicisms for technology. Here's how they adapt:
 
-| Anglicism | Bosnian equivalent |
-|-----------|-------------------|
-| internet | internet (same) |
-| download | preuzeti |
-| upload | postaviti |
-| e-mail | e-pošta / mejl |
+### 1. Direct borrowing (no change)
+| Anglicism | Usage |
+|-----------|-------|
+| internet | Surfam **internetom**. (I surf the internet) |
+| link | Pošalji mi **link**. (Send me the link) |
+| server | **Server** ne radi. (Server is not working) |
 
-### Adaptation:
-- **Google** → guglati (to google)
-- **chat** → četovati (to chat)
-- **like** → lajkovati (to like)
+### 2. Phonetic adaptation
+| English | Bosnian | Example |
+|---------|---------|---------|
+| email | mejl | Poslat ću ti **mejl**. |
+| website | websajt | Otvori taj **websajt**. |
+
+### 3. Verb adaptation (-ati, -ovati, -irati)
+| English | Bosnian verb | Present tense |
+|---------|--------------|---------------|
+| to google | guglati | guglam, guglaš, gugla... |
+| to chat | četovati | četujem, četuješ, četuje... |
+| to like | lajkovati | lajkujem, lajkuješ, lajkuje... |
+
+### 4. Bosnian equivalents (recommended)
+| Anglicism | Bosnian | Example |
+|-----------|---------|---------|
+| download | preuzeti | **Preuzmi** fajl. (Download the file) |
+| upload | postaviti | **Postavi** sliku. (Upload the image) |
+| save | sačuvati | **Sačuvaj** dokument. (Save the document) |
+
+### Cases with IT terms:
+- **Locative**: Radim na **računaru**. (I work on the computer)
+- **Accusative**: Preuzimam **aplikaciju**. (I'm downloading an app)
+- **Instrumental**: Surfam **internetom**. (I surf the internet)
 """,
-        "cultural_note": "BiH ima rastući IT sektor. Sarajevo i Banja Luka su tehnološki hubovi. Mladi koriste društvene mreže za aktivizam i povezivanje.",
-        "cultural_note_en": "BiH has a growing IT sector. Sarajevo and Banja Luka are tech hubs. Youth use social networks for activism and connection.",
+        "cultural_note": "BiH ima rastući IT sektor s preko 10.000 programera. Sarajevo, Banja Luka i Mostar su tehnološki hubovi. Firme kao Atlantbh, Symphony i Mistral su poznate u regiji. Mladi koriste društvene mreže za aktivizam - posebno Instagram i Twitter za građanske inicijative.",
+        "cultural_note_en": "BiH has a growing IT sector with over 10,000 programmers. Sarajevo, Banja Luka and Mostar are tech hubs. Companies like Atlantbh, Symphony and Mistral are known in the region.",
         "cultural_comic": {
             "title": "IT startup u Sarajevu",
-            "description": "Mladi programeri grade budućnost",
+            "description": "Mladi programeri razgovaraju o izazovima i uspjesima",
             "panels": [
                 {"character": "Tarik", "emotion": "excited", "text": "Naša aplikacija ima već 10.000 korisnika!", "translation": "Our app already has 10,000 users!"},
-                {"character": "Selma", "emotion": "proud", "text": "Odlično! Moramo dodati nove funkcije.", "translation": "Excellent! We need to add new features."},
-                {"character": "Tarik", "emotion": "thoughtful", "text": "Trebamo bolji server za više podataka.", "translation": "We need a better server for more data."},
-                {"character": "Selma", "emotion": "determined", "text": "Koristit ćemo cloud tehnologiju.", "translation": "We'll use cloud technology."},
-                {"character": "Tarik", "emotion": "happy", "text": "AI će nam pomoći da poboljšamo korisničko iskustvo.", "translation": "AI will help us improve user experience."},
-                {"character": "Selma", "emotion": "hopeful", "text": "Bosanski IT sektor raste svaki dan!", "translation": "Bosnian IT sector is growing every day!"}
+                {"character": "Selma", "emotion": "curious", "text": "Odlično! Kako si to postigao?", "translation": "Excellent! How did you achieve that?"},
+                {"character": "Tarik", "emotion": "thoughtful", "text": "Koristili smo društvene mreže za marketing.", "translation": "We used social networks for marketing."},
+                {"character": "Selma", "emotion": "interested", "text": "A koji server koristite za podatke?", "translation": "And which server do you use for data?"},
+                {"character": "Tarik", "emotion": "proud", "text": "Cloud tehnologiju - sve je u oblaku.", "translation": "Cloud technology - everything is in the cloud."},
+                {"character": "Selma", "emotion": "impressed", "text": "Pametno! A šta planirate sljedeće?", "translation": "Smart! And what do you plan next?"},
+                {"character": "Tarik", "emotion": "determined", "text": "Dodajemo AI funkcije. A ti, radiš li na nečem?", "translation": "We're adding AI features. And you, are you working on something?"},
+                {"character": "Selma", "emotion": "hopeful", "text": "Da, pravim edukativnu platformu za bosanski jezik!", "translation": "Yes, I'm making an educational platform for Bosnian language!"},
+                {"character": "Tarik", "emotion": "happy", "text": "Odlična ideja! Trebamo više takvih projekata.", "translation": "Great idea! We need more such projects."},
+                {"character": "Selma", "emotion": "optimistic", "text": "Slažem se. Bosanski IT sektor ima svijetlu budućnost!", "translation": "I agree. Bosnian IT sector has a bright future!"}
             ]
         },
         "dialogue": [
-            {"speaker": "Lejla", "text": "Možeš li mi poslati link?", "translation": "Can you send me the link?"},
-            {"speaker": "Adnan", "text": "Naravno, poslat ću ti na mejl.", "translation": "Of course, I'll send it to your email."},
-            {"speaker": "Lejla", "text": "Super! Preuzet ću aplikaciju.", "translation": "Great! I'll download the app."},
-            {"speaker": "Adnan", "text": "Zapamti lozinku!", "translation": "Remember the password!"},
-            {"speaker": "Lejla", "text": "Zaboravila sam staru lozinku.", "translation": "I forgot my old password."},
-            {"speaker": "Adnan", "text": "Možeš je resetovati putem mejla.", "translation": "You can reset it via email."},
-            {"speaker": "Lejla", "text": "A kako da sačuvam podatke u oblaku?", "translation": "And how do I save data in the cloud?"},
-            {"speaker": "Adnan", "text": "Idi u postavke i odaberi 'backup'.", "translation": "Go to settings and select 'backup'."},
-            {"speaker": "Lejla", "text": "Hvala! A koja društvena mreža je najpopularnija?", "translation": "Thanks! And which social network is most popular?"},
-            {"speaker": "Adnan", "text": "Instagram i TikTok su najkorišteniji među mladima.", "translation": "Instagram and TikTok are most used among young people."}
+            {"speaker": "Lejla", "text": "Možeš li mi poslati link za tu aplikaciju?", "translation": "Can you send me the link for that app?"},
+            {"speaker": "Adnan", "text": "Naravno! Poslat ću ti na mejl ili WhatsApp?", "translation": "Of course! Should I send it to email or WhatsApp?"},
+            {"speaker": "Lejla", "text": "Na mejl, molim te. A je li aplikacija besplatna?", "translation": "To email, please. And is the app free?"},
+            {"speaker": "Adnan", "text": "Da, besplatna je. Imaš reklame, ali možeš platiti premium.", "translation": "Yes, it's free. You have ads, but you can pay for premium."},
+            {"speaker": "Lejla", "text": "Super! Preuzet ću je. A trebam li kreirati račun?", "translation": "Great! I'll download it. Do I need to create an account?"},
+            {"speaker": "Adnan", "text": "Da, moraš se registrovati. Zapamti lozinku!", "translation": "Yes, you need to register. Remember your password!"},
+            {"speaker": "Lejla", "text": "Uvijek zaboravim lozinke. Kako da ih sačuvam?", "translation": "I always forget passwords. How do I save them?"},
+            {"speaker": "Adnan", "text": "Koristi password manager ili ih sačuvaj u oblaku.", "translation": "Use a password manager or save them in the cloud."},
+            {"speaker": "Lejla", "text": "A koja društvena mreža je sada najpopularnija kod nas?", "translation": "And which social network is most popular here now?"},
+            {"speaker": "Adnan", "text": "Instagram i TikTok za mlade, Facebook za starije.", "translation": "Instagram and TikTok for young people, Facebook for older."},
+            {"speaker": "Lejla", "text": "Ja najviše koristim Instagram. A ti?", "translation": "I use Instagram the most. And you?"},
+            {"speaker": "Adnan", "text": "LinkedIn za posao, Twitter za vijesti. Ovisi o svrsi.", "translation": "LinkedIn for work, Twitter for news. It depends on the purpose."}
         ],
         "exercises": [
-            {"id": 1, "type": "fill_blank", "instruction": "Popunite", "content": {"sentence": "Radim na _____.", "options": ["računaru", "računar", "računara", "računarom"]}, "answer": "računaru", "hint": "Lokativ"},
-            {"id": 2, "type": "fill_blank", "instruction": "Popunite", "content": {"sentence": "Zaboravio sam _____.", "options": ["lozinku", "lozinka", "lozinke", "lozinkom"]}, "answer": "lozinku", "hint": "Akuzativ"},
-            {"id": 3, "type": "fill_blank", "instruction": "Popunite", "content": {"sentence": "Preuzimam novu _____.", "options": ["aplikaciju", "aplikacija", "aplikacije", "aplikacijom"]}, "answer": "aplikaciju", "hint": "Akuzativ"},
-            {"id": 4, "type": "fill_blank", "instruction": "Popunite", "content": {"sentence": "Čuvam podatke u _____.", "options": ["oblaku", "oblak", "oblaka", "oblakom"]}, "answer": "oblaku", "hint": "Lokativ"},
-            {"id": 5, "type": "translate", "instruction": "Prevedite", "content": {"text": "I'm downloading an app."}, "answer": "Preuzimam aplikaciju.", "hint": "Preuzeti"},
-            {"id": 6, "type": "translate", "instruction": "Prevedite", "content": {"text": "Search it on Google."}, "answer": "Pretraži na Googleu.", "hint": "Pretražiti"},
-            {"id": 7, "type": "translate", "instruction": "Prevedite", "content": {"text": "I forgot my password."}, "answer": "Zaboravio sam lozinku.", "hint": "Lozinka"},
-            {"id": 8, "type": "matching", "instruction": "Spojite parove", "content": {"pairs": [{"left": "preuzeti", "right": "download"}, {"left": "postaviti", "right": "upload"}, {"left": "pretražiti", "right": "search"}, {"left": "guglati", "right": "to google"}]}, "answer": "correct_pairs", "hint": "IT termini"},
-            {"id": 9, "type": "writing", "instruction": "Napišite", "content": {"text": "computer"}, "answer": "računar", "hint": "PC"},
-            {"id": 10, "type": "writing", "instruction": "Napišite", "content": {"text": "password"}, "answer": "lozinka", "hint": "Tajna riječ"},
-            {"id": 11, "type": "writing", "instruction": "Napišite", "content": {"text": "to download"}, "answer": "preuzeti", "hint": "Skinuti"},
-            {"id": 12, "type": "writing", "instruction": "Napišite", "content": {"text": "smartphone"}, "answer": "pametni telefon", "hint": "iPhone, Samsung..."},
-            {"id": 13, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["na", "Radim", "računaru", "svaki", "dan"]}, "answer": "Radim na računaru svaki dan.", "hint": "Radim..."}
+            {"id": 1, "type": "fill_blank", "instruction": "Popunite lokativ", "content": {"sentence": "Radim na _____.", "options": ["računaru", "računar", "računara", "računarom"]}, "answer": "računaru", "hint": "Lokativ"},
+            {"id": 2, "type": "fill_blank", "instruction": "Popunite akuzativ", "content": {"sentence": "Zaboravio sam _____.", "options": ["lozinku", "lozinka", "lozinke", "lozinkom"]}, "answer": "lozinku", "hint": "Akuzativ"},
+            {"id": 3, "type": "fill_blank", "instruction": "Popunite akuzativ", "content": {"sentence": "Preuzimam novu _____.", "options": ["aplikaciju", "aplikacija", "aplikacije", "aplikacijom"]}, "answer": "aplikaciju", "hint": "Akuzativ"},
+            {"id": 4, "type": "fill_blank", "instruction": "Popunite lokativ", "content": {"sentence": "Čuvam podatke u _____.", "options": ["oblaku", "oblak", "oblaka", "oblakom"]}, "answer": "oblaku", "hint": "Lokativ"},
+            {"id": 5, "type": "fill_blank", "instruction": "Instrumental", "content": {"sentence": "Surfam _____.", "options": ["internetom", "internet", "interneta", "internetu"]}, "answer": "internetom", "hint": "Instrumental"},
+            {"id": 6, "type": "fill_blank", "instruction": "Glagolska adaptacija", "content": {"sentence": "Svaki dan _____ na internetu. (guglati)", "options": ["guglam", "google", "guglati", "guglao"]}, "answer": "guglam", "hint": "Prezent"},
+            {"id": 7, "type": "fill_blank", "instruction": "Glagolska adaptacija", "content": {"sentence": "Ona često _____ slike na Instagramu. (lajkovati)", "options": ["lajkuje", "lajk", "lajkujem", "lajkovati"]}, "answer": "lajkuje", "hint": "Prezent 3. lice"},
+            {"id": 8, "type": "translate", "instruction": "Prevedite", "content": {"text": "I'm downloading an app."}, "answer": "Preuzimam aplikaciju.", "hint": "Preuzeti"},
+            {"id": 9, "type": "translate", "instruction": "Prevedite", "content": {"text": "Search it on Google."}, "answer": "Pretraži na Googleu.", "hint": "Pretražiti"},
+            {"id": 10, "type": "translate", "instruction": "Prevedite", "content": {"text": "I forgot my password."}, "answer": "Zaboravio sam lozinku.", "hint": "Lozinka"},
+            {"id": 11, "type": "translate", "instruction": "Prevedite", "content": {"text": "Save the document in the cloud."}, "answer": "Sačuvaj dokument u oblaku.", "hint": "Oblak"},
+            {"id": 12, "type": "translate", "instruction": "Prevedite", "content": {"text": "I'll send you an email."}, "answer": "Poslat ću ti mejl.", "hint": "Mejl"},
+            {"id": 13, "type": "matching", "instruction": "Spojite anglicizme s bosanskim", "content": {"pairs": [{"left": "download", "right": "preuzeti"}, {"left": "upload", "right": "postaviti"}, {"left": "delete", "right": "obrisati"}, {"left": "save", "right": "sačuvati"}]}, "answer": "correct_pairs", "hint": "IT termini"},
+            {"id": 14, "type": "matching", "instruction": "Spojite glagole", "content": {"pairs": [{"left": "to google", "right": "guglati"}, {"left": "to chat", "right": "četovati"}, {"left": "to like", "right": "lajkovati"}, {"left": "to share", "right": "šerovati"}]}, "answer": "correct_pairs", "hint": "Glagolska adaptacija"},
+            {"id": 15, "type": "writing", "instruction": "Napišite", "content": {"text": "computer"}, "answer": "računar", "hint": "PC"},
+            {"id": 16, "type": "writing", "instruction": "Napišite", "content": {"text": "password"}, "answer": "lozinka", "hint": "Tajna riječ"},
+            {"id": 17, "type": "writing", "instruction": "Napišite", "content": {"text": "to download"}, "answer": "preuzeti", "hint": "Skinuti"},
+            {"id": 18, "type": "writing", "instruction": "Napišite bosanski za 'to google'", "content": {"text": "to google"}, "answer": "guglati", "hint": "Pretraživati"},
+            {"id": 19, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["na", "Radim", "računaru", "svaki", "dan"]}, "answer": "Radim na računaru svaki dan.", "hint": "Radim..."},
+            {"id": 20, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["mi", "Pošalji", "link", "na", "mejl"]}, "answer": "Pošalji mi link na mejl.", "hint": "Pošalji..."}
         ],
         "quiz": [
-            {"id": 1, "question": "Kako kažemo 'to download'?", "options": ["postaviti", "preuzeti", "pretražiti", "poslati"], "correct_answer": 1, "explanation": "'Preuzeti' = to download.", "question_type": "vocabulary"},
+            {"id": 1, "question": "Kako kažemo 'to download' na bosanskom?", "options": ["postaviti", "preuzeti", "pretražiti", "poslati"], "correct_answer": 1, "explanation": "'Preuzeti' = to download.", "question_type": "vocabulary"},
             {"id": 2, "question": "Šta znači 'lozinka'?", "options": ["Username", "Password", "Email", "Link"], "correct_answer": 1, "explanation": "'Lozinka' = password.", "question_type": "vocabulary"},
-            {"id": 3, "question": "Napiši: 'I work on the computer'", "question_type": "writing", "correct_answer_text": "Radim na računaru", "explanation": "Lokativ."}
+            {"id": 3, "question": "Koji je bosanski glagol za 'to google'?", "options": ["googlati", "guglati", "googleati", "guglovati"], "correct_answer": 1, "explanation": "'Guglati' - fonetska adaptacija.", "question_type": "grammar"},
+            {"id": 4, "question": "Koji padež koristimo: 'Radim na _____'?", "options": ["Nominativ", "Akuzativ", "Lokativ", "Genitiv"], "correct_answer": 2, "explanation": "Na + lokativ.", "question_type": "grammar"},
+            {"id": 5, "question": "Kako kažemo 'to upload'?", "options": ["preuzeti", "skinuti", "postaviti", "sačuvati"], "correct_answer": 2, "explanation": "'Postaviti' = to upload.", "question_type": "vocabulary"},
+            {"id": 6, "question": "Šta znači 'oblak' u IT kontekstu?", "options": ["Weather", "Cloud storage", "Sky", "Rain"], "correct_answer": 1, "explanation": "'Oblak' = cloud storage.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Kako glasi prezent od 'lajkovati' za 'ja'?", "options": ["lajkam", "lajkujem", "lajkovam", "lajkim"], "correct_answer": 1, "explanation": "Lajkujem, lajkuješ, lajkuje...", "question_type": "grammar"},
+            {"id": 8, "question": "Koji padež: 'Zaboravio sam _____' (lozinka)?", "options": ["Nominativ", "Genitiv", "Akuzativ", "Lokativ"], "correct_answer": 2, "explanation": "Akuzativ za direktni objekt.", "question_type": "grammar"},
+            {"id": 9, "question": "Kako kažemo 'social network'?", "options": ["socijalna mreža", "društvena mreža", "internet mreža", "online mreža"], "correct_answer": 1, "explanation": "'Društvena mreža' = social network.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Koji instrumental: 'Surfam _____'?", "options": ["internet", "interneta", "internetu", "internetom"], "correct_answer": 3, "explanation": "Instrumental: internetom.", "question_type": "grammar"},
+            {"id": 11, "question": "Kako kažemo 'to search'?", "options": ["preuzeti", "pretražiti", "postaviti", "poslati"], "correct_answer": 1, "explanation": "'Pretražiti' = to search.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Šta znači 'pametni telefon'?", "options": ["Laptop", "Tablet", "Smartphone", "Computer"], "correct_answer": 2, "explanation": "'Pametni telefon' = smartphone.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Napiši: 'I work on the computer'", "question_type": "writing", "correct_answer_text": "Radim na računaru", "explanation": "Lokativ."},
+            {"id": 14, "question": "Napiši: 'Send me the link'", "question_type": "writing", "correct_answer_text": "Pošalji mi link", "explanation": "Imperativ."},
+            {"id": 15, "question": "Napiši bosanski za 'I forgot my password'", "question_type": "writing", "correct_answer_text": "Zaboravio sam lozinku", "explanation": "Perfekat + akuzativ."}
         ]
     },
     {
@@ -456,34 +561,76 @@ Bosnian uses many anglicisms for technology:
             {"bosnian": "smještaj", "english": "accommodation", "pronunciation": "SMYEHSH-tai", "example": "Rezervirao sam smještaj.", "example_translation": "I booked accommodation.", "image_emoji": "🏨"}
         ],
         "grammar_explanation": """
-## Aspekt glagola (Verbal Aspect)
+## Aspekt glagola (Verbal Aspect) - Detaljno objašnjenje
 
-Bosanski razlikuje svršeni i nesvršeni vid:
+Bosanski razlikuje **svršeni** i **nesvršeni** vid glagola. Ovo je ključno za pripovijedanje!
 
-| Nesvršeni (trajanje) | Svršeni (završetak) |
-|---------------------|---------------------|
-| pisati (was writing) | napisati (wrote) |
-| čitati (was reading) | pročitati (read) |
-| putovati (was traveling) | otputovati (traveled) |
+### 1. Nesvršeni vid (imperfektivni) - trajanje, ponavljanje
+| Infinitiv | Perfekat | Značenje |
+|-----------|----------|----------|
+| pisati | pisao sam | was writing (trajanje) |
+| čitati | čitao sam | was reading |
+| putovati | putovao sam | was traveling |
+| gledati | gledao sam | was watching |
+| jesti | jeo sam | was eating |
 
-### U pripovijedanju:
-- **Putovao sam** danima. (I was traveling for days.) - trajanje
-- **Stigao sam** u Mostar. (I arrived in Mostar.) - završena radnja
+### 2. Svršeni vid (perfektivni) - završena radnja
+| Infinitiv | Perfekat | Značenje |
+|-----------|----------|----------|
+| napisati | napisao sam | wrote (finished) |
+| pročitati | pročitao sam | read (finished) |
+| otputovati | otputovao sam | traveled (departed) |
+| pogledati | pogledao sam | watched (finished) |
+| pojesti | pojeo sam | ate (finished) |
+
+### 3. Prefiksi koji tvore svršeni vid:
+| Prefiks | Primjer | Značenje |
+|---------|---------|----------|
+| na- | pisati → **na**pisati | to write (complete) |
+| pro- | čitati → **pro**čitati | to read through |
+| po- | gledati → **po**gledati | to have a look |
+| s-/sa- | kupiti → **s**kupiti | to gather |
+| do- | ći → **do**ći | to arrive |
+| ot- | ići → **ot**ići | to leave |
+
+### 4. U pripovijedanju - kombinacija oba vida:
+- **Putovao sam** (nesvrš.) autobusom **kad sam stigao** (svrš.) u Mostar.
+- **Čitao sam** (nesvrš.) knjigu **dok nisam pročitao** (svrš.) zadnju stranicu.
+- **Jeli smo** (nesvrš.) ćevape **i pojeli** (svrš.) sve!
+
+### 5. Pitanja u prošlosti:
+- **Jesi li putovao?** (Da li si putovao? - općenito)
+- **Jesi li otputovao?** (Da li si krenuo na put? - specifično)
 """,
         "grammar_explanation_en": """
-## Verbal Aspect
+## Verbal Aspect - Detailed Explanation
 
-Bosnian distinguishes imperfective and perfective aspects:
+Bosnian distinguishes **perfective** and **imperfective** verb aspects. This is crucial for storytelling!
 
-| Imperfective (ongoing) | Perfective (completed) |
-|-----------------------|------------------------|
-| pisati (was writing) | napisati (wrote) |
-| čitati (was reading) | pročitati (read) |
-| putovati (was traveling) | otputovati (traveled) |
+### 1. Imperfective (ongoing, repeated action)
+| Infinitive | Past tense | Meaning |
+|------------|------------|---------|
+| pisati | pisao sam | was writing |
+| čitati | čitao sam | was reading |
+| putovati | putovao sam | was traveling |
 
-### In narration:
-- **Putovao sam** danima. (I was traveling for days.) - ongoing
-- **Stigao sam** u Mostar. (I arrived in Mostar.) - completed
+### 2. Perfective (completed action)
+| Infinitive | Past tense | Meaning |
+|------------|------------|---------|
+| napisati | napisao sam | wrote (finished) |
+| pročitati | pročitao sam | read (finished) |
+| otputovati | otputovao sam | departed |
+
+### 3. Prefixes that create perfective aspect:
+| Prefix | Example | Meaning |
+|--------|---------|---------|
+| na- | pisati → **na**pisati | to write (complete) |
+| pro- | čitati → **pro**čitati | to read through |
+| po- | gledati → **po**gledati | to have a look |
+
+### 4. In storytelling - combining both aspects:
+- **Putovao sam** (imperf.) autobusom **kad sam stigao** (perf.) u Mostar.
+  (I was traveling by bus when I arrived in Mostar.)
 """,
         "cultural_note": "BiH ima mnogo turističkih destinacija: Stari most u Mostaru, Baščaršija u Sarajevu, Jajce sa vodopadom, Una sa raftingom. Turizam raste svake godine.",
         "cultural_note_en": "BiH has many tourist destinations: Stari Most in Mostar, Baščaršija in Sarajevo, Jajce with its waterfall, Una with rafting. Tourism is growing every year.",
@@ -512,24 +659,43 @@ Bosnian distinguishes imperfective and perfective aspects:
             {"speaker": "Kenan", "text": "Probao sam sve - ćevape, pitu, baklavu. Nezaboravno!", "translation": "I tried everything - ćevapi, pita, baklava. Unforgettable!"}
         ],
         "exercises": [
-            {"id": 1, "type": "fill_blank", "instruction": "Svršeni/nesvršeni", "content": {"sentence": "_____ sam danima. (putovati - trajanje)", "options": ["Putovao", "Otputovao", "Putujem", "Putovat ću"]}, "answer": "Putovao", "hint": "Nesvršeni"},
-            {"id": 2, "type": "fill_blank", "instruction": "Svršeni/nesvršeni", "content": {"sentence": "_____ sam u Mostar. (stići)", "options": ["Stigao", "Stizao", "Stižem", "Stizat ću"]}, "answer": "Stigao", "hint": "Svršeni"},
-            {"id": 3, "type": "fill_blank", "instruction": "Svršeni/nesvršeni", "content": {"sentence": "_____ sam cijelu knjigu. (pročitati)", "options": ["Pročitao", "Čitao", "Čitam", "Čitat ću"]}, "answer": "Pročitao", "hint": "Svršeni"},
-            {"id": 4, "type": "fill_blank", "instruction": "Svršeni/nesvršeni", "content": {"sentence": "_____ sam pismo sat vremena. (pisati)", "options": ["Pisao", "Napisao", "Pišem", "Pisat ću"]}, "answer": "Pisao", "hint": "Nesvršeni - trajanje"},
-            {"id": 5, "type": "translate", "instruction": "Prevedite", "content": {"text": "The journey was unforgettable."}, "answer": "Putovanje je bilo nezaboravno.", "hint": "Putovanje"},
-            {"id": 6, "type": "translate", "instruction": "Prevedite", "content": {"text": "I keep beautiful memories."}, "answer": "Čuvam lijepe uspomene.", "hint": "Uspomene"},
-            {"id": 7, "type": "translate", "instruction": "Prevedite", "content": {"text": "I arrived in Sarajevo yesterday."}, "answer": "Stigao sam u Sarajevo jučer.", "hint": "Stigao"},
-            {"id": 8, "type": "matching", "instruction": "Spojite parove", "content": {"pairs": [{"left": "pisati", "right": "napisati"}, {"left": "čitati", "right": "pročitati"}, {"left": "putovati", "right": "otputovati"}, {"left": "gledati", "right": "pogledati"}]}, "answer": "correct_pairs", "hint": "Nesvršeni → Svršeni"},
-            {"id": 9, "type": "writing", "instruction": "Napišite", "content": {"text": "journey"}, "answer": "putovanje", "hint": "Put"},
-            {"id": 10, "type": "writing", "instruction": "Napišite", "content": {"text": "adventure"}, "answer": "avantura", "hint": "Uzbuđenje"},
-            {"id": 11, "type": "writing", "instruction": "Napišite", "content": {"text": "experience"}, "answer": "iskustvo", "hint": "Doživljaj"},
-            {"id": 12, "type": "writing", "instruction": "Napišite", "content": {"text": "tourist"}, "answer": "turista", "hint": "Putnik"},
-            {"id": 13, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["je", "Putovanje", "bilo", "nezaboravno"]}, "answer": "Putovanje je bilo nezaboravno.", "hint": "Putovanje..."}
+            {"id": 1, "type": "fill_blank", "instruction": "Nesvršeni vid (trajanje)", "content": {"sentence": "_____ sam danima. (putovati)", "options": ["Putovao", "Otputovao", "Putujem", "Putovat ću"]}, "answer": "Putovao", "hint": "Nesvršeni"},
+            {"id": 2, "type": "fill_blank", "instruction": "Svršeni vid (završetak)", "content": {"sentence": "_____ sam u Mostar. (stići)", "options": ["Stigao", "Stizao", "Stižem", "Stizat ću"]}, "answer": "Stigao", "hint": "Svršeni"},
+            {"id": 3, "type": "fill_blank", "instruction": "Svršeni vid", "content": {"sentence": "_____ sam cijelu knjigu. (pročitati)", "options": ["Pročitao", "Čitao", "Čitam", "Čitat ću"]}, "answer": "Pročitao", "hint": "Svršeni"},
+            {"id": 4, "type": "fill_blank", "instruction": "Nesvršeni vid (trajanje)", "content": {"sentence": "_____ sam pismo sat vremena. (pisati)", "options": ["Pisao", "Napisao", "Pišem", "Pisat ću"]}, "answer": "Pisao", "hint": "Nesvršeni"},
+            {"id": 5, "type": "fill_blank", "instruction": "Svršeni vid", "content": {"sentence": "Juče sam _____ pismo. (napisati)", "options": ["napisao", "pisao", "pišem", "pisat ću"]}, "answer": "napisao", "hint": "Svršeni"},
+            {"id": 6, "type": "fill_blank", "instruction": "Svršeni vid", "content": {"sentence": "_____ sam film do kraja. (pogledati)", "options": ["Pogledao", "Gledao", "Gledam", "Gledat ću"]}, "answer": "Pogledao", "hint": "Svršeni"},
+            {"id": 7, "type": "fill_blank", "instruction": "Nesvršeni vid", "content": {"sentence": "_____ sam TV cijelo veče. (gledati)", "options": ["Gledao", "Pogledao", "Gledam", "Gledat ću"]}, "answer": "Gledao", "hint": "Nesvršeni - trajanje"},
+            {"id": 8, "type": "translate", "instruction": "Prevedite", "content": {"text": "The journey was unforgettable."}, "answer": "Putovanje je bilo nezaboravno.", "hint": "Putovanje"},
+            {"id": 9, "type": "translate", "instruction": "Prevedite", "content": {"text": "I keep beautiful memories."}, "answer": "Čuvam lijepe uspomene.", "hint": "Uspomene"},
+            {"id": 10, "type": "translate", "instruction": "Prevedite", "content": {"text": "I arrived in Sarajevo yesterday."}, "answer": "Stigao sam u Sarajevo jučer.", "hint": "Stigao"},
+            {"id": 11, "type": "translate", "instruction": "Prevedite", "content": {"text": "I was traveling for three days."}, "answer": "Putovao sam tri dana.", "hint": "Nesvršeni"},
+            {"id": 12, "type": "translate", "instruction": "Prevedite", "content": {"text": "I read the whole book."}, "answer": "Pročitao sam cijelu knjigu.", "hint": "Svršeni"},
+            {"id": 13, "type": "matching", "instruction": "Spojite nesvršeni sa svršenim", "content": {"pairs": [{"left": "pisati", "right": "napisati"}, {"left": "čitati", "right": "pročitati"}, {"left": "putovati", "right": "otputovati"}, {"left": "gledati", "right": "pogledati"}]}, "answer": "correct_pairs", "hint": "Nesvršeni → Svršeni"},
+            {"id": 14, "type": "matching", "instruction": "Spojite parove", "content": {"pairs": [{"left": "jesti", "right": "pojesti"}, {"left": "piti", "right": "popiti"}, {"left": "ići", "right": "otići"}, {"left": "dolaziti", "right": "doći"}]}, "answer": "correct_pairs", "hint": "Aspekt glagola"},
+            {"id": 15, "type": "writing", "instruction": "Napišite", "content": {"text": "journey"}, "answer": "putovanje", "hint": "Put"},
+            {"id": 16, "type": "writing", "instruction": "Napišite", "content": {"text": "adventure"}, "answer": "avantura", "hint": "Uzbuđenje"},
+            {"id": 17, "type": "writing", "instruction": "Napišite", "content": {"text": "experience"}, "answer": "iskustvo", "hint": "Doživljaj"},
+            {"id": 18, "type": "writing", "instruction": "Napišite svršeni vid od 'pisati'", "content": {"text": "pisati (perfective)"}, "answer": "napisati", "hint": "na- + pisati"},
+            {"id": 19, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["je", "Putovanje", "bilo", "nezaboravno"]}, "answer": "Putovanje je bilo nezaboravno.", "hint": "Putovanje..."},
+            {"id": 20, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["sam", "Stigao", "u", "Mostar", "jučer"]}, "answer": "Stigao sam u Mostar jučer.", "hint": "Stigao..."}
         ],
         "quiz": [
             {"id": 1, "question": "Koji vid je 'putovao'?", "options": ["Svršeni", "Nesvršeni", "Futur", "Prezent"], "correct_answer": 1, "explanation": "'Putovao' je nesvršeni vid - trajanje.", "question_type": "grammar"},
             {"id": 2, "question": "Šta znači 'uspomena'?", "options": ["Journey", "Memory", "Adventure", "Destination"], "correct_answer": 1, "explanation": "'Uspomena' = memory/souvenir.", "question_type": "vocabulary"},
-            {"id": 3, "question": "Napiši: 'I arrived in Mostar'", "question_type": "writing", "correct_answer_text": "Stigao sam u Mostar", "explanation": "Svršeni vid."}
+            {"id": 3, "question": "Koji vid je 'napisao'?", "options": ["Nesvršeni", "Svršeni", "Prezent", "Futur"], "correct_answer": 1, "explanation": "'Napisao' je svršeni vid - završena radnja.", "question_type": "grammar"},
+            {"id": 4, "question": "Koji prefiks tvori svršeni vid od 'čitati'?", "options": ["na-", "pro-", "po-", "do-"], "correct_answer": 1, "explanation": "čitati → pročitati.", "question_type": "grammar"},
+            {"id": 5, "question": "Šta znači 'putovanje'?", "options": ["Tourist", "Journey", "Destination", "Guide"], "correct_answer": 1, "explanation": "'Putovanje' = journey/trip.", "question_type": "vocabulary"},
+            {"id": 6, "question": "Kako kažemo 'sightseeing'?", "options": ["putovanje", "razgledanje", "destinacija", "smještaj"], "correct_answer": 1, "explanation": "'Razgledanje' = sightseeing.", "question_type": "vocabulary"},
+            {"id": 7, "question": "Koji vid koristimo za trajanje radnje?", "options": ["Svršeni", "Nesvršeni", "Futur", "Imperativ"], "correct_answer": 1, "explanation": "Nesvršeni vid za trajanje.", "question_type": "grammar"},
+            {"id": 8, "question": "Šta je svršeni vid od 'gledati'?", "options": ["gledati", "pogledati", "ogledati", "nagledati"], "correct_answer": 1, "explanation": "gledati → pogledati.", "question_type": "grammar"},
+            {"id": 9, "question": "Šta znači 'turista'?", "options": ["Guide", "Tourist", "Traveler", "Driver"], "correct_answer": 1, "explanation": "'Turista' = tourist.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Kako kažemo 'accommodation'?", "options": ["destinacija", "smještaj", "razgledanje", "vodič"], "correct_answer": 1, "explanation": "'Smještaj' = accommodation.", "question_type": "vocabulary"},
+            {"id": 11, "question": "Koji vid: 'Čitao sam knjgu sat vremena'?", "options": ["Svršeni", "Nesvršeni", "Futur", "Imperativ"], "correct_answer": 1, "explanation": "Nesvršeni - trajanje sat vremena.", "question_type": "grammar"},
+            {"id": 12, "question": "Šta znači 'avantura'?", "options": ["Journey", "Adventure", "Memory", "Culture"], "correct_answer": 1, "explanation": "'Avantura' = adventure.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Napiši: 'I arrived in Mostar'", "question_type": "writing", "correct_answer_text": "Stigao sam u Mostar", "explanation": "Svršeni vid."},
+            {"id": 14, "question": "Napiši: 'The journey was unforgettable'", "question_type": "writing", "correct_answer_text": "Putovanje je bilo nezaboravno", "explanation": "Perfekat."},
+            {"id": 15, "question": "Napiši svršeni vid od 'čitati'", "question_type": "writing", "correct_answer_text": "pročitati", "explanation": "pro- + čitati."}
         ]
     },
     {
@@ -559,47 +725,90 @@ Bosnian distinguishes imperfective and perfective aspects:
             {"bosnian": "ostvarenje", "english": "achievement/fulfillment", "pronunciation": "ohs-tvah-REH-nyeh", "example": "To je ostvarenje sna.", "example_translation": "That's a dream come true.", "image_emoji": "🌟"}
         ],
         "grammar_explanation": """
-## Kondicional II (Second Conditional)
+## Kondicional II (Second Conditional) - Detaljno
 
-Kondicional II izražava hipotetske situacije:
+Kondicional II izražava **hipotetske situacije** - nešto što nije stvarno, ali zamišljamo.
 
-### Tvorba:
-**Kad bih + glagolski pridjev radni**
+### 1. Tvorba: KAD BIH + glagolski pridjev radni
+| Lice | Pomoćni glagol | Primjer |
+|------|----------------|---------|
+| ja | bih | Kad **bih imao** novca... |
+| ti | bi | Kad **bi imao** novca... |
+| on/ona | bi | Kad **bi imao/imala** novca... |
+| mi | bismo | Kad **bismo imali** novca... |
+| vi | biste | Kad **biste imali** novca... |
+| oni | bi | Kad **bi imali** novca... |
 
-| Primjer |
-|---------|
-| Kad bih imao novca, kupio bih kuću. |
-| Kad bih znao, rekao bih ti. |
-| Da sam bogat, putovao bih svijetom. |
+### 2. Primjeri kondicionala II:
+| Uslov (hipotetski) | Posljedica |
+|--------------------|------------|
+| Kad bih imao novca, | kupio bih kuću. |
+| Kad bih znao, | rekao bih ti. |
+| Kad bi ona htjela, | pomogla bi nam. |
+| Kad bismo mogli, | otputovali bismo. |
+
+### 3. Alternativna tvorba: DA + perfekat
+| Primjer | Značenje |
+|---------|----------|
+| **Da sam** bogat, putovao bih. | If I were rich, I would travel. |
+| **Da je** tu, vidjela bi. | If she were here, she would see. |
 
 ## Futur II (Future Perfect)
 
-Futur II izražava radnju koja će biti završena prije druge buduće radnje:
+Futur II izražava radnju koja će biti **završena prije** druge buduće radnje.
 
-| Tvorba | Primjer |
-|--------|---------|
-| budem + glagolski pridjev radni | Kad budem završio, nazvat ću te. |
+### 4. Tvorba: BUDEM + glagolski pridjev radni
+| Lice | Tvorba | Primjer |
+|------|--------|---------|
+| ja | budem + particip | Kad **budem završio**, nazvat ću te. |
+| ti | budeš + particip | Kad **budeš stigao**, javi se. |
+| on/ona | bude + particip | Kad **bude došla**, reći ću joj. |
+| mi | budemo + particip | Kad **budemo imali** vremena... |
+
+### 5. Razlika: Kondicional II vs Futur II
+| Kondicional II (hipotetski) | Futur II (realno u budućnosti) |
+|-----------------------------|-------------------------------|
+| Kad **bih imao** novca... (ali nemam) | Kad **budem imao** novca... (očekujem da ću imati) |
+| Kad **bi znala**... (ali ne zna) | Kad **bude znala**... (saznat će) |
 """,
         "grammar_explanation_en": """
-## Second Conditional
+## Second Conditional - Detailed
 
-The second conditional expresses hypothetical situations:
+The second conditional expresses **hypothetical situations** - something unreal that we imagine.
 
-### Formation:
-**Kad bih (If I were to) + past participle**
+### 1. Formation: KAD BIH + past participle
+| Person | Auxiliary | Example |
+|--------|-----------|---------|
+| ja (I) | bih | Kad **bih imao** novca... |
+| ti (you) | bi | Kad **bi imao** novca... |
+| on/ona (he/she) | bi | Kad **bi imao/imala** novca... |
+| mi (we) | bismo | Kad **bismo imali** novca... |
 
-| Example |
-|---------|
-| Kad bih imao novca, kupio bih kuću. (If I had money, I would buy a house.) |
-| Kad bih znao, rekao bih ti. (If I knew, I would tell you.) |
+### 2. Examples:
+| Condition (hypothetical) | Consequence |
+|--------------------------|-------------|
+| Kad bih imao novca, | kupio bih kuću. (If I had money, I would buy a house.) |
+| Kad bih znao, | rekao bih ti. (If I knew, I would tell you.) |
 
-## Future Perfect
+### 3. Alternative: DA + perfect tense
+| Example | Meaning |
+|---------|---------|
+| **Da sam** bogat, putovao bih. | If I were rich, I would travel. |
 
-Future perfect expresses an action that will be completed before another future action:
+## Future Perfect (Futur II)
 
-| Formation | Example |
-|-----------|---------|
-| budem + past participle | Kad budem završio, nazvat ću te. (When I finish, I'll call you.) |
+Future perfect expresses an action that will be **completed before** another future action.
+
+### 4. Formation: BUDEM + past participle
+| Person | Formation | Example |
+|--------|-----------|---------|
+| ja (I) | budem + participle | Kad **budem završio**, nazvat ću te. (When I finish, I'll call you.) |
+| ti (you) | budeš + participle | Kad **budeš stigao**, javi se. (When you arrive, let me know.) |
+
+### 5. Difference: Conditional II vs Future II
+| Conditional II (hypothetical) | Future II (real future) |
+|-------------------------------|------------------------|
+| Kad **bih imao**... (but I don't have) | Kad **budem imao**... (I expect to have) |
 """,
         "cultural_note": "Mnogi mladi Bosanci sanjaju o boljoj budućnosti. Neki planiraju ostati i poboljšati situaciju, drugi planiraju studirati ili raditi vani. Optimizam i nade za bolje sutra su jaki.",
         "cultural_note_en": "Many young Bosnians dream of a better future. Some plan to stay and improve the situation, others plan to study or work abroad. Optimism and hope for a better tomorrow are strong.",
@@ -628,25 +837,43 @@ Future perfect expresses an action that will be completed before another future 
             {"speaker": "Samra", "text": "Moj san je pomoći mladima u BiH da ostvare svoje ciljeve.", "translation": "My dream is to help young people in BiH achieve their goals."}
         ],
         "exercises": [
-            {"id": 1, "type": "fill_blank", "instruction": "Kondicional II", "content": {"sentence": "Kad _____ novca, kupio bih kuću. (imati)", "options": ["bih imao", "imam", "ću imati", "sam imao"]}, "answer": "bih imao", "hint": "Hipotetski"},
+            {"id": 1, "type": "fill_blank", "instruction": "Kondicional II (ja)", "content": {"sentence": "Kad _____ novca, kupio bih kuću. (imati)", "options": ["bih imao", "imam", "ću imati", "sam imao"]}, "answer": "bih imao", "hint": "Hipotetski"},
             {"id": 2, "type": "fill_blank", "instruction": "Futur II", "content": {"sentence": "Kad _____ završio, nazvat ću te.", "options": ["budem", "bih", "sam", "ću"]}, "answer": "budem", "hint": "Future perfect"},
-            {"id": 3, "type": "fill_blank", "instruction": "Kondicional II", "content": {"sentence": "Da _____ bogat, putovao bih svijetom.", "options": ["sam", "bih bio", "ću biti", "budem"]}, "answer": "sam", "hint": "Da + perfekt"},
-            {"id": 4, "type": "fill_blank", "instruction": "Kondicional II", "content": {"sentence": "Kad _____ znao, rekao bih ti.", "options": ["bih", "sam", "budem", "ću"]}, "answer": "bih", "hint": "Hipotetski"},
-            {"id": 5, "type": "translate", "instruction": "Prevedite", "content": {"text": "If I had money, I would travel."}, "answer": "Kad bih imao novca, putovao bih.", "hint": "Kondicional II"},
-            {"id": 6, "type": "translate", "instruction": "Prevedite", "content": {"text": "My dream is to travel the world."}, "answer": "Moj san je putovati svijetom.", "hint": "San"},
-            {"id": 7, "type": "translate", "instruction": "Prevedite", "content": {"text": "When I finish, I'll call you."}, "answer": "Kad budem završio, nazvat ću te.", "hint": "Futur II"},
-            {"id": 8, "type": "matching", "instruction": "Spojite parove", "content": {"pairs": [{"left": "san", "right": "dream"}, {"left": "cilj", "right": "goal"}, {"left": "nada", "right": "hope"}, {"left": "uspjeh", "right": "success"}]}, "answer": "correct_pairs", "hint": "Budućnost"},
-            {"id": 9, "type": "writing", "instruction": "Napišite", "content": {"text": "future"}, "answer": "budućnost", "hint": "Sutra"},
-            {"id": 10, "type": "writing", "instruction": "Napišite", "content": {"text": "dream"}, "answer": "san", "hint": "Dok spavamo"},
-            {"id": 11, "type": "writing", "instruction": "Napišite", "content": {"text": "goal"}, "answer": "cilj", "hint": "Target"},
-            {"id": 12, "type": "writing", "instruction": "Napišite", "content": {"text": "success"}, "answer": "uspjeh", "hint": "Achievement"},
-            {"id": 13, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["bih", "Kad", "imao", "novca", "putovao", "bih"]}, "answer": "Kad bih imao novca, putovao bih.", "hint": "Kad bih..."}
+            {"id": 3, "type": "fill_blank", "instruction": "Kondicional II (da + perfekat)", "content": {"sentence": "Da _____ bogat, putovao bih svijetom.", "options": ["sam", "bih bio", "ću biti", "budem"]}, "answer": "sam", "hint": "Da + perfekt"},
+            {"id": 4, "type": "fill_blank", "instruction": "Kondicional II (ja)", "content": {"sentence": "Kad _____ znao, rekao bih ti.", "options": ["bih", "sam", "budem", "ću"]}, "answer": "bih", "hint": "Hipotetski"},
+            {"id": 5, "type": "fill_blank", "instruction": "Kondicional II (mi)", "content": {"sentence": "Kad _____ mogli, otputovali bismo.", "options": ["bismo", "bi", "bih", "budem"]}, "answer": "bismo", "hint": "1. lice množine"},
+            {"id": 6, "type": "fill_blank", "instruction": "Futur II (ti)", "content": {"sentence": "Kad _____ stigao, javi se.", "options": ["budeš", "bi", "bih", "ćeš"]}, "answer": "budeš", "hint": "2. lice jednine"},
+            {"id": 7, "type": "fill_blank", "instruction": "Kondicional II (ona)", "content": {"sentence": "Kad bi ona htjela, _____ bi nam.", "options": ["pomogla", "pomoći", "pomaže", "pomažem"]}, "answer": "pomogla", "hint": "Ženski rod"},
+            {"id": 8, "type": "translate", "instruction": "Prevedite", "content": {"text": "If I had money, I would travel."}, "answer": "Kad bih imao novca, putovao bih.", "hint": "Kondicional II"},
+            {"id": 9, "type": "translate", "instruction": "Prevedite", "content": {"text": "My dream is to travel the world."}, "answer": "Moj san je putovati svijetom.", "hint": "San"},
+            {"id": 10, "type": "translate", "instruction": "Prevedite", "content": {"text": "When I finish, I'll call you."}, "answer": "Kad budem završio, nazvat ću te.", "hint": "Futur II"},
+            {"id": 11, "type": "translate", "instruction": "Prevedite", "content": {"text": "If I knew, I would tell you."}, "answer": "Kad bih znao, rekao bih ti.", "hint": "Kondicional II"},
+            {"id": 12, "type": "translate", "instruction": "Prevedite", "content": {"text": "I have hope for the future."}, "answer": "Imam nadu u budućnost.", "hint": "Nada"},
+            {"id": 13, "type": "matching", "instruction": "Spojite vokabular", "content": {"pairs": [{"left": "san", "right": "dream"}, {"left": "cilj", "right": "goal"}, {"left": "nada", "right": "hope"}, {"left": "uspjeh", "right": "success"}]}, "answer": "correct_pairs", "hint": "Budućnost"},
+            {"id": 14, "type": "matching", "instruction": "Spojite pomoćne glagole", "content": {"pairs": [{"left": "ja", "right": "bih"}, {"left": "ti", "right": "bi"}, {"left": "mi", "right": "bismo"}, {"left": "vi", "right": "biste"}]}, "answer": "correct_pairs", "hint": "Kondicional"},
+            {"id": 15, "type": "writing", "instruction": "Napišite", "content": {"text": "future"}, "answer": "budućnost", "hint": "Sutra"},
+            {"id": 16, "type": "writing", "instruction": "Napišite", "content": {"text": "dream"}, "answer": "san", "hint": "Dok spavamo"},
+            {"id": 17, "type": "writing", "instruction": "Napišite", "content": {"text": "goal"}, "answer": "cilj", "hint": "Target"},
+            {"id": 18, "type": "writing", "instruction": "Napišite pomoćni glagol za 'mi' u kondicionalu", "content": {"text": "we (conditional)"}, "answer": "bismo", "hint": "Mi bismo..."},
+            {"id": 19, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["bih", "Kad", "imao", "novca", "putovao", "bih"]}, "answer": "Kad bih imao novca, putovao bih.", "hint": "Kad bih..."},
+            {"id": 20, "type": "sentence_order", "instruction": "Poredajte riječi", "content": {"words": ["budem", "Kad", "završio", "nazvat", "ću", "te"]}, "answer": "Kad budem završio, nazvat ću te.", "hint": "Kad budem..."}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se tvori kondicional II?", "options": ["kad + prezent", "kad bih + participi", "kad ću + infinitiv", "kad sam + particip"], "correct_answer": 1, "explanation": "Kondicional II: kad bih + glagolski pridjev.", "question_type": "grammar"},
             {"id": 2, "question": "Šta znači 'san'?", "options": ["Goal", "Dream", "Future", "Hope"], "correct_answer": 1, "explanation": "'San' = dream.", "question_type": "vocabulary"},
-            {"id": 3, "question": "Napiši: 'If I had money'", "question_type": "writing", "correct_answer_text": "Kad bih imao novca", "explanation": "Kondicional II."},
-            {"id": 4, "question": "Napiši: 'When I finish'", "question_type": "writing", "correct_answer_text": "Kad budem završio", "explanation": "Futur II."}
+            {"id": 3, "question": "Koji je pomoćni glagol za 'mi' u kondicionalu?", "options": ["bih", "bi", "bismo", "biste"], "correct_answer": 2, "explanation": "Mi bismo...", "question_type": "grammar"},
+            {"id": 4, "question": "Kako se tvori futur II?", "options": ["ću + infinitiv", "budem + particip", "bih + particip", "sam + particip"], "correct_answer": 1, "explanation": "Futur II: budem + glagolski pridjev.", "question_type": "grammar"},
+            {"id": 5, "question": "Šta znači 'cilj'?", "options": ["Dream", "Hope", "Goal", "Future"], "correct_answer": 2, "explanation": "'Cilj' = goal.", "question_type": "vocabulary"},
+            {"id": 6, "question": "Koja je razlika između 'kad bih' i 'kad budem'?", "options": ["Nema razlike", "Bih je prošlost, budem je budućnost", "Bih je hipotetski, budem je realno", "Bih je futur, budem je prezent"], "correct_answer": 2, "explanation": "'Kad bih' = hipotetski, 'kad budem' = realno u budućnosti.", "question_type": "grammar"},
+            {"id": 7, "question": "Šta znači 'nada'?", "options": ["Dream", "Goal", "Hope", "Plan"], "correct_answer": 2, "explanation": "'Nada' = hope.", "question_type": "vocabulary"},
+            {"id": 8, "question": "Kako kažemo 'If I were rich'?", "options": ["Kad sam bogat", "Kad bih bio bogat", "Kad budem bogat", "Kad ću biti bogat"], "correct_answer": 1, "explanation": "Kondicional II za hipotetske situacije.", "question_type": "grammar"},
+            {"id": 9, "question": "Šta znači 'budućnost'?", "options": ["Past", "Present", "Future", "Dream"], "correct_answer": 2, "explanation": "'Budućnost' = future.", "question_type": "vocabulary"},
+            {"id": 10, "question": "Koji oblik: 'Kad _____ stigla, reći ću joj'?", "options": ["bi", "bih", "bude", "budem"], "correct_answer": 2, "explanation": "Futur II za 'ona': kad bude.", "question_type": "grammar"},
+            {"id": 11, "question": "Šta znači 'ambicija'?", "options": ["Dream", "Ambition", "Goal", "Hope"], "correct_answer": 1, "explanation": "'Ambicija' = ambition.", "question_type": "vocabulary"},
+            {"id": 12, "question": "Kako kažemo 'career'?", "options": ["posao", "karijera", "rad", "zanimanje"], "correct_answer": 1, "explanation": "'Karijera' = career.", "question_type": "vocabulary"},
+            {"id": 13, "question": "Napiši: 'If I had money'", "question_type": "writing", "correct_answer_text": "Kad bih imao novca", "explanation": "Kondicional II."},
+            {"id": 14, "question": "Napiši: 'When I finish'", "question_type": "writing", "correct_answer_text": "Kad budem završio", "explanation": "Futur II."},
+            {"id": 15, "question": "Napiši: 'My dream is'", "question_type": "writing", "correct_answer_text": "Moj san je", "explanation": "San = dream."}
         ]
     }
 ]
