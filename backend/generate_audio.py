@@ -36,8 +36,8 @@ AUDIO_DIR = Path(__file__).parent / "static" / "audio"
 MANIFEST_FILE = AUDIO_DIR / "manifest.json"
 
 # Gender mapping for speakers/characters
-FEMALE_NAMES = {'Amina', 'Ana', 'Maja', 'Amra', 'Sara', 'Sabina', 'Lejla', 'Naida', 'Nana', 'Majka', 'Sestra', 'Kći', 'Žena', 'Snaha'}
-MALE_NAMES = {'Emir', 'Ahmed', 'Kenan', 'Prodavač', 'Kupac', 'Dućandžija', 'Tarik', 'Haris', 'Djed', 'Otac', 'Brat', 'Sin', 'Muž', 'Doktor'}
+FEMALE_NAMES = {'Amina', 'Ana', 'Maja', 'Amra', 'Sara', 'Sabina', 'Lejla', 'Naida', 'Nana', 'Majka', 'Sestra', 'Kći', 'Žena', 'Snaha', 'Hana', 'Selma', 'Amela', 'Lamija', 'Samra', 'Alma', 'Amira', 'Gošća', 'Turistkinja', 'Studentica', 'Profesorica', 'Konobarica'}
+MALE_NAMES = {'Emir', 'Ahmed', 'Kenan', 'Prodavač', 'Kupac', 'Dućandžija', 'Tarik', 'Haris', 'Djed', 'Otac', 'Brat', 'Sin', 'Muž', 'Doktor', 'Mirza', 'Damir', 'Amir', 'Bankar', 'Šef', 'Recepcioner', 'Vodič', 'Domaćin', 'Turista', 'Student', 'Profesor', 'Konobar', 'Aktivista', 'Građanin', 'Klijent', 'Adnan', 'Edin'}
 
 # Azure TTS Bosnian voices - Native speakers!
 FEMALE_VOICE = "bs-BA-VesnaNeural"   # Bosnian female voice

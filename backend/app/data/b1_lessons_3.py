@@ -68,12 +68,12 @@ B1_LESSONS_PART3 = [
             "title": "Sarajevo Film Festival",
             "description": "Posjet najpoznatijem filmskom festivalu u regiji",
             "panels": [
-                {"character": "Ana", "emotion": "excited", "text": "Idemo na Sarajevo Film Festival!", "translation": "We're going to Sarajevo Film Festival!"},
-                {"character": "Emir", "emotion": "happy", "text": "Čuo sam da je ove godine program bolji nego ikad.", "translation": "I heard this year's program is better than ever."},
-                {"character": "Ana", "emotion": "thoughtful", "text": "Želim vidjeti novi film Danisa Tanovića.", "translation": "I want to see the new film by Danis Tanović."},
-                {"character": "Emir", "emotion": "impressed", "text": "On je jedan od najpoznatijih bosanskih reditelja.", "translation": "He's one of the most famous Bosnian directors."},
-                {"character": "Ana", "emotion": "excited", "text": "Dobio je Oskara za 'Ničiju zemlju'!", "translation": "He won an Oscar for 'No Man's Land'!"},
-                {"character": "Emir", "emotion": "proud", "text": "Bosanska kinematografija je među najboljima u Evropi.", "translation": "Bosnian cinematography is among the best in Europe."}
+                {"character": "👩", "name": "Ana", "text": "Idemo na Sarajevo Film Festival!", "translation": "We're going to Sarajevo Film Festival!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Emir", "text": "Čuo sam da je ove godine program bolji nego ikad.", "translation": "I heard this year's program is better than ever.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Ana", "text": "Želim vidjeti novi film Danisa Tanovića.", "translation": "I want to see the new film by Danis Tanović.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Emir", "text": "On je jedan od najpoznatijih bosanskih reditelja.", "translation": "He's one of the most famous Bosnian directors.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Ana", "text": "Dobio je Oskara za 'Ničiju zemlju'!", "translation": "He won an Oscar for 'No Man's Land'!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Emir", "text": "Bosanska kinematografija je među najboljima u Evropi.", "translation": "Bosnian cinematography is among the best in Europe.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
@@ -186,12 +186,12 @@ Genitive plural is used with numbers 5+:
             "title": "U banci u Sarajevu",
             "description": "Svakodnevne finansijske situacije u BiH",
             "panels": [
-                {"character": "Amela", "emotion": "neutral", "text": "Dobar dan, želim otvoriti devizni račun.", "translation": "Good day, I want to open a foreign currency account."},
-                {"character": "Bankar", "emotion": "friendly", "text": "Naravno. Trebat će vam lična karta i sto maraka.", "translation": "Of course. You'll need an ID and 100 marks."},
-                {"character": "Amela", "emotion": "curious", "text": "Kolika je kamata na štednju u eurima?", "translation": "What's the interest rate on euro savings?"},
-                {"character": "Bankar", "emotion": "professional", "text": "Trenutno je 1.5% godišnje.", "translation": "Currently it's 1.5% annually."},
-                {"character": "Amela", "emotion": "thoughtful", "text": "A koliki je limit na kartici?", "translation": "And what's the card limit?"},
-                {"character": "Bankar", "emotion": "helpful", "text": "Možete podići do 1000 maraka dnevno na bankomatu.", "translation": "You can withdraw up to 1000 marks daily at the ATM."}
+                {"character": "👩", "name": "Amela", "text": "Dobar dan, želim otvoriti devizni račun.", "translation": "Good day, I want to open a foreign currency account.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Bankar", "text": "Naravno. Trebat će vam lična karta i sto maraka.", "translation": "Of course. You'll need an ID and 100 marks.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Amela", "text": "Kolika je kamata na štednju u eurima?", "translation": "What's the interest rate on euro savings?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Bankar", "text": "Trenutno je 1.5% godišnje.", "translation": "Currently it's 1.5% annually.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Amela", "text": "A koliki je limit na kartici?", "translation": "And what's the card limit?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Bankar", "text": "Možete podići do 1000 maraka dnevno na bankomatu.", "translation": "You can withdraw up to 1000 marks daily at the ATM.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
@@ -303,12 +303,12 @@ Impersonal constructions don't have a specific subject:
             "title": "Mladi i aktivizam",
             "description": "Kako mladi u BiH mijenjaju društvo",
             "panels": [
-                {"character": "Hana", "emotion": "determined", "text": "Moramo se boriti protiv korupcije!", "translation": "We must fight against corruption!"},
-                {"character": "Mirza", "emotion": "supportive", "text": "Slažem se. Kaže se da je to najveći problem.", "translation": "I agree. It's said that's the biggest problem."},
-                {"character": "Hana", "emotion": "passionate", "text": "Treba organizirati proteste.", "translation": "We should organize protests."},
-                {"character": "Mirza", "emotion": "thoughtful", "text": "Da, ali mora se poštovati zakon.", "translation": "Yes, but the law must be respected."},
-                {"character": "Hana", "emotion": "hopeful", "text": "Vjerujem da promjena dolazi.", "translation": "I believe change is coming."},
-                {"character": "Mirza", "emotion": "proud", "text": "Zajedno možemo napraviti razliku.", "translation": "Together we can make a difference."}
+                {"character": "👩", "name": "Hana", "text": "Moramo se boriti protiv korupcije!", "translation": "We must fight against corruption!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Mirza", "text": "Slažem se. Kaže se da je to najveći problem.", "translation": "I agree. It's said that's the biggest problem.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Hana", "text": "Treba organizirati proteste.", "translation": "We should organize protests.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Mirza", "text": "Da, ali mora se poštovati zakon.", "translation": "Yes, but the law must be respected.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Hana", "text": "Vjerujem da promjena dolazi.", "translation": "I believe change is coming.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Mirza", "text": "Zajedno možemo napraviti razliku.", "translation": "Together we can make a difference.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
@@ -468,16 +468,16 @@ Bosnian uses many anglicisms for technology. Here's how they adapt:
             "title": "IT startup u Sarajevu",
             "description": "Mladi programeri razgovaraju o izazovima i uspjesima",
             "panels": [
-                {"character": "Tarik", "emotion": "excited", "text": "Naša aplikacija ima već 10.000 korisnika!", "translation": "Our app already has 10,000 users!"},
-                {"character": "Selma", "emotion": "curious", "text": "Odlično! Kako si to postigao?", "translation": "Excellent! How did you achieve that?"},
-                {"character": "Tarik", "emotion": "thoughtful", "text": "Koristili smo društvene mreže za marketing.", "translation": "We used social networks for marketing."},
-                {"character": "Selma", "emotion": "interested", "text": "A koji server koristite za podatke?", "translation": "And which server do you use for data?"},
-                {"character": "Tarik", "emotion": "proud", "text": "Cloud tehnologiju - sve je u oblaku.", "translation": "Cloud technology - everything is in the cloud."},
-                {"character": "Selma", "emotion": "impressed", "text": "Pametno! A šta planirate sljedeće?", "translation": "Smart! And what do you plan next?"},
-                {"character": "Tarik", "emotion": "determined", "text": "Dodajemo AI funkcije. A ti, radiš li na nečem?", "translation": "We're adding AI features. And you, are you working on something?"},
-                {"character": "Selma", "emotion": "hopeful", "text": "Da, pravim edukativnu platformu za bosanski jezik!", "translation": "Yes, I'm making an educational platform for Bosnian language!"},
-                {"character": "Tarik", "emotion": "happy", "text": "Odlična ideja! Trebamo više takvih projekata.", "translation": "Great idea! We need more such projects."},
-                {"character": "Selma", "emotion": "optimistic", "text": "Slažem se. Bosanski IT sektor ima svijetlu budućnost!", "translation": "I agree. Bosnian IT sector has a bright future!"}
+                {"character": "👨", "name": "Tarik", "text": "Naša aplikacija ima već 10.000 korisnika!", "translation": "Our app already has 10,000 users!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Selma", "text": "Odlično! Kako si to postigao?", "translation": "Excellent! How did you achieve that?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Tarik", "text": "Koristili smo društvene mreže za marketing.", "translation": "We used social networks for marketing.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Selma", "text": "A koji server koristite za podatke?", "translation": "And which server do you use for data?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Tarik", "text": "Cloud tehnologiju - sve je u oblaku.", "translation": "Cloud technology - everything is in the cloud.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Selma", "text": "Pametno! A šta planirate sljedeće?", "translation": "Smart! And what do you plan next?", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Tarik", "text": "Dodajemo AI funkcije. A ti, radiš li na nečem?", "translation": "We're adding AI features. And you, are you working on something?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Selma", "text": "Da, pravim edukativnu platformu za bosanski jezik!", "translation": "Yes, I'm making an educational platform for Bosnian language!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Tarik", "text": "Odlična ideja! Trebamo više takvih projekata.", "translation": "Great idea! We need more such projects.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Selma", "text": "Slažem se. Bosanski IT sektor ima svijetlu budućnost!", "translation": "I agree. Bosnian IT sector has a bright future!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=47"}
             ]
         },
         "dialogue": [
@@ -638,12 +638,12 @@ Bosnian distinguishes **perfective** and **imperfective** verb aspects. This is 
             "title": "Putovanje kroz BiH",
             "description": "Otkrivanje ljepota Bosne i Hercegovine",
             "panels": [
-                {"character": "Maja", "emotion": "excited", "text": "Konačno smo stigli u Mostar!", "translation": "We finally arrived in Mostar!"},
-                {"character": "Haris", "emotion": "impressed", "text": "Stari most je još ljepši uživo.", "translation": "The Old Bridge is even more beautiful in person."},
-                {"character": "Maja", "emotion": "happy", "text": "Putovali smo satima, ali vrijedilo je.", "translation": "We traveled for hours, but it was worth it."},
-                {"character": "Haris", "emotion": "thoughtful", "text": "Sutra idemo na Blagaj vidjeti tekiju.", "translation": "Tomorrow we're going to Blagaj to see the tekke."},
-                {"character": "Maja", "emotion": "curious", "text": "A jesi li probao mostarski ćevap?", "translation": "And have you tried Mostar ćevap?"},
-                {"character": "Haris", "emotion": "delighted", "text": "Naravno! Bosanska hrana je najbolja uspomena.", "translation": "Of course! Bosnian food is the best souvenir."}
+                {"character": "👩", "name": "Maja", "text": "Konačno smo stigli u Mostar!", "translation": "We finally arrived in Mostar!", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Haris", "text": "Stari most je još ljepši uživo.", "translation": "The Old Bridge is even more beautiful in person.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Maja", "text": "Putovali smo satima, ali vrijedilo je.", "translation": "We traveled for hours, but it was worth it.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Haris", "text": "Sutra idemo na Blagaj vidjeti tekiju.", "translation": "Tomorrow we're going to Blagaj to see the tekke.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Maja", "text": "A jesi li probao mostarski ćevap?", "translation": "And have you tried Mostar ćevap?", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Haris", "text": "Naravno! Bosanska hrana je najbolja uspomena.", "translation": "Of course! Bosnian food is the best souvenir.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
@@ -816,12 +816,12 @@ Future perfect expresses an action that will be **completed before** another fut
             "title": "Snovi bosanske omladine",
             "description": "Mladi razgovaraju o svojim planovima i snovima",
             "panels": [
-                {"character": "Lejla", "emotion": "dreamy", "text": "Kad bih imala priliku, studirala bih u inostranstvu.", "translation": "If I had the opportunity, I would study abroad."},
-                {"character": "Amir", "emotion": "thoughtful", "text": "Ja bih ostao u BiH i pokrenuo svoj biznis.", "translation": "I would stay in BiH and start my own business."},
-                {"character": "Lejla", "emotion": "hopeful", "text": "Kad budem završila fakultet, vratit ću se.", "translation": "When I finish university, I'll come back."},
-                {"character": "Amir", "emotion": "determined", "text": "Moj san je da BiH postane bolje mjesto.", "translation": "My dream is for BiH to become a better place."},
-                {"character": "Lejla", "emotion": "inspired", "text": "Zajedno možemo ostvariti svoje ciljeve.", "translation": "Together we can achieve our goals."},
-                {"character": "Amir", "emotion": "optimistic", "text": "Budućnost je u našim rukama!", "translation": "The future is in our hands!"}
+                {"character": "👩", "name": "Lejla", "text": "Kad bih imala priliku, studirala bih u inostranstvu.", "translation": "If I had the opportunity, I would study abroad.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Amir", "text": "Ja bih ostao u BiH i pokrenuo svoj biznis.", "translation": "I would stay in BiH and start my own business.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Lejla", "text": "Kad budem završila fakultet, vratit ću se.", "translation": "When I finish university, I'll come back.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Amir", "text": "Moj san je da BiH postane bolje mjesto.", "translation": "My dream is for BiH to become a better place.", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"},
+                {"character": "👩", "name": "Lejla", "text": "Zajedno možemo ostvariti svoje ciljeve.", "translation": "Together we can achieve our goals.", "position": "left", "avatar": "https://i.pravatar.cc/100?img=47"},
+                {"character": "👨", "name": "Amir", "text": "Budućnost je u našim rukama!", "translation": "The future is in our hands!", "position": "right", "avatar": "https://i.pravatar.cc/100?img=33"}
             ]
         },
         "dialogue": [
