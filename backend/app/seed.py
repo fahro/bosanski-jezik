@@ -76,7 +76,30 @@ def seed_users():
                 )
                 db.add(progress)
             
-            print("Created superadmin user with all A1 and A2 lessons completed")
+            # Create progress for all B1 lessons (all passed)
+            for lesson_id in range(1, 13):
+                progress = LessonProgress(
+                    user_id=superadmin.id,
+                    lesson_id=lesson_id,
+                    level="b1",
+                    completed=True,
+                    vocabulary_viewed=True,
+                    grammar_viewed=True,
+                    dialogue_viewed=True,
+                    culture_viewed=True,
+                    exercises_completed=True,
+                    exercises_passed=True,
+                    best_exercise_score=20,
+                    best_exercise_percentage=100.0,
+                    quiz_completed=True,
+                    quiz_passed=True,
+                    best_quiz_score=15,
+                    best_quiz_percentage=100.0,
+                    xp_earned=100
+                )
+                db.add(progress)
+            
+            print("Created superadmin user with all A1, A2 and B1 lessons completed")
         else:
             # Update superadmin to have access to all lessons
             superadmin.current_lesson_id = 12
@@ -111,6 +134,37 @@ def seed_users():
                     )
                     db.add(progress)
                 print("Added A2 progress for superadmin")
+            
+            # Check if B1 progress exists, if not add it
+            b1_progress = db.query(LessonProgress).filter(
+                LessonProgress.user_id == superadmin.id,
+                LessonProgress.level == "b1"
+            ).first()
+            
+            if not b1_progress:
+                # Add B1 lesson progress
+                for lesson_id in range(1, 13):
+                    progress = LessonProgress(
+                        user_id=superadmin.id,
+                        lesson_id=lesson_id,
+                        level="b1",
+                        completed=True,
+                        vocabulary_viewed=True,
+                        grammar_viewed=True,
+                        dialogue_viewed=True,
+                        culture_viewed=True,
+                        exercises_completed=True,
+                        exercises_passed=True,
+                        best_exercise_score=20,
+                        best_exercise_percentage=100.0,
+                        quiz_completed=True,
+                        quiz_passed=True,
+                        best_quiz_score=15,
+                        best_quiz_percentage=100.0,
+                        xp_earned=100
+                    )
+                    db.add(progress)
+                print("Added B1 progress for superadmin")
             
             print("Superadmin already exists, updated current_lesson_id")
         

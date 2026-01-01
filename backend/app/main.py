@@ -90,6 +90,12 @@ class Level(BaseModel):
 from app.data.levels import LEVELS
 from app.data.a1_lessons import A1_LESSONS
 from app.data.a2_lessons import A2_LESSONS
+from app.data.b1_lessons import B1_LESSONS
+from app.data.b1_lessons_2 import B1_LESSONS_PART2
+from app.data.b1_lessons_3 import B1_LESSONS_PART3
+
+# Combine B1 lessons
+B1_ALL_LESSONS = B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3
 
 # Check for static directory at startup
 STATIC_DIR = None
@@ -124,11 +130,20 @@ def get_lessons_by_level(level_id: str):
         return A1_LESSONS
     elif level_id == "a2":
         return A2_LESSONS
+    elif level_id == "b1":
+        return B1_ALL_LESSONS
     return []
 
 @app.get("/api/lessons/{lesson_id}")
 def get_lesson(lesson_id: int, level: str = "a1"):
-    lessons = A1_LESSONS if level == "a1" else A2_LESSONS if level == "a2" else []
+    if level == "a1":
+        lessons = A1_LESSONS
+    elif level == "a2":
+        lessons = A2_LESSONS
+    elif level == "b1":
+        lessons = B1_ALL_LESSONS
+    else:
+        lessons = []
     for lesson in lessons:
         if lesson["id"] == lesson_id:
             enriched_lesson = lesson.copy()

@@ -37,9 +37,25 @@ const A2_LESSONS = [
   { id: 12, title: 'Planovi', subtitle: 'Plans', emoji: '📋' }
 ]
 
+const B1_LESSONS = [
+  { id: 1, title: 'Mišljenja', subtitle: 'Opinions', emoji: '💭' },
+  { id: 2, title: 'Vijesti', subtitle: 'News & Media', emoji: '📰' },
+  { id: 3, title: 'Obrazovanje', subtitle: 'Education', emoji: '🎓' },
+  { id: 4, title: 'Okoliš', subtitle: 'Environment', emoji: '🌿' },
+  { id: 5, title: 'Tradicija', subtitle: 'Traditions', emoji: '🎭' },
+  { id: 6, title: 'Emocije', subtitle: 'Emotions', emoji: '❤️' },
+  { id: 7, title: 'Umjetnost', subtitle: 'Art & Culture', emoji: '🎨' },
+  { id: 8, title: 'Ekonomija', subtitle: 'Economy', emoji: '💰' },
+  { id: 9, title: 'Politika', subtitle: 'Politics', emoji: '🏛️' },
+  { id: 10, title: 'Tehnologija', subtitle: 'Technology', emoji: '💻' },
+  { id: 11, title: 'Putovanja', subtitle: 'Travel Stories', emoji: '✈️' },
+  { id: 12, title: 'Budućnost', subtitle: 'Future & Dreams', emoji: '🔮' }
+]
+
 const LEVEL_INFO = {
   a1: { name: 'A1 - Početnik', color: '#22c55e', lessons: A1_LESSONS },
-  a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS }
+  a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS },
+  b1: { name: 'B1 - Srednji', color: '#8b5cf6', lessons: B1_LESSONS }
 }
 
 export default function Dashboard() {
@@ -67,11 +83,21 @@ export default function Dashboard() {
 
   const checkAvailableLevels = async () => {
     try {
+      const levels = ['a1']
+      
       // Check access to A2
       const a2Access = await progressApi.checkLevelAccess('a2')
       if (a2Access.has_access) {
-        setAvailableLevels(['a1', 'a2'])
+        levels.push('a2')
       }
+      
+      // Check access to B1
+      const b1Access = await progressApi.checkLevelAccess('b1')
+      if (b1Access.has_access) {
+        levels.push('b1')
+      }
+      
+      setAvailableLevels(levels)
     } catch (error) {
       console.error('Failed to check level access:', error)
     }
@@ -215,7 +241,9 @@ export default function Dashboard() {
           className={`block rounded-3xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] group ${
             selectedLevel === 'a1' 
               ? 'bg-gradient-to-br from-green-500 to-green-600' 
-              : 'bg-gradient-to-br from-bosnia-blue to-blue-600'
+              : selectedLevel === 'a2'
+              ? 'bg-gradient-to-br from-bosnia-blue to-blue-600'
+              : 'bg-gradient-to-br from-purple-500 to-purple-600'
           }`}
         >
           <div className="flex items-center justify-between">
@@ -232,7 +260,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className={`p-4 rounded-2xl group-hover:scale-110 transition-transform ${
-              selectedLevel === 'a1' ? 'bg-white text-green-600' : 'bg-white text-bosnia-blue'
+              selectedLevel === 'a1' ? 'bg-white text-green-600' : selectedLevel === 'a2' ? 'bg-white text-bosnia-blue' : 'bg-white text-purple-600'
             }`}>
               <Play className="w-6 h-6" />
             </div>
