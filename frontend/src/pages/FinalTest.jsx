@@ -1,16 +1,25 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { finalTestApi } from '../api'
 import { 
   Award, Clock, CheckCircle, XCircle, AlertTriangle,
   ChevronLeft, ChevronRight, Flag, Trophy, Star,
-  RotateCcw, Home, BookOpen
+  RotateCcw, Home, BookOpen, PenTool
 } from 'lucide-react'
+
+const LEVEL_INFO = {
+  a1: { name: 'A1 - Početnik', color: 'from-green-500 to-emerald-600', nextLevel: 'A2' },
+  a2: { name: 'A2 - Elementarni', color: 'from-blue-500 to-blue-600', nextLevel: 'B1' },
+  b1: { name: 'B1 - Srednji', color: 'from-purple-500 to-purple-600', nextLevel: 'B2' }
+}
 
 export default function FinalTest() {
   const { isAuthenticated, refreshStats } = useAuth()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const level = searchParams.get('level') || 'a1'
+  const levelInfo = LEVEL_INFO[level] || LEVEL_INFO.a1
   
   const [stage, setStage] = useState('eligibility') // eligibility, test, result
   const [eligibility, setEligibility] = useState(null)
@@ -18,6 +27,7 @@ export default function FinalTest() {
   const [answerKey, setAnswerKey] = useState({})
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState({})
+  const [writingAnswers, setWritingAnswers] = useState({})
   const [timeLeft, setTimeLeft] = useState(60 * 60) // 60 minutes in seconds
   const [startTime, setStartTime] = useState(null)
   const [result, setResult] = useState(null)
@@ -51,7 +61,7 @@ export default function FinalTest() {
 
   const checkEligibility = async () => {
     try {
-      const data = await finalTestApi.checkEligibility()
+      const data = await finalTestApi.checkEligibility(level)
       setEligibility(data)
     } catch (error) {
       console.error('Failed to check eligibility:', error)
@@ -63,7 +73,7 @@ export default function FinalTest() {
   const startTest = async () => {
     setLoading(true)
     try {
-      const data = await finalTestApi.getQuestions()
+      const data = await finalTestApi.getQuestions(level)
       setQuestions(data.questions)
       setAnswerKey(data._answer_key)
       setStartTime(Date.now())
@@ -80,6 +90,10 @@ export default function FinalTest() {
     setAnswers(prev => ({ ...prev, [questionId]: answerIndex }))
   }
 
+  const handleWritingAnswer = (questionId, text) => {
+    setWritingAnswers(prev => ({ ...prev, [questionId]: text }))
+  }
+
   const handleSubmit = async () => {
     if (submitting) return
     setSubmitting(true)
@@ -87,7 +101,7 @@ export default function FinalTest() {
     const timeTaken = startTime ? Math.floor((Date.now() - startTime) / 1000) : null
 
     try {
-      const data = await finalTestApi.submit(answers, timeTaken)
+      const data = await finalTestApi.submit(answers, writingAnswers, timeTaken, level)
       setResult(data)
       setStage('result')
       await refreshStats()
@@ -118,10 +132,10 @@ export default function FinalTest() {
     return (
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <div className="bg-gradient-to-r from-yellow-400 to-amber-500 p-8 text-white text-center">
+          <div className={`bg-gradient-to-r ${levelInfo.color} p-8 text-white text-center`}>
             <Award className="w-16 h-16 mx-auto mb-4" />
             <h1 className="text-3xl font-bold">Završni Test</h1>
-            <p className="mt-2 opacity-90">A1 Nivo - Bosanski Jezik</p>
+            <p className="mt-2 opacity-90">{levelInfo.name} - Bosanski Jezik</p>
           </div>
 
           <div className="p-8">
@@ -212,7 +226,7 @@ export default function FinalTest() {
                 )}
 
                 <button
-                  onClick={() => navigate('/levels/a1')}
+                  onClick={() => navigate(`/levels/${level}`)}
                   className="w-full bg-gray-200 text-gray-700 py-4 rounded-xl font-semibold hover:bg-gray-300 transition-all"
                 >
                   Nazad na lekcije
@@ -228,7 +242,7 @@ export default function FinalTest() {
   // Test Screen
   if (stage === 'test') {
     const question = questions[currentQuestion]
-    const answeredCount = Object.keys(answers).length
+    const answeredCount = Object.keys(answers).length + Object.keys(writingAnswers).filter(k => writingAnswers[k]).length
     const isTimeWarning = timeLeft < 300 // Less than 5 minutes
 
     return (
@@ -270,30 +284,45 @@ export default function FinalTest() {
             {question?.question}
           </h2>
 
-          <div className="space-y-3">
-            {question?.options.map((option, index) => (
-              <button
-                key={index}
-                onClick={() => handleAnswer(question.id, index)}
-                className={`w-full p-4 rounded-xl text-left transition-all border-2 ${
-                  answers[question.id] === index
-                    ? 'border-bosnia-blue bg-blue-50 text-bosnia-blue'
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                }`}
-              >
-                <div className="flex items-center space-x-3">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+          {question?.question_type === 'writing' ? (
+            <div className="space-y-3">
+              <div className="flex items-center space-x-2 text-purple-600 mb-2">
+                <PenTool className="w-5 h-5" />
+                <span className="text-sm font-medium">Pitanje za pisanje</span>
+              </div>
+              <textarea
+                value={writingAnswers[question.id] || ''}
+                onChange={(e) => handleWritingAnswer(question.id, e.target.value)}
+                placeholder="Unesite vaš odgovor..."
+                className="w-full p-4 rounded-xl border-2 border-gray-200 focus:border-bosnia-blue focus:ring-2 focus:ring-bosnia-blue/20 transition-all min-h-[120px] resize-none"
+              />
+            </div>
+          ) : (
+            <div className="space-y-3">
+              {question?.options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleAnswer(question.id, index)}
+                  className={`w-full p-4 rounded-xl text-left transition-all border-2 ${
                     answers[question.id] === index
-                      ? 'bg-bosnia-blue text-white'
-                      : 'bg-gray-200 text-gray-600'
-                  }`}>
-                    {String.fromCharCode(65 + index)}
+                      ? 'border-bosnia-blue bg-blue-50 text-bosnia-blue'
+                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                      answers[question.id] === index
+                        ? 'bg-bosnia-blue text-white'
+                        : 'bg-gray-200 text-gray-600'
+                    }`}>
+                      {String.fromCharCode(65 + index)}
+                    </div>
+                    <span className="flex-1">{option}</span>
                   </div>
-                  <span className="flex-1">{option}</span>
-                </div>
-              </button>
-            ))}
-          </div>
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
@@ -338,7 +367,7 @@ export default function FinalTest() {
                 className={`w-10 h-10 rounded-lg text-sm font-semibold transition-all ${
                   index === currentQuestion
                     ? 'bg-bosnia-blue text-white'
-                    : answers[q.id] !== undefined
+                    : (answers[q.id] !== undefined || writingAnswers[q.id])
                     ? 'bg-green-100 text-green-700'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}

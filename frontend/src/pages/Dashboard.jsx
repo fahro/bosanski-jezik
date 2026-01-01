@@ -53,9 +53,65 @@ const B1_LESSONS = [
 ]
 
 const LEVEL_INFO = {
-  a1: { name: 'A1 - Početnik', color: '#22c55e', lessons: A1_LESSONS },
-  a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS },
-  b1: { name: 'B1 - Srednji', color: '#8b5cf6', lessons: B1_LESSONS }
+  a1: { name: 'A1 - Početnik', color: '#22c55e', lessons: A1_LESSONS, gradient: 'from-green-500 to-emerald-600' },
+  a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS, gradient: 'from-blue-500 to-blue-600' },
+  b1: { name: 'B1 - Srednji', color: '#8b5cf6', lessons: B1_LESSONS, gradient: 'from-purple-500 to-purple-600' }
+}
+
+function FinalTestCard({ level, allProgress }) {
+  const levelInfo = LEVEL_INFO[level]
+  const completedLessons = allProgress.filter(p => p.completed).length
+  const canTakeTest = completedLessons >= 12
+  
+  const levelColors = {
+    a1: { bg: 'from-green-500 to-emerald-600', text: 'text-green-600', button: 'text-green-600 hover:bg-green-50' },
+    a2: { bg: 'from-blue-500 to-blue-600', text: 'text-blue-600', button: 'text-blue-600 hover:bg-blue-50' },
+    b1: { bg: 'from-purple-500 to-purple-600', text: 'text-purple-600', button: 'text-purple-600 hover:bg-purple-50' }
+  }
+  const colors = levelColors[level] || levelColors.a1
+
+  return (
+    <div className={`rounded-3xl p-6 ${
+      canTakeTest 
+        ? `bg-gradient-to-br ${colors.bg} text-white` 
+        : 'bg-gray-50 border border-gray-100'
+    }`}>
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
+            canTakeTest ? 'bg-white/20' : 'bg-gray-200'
+          }`}>
+            <Award className={`w-7 h-7 ${canTakeTest ? 'text-white' : 'text-gray-400'}`} />
+          </div>
+          <div>
+            <h3 className={`font-bold text-lg ${canTakeTest ? 'text-white' : 'text-gray-900'}`}>
+              {level.toUpperCase()} Završni Test
+            </h3>
+            <p className={`text-sm ${canTakeTest ? 'text-white/80' : 'text-gray-500'}`}>
+              {canTakeTest 
+                ? '120 pitanja • Testiraj svoje znanje' 
+                : `Završi sve lekcije (${completedLessons}/12)`}
+            </p>
+          </div>
+        </div>
+        
+        {canTakeTest ? (
+          <Link
+            to={`/final-test?level=${level}`}
+            className={`bg-white ${colors.button} px-5 py-3 rounded-xl font-semibold transition-colors flex items-center gap-2`}
+          >
+            <Play className="w-5 h-5" />
+            <span>Započni</span>
+          </Link>
+        ) : (
+          <div className="bg-gray-200 text-gray-400 px-5 py-3 rounded-xl font-medium flex items-center gap-2">
+            <Lock className="w-5 h-5" />
+            <span>Zaključano</span>
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
 
 export default function Dashboard() {
@@ -344,54 +400,8 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Final Test Card - Only show for A1 */}
-      {selectedLevel === 'a1' && (
-      <div className={`rounded-3xl p-6 ${
-        stats?.can_take_final_test 
-          ? 'bg-gradient-to-br from-bosnia-yellow to-amber-500 text-white' 
-          : 'bg-gray-50 border border-gray-100'
-      }`}>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
-              stats?.can_take_final_test ? 'bg-white/20' : 'bg-gray-200'
-            }`}>
-              <Award className={`w-7 h-7 ${stats?.can_take_final_test ? 'text-white' : 'text-gray-400'}`} />
-            </div>
-            <div>
-              <h3 className={`font-bold text-lg ${stats?.can_take_final_test ? 'text-white' : 'text-gray-900'}`}>
-                Završni Test
-              </h3>
-              <p className={`text-sm ${stats?.can_take_final_test ? 'text-white/80' : 'text-gray-500'}`}>
-                {stats?.can_take_final_test 
-                  ? '120 pitanja • Testiraj svoje znanje' 
-                  : `Završi sve lekcije (${stats?.lessons_completed || 0}/12)`}
-              </p>
-              {stats?.final_test_passed && (
-                <p className="text-sm text-white/90 flex items-center gap-1 mt-1">
-                  <Trophy className="w-4 h-4" /> Najbolji: {stats.best_final_score}%
-                </p>
-              )}
-            </div>
-          </div>
-          
-          {stats?.can_take_final_test ? (
-            <Link
-              to="/final-test"
-              className="bg-white text-amber-600 px-5 py-3 rounded-xl font-semibold hover:bg-amber-50 transition-colors flex items-center gap-2"
-            >
-              <Play className="w-5 h-5" />
-              <span>Započni</span>
-            </Link>
-          ) : (
-            <div className="bg-gray-200 text-gray-400 px-5 py-3 rounded-xl font-medium flex items-center gap-2">
-              <Lock className="w-5 h-5" />
-              <span>Zaključano</span>
-            </div>
-          )}
-        </div>
-      </div>
-      )}
+      {/* Final Test Card - For current level */}
+      <FinalTestCard level={selectedLevel} allProgress={lessonProgress} />
     </div>
   )
 }

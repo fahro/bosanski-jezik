@@ -93,16 +93,18 @@ export const progressApi = {
 }
 
 export const finalTestApi = {
-  checkEligibility: async () => {
-    return api.get('/api/final-test/check-eligibility')
+  checkEligibility: async (level = 'a1') => {
+    return api.get(`/api/final-test/check-eligibility?level=${level}`)
   },
-  getQuestions: async () => {
-    return api.get('/api/final-test/questions')
+  getQuestions: async (level = 'a1') => {
+    return api.get(`/api/final-test/questions?level=${level}`)
   },
-  submit: async (answers, timeTaken) => {
+  submit: async (answers, writingAnswers, timeTaken, level = 'a1') => {
     return api.post('/api/final-test/submit', {
       answers,
-      time_taken_seconds: timeTaken
+      writing_answers: writingAnswers || {},
+      time_taken_seconds: timeTaken,
+      level
     })
   },
   getHistory: async () => {

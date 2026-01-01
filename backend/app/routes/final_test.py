@@ -13,6 +13,26 @@ from app.models import (
 from app.auth import get_current_user_required
 from app.data.a1_lessons import A1_LESSONS
 from app.data.a2_lessons import A2_LESSONS
+from app.data.b1_lessons import B1_LESSONS
+from app.data.b1_lessons_2 import B1_LESSONS_PART2
+from app.data.b1_lessons_3 import B1_LESSONS_PART3
+
+# Combine B1 lessons
+B1_ALL_LESSONS = B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3
+
+# Level to lessons mapping
+LEVEL_LESSONS = {
+    "a1": A1_LESSONS,
+    "a2": A2_LESSONS,
+    "b1": B1_ALL_LESSONS
+}
+
+# Next level mapping
+NEXT_LEVEL = {
+    "a1": "a2",
+    "a2": "b1",
+    "b1": "b2"
+}
 
 router = APIRouter(prefix="/api/final-test", tags=["final_test"])
 
@@ -29,11 +49,12 @@ def check_writing_answer(user_answer: str, correct_answer: str) -> bool:
     """Check if writing answer is correct (case-insensitive, trimmed)."""
     return normalize_text(user_answer) == normalize_text(correct_answer)
 
-def get_final_test_questions():
+def get_final_test_questions(level: str = "a1"):
     """Generate questions - 8 multiple choice + 2 writing from each of the 12 lessons."""
     all_questions = []
+    lessons = LEVEL_LESSONS.get(level, A1_LESSONS)
     
-    for lesson in A1_LESSONS:
+    for lesson in lessons:
         lesson_id = lesson["id"]
         quiz = lesson.get("quiz", [])
         
@@ -90,33 +111,41 @@ def get_final_test_questions():
 
 @router.get("/check-eligibility")
 async def check_eligibility(
+    level: str = "a1",
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
-    """Check if user can take the final test."""
+    """Check if user can take the final test for a specific level."""
+    # Get progress for the specific level
     progress_records = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
+        LessonProgress.level == level,
         LessonProgress.completed == True
     ).all()
     
     completed_lessons = [p.lesson_id for p in progress_records]
     lessons_completed = len(completed_lessons)
     
-    # Get previous attempts
+    # Get previous attempts for this level
     attempts = db.query(FinalTestAttempt).filter(
-        FinalTestAttempt.user_id == current_user.id
+        FinalTestAttempt.user_id == current_user.id,
+        FinalTestAttempt.level == level
     ).order_by(FinalTestAttempt.created_at.desc()).all()
     
     passed = any(a.passed for a in attempts)
     best_score = max((a.percentage for a in attempts), default=None)
     
-    # Check if A2 is unlocked (user has passed the final test)
-    a2_unlocked = db.query(LessonProgress).filter(
-        LessonProgress.user_id == current_user.id,
-        LessonProgress.level == "a2"
-    ).first() is not None
+    # Check if next level is unlocked
+    next_level = NEXT_LEVEL.get(level)
+    next_level_unlocked = False
+    if next_level:
+        next_level_unlocked = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == next_level
+        ).first() is not None
     
     return {
+        "level": level,
         "eligible": lessons_completed >= 12,
         "lessons_completed": lessons_completed,
         "total_lessons": 12,
@@ -125,28 +154,31 @@ async def check_eligibility(
         "previous_attempts": len(attempts),
         "passed": passed,
         "best_score": round(best_score, 1) if best_score else None,
-        "a2_unlocked": a2_unlocked
+        "next_level": next_level,
+        "next_level_unlocked": next_level_unlocked
     }
 
 @router.get("/questions")
 async def get_questions(
+    level: str = "a1",
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
     """Get the final test questions (only if eligible)."""
-    # Check eligibility
+    # Check eligibility for this level
     progress_records = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
+        LessonProgress.level == level,
         LessonProgress.completed == True
     ).all()
     
     if len(progress_records) < 12:
         raise HTTPException(
             status_code=403,
-            detail="Morate završiti sve lekcije prije završnog testa"
+            detail=f"Morate završiti sve {level.upper()} lekcije prije završnog testa"
         )
     
-    questions = get_final_test_questions()
+    questions = get_final_test_questions(level)
     
     # Count question types
     mc_count = sum(1 for q in questions if q["question_type"] != "writing")
@@ -172,27 +204,37 @@ async def get_questions(
         ]
     }
 
+class FinalTestSubmissionWithLevel(BaseModel):
+    answers: dict
+    writing_answers: dict = {}
+    time_taken_seconds: Optional[int] = None
+    level: str = "a1"
+
 @router.post("/submit")
 async def submit_final_test(
-    submission: FinalTestSubmission,
+    submission: FinalTestSubmissionWithLevel,
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
     """Submit the final test."""
-    # Check eligibility
+    level = submission.level
+    
+    # Check eligibility for this level
     progress_records = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
+        LessonProgress.level == level,
         LessonProgress.completed == True
     ).all()
     
     if len(progress_records) < 12:
         raise HTTPException(
             status_code=403,
-            detail="Morate završiti sve lekcije prije završnog testa"
+            detail=f"Morate završiti sve {level.upper()} lekcije prije završnog testa"
         )
     
     # Generate the same questions to get correct answers
-    questions = get_final_test_questions()
+    questions = get_final_test_questions(level)
+    lessons = LEVEL_LESSONS.get(level, A1_LESSONS)
     
     # Build answer keys for both types
     mc_answer_key = {q["id"]: q["correct_answer"] for q in questions if q["question_type"] != "writing"}
@@ -255,9 +297,10 @@ async def submit_final_test(
     if percentage == 100:
         xp_earned += 100  # Perfect score bonus
     
-    # Check if first time passing
+    # Check if first time passing for this level
     previous_passes = db.query(FinalTestAttempt).filter(
         FinalTestAttempt.user_id == current_user.id,
+        FinalTestAttempt.level == level,
         FinalTestAttempt.passed == True
     ).count()
     
@@ -268,6 +311,7 @@ async def submit_final_test(
     # Create attempt record
     attempt = FinalTestAttempt(
         user_id=current_user.id,
+        level=level,
         score=score,
         total_questions=total_questions,
         percentage=percentage,
@@ -283,21 +327,22 @@ async def submit_final_test(
     current_user.current_level = calculate_level(current_user.total_xp)
     current_user.last_activity = datetime.utcnow()
     
-    # UNLOCK A2 LEVEL: When user passes final test for the first time, create A2 progress entries
-    a2_unlocked = False
-    if first_time_pass:
-        # Check if A2 progress already exists
-        existing_a2 = db.query(LessonProgress).filter(
+    # UNLOCK NEXT LEVEL: When user passes final test for the first time
+    next_level = NEXT_LEVEL.get(level)
+    next_level_unlocked = False
+    if first_time_pass and next_level:
+        # Check if next level progress already exists
+        existing_next = db.query(LessonProgress).filter(
             LessonProgress.user_id == current_user.id,
-            LessonProgress.level == "a2"
+            LessonProgress.level == next_level
         ).first()
         
-        if not existing_a2:
-            # Create initial A2 progress for lesson 1 (unlocked, not completed)
-            a2_progress = LessonProgress(
+        if not existing_next:
+            # Create initial progress for lesson 1 (unlocked, not completed)
+            next_level_progress = LessonProgress(
                 user_id=current_user.id,
                 lesson_id=1,
-                level="a2",
+                level=next_level,
                 completed=False,
                 vocabulary_viewed=False,
                 grammar_viewed=False,
@@ -306,15 +351,15 @@ async def submit_final_test(
                 exercises_completed=False,
                 quiz_completed=False
             )
-            db.add(a2_progress)
-            a2_unlocked = True
+            db.add(next_level_progress)
+            next_level_unlocked = True
     
     db.commit()
     
     # Prepare detailed results
     lesson_results = []
     for lesson_id, scores in sorted(lesson_scores.items()):
-        lesson = next((l for l in A1_LESSONS if l["id"] == lesson_id), None)
+        lesson = next((l for l in lessons if l["id"] == lesson_id), None)
         lesson_results.append({
             "lesson_id": lesson_id,
             "lesson_title": lesson["title"] if lesson else f"Lekcija {lesson_id}",
@@ -347,8 +392,10 @@ async def submit_final_test(
         # Multiple choice stats
         "mc_score": mc_score,
         "mc_total": total_questions - total_writing,
-        # A2 unlock status
-        "a2_unlocked": a2_unlocked,
+        # Next level unlock status
+        "level": level,
+        "next_level": next_level,
+        "next_level_unlocked": next_level_unlocked,
         "first_time_pass": first_time_pass
     }
 

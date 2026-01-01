@@ -48,8 +48,22 @@ def run_migrations():
             # Add level column if missing (for multi-level support: a1, a2, b1, etc.)
             if 'level' not in existing_columns:
                 conn.execute(text("ALTER TABLE lesson_progress ADD COLUMN level VARCHAR(10) DEFAULT 'a1'"))
-                print("Migration: Added level column")
+                print("Migration: Added level column to lesson_progress")
             
             conn.commit()
         except Exception as e:
-            print(f"Migration note: {e}")
+            print(f"Migration note (lesson_progress): {e}")
+        
+        # Check and add missing columns to final_test_attempts table
+        try:
+            result = conn.execute(text("PRAGMA table_info(final_test_attempts)"))
+            existing_columns = {row[1] for row in result.fetchall()}
+            
+            # Add level column if missing (for A1/A2/B1 final tests)
+            if 'level' not in existing_columns:
+                conn.execute(text("ALTER TABLE final_test_attempts ADD COLUMN level VARCHAR(10) DEFAULT 'a1'"))
+                print("Migration: Added level column to final_test_attempts")
+            
+            conn.commit()
+        except Exception as e:
+            print(f"Migration note (final_test_attempts): {e}")

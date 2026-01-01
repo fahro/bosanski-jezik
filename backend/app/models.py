@@ -94,6 +94,7 @@ class FinalTestAttempt(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    level = Column(String(10), default="a1")  # a1, a2, b1
     
     score = Column(Integer, nullable=False)
     total_questions = Column(Integer, default=120)
