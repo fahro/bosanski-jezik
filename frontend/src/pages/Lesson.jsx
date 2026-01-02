@@ -2896,7 +2896,7 @@ function Lesson() {
                         setDialogueFillExercises(prev => ({ ...prev, currentPlaying: i }))
                         speak(dialogueLines[i].text)
                         const wordCount = dialogueLines[i].text.split(' ').length
-                        const delay = Math.max(3000, wordCount * 400 + 1000)
+                        const delay = Math.max(4500, wordCount * 600 + 2000)
                         await new Promise(r => setTimeout(r, delay))
                       }
                       setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 }))
@@ -3074,7 +3074,7 @@ function Lesson() {
                       setDialoguePlayingIndex(i)
                       speak(lesson.dialogue[i].text)
                       const wordCount = lesson.dialogue[i].text.split(' ').length
-                      const delay = Math.max(3000, wordCount * 400 + 1000)
+                      const delay = Math.max(4500, wordCount * 600 + 2000)
                       await new Promise(r => setTimeout(r, delay))
                     }
                     setDialoguePlayingIndex(-1)
@@ -3245,7 +3245,7 @@ function Lesson() {
                           setCulturePlayingIndex(i)
                           speak(lesson.cultural_comic.panels[i].text)
                           const wordCount = lesson.cultural_comic.panels[i].text.split(' ').length
-                          const delay = Math.max(3000, wordCount * 400 + 1000)
+                          const delay = Math.max(4500, wordCount * 600 + 2000)
                           await new Promise(r => setTimeout(r, delay))
                         }
                         setCulturePlayingIndex(-1)
