@@ -70,6 +70,11 @@ function Lesson() {
     showResults: false,
     currentLetters: {}
   })
+  const [imageQuizExercises, setImageQuizExercises] = useState({
+    answers: {},
+    showResults: false,
+    currentQuestion: 0
+  })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
 
@@ -118,6 +123,7 @@ function Lesson() {
     setTranslationExercises({ answers: {}, showResults: false })
     setWritingExercises({ answers: {}, showResults: false, isPlayingAudio: false, currentAudioIndex: -1, checked: {} })
     setScrambleExercises({ answers: {}, showResults: false, currentLetters: {} })
+    setImageQuizExercises({ answers: {}, showResults: false, currentQuestion: 0 })
     setActiveExerciseType('fillBlank')
     setTranslationInputs({})
     setMatchedPairs({})
@@ -1435,7 +1441,8 @@ function Lesson() {
     { id: 'matching', label: 'Spoji parove', icon: '🔗' },
     { id: 'translation', label: 'Prevedi', icon: '🌍' },
     { id: 'writing', label: 'Piši', icon: '✍️' },
-    { id: 'scramble', label: 'Pomiješana slova', icon: '🎲' }
+    { id: 'scramble', label: 'Pomiješana slova', icon: '🎲' },
+    { id: 'imageQuiz', label: 'Prepoznaj sliku', icon: '🖼️' }
   ]
 
   return (
@@ -2486,6 +2493,181 @@ function Lesson() {
                   </div>
                 </div>
               )}
+
+              {/* Image Quiz Exercises */}
+              {activeExerciseType === 'imageQuiz' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🖼️ Prepoznaj sliku</h3>
+                  <p className="text-gray-600 mb-4">Pogledaj sliku i odaberi tačnu bosansku riječ</p>
+
+                  {(() => {
+                    const vocabWithImages = lesson?.vocabulary?.filter(v => v.image_url || v.image_emoji) || []
+                    const imageQuizList = vocabWithImages.slice(0, 8)
+                    const currentQ = imageQuizExercises.currentQuestion
+                    const currentItem = imageQuizList[currentQ]
+                    
+                    if (!currentItem) return <div className="text-gray-500 text-center py-8">Nema dostupnih slika za ovu vježbu</div>
+
+                    const generateOptions = (correctAnswer, allItems) => {
+                      const options = [correctAnswer]
+                      const otherItems = allItems.filter(item => item.bosnian !== correctAnswer)
+                      while (options.length < 4 && otherItems.length > 0) {
+                        const randomIdx = Math.floor(Math.random() * otherItems.length)
+                        options.push(otherItems[randomIdx].bosnian)
+                        otherItems.splice(randomIdx, 1)
+                      }
+                      return options.sort(() => Math.random() - 0.5)
+                    }
+
+                    const optionsKey = `options_${currentQ}`
+                    if (!imageQuizExercises[optionsKey]) {
+                      const opts = generateOptions(currentItem.bosnian, imageQuizList)
+                      setImageQuizExercises(prev => ({ ...prev, [optionsKey]: opts }))
+                    }
+                    const options = imageQuizExercises[optionsKey] || [currentItem.bosnian]
+
+                    const userAnswer = imageQuizExercises.answers[currentQ]
+                    const isCorrect = userAnswer === currentItem.bosnian
+                    const hasAnswered = userAnswer !== undefined
+
+                    const handleAnswer = (answer) => {
+                      if (hasAnswered) return
+                      setImageQuizExercises(prev => ({
+                        ...prev,
+                        answers: { ...prev.answers, [currentQ]: answer }
+                      }))
+                      if (answer === currentItem.bosnian) {
+                        speak(currentItem.bosnian)
+                      }
+                    }
+
+                    const nextQuestion = () => {
+                      if (currentQ < imageQuizList.length - 1) {
+                        setImageQuizExercises(prev => ({ ...prev, currentQuestion: currentQ + 1 }))
+                      } else {
+                        setImageQuizExercises(prev => ({ ...prev, showResults: true }))
+                      }
+                    }
+
+                    const getScore = () => {
+                      let correct = 0
+                      imageQuizList.forEach((item, idx) => {
+                        if (imageQuizExercises.answers[idx] === item.bosnian) correct++
+                      })
+                      return correct
+                    }
+
+                    const resetImageQuiz = () => {
+                      setImageQuizExercises({ answers: {}, showResults: false, currentQuestion: 0 })
+                    }
+
+                    if (imageQuizExercises.showResults) {
+                      const score = getScore()
+                      const percentage = Math.round((score / imageQuizList.length) * 100)
+                      return (
+                        <div className="text-center space-y-6 p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-2xl border-2 border-purple-200">
+                          <div className="text-6xl">{percentage >= 80 ? '🏆' : percentage >= 50 ? '👍' : '💪'}</div>
+                          <div className="text-2xl font-bold text-gray-800">
+                            {percentage >= 80 ? 'Odlično!' : percentage >= 50 ? 'Dobro!' : 'Nastavi vježbati!'}
+                          </div>
+                          <div className="text-xl">
+                            Rezultat: <strong className="text-bosnia-blue">{score}</strong> / {imageQuizList.length}
+                            <span className="text-gray-500 ml-2">({percentage}%)</span>
+                          </div>
+                          <button 
+                            onClick={resetImageQuiz}
+                            className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                          >
+                            <RefreshCw className="w-5 h-5" /><span>Igraj ponovo</span>
+                          </button>
+                        </div>
+                      )
+                    }
+
+                    return (
+                      <div className="space-y-6">
+                        {/* Progress bar */}
+                        <div className="flex items-center justify-between mb-4">
+                          <span className="text-sm text-gray-500">Pitanje {currentQ + 1} od {imageQuizList.length}</span>
+                          <div className="flex-1 mx-4 bg-gray-200 rounded-full h-2">
+                            <div 
+                              className="bg-bosnia-blue h-2 rounded-full transition-all duration-300"
+                              style={{ width: `${((currentQ + 1) / imageQuizList.length) * 100}%` }}
+                            />
+                          </div>
+                          <span className="text-sm font-medium text-bosnia-blue">{getScore()} ✓</span>
+                        </div>
+
+                        {/* Image card */}
+                        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-gray-100 max-w-md mx-auto">
+                          <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                            {currentItem.image_url ? (
+                              <img 
+                                src={currentItem.image_url} 
+                                alt="?" 
+                                className="w-full h-full object-cover"
+                              />
+                            ) : (
+                              <span className="text-8xl">{currentItem.image_emoji}</span>
+                            )}
+                          </div>
+                          <div className="p-4 text-center bg-gray-50">
+                            <p className="text-gray-600 font-medium">🇬🇧 {currentItem.english}</p>
+                          </div>
+                        </div>
+
+                        {/* Options */}
+                        <div className="grid grid-cols-2 gap-3 max-w-md mx-auto">
+                          {options.map((option, idx) => {
+                            const isSelected = userAnswer === option
+                            const isThisCorrect = option === currentItem.bosnian
+                            let btnClass = 'bg-white border-2 border-gray-200 hover:border-bosnia-blue hover:bg-blue-50'
+                            
+                            if (hasAnswered) {
+                              if (isThisCorrect) {
+                                btnClass = 'bg-green-100 border-2 border-green-500 text-green-800'
+                              } else if (isSelected && !isThisCorrect) {
+                                btnClass = 'bg-red-100 border-2 border-red-500 text-red-800'
+                              } else {
+                                btnClass = 'bg-gray-100 border-2 border-gray-200 text-gray-400'
+                              }
+                            }
+
+                            return (
+                              <button
+                                key={idx}
+                                onClick={() => handleAnswer(option)}
+                                disabled={hasAnswered}
+                                className={`p-4 rounded-xl font-medium text-lg transition-all ${btnClass} ${!hasAnswered ? 'hover:scale-105 active:scale-95' : ''}`}
+                              >
+                                {option}
+                                {hasAnswered && isThisCorrect && <span className="ml-2">✓</span>}
+                                {hasAnswered && isSelected && !isThisCorrect && <span className="ml-2">✗</span>}
+                              </button>
+                            )
+                          })}
+                        </div>
+
+                        {/* Feedback & Next button */}
+                        {hasAnswered && (
+                          <div className="text-center space-y-4">
+                            <div className={`text-lg font-medium ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                              {isCorrect ? '🎉 Tačno!' : `❌ Netačno! Tačan odgovor: ${currentItem.bosnian}`}
+                            </div>
+                            <button
+                              onClick={nextQuestion}
+                              className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                            >
+                              <span>{currentQ < imageQuizList.length - 1 ? 'Sljedeće pitanje' : 'Vidi rezultat'}</span>
+                              <ChevronRight className="w-5 h-5" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    )
+                  })()}
+                </div>
+              )}
             </div>
           )}
 
@@ -3213,6 +3395,15 @@ function Lesson() {
           </button>
         )}
         {activeTab === 'exercises' && activeExerciseType === 'scramble' && (
+          <button
+            onClick={() => { setActiveExerciseType('imageQuiz'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Prepoznaj sliku</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'imageQuiz' && (
           <button
             onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
