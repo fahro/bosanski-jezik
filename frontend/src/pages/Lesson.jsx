@@ -1464,8 +1464,8 @@ function Lesson() {
   const tabs = [
     { id: 'vocabulary', label: 'Vokabular', icon: <BookOpen className="w-4 h-4" /> },
     { id: 'grammar', label: 'Gramatika', icon: <PenTool className="w-4 h-4" /> },
-    { id: 'exercises', label: 'Vježbajmo', icon: <Dumbbell className="w-4 h-4" /> },
     { id: 'dialogue', label: 'Dijalog', icon: <MessageSquare className="w-4 h-4" /> },
+    { id: 'exercises', label: 'Vježbajmo', icon: <Dumbbell className="w-4 h-4" /> },
     { id: 'culture', label: 'Kultura', icon: <Globe className="w-4 h-4" /> },
     { id: 'quiz', label: 'Kviz', icon: <HelpCircle className="w-4 h-4" /> }
   ]
@@ -1476,7 +1476,6 @@ function Lesson() {
     { id: 'matching', label: 'Spoji parove', icon: '🔗' },
     { id: 'translation', label: 'Prevedi', icon: '🌍' },
     { id: 'writing', label: 'Piši', icon: '✍️' },
-    { id: 'scramble', label: 'Pomiješana slova', icon: '🎲' },
     { id: 'imageQuiz', label: 'Prepoznaj sliku', icon: '🖼️' },
     { id: 'listenType', label: 'Slušaj i piši', icon: '🎧' },
     { id: 'dialogueFill', label: 'Dopuni dijalog', icon: '💬' }
@@ -3856,10 +3855,10 @@ function Lesson() {
         )}
         {activeTab === 'grammar' && (
           <button
-            onClick={() => { setActiveTab('exercises'); saveCurrentPosition() }}
+            onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
-            <span>Idite na Vježbe</span>
+            <span>Idite na Dijalog</span>
             <ChevronRight className="w-5 h-5" />
           </button>
         )}
@@ -3901,15 +3900,6 @@ function Lesson() {
         )}
         {activeTab === 'exercises' && activeExerciseType === 'writing' && (
           <button
-            onClick={() => { setActiveExerciseType('scramble'); saveCurrentPosition() }}
-            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
-          >
-            <span>Idite na Pomiješana slova</span>
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        )}
-        {activeTab === 'exercises' && activeExerciseType === 'scramble' && (
-          <button
             onClick={() => { setActiveExerciseType('imageQuiz'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
@@ -3937,19 +3927,19 @@ function Lesson() {
         )}
         {activeTab === 'exercises' && activeExerciseType === 'dialogueFill' && (
           <button
-            onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
+            onClick={() => { setActiveTab('culture'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
-            <span>Idite na Dijalog</span>
+            <span>Idite na Kulturu</span>
             <ChevronRight className="w-5 h-5" />
           </button>
         )}
         {activeTab === 'dialogue' && (
           <button
-            onClick={() => { setActiveTab('culture'); saveCurrentPosition() }}
+            onClick={() => { setActiveTab('exercises'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
           >
-            <span>Idite na Kulturu</span>
+            <span>Idite na Vježbe</span>
             <ChevronRight className="w-5 h-5" />
           </button>
         )}
