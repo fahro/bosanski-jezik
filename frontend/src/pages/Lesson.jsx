@@ -75,6 +75,12 @@ function Lesson() {
     showResults: false,
     currentQuestion: 0
   })
+  const [listenTypeExercises, setListenTypeExercises] = useState({
+    answers: {},
+    showResults: false,
+    currentQuestion: 0,
+    hasPlayed: {}
+  })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
 
@@ -124,6 +130,7 @@ function Lesson() {
     setWritingExercises({ answers: {}, showResults: false, isPlayingAudio: false, currentAudioIndex: -1, checked: {} })
     setScrambleExercises({ answers: {}, showResults: false, currentLetters: {} })
     setImageQuizExercises({ answers: {}, showResults: false, currentQuestion: 0 })
+    setListenTypeExercises({ answers: {}, showResults: false, currentQuestion: 0, hasPlayed: {} })
     setActiveExerciseType('fillBlank')
     setTranslationInputs({})
     setMatchedPairs({})
@@ -295,10 +302,14 @@ function Lesson() {
   }
 
   // Handler for grammar exercise answer
-  const handleGrammarAnswer = (exerciseId, option) => {
+  const handleGrammarAnswer = (exerciseId, option, correctAnswer, sentenceText) => {
     const newAnswers = { ...grammarExercises.answers, [exerciseId]: option }
     setGrammarExercises(prev => ({ ...prev, answers: newAnswers }))
     saveExerciseProgress(newAnswers, null, null, null)
+    if (option === correctAnswer && sentenceText) {
+      const fullSentence = sentenceText.replace('_____', correctAnswer)
+      setTimeout(() => speak(fullSentence), 300)
+    }
   }
 
   // Handler for matching exercise
@@ -1181,6 +1192,10 @@ function Lesson() {
     } else if (type === 'english' && selectedBosnian) {
       const newPairs = { ...matchedPairs, [selectedBosnian.id]: value }
       setMatchedPairs(newPairs)
+      const matchedItem = matchingList.find(item => item.id === selectedBosnian.id)
+      if (matchedItem && matchedItem.english === value) {
+        setTimeout(() => speak(matchedItem.bosnian), 300)
+      }
       setSelectedBosnian(null)
       saveExerciseProgress(null, null, newPairs, null)
     }
@@ -1442,7 +1457,8 @@ function Lesson() {
     { id: 'translation', label: 'Prevedi', icon: '🌍' },
     { id: 'writing', label: 'Piši', icon: '✍️' },
     { id: 'scramble', label: 'Pomiješana slova', icon: '🎲' },
-    { id: 'imageQuiz', label: 'Prepoznaj sliku', icon: '🖼️' }
+    { id: 'imageQuiz', label: 'Prepoznaj sliku', icon: '🖼️' },
+    { id: 'listenType', label: 'Slušaj i piši', icon: '🎧' }
   ]
 
   return (
@@ -1774,7 +1790,7 @@ function Lesson() {
                             {exercise.options.map((option, idx) => (
                               <button
                                 key={idx}
-                                onClick={() => !showResult && handleGrammarAnswer(exercise.id, option)}
+                                onClick={() => !showResult && handleGrammarAnswer(exercise.id, option, exercise.answer, exercise.sentence)}
                                 disabled={showResult}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
                                   showResult
@@ -2357,14 +2373,20 @@ function Lesson() {
 
                             const handleLetterClick = (letter, letterIdx) => {
                               if (scrambleExercises.showResults || usedIndices.includes(letterIdx)) return
+                              const newAnswer = [...userAnswer, letter]
+                              const willBeComplete = newAnswer.length === item.bosnian.length
+                              const willBeCorrect = newAnswer.join('').toLowerCase() === item.bosnian.toLowerCase()
                               setScrambleExercises(prev => ({
                                 ...prev,
                                 answers: {
                                   ...prev.answers,
-                                  [idx]: [...userAnswer, letter],
+                                  [idx]: newAnswer,
                                   [`${idx}_used`]: [...usedIndices, letterIdx]
                                 }
                               }))
+                              if (willBeComplete && willBeCorrect) {
+                                setTimeout(() => speak(item.bosnian), 300)
+                              }
                             }
 
                             const handleRemoveLetter = (removeIdx) => {
@@ -2663,6 +2685,150 @@ function Lesson() {
                             </button>
                           </div>
                         )}
+                      </div>
+                    )
+                  })()}
+                </div>
+              )}
+
+              {/* Listen & Type Exercises */}
+              {activeExerciseType === 'listenType' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🎧 Slušaj i piši</h3>
+                  <p className="text-gray-600 mb-4">Slušaj bosansku riječ i napiši je</p>
+
+                  {(() => {
+                    const listenList = lesson?.vocabulary?.slice(0, 10) || []
+                    const currentQ = listenTypeExercises.currentQuestion
+                    const currentItem = listenList[currentQ]
+                    
+                    if (!currentItem) return <div className="text-gray-500 text-center py-8">Nema dostupnih riječi</div>
+
+                    const userAnswer = listenTypeExercises.answers[currentQ] || ''
+                    const hasChecked = listenTypeExercises.answers[`${currentQ}_checked`]
+                    const isCorrect = userAnswer.toLowerCase().trim() === currentItem.bosnian.toLowerCase().trim()
+
+                    const playAudio = () => {
+                      speak(currentItem.bosnian)
+                      setListenTypeExercises(prev => ({ ...prev, hasPlayed: { ...prev.hasPlayed, [currentQ]: true } }))
+                    }
+
+                    const checkAnswer = () => {
+                      setListenTypeExercises(prev => ({
+                        ...prev,
+                        answers: { ...prev.answers, [`${currentQ}_checked`]: true }
+                      }))
+                      if (isCorrect) {
+                        setTimeout(() => speak(currentItem.bosnian), 300)
+                      }
+                    }
+
+                    const nextQuestion = () => {
+                      if (currentQ < listenList.length - 1) {
+                        setListenTypeExercises(prev => ({ ...prev, currentQuestion: currentQ + 1 }))
+                      } else {
+                        setListenTypeExercises(prev => ({ ...prev, showResults: true }))
+                      }
+                    }
+
+                    const getScore = () => {
+                      let correct = 0
+                      listenList.forEach((item, idx) => {
+                        const ans = listenTypeExercises.answers[idx] || ''
+                        if (ans.toLowerCase().trim() === item.bosnian.toLowerCase().trim()) correct++
+                      })
+                      return correct
+                    }
+
+                    const resetListenType = () => {
+                      setListenTypeExercises({ answers: {}, showResults: false, currentQuestion: 0, hasPlayed: {} })
+                    }
+
+                    if (listenTypeExercises.showResults) {
+                      const score = getScore()
+                      const percentage = Math.round((score / listenList.length) * 100)
+                      return (
+                        <div className="text-center space-y-6 p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border-2 border-purple-200">
+                          <div className="text-6xl">{percentage >= 80 ? '🏆' : percentage >= 50 ? '👍' : '💪'}</div>
+                          <div className="text-2xl font-bold text-gray-800">
+                            {percentage >= 80 ? 'Odlično!' : percentage >= 50 ? 'Dobro!' : 'Nastavi vježbati!'}
+                          </div>
+                          <div className="text-xl">
+                            Rezultat: <strong className="text-bosnia-blue">{score}</strong> / {listenList.length}
+                            <span className="text-gray-500 ml-2">({percentage}%)</span>
+                          </div>
+                          <button onClick={resetListenType} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                            <RefreshCw className="w-5 h-5" /><span>Igraj ponovo</span>
+                          </button>
+                        </div>
+                      )
+                    }
+
+                    return (
+                      <div className="space-y-6 max-w-md mx-auto">
+                        {/* Progress */}
+                        <div className="flex items-center justify-between">
+                          <span className="text-sm text-gray-500">Riječ {currentQ + 1} od {listenList.length}</span>
+                          <div className="flex-1 mx-4 bg-gray-200 rounded-full h-2">
+                            <div className="bg-purple-500 h-2 rounded-full transition-all" style={{ width: `${((currentQ + 1) / listenList.length) * 100}%` }} />
+                          </div>
+                          <span className="text-sm font-medium text-purple-600">{getScore()} ✓</span>
+                        </div>
+
+                        {/* Audio card */}
+                        <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 text-center border-2 border-purple-200">
+                          <button
+                            onClick={playAudio}
+                            className="w-24 h-24 rounded-full bg-purple-500 hover:bg-purple-600 text-white flex items-center justify-center mx-auto mb-4 shadow-lg hover:scale-110 transition-all"
+                          >
+                            <Volume2 className="w-12 h-12" />
+                          </button>
+                          <p className="text-gray-600 font-medium">🇬🇧 {currentItem.english}</p>
+                          <p className="text-sm text-gray-500 mt-2">Klikni za slušanje</p>
+                        </div>
+
+                        {/* Input */}
+                        <div className="space-y-3">
+                          <input
+                            type="text"
+                            value={userAnswer}
+                            onChange={(e) => setListenTypeExercises(prev => ({
+                              ...prev,
+                              answers: { ...prev.answers, [currentQ]: e.target.value }
+                            }))}
+                            disabled={hasChecked}
+                            placeholder="Napiši bosansku riječ..."
+                            className={`w-full p-4 text-xl text-center rounded-xl border-2 focus:outline-none transition-all ${
+                              hasChecked
+                                ? isCorrect ? 'bg-green-50 border-green-400' : 'bg-red-50 border-red-400'
+                                : 'border-gray-300 focus:border-purple-500'
+                            }`}
+                            onKeyDown={(e) => e.key === 'Enter' && !hasChecked && userAnswer.trim() && checkAnswer()}
+                          />
+
+                          {!hasChecked ? (
+                            <button
+                              onClick={checkAnswer}
+                              disabled={!userAnswer.trim()}
+                              className="w-full py-3 bg-purple-500 text-white rounded-xl font-medium hover:bg-purple-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+                            >
+                              ✓ Provjeri
+                            </button>
+                          ) : (
+                            <div className="space-y-3">
+                              <div className={`p-3 rounded-xl text-center ${isCorrect ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                {isCorrect ? '🎉 Tačno!' : `❌ Tačan odgovor: ${currentItem.bosnian}`}
+                              </div>
+                              <button
+                                onClick={nextQuestion}
+                                className="w-full py-3 bg-bosnia-blue text-white rounded-xl font-medium hover:bg-blue-700 transition-all inline-flex items-center justify-center space-x-2"
+                              >
+                                <span>{currentQ < listenList.length - 1 ? 'Sljedeća riječ' : 'Vidi rezultat'}</span>
+                                <ChevronRight className="w-5 h-5" />
+                              </button>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     )
                   })()}
@@ -3404,6 +3570,15 @@ function Lesson() {
           </button>
         )}
         {activeTab === 'exercises' && activeExerciseType === 'imageQuiz' && (
+          <button
+            onClick={() => { setActiveExerciseType('listenType'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Slušaj i piši</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'listenType' && (
           <button
             onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
