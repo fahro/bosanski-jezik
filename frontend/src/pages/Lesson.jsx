@@ -81,6 +81,11 @@ function Lesson() {
     currentQuestion: 0,
     hasPlayed: {}
   })
+  const [dialogueFillExercises, setDialogueFillExercises] = useState({
+    answers: {},
+    showResults: false,
+    currentPlaying: -1
+  })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
 
@@ -131,6 +136,7 @@ function Lesson() {
     setScrambleExercises({ answers: {}, showResults: false, currentLetters: {} })
     setImageQuizExercises({ answers: {}, showResults: false, currentQuestion: 0 })
     setListenTypeExercises({ answers: {}, showResults: false, currentQuestion: 0, hasPlayed: {} })
+    setDialogueFillExercises({ answers: {}, showResults: false, currentPlaying: -1 })
     setActiveExerciseType('fillBlank')
     setTranslationInputs({})
     setMatchedPairs({})
@@ -1458,7 +1464,8 @@ function Lesson() {
     { id: 'writing', label: 'Piši', icon: '✍️' },
     { id: 'scramble', label: 'Pomiješana slova', icon: '🎲' },
     { id: 'imageQuiz', label: 'Prepoznaj sliku', icon: '🖼️' },
-    { id: 'listenType', label: 'Slušaj i piši', icon: '🎧' }
+    { id: 'listenType', label: 'Slušaj i piši', icon: '🎧' },
+    { id: 'dialogueFill', label: 'Dopuni dijalog', icon: '💬' }
   ]
 
   return (
@@ -2834,6 +2841,192 @@ function Lesson() {
                   })()}
                 </div>
               )}
+
+              {/* Dialogue Fill Exercises */}
+              {activeExerciseType === 'dialogueFill' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">💬 Dopuni dijalog</h3>
+                  <p className="text-gray-600 mb-4">Slušaj razgovor i dopuni riječi koje nedostaju</p>
+
+                  {(() => {
+                    const dialogue = lesson?.dialogue || []
+                    const dialogueLines = dialogue.slice(0, 8)
+                    
+                    if (dialogueLines.length < 2) return <div className="text-gray-500 text-center py-8">Nema dostupnog dijaloga</div>
+
+                    const generateBlank = (text, idx) => {
+                      const words = text.split(' ')
+                      if (words.length < 2) return { display: text, answer: '', hasBlank: false }
+                      const blankIdx = (idx % 3) + 1
+                      const actualIdx = Math.min(blankIdx, words.length - 1)
+                      const answer = words[actualIdx]
+                      const display = words.map((w, i) => i === actualIdx ? '_____' : w).join(' ')
+                      return { display, answer, hasBlank: true }
+                    }
+
+                    const dialogueWithBlanks = dialogueLines.map((line, idx) => ({
+                      ...line,
+                      idx,
+                      ...generateBlank(line.text, idx)
+                    }))
+
+                    const playLine = (idx, text) => {
+                      setDialogueFillExercises(prev => ({ ...prev, currentPlaying: idx }))
+                      speak(text)
+                      setTimeout(() => setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 })), 2000)
+                    }
+
+                    const playAllDialogue = async () => {
+                      for (let i = 0; i < dialogueLines.length; i++) {
+                        setDialogueFillExercises(prev => ({ ...prev, currentPlaying: i }))
+                        speak(dialogueLines[i].text)
+                        await new Promise(r => setTimeout(r, 2500))
+                      }
+                      setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 }))
+                    }
+
+                    const getScore = () => {
+                      let correct = 0
+                      dialogueWithBlanks.forEach((line, idx) => {
+                        const userAns = (dialogueFillExercises.answers[idx] || '').toLowerCase().trim()
+                        if (userAns === line.answer.toLowerCase().trim()) correct++
+                      })
+                      return correct
+                    }
+
+                    const checkAnswers = () => {
+                      setDialogueFillExercises(prev => ({ ...prev, showResults: true }))
+                    }
+
+                    const resetDialogueFill = () => {
+                      setDialogueFillExercises({ answers: {}, showResults: false, currentPlaying: -1 })
+                    }
+
+                    const allAnswered = Object.keys(dialogueFillExercises.answers).length === dialogueWithBlanks.length
+
+                    return (
+                      <div className="space-y-4">
+                        {/* Play all button */}
+                        <div className="flex justify-center mb-4">
+                          <button
+                            onClick={playAllDialogue}
+                            className="px-6 py-3 bg-purple-500 text-white rounded-xl font-medium hover:bg-purple-600 transition-all inline-flex items-center space-x-2 shadow-lg"
+                          >
+                            <Volume2 className="w-5 h-5" />
+                            <span>▶ Slušaj cijeli dijalog</span>
+                          </button>
+                        </div>
+
+                        {/* Dialogue lines */}
+                        <div className="space-y-3">
+                          {dialogueWithBlanks.map((line, idx) => {
+                            const isLeft = idx % 2 === 0
+                            const userAnswer = dialogueFillExercises.answers[idx] || ''
+                            const isCorrect = userAnswer.toLowerCase().trim() === line.answer.toLowerCase().trim()
+                            const isPlaying = dialogueFillExercises.currentPlaying === idx
+
+                            return (
+                              <div
+                                key={idx}
+                                className={`flex ${isLeft ? 'justify-start' : 'justify-end'}`}
+                              >
+                                <div
+                                  className={`max-w-[85%] p-4 rounded-2xl transition-all ${
+                                    isPlaying ? 'ring-4 ring-purple-400 scale-105' : ''
+                                  } ${
+                                    isLeft
+                                      ? 'bg-blue-100 rounded-tl-sm'
+                                      : 'bg-green-100 rounded-tr-sm'
+                                  }`}
+                                >
+                                  <div className="flex items-center space-x-2 mb-2">
+                                    <span className="font-bold text-sm text-gray-700">{line.speaker}</span>
+                                    <button
+                                      onClick={() => playLine(idx, line.text)}
+                                      className="p-1 rounded-full hover:bg-white/50 transition-all"
+                                      title="Slušaj"
+                                    >
+                                      <Volume2 className={`w-4 h-4 ${isPlaying ? 'text-purple-600 animate-pulse' : 'text-gray-500'}`} />
+                                    </button>
+                                  </div>
+
+                                  <div className="text-gray-800">
+                                    {line.display.split('_____').map((part, pIdx, arr) => (
+                                      <span key={pIdx}>
+                                        {part}
+                                        {pIdx < arr.length - 1 && (
+                                          <input
+                                            type="text"
+                                            value={userAnswer}
+                                            onChange={(e) => setDialogueFillExercises(prev => ({
+                                              ...prev,
+                                              answers: { ...prev.answers, [idx]: e.target.value }
+                                            }))}
+                                            disabled={dialogueFillExercises.showResults}
+                                            placeholder="..."
+                                            className={`inline-block w-24 mx-1 px-2 py-1 rounded-lg border-2 text-center font-medium ${
+                                              dialogueFillExercises.showResults
+                                                ? isCorrect
+                                                  ? 'bg-green-200 border-green-500 text-green-800'
+                                                  : 'bg-red-200 border-red-500 text-red-800'
+                                                : 'bg-white border-gray-300 focus:border-purple-500 focus:outline-none'
+                                            }`}
+                                          />
+                                        )}
+                                      </span>
+                                    ))}
+                                  </div>
+
+                                  {dialogueFillExercises.showResults && !isCorrect && (
+                                    <div className="mt-2 text-sm text-red-600">
+                                      ✓ Tačno: <strong>{line.answer}</strong>
+                                    </div>
+                                  )}
+                                  {dialogueFillExercises.showResults && isCorrect && (
+                                    <div className="mt-2 text-sm text-green-600">✓ Tačno!</div>
+                                  )}
+
+                                  <div className="text-xs text-gray-500 mt-2 italic">
+                                    🌍 {line.translation}
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          })}
+                        </div>
+
+                        {/* Check/Results section */}
+                        <div className="flex justify-center mt-6">
+                          {!dialogueFillExercises.showResults ? (
+                            <button
+                              onClick={checkAnswers}
+                              disabled={!allAnswered}
+                              className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+                            >
+                              ✓ Provjeri ({Object.keys(dialogueFillExercises.answers).length}/{dialogueWithBlanks.length})
+                            </button>
+                          ) : (
+                            <div className="text-center space-y-4 p-6 bg-gradient-to-br from-blue-50 to-green-50 rounded-2xl border-2 border-blue-200">
+                              <div className="text-2xl font-bold text-gray-800">
+                                {getScore() === dialogueWithBlanks.length ? '🏆 Savršeno!' : getScore() >= dialogueWithBlanks.length / 2 ? '👍 Dobro!' : '💪 Nastavi vježbati!'}
+                              </div>
+                              <div className="text-xl">
+                                Rezultat: <strong className="text-bosnia-blue">{getScore()}</strong> / {dialogueWithBlanks.length}
+                              </div>
+                              <button
+                                onClick={resetDialogueFill}
+                                className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                              >
+                                <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    )
+                  })()}
+                </div>
+              )}
             </div>
           )}
 
@@ -3579,6 +3772,15 @@ function Lesson() {
           </button>
         )}
         {activeTab === 'exercises' && activeExerciseType === 'listenType' && (
+          <button
+            onClick={() => { setActiveExerciseType('dialogueFill'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Dopuni dijalog</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'dialogueFill' && (
           <button
             onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
