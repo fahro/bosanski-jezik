@@ -2895,7 +2895,9 @@ function Lesson() {
                       for (let i = 0; i < dialogueLines.length; i++) {
                         setDialogueFillExercises(prev => ({ ...prev, currentPlaying: i }))
                         speak(dialogueLines[i].text)
-                        await new Promise(r => setTimeout(r, 2500))
+                        const wordCount = dialogueLines[i].text.split(' ').length
+                        const delay = Math.max(3000, wordCount * 400 + 1000)
+                        await new Promise(r => setTimeout(r, delay))
                       }
                       setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 }))
                     }
@@ -3071,7 +3073,9 @@ function Lesson() {
                     for (let i = 0; i < lesson.dialogue.length; i++) {
                       setDialoguePlayingIndex(i)
                       speak(lesson.dialogue[i].text)
-                      await new Promise(r => setTimeout(r, 2500))
+                      const wordCount = lesson.dialogue[i].text.split(' ').length
+                      const delay = Math.max(3000, wordCount * 400 + 1000)
+                      await new Promise(r => setTimeout(r, delay))
                     }
                     setDialoguePlayingIndex(-1)
                   }}
@@ -3240,7 +3244,9 @@ function Lesson() {
                         for (let i = 0; i < lesson.cultural_comic.panels.length; i++) {
                           setCulturePlayingIndex(i)
                           speak(lesson.cultural_comic.panels[i].text)
-                          await new Promise(r => setTimeout(r, 2500))
+                          const wordCount = lesson.cultural_comic.panels[i].text.split(' ').length
+                          const delay = Math.max(3000, wordCount * 400 + 1000)
+                          await new Promise(r => setTimeout(r, delay))
                         }
                         setCulturePlayingIndex(-1)
                       }}
