@@ -88,6 +88,8 @@ function Lesson() {
   })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
+  const [dialoguePlayingIndex, setDialoguePlayingIndex] = useState(-1)
+  const [culturePlayingIndex, setCulturePlayingIndex] = useState(-1)
 
   // Track previous lessonId to only reset state when lesson actually changes
   const prevLessonIdRef = useRef(null)
@@ -3060,7 +3062,25 @@ function Lesson() {
                   <span>{showDialogTranslation ? '🇬🇧 Hide English' : '🇬🇧 Show English'}</span>
                 </button>
               </div>
-              <p className="text-gray-600 mb-6">Pratite razgovor i učite iz konteksta</p>
+              <p className="text-gray-600 mb-4">Pratite razgovor i učite iz konteksta</p>
+
+              {/* Play All Dialogue Button */}
+              <div className="flex justify-center mb-6">
+                <button
+                  onClick={async () => {
+                    for (let i = 0; i < lesson.dialogue.length; i++) {
+                      setDialoguePlayingIndex(i)
+                      speak(lesson.dialogue[i].text)
+                      await new Promise(r => setTimeout(r, 2500))
+                    }
+                    setDialoguePlayingIndex(-1)
+                  }}
+                  className="px-6 py-3 bg-purple-500 text-white rounded-xl font-medium hover:bg-purple-600 transition-all inline-flex items-center space-x-2 shadow-lg"
+                >
+                  <Volume2 className="w-5 h-5" />
+                  <span>▶ Slušaj cijeli dijalog</span>
+                </button>
+              </div>
               
               {/* Dialogue with Background Image */}
               <div 
@@ -3077,23 +3097,36 @@ function Lesson() {
                 )}
                 
                 <div className="relative z-10 space-y-4 max-w-2xl mx-auto">
-                {lesson.dialogue.map((line, index) => (
+                {lesson.dialogue.map((line, index) => {
+                  const isPlaying = dialoguePlayingIndex === index
+                  const isLeft = index % 2 === 0
+                  return (
                   <div
                     key={index}
-                    className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'} animate-slideIn`}
+                    className={`flex ${isLeft ? 'justify-start' : 'justify-end'} animate-slideIn`}
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <div className={`max-w-[80%] ${
-                      index % 2 === 0 
+                    <div className={`max-w-[80%] transition-all duration-300 ${
+                      isPlaying ? 'scale-105 ring-4 ring-purple-400 shadow-xl' : ''
+                    } ${
+                      isLeft 
                         ? 'bg-blue-100 rounded-tr-2xl rounded-br-2xl rounded-bl-2xl' 
                         : 'bg-green-100 rounded-tl-2xl rounded-bl-2xl rounded-br-2xl'
                     } p-4`}>
                       <div className="flex items-center justify-between mb-1">
-                        <div className="font-semibold text-gray-700 text-sm">{line.speaker}</div>
+                        <div className={`font-semibold text-sm flex items-center space-x-2 ${isPlaying ? 'text-purple-700' : 'text-gray-700'}`}>
+                          <span>{line.speaker}</span>
+                          {isPlaying && <span className="animate-pulse">🎤</span>}
+                        </div>
                         <button
-                          onClick={() => speak(line.text)}
+                          onClick={() => {
+                            setDialoguePlayingIndex(index)
+                            speak(line.text)
+                            setTimeout(() => setDialoguePlayingIndex(-1), 2000)
+                          }}
                           className={`p-1.5 rounded-full transition-all ${
-                            index % 2 === 0 
+                            isPlaying ? 'bg-purple-200 text-purple-600 animate-pulse' :
+                            isLeft 
                               ? 'hover:bg-blue-200 text-blue-600' 
                               : 'hover:bg-green-200 text-green-600'
                           }`}
@@ -3102,7 +3135,16 @@ function Lesson() {
                           <Volume2 className="w-4 h-4" />
                         </button>
                       </div>
-                      <div className="text-gray-800 cursor-pointer hover:text-blue-700" onClick={() => speak(line.text)}>{line.text}</div>
+                      <div 
+                        className={`cursor-pointer transition-colors ${isPlaying ? 'text-purple-800 font-medium' : 'text-gray-800 hover:text-blue-700'}`} 
+                        onClick={() => {
+                          setDialoguePlayingIndex(index)
+                          speak(line.text)
+                          setTimeout(() => setDialoguePlayingIndex(-1), 2000)
+                        }}
+                      >
+                        {line.text}
+                      </div>
                       {showDialogTranslation && (
                         <div className="text-sm text-gray-500 mt-2 italic border-t border-gray-200 pt-2">
                           🇬🇧 {line.translation}
@@ -3110,7 +3152,7 @@ function Lesson() {
                       )}
                     </div>
                   </div>
-                ))}
+                )})}
                 </div>
               </div>
             </div>
@@ -3190,6 +3232,24 @@ function Lesson() {
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center">
                     <span className="mr-2">💬</span> {lesson.cultural_comic.title}
                   </h3>
+
+                  {/* Play All Culture Dialogue Button */}
+                  <div className="flex justify-center mb-4">
+                    <button
+                      onClick={async () => {
+                        for (let i = 0; i < lesson.cultural_comic.panels.length; i++) {
+                          setCulturePlayingIndex(i)
+                          speak(lesson.cultural_comic.panels[i].text)
+                          await new Promise(r => setTimeout(r, 2500))
+                        }
+                        setCulturePlayingIndex(-1)
+                      }}
+                      className="px-6 py-3 bg-purple-500 text-white rounded-xl font-medium hover:bg-purple-600 transition-all inline-flex items-center space-x-2 shadow-lg"
+                    >
+                      <Volume2 className="w-5 h-5" />
+                      <span>▶ Slušaj cijeli dijalog</span>
+                    </button>
+                  </div>
                   
                   {/* Comic container with background */}
                   <div className="relative rounded-2xl overflow-hidden shadow-xl">
@@ -3209,14 +3269,18 @@ function Lesson() {
                     
                     {/* Comic panels */}
                     <div className="relative p-4 sm:p-6 space-y-4">
-                      {lesson.cultural_comic.panels.map((panel, index) => (
+                      {lesson.cultural_comic.panels.map((panel, index) => {
+                        const isPlaying = culturePlayingIndex === index
+                        return (
                         <div 
                           key={index} 
                           className={`flex ${panel.position === 'right' ? 'justify-end' : 'justify-start'}`}
                         >
                           <div className={`max-w-[85%] flex items-start gap-2 sm:gap-3 ${panel.position === 'right' ? 'flex-row-reverse' : ''}`}>
                             {/* Character avatar - generated or fallback */}
-                            <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-white shadow-lg">
+                            <div className={`flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 shadow-lg transition-all duration-300 ${
+                              isPlaying ? 'border-purple-400 ring-4 ring-purple-400 scale-110' : 'border-white'
+                            }`}>
                               {(panel.generated_avatar || panel.avatar) ? (
                                 <img 
                                   src={panel.generated_avatar || panel.avatar} 
@@ -3239,22 +3303,37 @@ function Lesson() {
                             </div>
                             
                             {/* Speech bubble */}
-                            <div className={`relative bg-white/95 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-lg ${
+                            <div className={`relative bg-white/95 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-lg transition-all duration-300 ${
                               panel.position === 'right' ? 'rounded-tr-sm' : 'rounded-tl-sm'
-                            }`}>
+                            } ${isPlaying ? 'ring-4 ring-purple-400 scale-105' : ''}`}>
                               <div className="flex items-center justify-between mb-1">
-                                <div className="font-bold text-sm text-bosnia-blue">{panel.name}</div>
+                                <div className={`font-bold text-sm flex items-center space-x-2 ${isPlaying ? 'text-purple-700' : 'text-bosnia-blue'}`}>
+                                  <span>{panel.name}</span>
+                                  {isPlaying && <span className="animate-pulse">🎤</span>}
+                                </div>
                                 <button
-                                  onClick={() => speak(panel.text)}
-                                  className="p-1 rounded-full hover:bg-blue-100 text-bosnia-blue transition-all"
+                                  onClick={() => {
+                                    setCulturePlayingIndex(index)
+                                    speak(panel.text)
+                                    setTimeout(() => setCulturePlayingIndex(-1), 2000)
+                                  }}
+                                  className={`p-1 rounded-full transition-all ${
+                                    isPlaying ? 'bg-purple-200 text-purple-600 animate-pulse' : 'hover:bg-blue-100 text-bosnia-blue'
+                                  }`}
                                   title="Slušaj"
                                 >
                                   <Volume2 className="w-3.5 h-3.5" />
                                 </button>
                               </div>
                               <div 
-                                className="text-gray-800 font-medium text-base sm:text-lg cursor-pointer hover:text-bosnia-blue transition-colors"
-                                onClick={() => speak(panel.text)}
+                                className={`font-medium text-base sm:text-lg cursor-pointer transition-colors ${
+                                  isPlaying ? 'text-purple-800' : 'text-gray-800 hover:text-bosnia-blue'
+                                }`}
+                                onClick={() => {
+                                  setCulturePlayingIndex(index)
+                                  speak(panel.text)
+                                  setTimeout(() => setCulturePlayingIndex(-1), 2000)
+                                }}
                               >
                                 {panel.text}
                               </div>
@@ -3262,7 +3341,7 @@ function Lesson() {
                             </div>
                           </div>
                         </div>
-                      ))}
+                      )})}
                     </div>
                   </div>
                 </div>
