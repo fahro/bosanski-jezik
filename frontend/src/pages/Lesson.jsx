@@ -2784,13 +2784,26 @@ function Lesson() {
 
                         {/* Audio card */}
                         <div className="bg-gradient-to-br from-purple-100 to-pink-100 rounded-2xl p-8 text-center border-2 border-purple-200">
+                          {hasChecked && (currentItem.image_url || currentItem.image_emoji) && (
+                            <div className="mb-4">
+                              {currentItem.image_url ? (
+                                <img src={currentItem.image_url} alt="" className="w-32 h-32 object-cover rounded-xl mx-auto shadow-lg" />
+                              ) : (
+                                <span className="text-6xl">{currentItem.image_emoji}</span>
+                              )}
+                            </div>
+                          )}
                           <button
                             onClick={playAudio}
                             className="w-24 h-24 rounded-full bg-purple-500 hover:bg-purple-600 text-white flex items-center justify-center mx-auto mb-4 shadow-lg hover:scale-110 transition-all"
                           >
                             <Volume2 className="w-12 h-12" />
                           </button>
-                          <p className="text-gray-600 font-medium">🇬🇧 {currentItem.english}</p>
+                          {hasChecked ? (
+                            <p className="text-gray-600 font-medium">🇬🇧 {currentItem.english}</p>
+                          ) : (
+                            <p className="text-gray-500 text-sm">🎧 Slušaj i napiši bosansku riječ</p>
+                          )}
                           <p className="text-sm text-gray-500 mt-2">Klikni za slušanje</p>
                         </div>
 
