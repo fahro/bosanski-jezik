@@ -2502,7 +2502,7 @@ function Lesson() {
 
                   {(() => {
                     const vocabWithImages = lesson?.vocabulary?.filter(v => v.image_url || v.image_emoji) || []
-                    const imageQuizList = vocabWithImages.slice(0, 8)
+                    const imageQuizList = vocabWithImages.slice(0, 10)
                     const currentQ = imageQuizExercises.currentQuestion
                     const currentItem = imageQuizList[currentQ]
                     
