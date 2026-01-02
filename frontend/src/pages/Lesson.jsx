@@ -90,6 +90,18 @@ function Lesson() {
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
   const [dialoguePlayingIndex, setDialoguePlayingIndex] = useState(-1)
   const [culturePlayingIndex, setCulturePlayingIndex] = useState(-1)
+  const dialogueAbortRef = useRef(false)
+
+  // Function to stop all dialogue playback
+  const stopDialoguePlayback = () => {
+    dialogueAbortRef.current = true
+    setDialoguePlayingIndex(-1)
+    setCulturePlayingIndex(-1)
+    setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 }))
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel()
+    }
+  }
 
   // Track previous lessonId to only reset state when lesson actually changes
   const prevLessonIdRef = useRef(null)
@@ -2886,13 +2898,18 @@ function Lesson() {
                     }))
 
                     const playLine = (idx, text) => {
-                      setDialogueFillExercises(prev => ({ ...prev, currentPlaying: idx }))
-                      speak(text)
-                      setTimeout(() => setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 })), 2000)
+                      stopDialoguePlayback()
+                      setTimeout(() => {
+                        setDialogueFillExercises(prev => ({ ...prev, currentPlaying: idx }))
+                        speak(text)
+                        setTimeout(() => setDialogueFillExercises(prev => ({ ...prev, currentPlaying: -1 })), 2000)
+                      }, 100)
                     }
 
                     const playAllDialogue = async () => {
+                      dialogueAbortRef.current = false
                       for (let i = 0; i < dialogueLines.length; i++) {
+                        if (dialogueAbortRef.current) break
                         setDialogueFillExercises(prev => ({ ...prev, currentPlaying: i }))
                         speak(dialogueLines[i].text)
                         const wordCount = dialogueLines[i].text.split(' ').length
@@ -2924,7 +2941,7 @@ function Lesson() {
                     return (
                       <div className="space-y-4">
                         {/* Play all button */}
-                        <div className="flex justify-center mb-4">
+                        <div className="flex justify-center gap-3 mb-4">
                           <button
                             onClick={playAllDialogue}
                             className="px-6 py-3 bg-purple-500 text-white rounded-xl font-medium hover:bg-purple-600 transition-all inline-flex items-center space-x-2 shadow-lg"
@@ -2932,6 +2949,14 @@ function Lesson() {
                             <Volume2 className="w-5 h-5" />
                             <span>▶ Slušaj cijeli dijalog</span>
                           </button>
+                          {dialogueFillExercises.currentPlaying >= 0 && (
+                            <button
+                              onClick={stopDialoguePlayback}
+                              className="px-6 py-3 bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-all inline-flex items-center space-x-2 shadow-lg"
+                            >
+                              <span>⏹ Zaustavi</span>
+                            </button>
+                          )}
                         </div>
 
                         {/* Dialogue lines */}
@@ -3067,10 +3092,12 @@ function Lesson() {
               <p className="text-gray-600 mb-4">Pratite razgovor i učite iz konteksta</p>
 
               {/* Play All Dialogue Button */}
-              <div className="flex justify-center mb-6">
+              <div className="flex justify-center gap-3 mb-6">
                 <button
                   onClick={async () => {
+                    dialogueAbortRef.current = false
                     for (let i = 0; i < lesson.dialogue.length; i++) {
+                      if (dialogueAbortRef.current) break
                       setDialoguePlayingIndex(i)
                       speak(lesson.dialogue[i].text)
                       const wordCount = lesson.dialogue[i].text.split(' ').length
@@ -3084,6 +3111,14 @@ function Lesson() {
                   <Volume2 className="w-5 h-5" />
                   <span>▶ Slušaj cijeli dijalog</span>
                 </button>
+                {dialoguePlayingIndex >= 0 && (
+                  <button
+                    onClick={stopDialoguePlayback}
+                    className="px-6 py-3 bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-all inline-flex items-center space-x-2 shadow-lg"
+                  >
+                    <span>⏹ Zaustavi</span>
+                  </button>
+                )}
               </div>
               
               {/* Dialogue with Background Image */}
@@ -3124,9 +3159,12 @@ function Lesson() {
                         </div>
                         <button
                           onClick={() => {
-                            setDialoguePlayingIndex(index)
-                            speak(line.text)
-                            setTimeout(() => setDialoguePlayingIndex(-1), 2000)
+                            stopDialoguePlayback()
+                            setTimeout(() => {
+                              setDialoguePlayingIndex(index)
+                              speak(line.text)
+                              setTimeout(() => setDialoguePlayingIndex(-1), 2000)
+                            }, 100)
                           }}
                           className={`p-1.5 rounded-full transition-all ${
                             isPlaying ? 'bg-purple-200 text-purple-600 animate-pulse' :
@@ -3142,9 +3180,12 @@ function Lesson() {
                       <div 
                         className={`cursor-pointer transition-colors ${isPlaying ? 'text-purple-800 font-medium' : 'text-gray-800 hover:text-blue-700'}`} 
                         onClick={() => {
-                          setDialoguePlayingIndex(index)
-                          speak(line.text)
-                          setTimeout(() => setDialoguePlayingIndex(-1), 2000)
+                          stopDialoguePlayback()
+                          setTimeout(() => {
+                            setDialoguePlayingIndex(index)
+                            speak(line.text)
+                            setTimeout(() => setDialoguePlayingIndex(-1), 2000)
+                          }, 100)
                         }}
                       >
                         {line.text}
@@ -3238,10 +3279,12 @@ function Lesson() {
                   </h3>
 
                   {/* Play All Culture Dialogue Button */}
-                  <div className="flex justify-center mb-4">
+                  <div className="flex justify-center gap-3 mb-4">
                     <button
                       onClick={async () => {
+                        dialogueAbortRef.current = false
                         for (let i = 0; i < lesson.cultural_comic.panels.length; i++) {
+                          if (dialogueAbortRef.current) break
                           setCulturePlayingIndex(i)
                           speak(lesson.cultural_comic.panels[i].text)
                           const wordCount = lesson.cultural_comic.panels[i].text.split(' ').length
@@ -3255,6 +3298,14 @@ function Lesson() {
                       <Volume2 className="w-5 h-5" />
                       <span>▶ Slušaj cijeli dijalog</span>
                     </button>
+                    {culturePlayingIndex >= 0 && (
+                      <button
+                        onClick={stopDialoguePlayback}
+                        className="px-6 py-3 bg-red-500 text-white rounded-xl font-medium hover:bg-red-600 transition-all inline-flex items-center space-x-2 shadow-lg"
+                      >
+                        <span>⏹ Zaustavi</span>
+                      </button>
+                    )}
                   </div>
                   
                   {/* Comic container with background */}
@@ -3319,9 +3370,12 @@ function Lesson() {
                                 </div>
                                 <button
                                   onClick={() => {
-                                    setCulturePlayingIndex(index)
-                                    speak(panel.text)
-                                    setTimeout(() => setCulturePlayingIndex(-1), 2000)
+                                    stopDialoguePlayback()
+                                    setTimeout(() => {
+                                      setCulturePlayingIndex(index)
+                                      speak(panel.text)
+                                      setTimeout(() => setCulturePlayingIndex(-1), 2000)
+                                    }, 100)
                                   }}
                                   className={`p-1 rounded-full transition-all ${
                                     isPlaying ? 'bg-purple-200 text-purple-600 animate-pulse' : 'hover:bg-blue-100 text-bosnia-blue'
@@ -3336,9 +3390,12 @@ function Lesson() {
                                   isPlaying ? 'text-purple-800' : 'text-gray-800 hover:text-bosnia-blue'
                                 }`}
                                 onClick={() => {
-                                  setCulturePlayingIndex(index)
-                                  speak(panel.text)
-                                  setTimeout(() => setCulturePlayingIndex(-1), 2000)
+                                  stopDialoguePlayback()
+                                  setTimeout(() => {
+                                    setCulturePlayingIndex(index)
+                                    speak(panel.text)
+                                    setTimeout(() => setCulturePlayingIndex(-1), 2000)
+                                  }, 100)
                                 }}
                               >
                                 {panel.text}
