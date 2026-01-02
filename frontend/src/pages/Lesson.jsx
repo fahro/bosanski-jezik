@@ -65,6 +65,11 @@ function Lesson() {
     currentAudioIndex: -1,
     checked: {}
   })
+  const [scrambleExercises, setScrambleExercises] = useState({
+    answers: {},
+    showResults: false,
+    currentLetters: {}
+  })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
 
@@ -112,6 +117,7 @@ function Lesson() {
     setMatchingExercises({ answers: {}, showResults: false })
     setTranslationExercises({ answers: {}, showResults: false })
     setWritingExercises({ answers: {}, showResults: false, isPlayingAudio: false, currentAudioIndex: -1, checked: {} })
+    setScrambleExercises({ answers: {}, showResults: false, currentLetters: {} })
     setActiveExerciseType('fillBlank')
     setTranslationInputs({})
     setMatchedPairs({})
@@ -1428,7 +1434,8 @@ function Lesson() {
     { id: 'sentenceOrder', label: 'Složi rečenicu', icon: '🔀' },
     { id: 'matching', label: 'Spoji parove', icon: '🔗' },
     { id: 'translation', label: 'Prevedi', icon: '🌍' },
-    { id: 'writing', label: 'Piši', icon: '✍️' }
+    { id: 'writing', label: 'Piši', icon: '✍️' },
+    { id: 'scramble', label: 'Pomiješana slova', icon: '🎲' }
   ]
 
   return (
@@ -2288,6 +2295,197 @@ function Lesson() {
                   </div>
                 </div>
               )}
+
+              {/* Word Scramble Exercises */}
+              {activeExerciseType === 'scramble' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🎲 Pomiješana slova</h3>
+                  <p className="text-gray-600 mb-4">Klikni na slova redom da sastaviš bosansku riječ</p>
+
+                  <div className="space-y-6">
+                    {(() => {
+                      const scrambleList = lesson?.exercises?.find(e => e.type === 'scramble')?.content?.words || 
+                        lesson?.vocabulary?.slice(0, 6).map(v => ({ english: v.english, bosnian: v.bosnian })) || []
+                      
+                      const shuffleWord = (word, id) => {
+                        if (scrambleExercises.currentLetters[id]) return scrambleExercises.currentLetters[id]
+                        const letters = word.toUpperCase().split('')
+                        for (let i = letters.length - 1; i > 0; i--) {
+                          const j = Math.floor(Math.random() * (i + 1));
+                          [letters[i], letters[j]] = [letters[j], letters[i]]
+                        }
+                        return letters
+                      }
+
+                      const getScrambleScore = () => {
+                        let correct = 0
+                        scrambleList.forEach((item, idx) => {
+                          const answer = scrambleExercises.answers[idx]
+                          if (answer && answer.join('').toLowerCase() === item.bosnian.toLowerCase()) {
+                            correct++
+                          }
+                        })
+                        return correct
+                      }
+
+                      const resetScrambleExercises = () => {
+                        setScrambleExercises({ answers: {}, showResults: false, currentLetters: {} })
+                      }
+
+                      return (
+                        <>
+                          {scrambleList.map((item, idx) => {
+                            const shuffledLetters = shuffleWord(item.bosnian, idx)
+                            if (!scrambleExercises.currentLetters[idx]) {
+                              setScrambleExercises(prev => ({
+                                ...prev,
+                                currentLetters: { ...prev.currentLetters, [idx]: shuffledLetters }
+                              }))
+                            }
+                            const currentShuffled = scrambleExercises.currentLetters[idx] || shuffledLetters
+                            const userAnswer = scrambleExercises.answers[idx] || []
+                            const usedIndices = scrambleExercises.answers[`${idx}_used`] || []
+                            const isCorrect = userAnswer.join('').toLowerCase() === item.bosnian.toLowerCase()
+                            const isComplete = userAnswer.length === item.bosnian.length
+
+                            const handleLetterClick = (letter, letterIdx) => {
+                              if (scrambleExercises.showResults || usedIndices.includes(letterIdx)) return
+                              setScrambleExercises(prev => ({
+                                ...prev,
+                                answers: {
+                                  ...prev.answers,
+                                  [idx]: [...userAnswer, letter],
+                                  [`${idx}_used`]: [...usedIndices, letterIdx]
+                                }
+                              }))
+                            }
+
+                            const handleRemoveLetter = (removeIdx) => {
+                              if (scrambleExercises.showResults) return
+                              const newAnswer = userAnswer.filter((_, i) => i !== removeIdx)
+                              const newUsed = usedIndices.filter((_, i) => i !== removeIdx)
+                              setScrambleExercises(prev => ({
+                                ...prev,
+                                answers: {
+                                  ...prev.answers,
+                                  [idx]: newAnswer,
+                                  [`${idx}_used`]: newUsed
+                                }
+                              }))
+                            }
+
+                            return (
+                              <div
+                                key={idx}
+                                className={`p-4 rounded-xl border-2 transition-all ${
+                                  scrambleExercises.showResults
+                                    ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                                    : isComplete
+                                      ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-yellow-50 border-yellow-300'
+                                      : 'bg-white border-gray-200'
+                                }`}
+                              >
+                                <div className="flex items-center space-x-2 mb-4">
+                                  <span className="bg-bosnia-blue text-white px-2 py-1 rounded-md text-sm font-bold">#{idx + 1}</span>
+                                  <span className="text-gray-700 font-medium">🇬🇧 {item.english}</span>
+                                  {isComplete && isCorrect && <span className="text-green-500 text-xl">✓</span>}
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                  {/* Available letters */}
+                                  <div>
+                                    <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide text-center">🔤 Dostupna slova</div>
+                                    <div className="bg-blue-50 rounded-xl p-3 min-h-[60px] border-2 border-dashed border-blue-200">
+                                      <div className="flex flex-wrap gap-2 justify-center">
+                                        {currentShuffled.map((letter, letterIdx) => (
+                                          <button
+                                            key={letterIdx}
+                                            onClick={() => handleLetterClick(letter, letterIdx)}
+                                            disabled={usedIndices.includes(letterIdx) || scrambleExercises.showResults}
+                                            className={`w-10 h-10 rounded-lg font-bold text-lg transition-all ${
+                                              usedIndices.includes(letterIdx)
+                                                ? 'bg-gray-200 text-gray-400 cursor-not-allowed opacity-50'
+                                                : 'bg-bosnia-blue text-white hover:bg-blue-700 hover:scale-110 cursor-pointer shadow-md'
+                                            }`}
+                                          >
+                                            {letter}
+                                          </button>
+                                        ))}
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  {/* Built word */}
+                                  <div>
+                                    <div className="text-xs text-gray-500 mb-2 font-medium uppercase tracking-wide text-center">📝 Tvoja riječ</div>
+                                    <div className={`rounded-xl p-3 min-h-[60px] border-2 ${
+                                      scrambleExercises.showResults || isComplete
+                                        ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                                        : 'bg-green-50 border-dashed border-green-300'
+                                    }`}>
+                                      <div className="flex flex-wrap gap-2 justify-center min-h-[40px] items-center">
+                                        {userAnswer.length === 0 ? (
+                                          <span className="text-gray-400 text-sm italic">Klikni na slova...</span>
+                                        ) : (
+                                          userAnswer.map((letter, i) => (
+                                            <button
+                                              key={i}
+                                              onClick={() => handleRemoveLetter(i)}
+                                              disabled={scrambleExercises.showResults}
+                                              className={`w-10 h-10 rounded-lg font-bold text-lg transition-all ${
+                                                scrambleExercises.showResults || isComplete
+                                                  ? isCorrect ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                                                  : 'bg-green-600 text-white hover:bg-red-500 cursor-pointer shadow-md'
+                                              }`}
+                                              title={!scrambleExercises.showResults ? "Klikni da ukloniš" : ""}
+                                            >
+                                              {letter}
+                                            </button>
+                                          ))
+                                        )}
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {(scrambleExercises.showResults || isComplete) && !isCorrect && (
+                                  <div className="mt-3 p-2 bg-red-100 rounded-lg text-sm text-red-700">
+                                    ✓ Tačna riječ: <strong>{item.bosnian.toUpperCase()}</strong>
+                                  </div>
+                                )}
+                                {isComplete && isCorrect && (
+                                  <div className="mt-3 p-2 bg-green-100 rounded-lg text-sm text-green-700">
+                                    ✓ Odlično! Tačna riječ!
+                                  </div>
+                                )}
+                              </div>
+                            )
+                          })}
+
+                          {/* Results section */}
+                          <div className="flex flex-col items-center space-y-4 mt-6">
+                            {!scrambleExercises.showResults ? (
+                              <button
+                                onClick={() => setScrambleExercises(prev => ({ ...prev, showResults: true }))}
+                                className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
+                              >
+                                ✓ Provjeri sve
+                              </button>
+                            ) : (
+                              <div className="text-center space-y-4 p-4 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border border-green-200">
+                                <div className="text-xl">Rezultat: <strong className="text-bosnia-blue">{getScrambleScore()}</strong> / {scrambleList.length}</div>
+                                <button onClick={resetScrambleExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
+                                  <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </>
+                      )
+                    })()}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -3006,6 +3204,15 @@ function Lesson() {
           </button>
         )}
         {activeTab === 'exercises' && activeExerciseType === 'writing' && (
+          <button
+            onClick={() => { setActiveExerciseType('scramble'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Pomiješana slova</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'scramble' && (
           <button
             onClick={() => { setActiveTab('dialogue'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
