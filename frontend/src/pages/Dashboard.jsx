@@ -154,6 +154,10 @@ export default function Dashboard() {
       }
       
       setAvailableLevels(levels)
+      
+      // Set default to highest available level
+      const highestLevel = levels[levels.length - 1]
+      setSelectedLevel(highestLevel)
     } catch (error) {
       console.error('Failed to check level access:', error)
     }

@@ -1736,22 +1736,41 @@ function Lesson() {
                 <span>Vježbajmo gramatiku!</span>
               </h2>
               
-              {/* Exercise type selector */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {exerciseTypes.map(type => (
+              {/* Exercise type selector - improved grid layout */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 p-4 bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl border border-gray-200">
+                {exerciseTypes.map(type => {
+                  // Check if exercise is completed
+                  const isCompleted = 
+                    (type.id === 'fillBlank' && grammarExercises.showResults) ||
+                    (type.id === 'sentenceOrder' && sentenceExercises.showResults) ||
+                    (type.id === 'matching' && matchingExercises.showResults) ||
+                    (type.id === 'translation' && translationExercises.showResults) ||
+                    (type.id === 'writing' && getCompletedCount() === writingList.length && writingList.length > 0) ||
+                    (type.id === 'imageQuiz' && imageQuizExercises.showResults) ||
+                    (type.id === 'listenType' && listenTypeExercises.showResults) ||
+                    (type.id === 'dialogueFill' && dialogueFillExercises.showResults)
+                  
+                  return (
                   <button
                     key={type.id}
                     onClick={() => setActiveExerciseType(type.id)}
-                    className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center space-x-2 ${
+                    className={`relative p-3 rounded-xl font-medium transition-all flex flex-col items-center justify-center gap-1 min-h-[70px] ${
                       activeExerciseType === type.id
-                        ? 'bg-bosnia-blue text-white shadow-md'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-bosnia-blue text-white shadow-lg scale-105 ring-2 ring-bosnia-blue ring-offset-2'
+                        : isCompleted
+                          ? 'bg-green-100 text-green-700 border-2 border-green-300 hover:bg-green-200'
+                          : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-100 hover:border-gray-300'
                     }`}
                   >
-                    <span>{type.icon}</span>
-                    <span>{type.label}</span>
+                    {isCompleted && activeExerciseType !== type.id && (
+                      <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                        <CheckCircle className="w-3 h-3 text-white" />
+                      </div>
+                    )}
+                    <span className="text-xl">{type.icon}</span>
+                    <span className="text-xs text-center leading-tight">{type.label}</span>
                   </button>
-                ))}
+                )})}
               </div>
 
               {/* Fill in the Blank Exercises */}
