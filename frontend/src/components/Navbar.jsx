@@ -29,10 +29,6 @@ function Navbar() {
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-6">
-            <Link to="/levels" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
-              Nivoi
-            </Link>
-            
             {isAuthenticated ? (
               <div className="flex items-center gap-4">
                 <Link to="/dashboard" className="text-sm text-gray-600 hover:text-gray-900 transition-colors">
@@ -84,14 +80,6 @@ function Navbar() {
               >
                 Početna
               </Link>
-              <Link
-                to="/levels"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
-              >
-                Nivoi
-              </Link>
-
               {isAuthenticated ? (
                 <>
                   <Link
