@@ -1043,6 +1043,11 @@ function Lesson() {
   const matchingList = currentExercises.matching || []
   const translationList = currentExercises.translation || []
   const writingList = currentExercises.writing || []
+  
+  // Shuffled matching list for right column (stable shuffle)
+  const shuffledMatchingList = useMemo(() => {
+    return [...matchingList].sort(() => 0.5 - Math.random())
+  }, [matchingList.length, lesson?.id])
 
   // Get options for fill-blank based on lesson
   const getVerbOptions = () => {
@@ -2047,14 +2052,40 @@ function Lesson() {
               {/* Matching Exercises */}
               {activeExerciseType === 'matching' && (
                 <div className="animate-fadeIn">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🔗 Spoji parove</h3>
-                  <p className="text-gray-600 mb-4">Kliknite na bosansku riječ, zatim na engleski prijevod</p>
+                  <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-6 mb-6 border border-purple-100">
+                    <h3 className="text-xl font-bold text-gray-800 mb-2 flex items-center gap-2">
+                      🔗 Spoji parove
+                    </h3>
+                    <p className="text-gray-600">Kliknite na riječ s lijeve strane, zatim odaberite odgovarajući par s desne strane</p>
+                    <div className="mt-3 flex items-center gap-4 text-sm">
+                      <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-bosnia-blue"></span> Odabrano</span>
+                      <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-green-500"></span> Tačno</span>
+                      <span className="flex items-center gap-1"><span className="w-3 h-3 rounded-full bg-red-500"></span> Netačno</span>
+                    </div>
+                  </div>
 
-                  <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                      <h4 className="font-medium text-gray-700 mb-3">Bosanski</h4>
+                  {/* Progress indicator */}
+                  <div className="mb-4">
+                    <div className="flex justify-between text-sm text-gray-600 mb-1">
+                      <span>Napredak</span>
+                      <span>{Object.keys(matchedPairs).length} / {matchingList.length}</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-gradient-to-r from-bosnia-blue to-purple-500 h-2 rounded-full transition-all duration-300"
+                        style={{ width: `${(Object.keys(matchedPairs).length / matchingList.length) * 100}%` }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Left column */}
+                    <div className="bg-white rounded-xl p-4 border-2 border-gray-100 shadow-sm">
+                      <h4 className="font-semibold text-gray-700 mb-3 text-center pb-2 border-b border-gray-100">
+                        🇧🇦 Odaberite
+                      </h4>
                       <div className="space-y-2">
-                        {matchingList.map(item => {
+                        {matchingList.map((item, index) => {
                           const isMatched = matchedPairs[item.id]
                           const isSelected = selectedBosnian?.id === item.id
                           const isCorrect = matchingExercises.showResults && matchedPairs[item.id] === item.english
@@ -2065,38 +2096,67 @@ function Lesson() {
                               key={item.id}
                               onClick={() => handleMatchClick('bosnian', item.id, item.bosnian)}
                               disabled={isMatched || matchingExercises.showResults}
-                              className={`w-full p-3 rounded-lg text-left transition-all ${
-                                isCorrect ? 'bg-green-100 border-2 border-green-400' :
-                                isWrong ? 'bg-red-100 border-2 border-red-400' :
-                                isMatched ? 'bg-gray-100 text-gray-400' :
-                                isSelected ? 'bg-bosnia-blue text-white' :
-                                'bg-white border-2 border-gray-200 hover:border-bosnia-blue'
+                              className={`w-full p-4 rounded-xl text-left transition-all flex items-center justify-between group ${
+                                isCorrect ? 'bg-green-100 border-2 border-green-400 shadow-sm' :
+                                isWrong ? 'bg-red-100 border-2 border-red-400 shadow-sm' :
+                                isMatched ? 'bg-gray-50 text-gray-400 border-2 border-gray-200' :
+                                isSelected ? 'bg-bosnia-blue text-white shadow-lg scale-[1.02] border-2 border-bosnia-blue' :
+                                'bg-gray-50 border-2 border-gray-200 hover:border-bosnia-blue hover:bg-blue-50 hover:shadow-md'
                               }`}
                             >
-                              {item.bosnian}
-                              {isMatched && <span className="float-right text-sm">→ {matchedPairs[item.id]}</span>}
+                              <span className="flex items-center gap-3">
+                                <span className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-bold ${
+                                  isCorrect ? 'bg-green-500 text-white' :
+                                  isWrong ? 'bg-red-500 text-white' :
+                                  isSelected ? 'bg-white text-bosnia-blue' :
+                                  'bg-gray-200 text-gray-600 group-hover:bg-bosnia-blue group-hover:text-white'
+                                }`}>
+                                  {index + 1}
+                                </span>
+                                <span className="font-medium">{item.bosnian}</span>
+                              </span>
+                              {isMatched && (
+                                <span className={`text-sm px-2 py-1 rounded-lg ${
+                                  isCorrect ? 'bg-green-200 text-green-700' : 
+                                  isWrong ? 'bg-red-200 text-red-700' : 
+                                  'bg-gray-200 text-gray-600'
+                                }`}>
+                                  → {matchedPairs[item.id]}
+                                </span>
+                              )}
                             </button>
                           )
                         })}
                       </div>
                     </div>
-                    <div>
-                      <h4 className="font-medium text-gray-700 mb-3">English</h4>
+
+                    {/* Right column */}
+                    <div className="bg-white rounded-xl p-4 border-2 border-gray-100 shadow-sm">
+                      <h4 className="font-semibold text-gray-700 mb-3 text-center pb-2 border-b border-gray-100">
+                        🎯 Spoji sa
+                      </h4>
                       <div className="space-y-2">
-                        {[...matchingList].sort(() => Math.random() - 0.5).map(item => {
+                        {shuffledMatchingList.map((item, index) => {
                           const isUsed = Object.values(matchedPairs).includes(item.english)
                           return (
                             <button
                               key={item.english}
                               onClick={() => handleMatchClick('english', item.id, item.english)}
                               disabled={isUsed || !selectedBosnian || matchingExercises.showResults}
-                              className={`w-full p-3 rounded-lg text-left transition-all ${
-                                isUsed ? 'bg-gray-100 text-gray-400' :
-                                selectedBosnian ? 'bg-white border-2 border-gray-200 hover:border-green-400 hover:bg-green-50' :
-                                'bg-white border-2 border-gray-200'
+                              className={`w-full p-4 rounded-xl text-left transition-all flex items-center gap-3 ${
+                                isUsed ? 'bg-gray-100 text-gray-400 border-2 border-gray-200' :
+                                selectedBosnian ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-2 border-green-200 hover:border-green-400 hover:shadow-md cursor-pointer' :
+                                'bg-gray-50 border-2 border-gray-200 cursor-not-allowed opacity-60'
                               }`}
                             >
-                              {item.english}
+                              <span className={`w-7 h-7 rounded-full flex items-center justify-center text-sm ${
+                                isUsed ? 'bg-gray-200 text-gray-400' :
+                                selectedBosnian ? 'bg-green-200 text-green-700' :
+                                'bg-gray-200 text-gray-500'
+                              }`}>
+                                {isUsed ? '✓' : String.fromCharCode(65 + index)}
+                              </span>
+                              <span className="font-medium">{item.english}</span>
                             </button>
                           )
                         })}
@@ -2106,14 +2166,23 @@ function Lesson() {
 
                   <div className="flex justify-center space-x-4 mt-6">
                     {!matchingExercises.showResults ? (
-                      <button onClick={checkMatchingExercises} disabled={Object.keys(matchedPairs).length < matchingList.length} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors disabled:bg-gray-300">
-                        Provjeri ({Object.keys(matchedPairs).length}/{matchingList.length})
+                      <button 
+                        onClick={checkMatchingExercises} 
+                        disabled={Object.keys(matchedPairs).length < matchingList.length} 
+                        className="px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-700 transition-all disabled:from-gray-300 disabled:to-gray-400 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                      >
+                        ✓ Provjeri odgovore
                       </button>
                     ) : (
-                      <div className="text-center">
-                        <div className="mb-4 text-xl">Rezultat: <strong className="text-bosnia-blue">{getMatchingScore()}</strong> / {matchingList.length}</div>
-                        <button onClick={resetMatchingExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2">
-                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                      <div className="text-center bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
+                        <div className="text-3xl font-bold mb-2">
+                          {getMatchingScore() === matchingList.length ? '🎉' : getMatchingScore() >= matchingList.length / 2 ? '👍' : '💪'}
+                        </div>
+                        <div className="mb-4 text-2xl">
+                          Rezultat: <strong className="text-bosnia-blue">{getMatchingScore()}</strong> / {matchingList.length}
+                        </div>
+                        <button onClick={resetMatchingExercises} className="px-6 py-3 bg-bosnia-blue text-white rounded-xl font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2 shadow-md">
+                          <RefreshCw className="w-5 h-5" /><span>Pokušaj ponovo</span>
                         </button>
                       </div>
                     )}
