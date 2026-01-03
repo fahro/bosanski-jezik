@@ -42,8 +42,9 @@ from app.data.a2_lessons import A2_LESSONS
 from app.data.b1_lessons import B1_LESSONS
 from app.data.b1_lessons_2 import B1_LESSONS_PART2
 from app.data.b1_lessons_3 import B1_LESSONS_PART3
+from app.data.b2_lessons import B2_LESSONS
 
-ALL_LESSONS = A1_LESSONS + A1_LESSONS_PART2 + A1_LESSONS_PART3 + A1_LESSONS_PART4 + A2_LESSONS + B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3
+ALL_LESSONS = A1_LESSONS + A1_LESSONS_PART2 + A1_LESSONS_PART3 + A1_LESSONS_PART4 + A2_LESSONS + B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3 + B2_LESSONS
 
 # Configuration
 OUTPUT_DIR = Path("static/images/vocabulary")

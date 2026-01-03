@@ -52,10 +52,26 @@ const B1_LESSONS = [
   { id: 12, title: 'Budućnost', subtitle: 'Future & Dreams', emoji: '🔮' }
 ]
 
+const B2_LESSONS = [
+  { id: 1, title: 'Na aerodromu', subtitle: 'At the Airport', emoji: '✈️' },
+  { id: 2, title: 'U supermarketu', subtitle: 'At the Supermarket', emoji: '🛒' },
+  { id: 3, title: 'Na benzinskoj pumpi', subtitle: 'At the Gas Station', emoji: '⛽' },
+  { id: 4, title: 'U banci', subtitle: 'At the Bank', emoji: '🏦' },
+  { id: 5, title: 'Kod automehaničara', subtitle: 'At the Mechanic', emoji: '🔧' },
+  { id: 6, title: 'U hotelu', subtitle: 'At the Hotel', emoji: '🏨' },
+  { id: 7, title: 'Na pošti', subtitle: 'At the Post Office', emoji: '📮' },
+  { id: 8, title: 'U frizerskom salonu', subtitle: 'At the Hair Salon', emoji: '💇' },
+  { id: 9, title: 'U ambasadi', subtitle: 'At the Embassy', emoji: '🏛️' },
+  { id: 10, title: 'Kod agenta za nekretnine', subtitle: 'Real Estate', emoji: '🏠' },
+  { id: 11, title: 'Na autobuskoj stanici', subtitle: 'At the Bus Station', emoji: '🚌' },
+  { id: 12, title: 'U turističkoj agenciji', subtitle: 'Travel Agency', emoji: '🌍' }
+]
+
 const LEVEL_INFO = {
   a1: { name: 'A1 - Početnik', color: '#22c55e', lessons: A1_LESSONS, gradient: 'from-green-500 to-emerald-600' },
   a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS, gradient: 'from-blue-500 to-blue-600' },
-  b1: { name: 'B1 - Srednji', color: '#8b5cf6', lessons: B1_LESSONS, gradient: 'from-purple-500 to-purple-600' }
+  b1: { name: 'B1 - Srednji', color: '#8b5cf6', lessons: B1_LESSONS, gradient: 'from-purple-500 to-purple-600' },
+  b2: { name: 'B2 - Viši srednji', color: '#f59e0b', lessons: B2_LESSONS, gradient: 'from-amber-500 to-orange-600' }
 }
 
 function FinalTestCard({ level, allProgress }) {
@@ -66,7 +82,8 @@ function FinalTestCard({ level, allProgress }) {
   const levelColors = {
     a1: { bg: 'from-green-500 to-emerald-600', text: 'text-green-600', button: 'text-green-600 hover:bg-green-50' },
     a2: { bg: 'from-blue-500 to-blue-600', text: 'text-blue-600', button: 'text-blue-600 hover:bg-blue-50' },
-    b1: { bg: 'from-purple-500 to-purple-600', text: 'text-purple-600', button: 'text-purple-600 hover:bg-purple-50' }
+    b1: { bg: 'from-purple-500 to-purple-600', text: 'text-purple-600', button: 'text-purple-600 hover:bg-purple-50' },
+    b2: { bg: 'from-amber-500 to-orange-600', text: 'text-amber-600', button: 'text-amber-600 hover:bg-amber-50' }
   }
   const colors = levelColors[level] || levelColors.a1
 
@@ -151,6 +168,12 @@ export default function Dashboard() {
       const b1Access = await progressApi.checkLevelAccess('b1')
       if (b1Access.has_access) {
         levels.push('b1')
+      }
+      
+      // Check access to B2
+      const b2Access = await progressApi.checkLevelAccess('b2')
+      if (b2Access.has_access) {
+        levels.push('b2')
       }
       
       setAvailableLevels(levels)
@@ -303,6 +326,8 @@ export default function Dashboard() {
               ? 'bg-gradient-to-br from-green-500 to-green-600' 
               : selectedLevel === 'a2'
               ? 'bg-gradient-to-br from-bosnia-blue to-blue-600'
+              : selectedLevel === 'b2'
+              ? 'bg-gradient-to-br from-amber-500 to-orange-600'
               : 'bg-gradient-to-br from-purple-500 to-purple-600'
           }`}
         >
@@ -320,7 +345,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className={`p-4 rounded-2xl group-hover:scale-110 transition-transform ${
-              selectedLevel === 'a1' ? 'bg-white text-green-600' : selectedLevel === 'a2' ? 'bg-white text-bosnia-blue' : 'bg-white text-purple-600'
+              selectedLevel === 'a1' ? 'bg-white text-green-600' : selectedLevel === 'a2' ? 'bg-white text-bosnia-blue' : selectedLevel === 'b2' ? 'bg-white text-amber-600' : 'bg-white text-purple-600'
             }`}>
               <Play className="w-6 h-6" />
             </div>

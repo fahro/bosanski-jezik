@@ -1747,14 +1747,14 @@ function Lesson() {
   ]
 
   const exerciseTypes = [
-    { id: 'fillBlank', label: 'Popuni prazninu', icon: '✏️' },
-    { id: 'sentenceOrder', label: 'Složi rečenicu', icon: '🔀' },
-    { id: 'matching', label: 'Spoji parove', icon: '🔗' },
-    { id: 'translation', label: 'Prevedi', icon: '🌍' },
-    { id: 'writing', label: 'Piši', icon: '✍️' },
-    { id: 'imageQuiz', label: 'Prepoznaj sliku', icon: '🖼️' },
-    { id: 'listenType', label: 'Slušaj i piši', icon: '🎧' },
-    { id: 'dialogueFill', label: 'Dopuni dijalog', icon: '💬' }
+    { id: 'fillBlank', label: 'Popuni prazninu', labelEn: 'Fill in the blank', icon: '✏️' },
+    { id: 'sentenceOrder', label: 'Složi rečenicu', labelEn: 'Build the sentence', icon: '🔀' },
+    { id: 'matching', label: 'Spoji parove', labelEn: 'Match pairs', icon: '🔗' },
+    { id: 'translation', label: 'Prevedi', labelEn: 'Translate', icon: '🌍' },
+    { id: 'writing', label: 'Piši', labelEn: 'Write', icon: '✍️' },
+    { id: 'imageQuiz', label: 'Prepoznaj sliku', labelEn: 'Identify the image', icon: '🖼️' },
+    { id: 'listenType', label: 'Slušaj i piši', labelEn: 'Listen & type', icon: '🎧' },
+    { id: 'dialogueFill', label: 'Dopuni dijalog', labelEn: 'Complete dialogue', icon: '💬' }
   ]
 
   return (
@@ -2045,6 +2045,7 @@ function Lesson() {
                     )}
                     <span className="text-xl">{type.icon}</span>
                     <span className="text-xs text-center leading-tight">{type.label}</span>
+                    <span className="text-[10px] text-center leading-tight opacity-70">{type.labelEn}</span>
                   </button>
                 )})}
               </div>

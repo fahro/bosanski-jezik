@@ -16,6 +16,7 @@ from app.data.a2_lessons import A2_LESSONS
 from app.data.b1_lessons import B1_LESSONS
 from app.data.b1_lessons_2 import B1_LESSONS_PART2
 from app.data.b1_lessons_3 import B1_LESSONS_PART3
+from app.data.b2_lessons import B2_LESSONS
 
 # Combine B1 lessons
 B1_ALL_LESSONS = B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3
@@ -24,7 +25,8 @@ B1_ALL_LESSONS = B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3
 LEVEL_LESSONS = {
     "a1": A1_LESSONS,
     "a2": A2_LESSONS,
-    "b1": B1_ALL_LESSONS
+    "b1": B1_ALL_LESSONS,
+    "b2": B2_LESSONS
 }
 
 # Next level mapping

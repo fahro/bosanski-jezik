@@ -86,10 +86,11 @@ async def get_user_stats(
     final_passed = any(a.passed for a in final_attempts)
     best_final = max((a.percentage for a in final_attempts), default=None)
     
-    # Level info
-    level_config = LEVEL_CONFIG.get(current_user.current_level, LEVEL_CONFIG[1])
+    # Level info (XP-based level 1-20, not lesson level like "b2")
+    xp_level = calculate_level(current_user.total_xp)
+    level_config = LEVEL_CONFIG.get(xp_level, LEVEL_CONFIG[1])
     current_level_min_xp = level_config["min_xp"]
-    next_level_xp = get_xp_for_next_level(current_user.current_level)
+    next_level_xp = get_xp_for_next_level(xp_level)
     xp_progress = current_user.total_xp - current_level_min_xp
     
     return {
@@ -586,7 +587,45 @@ async def check_level_access(
             "requirement": f"Završite sve A2 lekcije ({a2_completed}/12)"
         }
     
-    # For other levels (B2, C1, C2) - not yet implemented
+    # B2 requires completing all B1 lessons or passing B1 final test
+    if level == "b2":
+        # Check if user has any B2 progress
+        b2_progress = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "b2"
+        ).first()
+        
+        if b2_progress:
+            return {"has_access": True, "level": level, "reason": "Završili ste B1 nivo"}
+        
+        # Check if user passed B1 final test
+        passed_b1 = db.query(FinalTestAttempt).filter(
+            FinalTestAttempt.user_id == current_user.id,
+            FinalTestAttempt.level == "b1",
+            FinalTestAttempt.passed == True
+        ).first()
+        
+        if passed_b1:
+            return {"has_access": True, "level": level, "reason": "Položili ste završni test B1 nivoa"}
+        
+        # Check if user completed all B1 lessons
+        b1_completed = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "b1",
+            LessonProgress.completed == True
+        ).count()
+        
+        if b1_completed >= 12:
+            return {"has_access": True, "level": level, "reason": "Završili ste sve B1 lekcije"}
+        
+        return {
+            "has_access": False, 
+            "level": level, 
+            "reason": "Morate završiti sve B1 lekcije da biste otključali B2",
+            "requirement": f"Završite sve B1 lekcije ({b1_completed}/12)"
+        }
+    
+    # For other levels (C1, C2) - not yet implemented
     return {
         "has_access": False, 
         "level": level, 

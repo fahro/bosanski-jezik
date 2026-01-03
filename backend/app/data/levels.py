@@ -23,7 +23,7 @@ LEVELS = [
     {
         "id": "b2",
         "name": "B2 - Viši srednji",
-        "description": "Napredne teme: politika, ekonomija, nauka, umjetnost",
+        "description": "Napredne teme: konjunktiv, idiomi, poslovna komunikacija, umjetnost, politika, nauka, filozofija, ekologija, psihologija, ekonomija, pravo, historija",
         "total_lessons": 12,
         "color": "#f59e0b"
     },
