@@ -13,6 +13,25 @@ import { useSpeech } from '../hooks/useSpeech'
 import { useAuth } from '../context/AuthContext'
 import { api, progressApi } from '../api'
 
+// Normalize Bosnian characters for answer comparison (č/ć→c, š→s, đ→dj, ž→z)
+const normalizeBosnian = (text) => {
+  if (!text) return ''
+  return text
+    .toLowerCase()
+    .trim()
+    .replace(/č/g, 'c')
+    .replace(/ć/g, 'c')
+    .replace(/š/g, 's')
+    .replace(/đ/g, 'dj')
+    .replace(/ž/g, 'z')
+    .replace(/[.!?,;:]+$/g, '')
+}
+
+// Compare answers with Bosnian character tolerance
+const compareAnswers = (userAnswer, correctAnswer) => {
+  return normalizeBosnian(userAnswer) === normalizeBosnian(correctAnswer)
+}
+
 function Lesson() {
   const { lessonId } = useParams()
   const [searchParams] = useSearchParams()
@@ -375,9 +394,7 @@ function Lesson() {
   // Handle writing quiz answers
   const handleQuizWritingSubmit = async () => {
     const currentQ = lesson.quiz[quizState.currentQuestion]
-    const userAnswer = quizWritingInput.toLowerCase().trim().replace(/[.!?,;:]+$/, '')
-    const correctAnswer = currentQ.correct_answer_text.toLowerCase().trim().replace(/[.!?,;:]+$/, '')
-    const isCorrect = userAnswer === correctAnswer
+    const isCorrect = compareAnswers(quizWritingInput, currentQ.correct_answer_text)
     
     // Store answer at the correct question index
     const newAnswers = { ...quizState.answers }
@@ -475,14 +492,23 @@ function Lesson() {
         { id: 3, sentence: "On _____ moj prijatelj.", answer: "je", translation: "He is my friend.", options: ["sam", "si", "je", "su"] },
         { id: 4, sentence: "Mi _____ iz Bosne.", answer: "smo", translation: "We are from Bosnia.", options: ["sam", "smo", "ste", "su"] },
         { id: 5, sentence: "Vi _____ dobrodošli!", answer: "ste", translation: "You are welcome!", options: ["si", "smo", "ste", "su"] },
-        { id: 6, sentence: "Oni _____ u Sarajevu.", answer: "su", translation: "They are in Sarajevo.", options: ["je", "smo", "ste", "su"] }
+        { id: 6, sentence: "Oni _____ u Sarajevu.", answer: "su", translation: "They are in Sarajevo.", options: ["je", "smo", "ste", "su"] },
+        { id: 7, sentence: "Ona _____ moja sestra.", answer: "je", translation: "She is my sister.", options: ["sam", "si", "je", "su"] },
+        { id: 8, sentence: "_____ sam dobro, hvala.", answer: "Ja", translation: "I am fine, thank you.", options: ["Ja", "Ti", "On", "Mi"] },
+        { id: 9, sentence: "Kako _____ ti?", answer: "si", translation: "How are you?", options: ["sam", "si", "je", "smo"] },
+        { id: 10, sentence: "Mi _____ studenti.", answer: "smo", translation: "We are students.", options: ["sam", "si", "smo", "ste"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["sam", "Ja", "student"], correct: ["Ja", "sam", "student"], translation: "I am a student." },
         { id: 2, scrambled: ["si", "Kako", "ti"], correct: ["Kako", "si", "ti"], translation: "How are you?" },
         { id: 3, scrambled: ["je", "mi", "Drago"], correct: ["Drago", "mi", "je"], translation: "Nice to meet you." },
         { id: 4, scrambled: ["Sarajeva", "iz", "sam", "Ja"], correct: ["Ja", "sam", "iz", "Sarajeva"], translation: "I am from Sarajevo." },
-        { id: 5, scrambled: ["smo", "Mi", "prijatelji"], correct: ["Mi", "smo", "prijatelji"], translation: "We are friends." }
+        { id: 5, scrambled: ["smo", "Mi", "prijatelji"], correct: ["Mi", "smo", "prijatelji"], translation: "We are friends." },
+        { id: 6, scrambled: ["je", "Ona", "učiteljica"], correct: ["Ona", "je", "učiteljica"], translation: "She is a teacher." },
+        { id: 7, scrambled: ["dobrodošli", "Vi", "ste"], correct: ["Vi", "ste", "dobrodošli"], translation: "You are welcome." },
+        { id: 8, scrambled: ["su", "Oni", "ovdje"], correct: ["Oni", "su", "ovdje"], translation: "They are here." },
+        { id: 9, scrambled: ["sam", "dobro", "Ja"], correct: ["Ja", "sam", "dobro"], translation: "I am fine." },
+        { id: 10, scrambled: ["zoveš", "se", "Kako"], correct: ["Kako", "se", "zoveš"], translation: "What is your name?" }
       ],
       matching: [
         { id: 1, bosnian: "Ja sam", english: "I am" },
@@ -490,13 +516,23 @@ function Lesson() {
         { id: 3, bosnian: "On/Ona je", english: "He/She is" },
         { id: 4, bosnian: "Mi smo", english: "We are" },
         { id: 5, bosnian: "Vi ste", english: "You are (formal)" },
-        { id: 6, bosnian: "Oni su", english: "They are" }
+        { id: 6, bosnian: "Oni su", english: "They are" },
+        { id: 7, bosnian: "Zdravo", english: "Hello" },
+        { id: 8, bosnian: "Doviđenja", english: "Goodbye" },
+        { id: 9, bosnian: "Hvala", english: "Thank you" },
+        { id: 10, bosnian: "Molim", english: "Please" }
       ],
       translation: [
         { id: 1, english: "I am from Sarajevo", bosnian: "Ja sam iz Sarajeva", options: ["Ja sam iz Sarajeva", "Ti si iz Sarajeva", "On je iz Sarajeva", "Mi smo iz Sarajeva"] },
         { id: 2, english: "She is a teacher", bosnian: "Ona je učiteljica", options: ["On je učitelj", "Ona je učiteljica", "Mi smo učitelji", "Ti si učenik"] },
         { id: 3, english: "We are friends", bosnian: "Mi smo prijatelji", options: ["Ja sam prijatelj", "Mi smo prijatelji", "Vi ste prijatelji", "Oni su prijatelji"] },
-        { id: 4, english: "You are welcome", bosnian: "Vi ste dobrodošli", options: ["Ti si dobrodošao", "Vi ste dobrodošli", "Mi smo dobrodošli", "Oni su dobrodošli"] }
+        { id: 4, english: "You are welcome", bosnian: "Vi ste dobrodošli", options: ["Ti si dobrodošao", "Vi ste dobrodošli", "Mi smo dobrodošli", "Oni su dobrodošli"] },
+        { id: 5, english: "How are you?", bosnian: "Kako si?", options: ["Kako si?", "Gdje si?", "Ko si?", "Šta si?"] },
+        { id: 6, english: "I am fine", bosnian: "Ja sam dobro", options: ["Ja sam dobro", "Ti si dobro", "On je dobro", "Loše sam"] },
+        { id: 7, english: "Nice to meet you", bosnian: "Drago mi je", options: ["Drago mi je", "Žao mi je", "Hvala ti", "Molim te"] },
+        { id: 8, english: "What is your name?", bosnian: "Kako se zoveš?", options: ["Kako se zoveš?", "Gdje živiš?", "Koliko imaš godina?", "Odakle si?"] },
+        { id: 9, english: "They are students", bosnian: "Oni su studenti", options: ["Oni su studenti", "Mi smo studenti", "Vi ste studenti", "Ja sam student"] },
+        { id: 10, english: "Good morning", bosnian: "Dobro jutro", options: ["Dobro jutro", "Dobro veče", "Dobar dan", "Laku noć"] }
       ],
       writing: [
         { id: 1, english: "Hello, how are you?", bosnian: "Zdravo, kako si?" },
@@ -519,14 +555,23 @@ function Lesson() {
         { id: 3, sentence: "Ovo je moj _____ dan u školi.", answer: "prvi", translation: "This is my first day at school.", options: ["prvi", "druga", "treći", "peti"] },
         { id: 4, sentence: "Imam _____ sestre.", answer: "dvije", translation: "I have two sisters.", options: ["jedan", "dva", "dvije", "tri"] },
         { id: 5, sentence: "To je _____ lekcija.", answer: "druga", translation: "That is the second lesson.", options: ["prvi", "druga", "treći", "četvrti"] },
-        { id: 6, sentence: "U razredu ima _____ učenika.", answer: "pet", translation: "There are five students in class.", options: ["dva", "tri", "četiri", "pet"] }
+        { id: 6, sentence: "U razredu ima _____ učenika.", answer: "pet", translation: "There are five students in class.", options: ["dva", "tri", "četiri", "pet"] },
+        { id: 7, sentence: "Koliko imaš _____?", answer: "godina", translation: "How old are you?", options: ["godina", "brata", "sestara", "djece"] },
+        { id: 8, sentence: "Imam _____ godina.", answer: "dvadeset", translation: "I am twenty years old.", options: ["deset", "petnaest", "dvadeset", "trideset"] },
+        { id: 9, sentence: "Ovo je _____ put.", answer: "treći", translation: "This is the third time.", options: ["prvi", "drugi", "treći", "četvrti"] },
+        { id: 10, sentence: "Kupila sam _____ knjiga.", answer: "četiri", translation: "I bought four books.", options: ["dva", "tri", "četiri", "pet"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["dan", "prvi", "moj", "je", "Ovo"], correct: ["Ovo", "je", "moj", "prvi", "dan"], translation: "This is my first day." },
         { id: 2, scrambled: ["sestre", "dvije", "Imam"], correct: ["Imam", "dvije", "sestre"], translation: "I have two sisters." },
         { id: 3, scrambled: ["lekcija", "druga", "je", "Ovo"], correct: ["Ovo", "je", "druga", "lekcija"], translation: "This is the second lesson." },
         { id: 4, scrambled: ["jabuke", "tri", "sam", "Kupila"], correct: ["Kupila", "sam", "tri", "jabuke"], translation: "I bought three apples." },
-        { id: 5, scrambled: ["čovjek", "jedan", "Tu", "je"], correct: ["Tu", "je", "jedan", "čovjek"], translation: "There is one man." }
+        { id: 5, scrambled: ["čovjek", "jedan", "Tu", "je"], correct: ["Tu", "je", "jedan", "čovjek"], translation: "There is one man." },
+        { id: 6, scrambled: ["imaš", "godina", "Koliko"], correct: ["Koliko", "imaš", "godina"], translation: "How old are you?" },
+        { id: 7, scrambled: ["pet", "Ima", "učenika"], correct: ["Ima", "pet", "učenika"], translation: "There are five students." },
+        { id: 8, scrambled: ["kafu", "Jednu", "molim"], correct: ["Jednu", "kafu", "molim"], translation: "One coffee, please." },
+        { id: 9, scrambled: ["dvadeset", "Imam", "godina"], correct: ["Imam", "dvadeset", "godina"], translation: "I am twenty years old." },
+        { id: 10, scrambled: ["put", "treći", "je", "Ovo"], correct: ["Ovo", "je", "treći", "put"], translation: "This is the third time." }
       ],
       matching: [
         { id: 1, bosnian: "Prvi", english: "First" },
@@ -534,13 +579,23 @@ function Lesson() {
         { id: 3, bosnian: "Treći", english: "Third" },
         { id: 4, bosnian: "Jedna žena", english: "One woman" },
         { id: 5, bosnian: "Dva brata", english: "Two brothers" },
-        { id: 6, bosnian: "Pet djece", english: "Five children" }
+        { id: 6, bosnian: "Pet djece", english: "Five children" },
+        { id: 7, bosnian: "Deset", english: "Ten" },
+        { id: 8, bosnian: "Dvadeset", english: "Twenty" },
+        { id: 9, bosnian: "Sto", english: "Hundred" },
+        { id: 10, bosnian: "Četvrti", english: "Fourth" }
       ],
       translation: [
         { id: 1, english: "This is my first day", bosnian: "Ovo je moj prvi dan", options: ["Ovo je moj prvi dan", "Ovo je moj drugi dan", "Ovo je moja prva noć", "Ovo je moj treći dan"] },
         { id: 2, english: "I have two sisters", bosnian: "Imam dvije sestre", options: ["Imam jednu sestru", "Imam dvije sestre", "Imam tri sestre", "Imam pet sestara"] },
         { id: 3, english: "One man and two women", bosnian: "Jedan čovjek i dvije žene", options: ["Dva čovjeka i jedna žena", "Jedan čovjek i dvije žene", "Tri čovjeka i pet žena", "Pet ljudi"] },
-        { id: 4, english: "The third lesson", bosnian: "Treća lekcija", options: ["Prva lekcija", "Druga lekcija", "Treća lekcija", "Četvrta lekcija"] }
+        { id: 4, english: "The third lesson", bosnian: "Treća lekcija", options: ["Prva lekcija", "Druga lekcija", "Treća lekcija", "Četvrta lekcija"] },
+        { id: 5, english: "How old are you?", bosnian: "Koliko imaš godina?", options: ["Koliko imaš godina?", "Kako se zoveš?", "Gdje živiš?", "Odakle si?"] },
+        { id: 6, english: "I am twenty years old", bosnian: "Imam dvadeset godina", options: ["Imam deset godina", "Imam dvadeset godina", "Imam trideset godina", "Imam pet godina"] },
+        { id: 7, english: "There are five students", bosnian: "Ima pet učenika", options: ["Ima dva učenika", "Ima tri učenika", "Ima pet učenika", "Ima deset učenika"] },
+        { id: 8, english: "One coffee please", bosnian: "Jednu kafu molim", options: ["Jednu kafu molim", "Dvije kafe molim", "Tri kafe molim", "Pet kafa molim"] },
+        { id: 9, english: "I bought four books", bosnian: "Kupio sam četiri knjige", options: ["Kupio sam dvije knjige", "Kupio sam tri knjige", "Kupio sam četiri knjige", "Kupio sam pet knjiga"] },
+        { id: 10, english: "This is the third time", bosnian: "Ovo je treći put", options: ["Ovo je prvi put", "Ovo je drugi put", "Ovo je treći put", "Ovo je četvrti put"] }
       ],
       writing: [
         { id: 1, english: "I have one brother.", bosnian: "Imam jednog brata." },
@@ -563,14 +618,23 @@ function Lesson() {
         { id: 3, sentence: "Stari Most je _____ boje.", answer: "bijele", translation: "The Old Bridge is white color.", options: ["bijel", "bijela", "bijele", "bijelo"] },
         { id: 4, sentence: "Bosanska kafa je _____.", answer: "crna", translation: "Bosnian coffee is black.", options: ["crn", "crna", "crno", "crni"] },
         { id: 5, sentence: "_____ ćilim je tradicionalan.", answer: "Crveni", translation: "The red carpet is traditional.", options: ["Crven", "Crvena", "Crveni", "Crveno"] },
-        { id: 6, sentence: "Rijeka Miljacka je _____.", answer: "zelena", translation: "The Miljacka river is green.", options: ["zelen", "zelena", "zeleno", "zeleni"] }
+        { id: 6, sentence: "Rijeka Miljacka je _____.", answer: "zelena", translation: "The Miljacka river is green.", options: ["zelen", "zelena", "zeleno", "zeleni"] },
+        { id: 7, sentence: "Nebo je _____ danas.", answer: "plavo", translation: "The sky is blue today.", options: ["plav", "plava", "plavo", "plave"] },
+        { id: 8, sentence: "Ona ima _____ kosu.", answer: "crnu", translation: "She has black hair.", options: ["crna", "crnu", "crne", "crni"] },
+        { id: 9, sentence: "_____ sunce sija.", answer: "Žuto", translation: "The yellow sun is shining.", options: ["Žut", "Žuta", "Žuto", "Žuti"] },
+        { id: 10, sentence: "Volim _____ boju.", answer: "zelenu", translation: "I like green color.", options: ["zelen", "zelena", "zelenu", "zeleno"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["plava", "je", "Zastava", "i", "žuta"], correct: ["Zastava", "je", "plava", "i", "žuta"], translation: "The flag is blue and yellow." },
         { id: 2, scrambled: ["bijela", "džamija", "je", "Ova"], correct: ["Ova", "džamija", "je", "bijela"], translation: "This mosque is white." },
         { id: 3, scrambled: ["crna", "je", "Bosanska", "kafa"], correct: ["Bosanska", "kafa", "je", "crna"], translation: "Bosnian coffee is black." },
         { id: 4, scrambled: ["crveni", "je", "Ovaj", "ćilim"], correct: ["Ovaj", "ćilim", "je", "crveni"], translation: "This carpet is red." },
-        { id: 5, scrambled: ["boje", "je", "Koje", "nebo"], correct: ["Koje", "boje", "je", "nebo"], translation: "What color is the sky?" }
+        { id: 5, scrambled: ["boje", "je", "Koje", "nebo"], correct: ["Koje", "boje", "je", "nebo"], translation: "What color is the sky?" },
+        { id: 6, scrambled: ["plavo", "je", "Nebo", "danas"], correct: ["Nebo", "je", "plavo", "danas"], translation: "The sky is blue today." },
+        { id: 7, scrambled: ["zelenu", "Volim", "boju"], correct: ["Volim", "zelenu", "boju"], translation: "I like green color." },
+        { id: 8, scrambled: ["crnu", "ima", "Ona", "kosu"], correct: ["Ona", "ima", "crnu", "kosu"], translation: "She has black hair." },
+        { id: 9, scrambled: ["bijel", "Most", "je", "Stari"], correct: ["Stari", "Most", "je", "bijel"], translation: "The Old Bridge is white." },
+        { id: 10, scrambled: ["sija", "sunce", "Žuto"], correct: ["Žuto", "sunce", "sija"], translation: "The yellow sun is shining." }
       ],
       matching: [
         { id: 1, bosnian: "Crven ćilim (m)", english: "Red carpet" },
@@ -578,13 +642,23 @@ function Lesson() {
         { id: 3, bosnian: "Plavo nebo (n)", english: "Blue sky" },
         { id: 4, bosnian: "Zelena rijeka (f)", english: "Green river" },
         { id: 5, bosnian: "Žuta zastava (f)", english: "Yellow flag" },
-        { id: 6, bosnian: "Crna kafa (f)", english: "Black coffee" }
+        { id: 6, bosnian: "Crna kafa (f)", english: "Black coffee" },
+        { id: 7, bosnian: "Smeđe oči", english: "Brown eyes" },
+        { id: 8, bosnian: "Siva boja", english: "Gray color" },
+        { id: 9, bosnian: "Narančasta", english: "Orange" },
+        { id: 10, bosnian: "Ljubičasta", english: "Purple" }
       ],
       translation: [
         { id: 1, english: "The Bosnian flag is blue", bosnian: "Bosanska zastava je plava", options: ["Bosanska zastava je plava", "Bosanska zastava je crvena", "Bosanski grb je plav", "Bosanska kafa je crna"] },
         { id: 2, english: "The Old Bridge is white", bosnian: "Stari Most je bijel", options: ["Stari Most je crn", "Stari Most je bijel", "Stari Most je zelen", "Stari Most je plav"] },
         { id: 3, english: "I love black coffee", bosnian: "Volim crnu kafu", options: ["Volim bijelu kafu", "Volim crnu kafu", "Volim zelenu kafu", "Volim crvenu kafu"] },
-        { id: 4, english: "The green mountains", bosnian: "Zelene planine", options: ["Crvene planine", "Plave planine", "Zelene planine", "Bijele planine"] }
+        { id: 4, english: "The green mountains", bosnian: "Zelene planine", options: ["Crvene planine", "Plave planine", "Zelene planine", "Bijele planine"] },
+        { id: 5, english: "The sky is blue", bosnian: "Nebo je plavo", options: ["Nebo je plavo", "Nebo je crveno", "Nebo je zeleno", "Nebo je bijelo"] },
+        { id: 6, english: "She has black hair", bosnian: "Ona ima crnu kosu", options: ["Ona ima crnu kosu", "Ona ima plavu kosu", "Ona ima bijelu kosu", "Ona ima crvenu kosu"] },
+        { id: 7, english: "The yellow sun", bosnian: "Žuto sunce", options: ["Žuto sunce", "Plavo sunce", "Crveno sunce", "Bijelo sunce"] },
+        { id: 8, english: "I like green color", bosnian: "Volim zelenu boju", options: ["Volim zelenu boju", "Volim plavu boju", "Volim crvenu boju", "Volim žutu boju"] },
+        { id: 9, english: "The red carpet is traditional", bosnian: "Crveni ćilim je tradicionalan", options: ["Crveni ćilim je tradicionalan", "Plavi ćilim je tradicionalan", "Zeleni ćilim je tradicionalan", "Bijeli ćilim je tradicionalan"] },
+        { id: 10, english: "The white mosque is beautiful", bosnian: "Bijela džamija je lijepa", options: ["Bijela džamija je lijepa", "Crvena džamija je lijepa", "Plava džamija je lijepa", "Zelena džamija je lijepa"] }
       ],
       writing: [
         { id: 1, english: "The flag is blue and yellow.", bosnian: "Zastava je plava i žuta." },
@@ -607,13 +681,23 @@ function Lesson() {
         { id: 3, sentence: "_____ sestra je mlađa od mene.", answer: "Njegova", translation: "His sister is younger than him.", options: ["Moja", "Tvoja", "Njegova", "Njena"] },
         { id: 4, sentence: "_____ nana živi u Zenici.", answer: "Naša", translation: "Our grandmother lives in Zenica.", options: ["Moja", "Tvoja", "Njegova", "Naša"] },
         { id: 5, sentence: "Ovo je _____ dijete.", answer: "njeno", translation: "This is her child.", options: ["moje", "tvoje", "njegovo", "njeno"] },
-        { id: 6, sentence: "_____ djed čita novine.", answer: "Moj", translation: "My grandfather reads newspapers.", options: ["Moj", "Moja", "Moje", "Moji"] }
+        { id: 6, sentence: "_____ djed čita novine.", answer: "Moj", translation: "My grandfather reads newspapers.", options: ["Moj", "Moja", "Moje", "Moji"] },
+        { id: 7, sentence: "_____ brat radi u Sarajevu.", answer: "Njihov", translation: "Their brother works in Sarajevo.", options: ["Moj", "Tvoj", "Njegov", "Njihov"] },
+        { id: 8, sentence: "Ovo je _____ kuća.", answer: "naša", translation: "This is our house.", options: ["moja", "tvoja", "naša", "njihova"] },
+        { id: 9, sentence: "_____ sin je student.", answer: "Njegov", translation: "His son is a student.", options: ["Moj", "Tvoj", "Njegov", "Njen"] },
+        { id: 10, sentence: "Gdje je _____ majka?", answer: "njena", translation: "Where is her mother?", options: ["moja", "tvoja", "njegova", "njena"] }
       ],
       sentenceOrder: [
         { id: 1, scrambled: ["pravi", "nana", "pitu", "Moja"], correct: ["Moja", "nana", "pravi", "pitu"], translation: "My grandmother makes pie." },
         { id: 2, scrambled: ["je", "sin", "Njegov", "visok"], correct: ["Njegov", "sin", "je", "visok"], translation: "His son is tall." },
         { id: 3, scrambled: ["u", "živi", "Naša", "Sarajevu", "porodica"], correct: ["Naša", "porodica", "živi", "u", "Sarajevu"], translation: "Our family lives in Sarajevo." },
-        { id: 4, scrambled: ["kći", "Njena", "studentica", "je"], correct: ["Njena", "kći", "je", "studentica"], translation: "Her daughter is a student." }
+        { id: 4, scrambled: ["kći", "Njena", "studentica", "je"], correct: ["Njena", "kći", "je", "studentica"], translation: "Her daughter is a student." },
+        { id: 5, scrambled: ["brat", "radi", "Moj", "ovdje"], correct: ["Moj", "brat", "radi", "ovdje"], translation: "My brother works here." },
+        { id: 6, scrambled: ["je", "otac", "Tvoj", "gdje"], correct: ["Gdje", "je", "tvoj", "otac"], translation: "Where is your father?" },
+        { id: 7, scrambled: ["kuća", "je", "Ovo", "naša"], correct: ["Ovo", "je", "naša", "kuća"], translation: "This is our house." },
+        { id: 8, scrambled: ["djeca", "su", "Njihova", "mlada"], correct: ["Njihova", "djeca", "su", "mlada"], translation: "Their children are young." },
+        { id: 9, scrambled: ["novine", "čita", "djed", "Moj"], correct: ["Moj", "djed", "čita", "novine"], translation: "My grandfather reads newspapers." },
+        { id: 10, scrambled: ["majka", "je", "Njena", "lijepa"], correct: ["Njena", "majka", "je", "lijepa"], translation: "Her mother is beautiful." }
       ],
       matching: [
         { id: 1, bosnian: "Moj brat", english: "My brother" },
@@ -621,12 +705,23 @@ function Lesson() {
         { id: 3, bosnian: "Njegov otac", english: "His father" },
         { id: 4, bosnian: "Njena majka", english: "Her mother" },
         { id: 5, bosnian: "Naša nana", english: "Our grandmother" },
-        { id: 6, bosnian: "Njihov djed", english: "Their grandfather" }
+        { id: 6, bosnian: "Njihov djed", english: "Their grandfather" },
+        { id: 7, bosnian: "Moje dijete", english: "My child" },
+        { id: 8, bosnian: "Vaša kuća", english: "Your house" },
+        { id: 9, bosnian: "Njegova žena", english: "His wife" },
+        { id: 10, bosnian: "Naš sin", english: "Our son" }
       ],
       translation: [
         { id: 1, english: "My grandmother makes the best pie", bosnian: "Moja nana pravi najbolju pitu", options: ["Moja nana pravi najbolju pitu", "Tvoja nana pravi pitu", "Njegova majka pravi pitu", "Naša sestra pravi pitu"] },
         { id: 2, english: "His wife is a teacher", bosnian: "Njegova žena je učiteljica", options: ["Moja žena je učiteljica", "Tvoja žena je učiteljica", "Njegova žena je učiteljica", "Njena žena je učiteljica"] },
-        { id: 3, english: "Our family is big", bosnian: "Naša porodica je velika", options: ["Moja porodica je velika", "Tvoja porodica je velika", "Naša porodica je velika", "Njihova porodica je velika"] }
+        { id: 3, english: "Our family is big", bosnian: "Naša porodica je velika", options: ["Moja porodica je velika", "Tvoja porodica je velika", "Naša porodica je velika", "Njihova porodica je velika"] },
+        { id: 4, english: "My brother is tall", bosnian: "Moj brat je visok", options: ["Moj brat je visok", "Tvoj brat je visok", "Njegov brat je visok", "Naš brat je visok"] },
+        { id: 5, english: "Where is your father?", bosnian: "Gdje je tvoj otac?", options: ["Gdje je tvoj otac?", "Gdje je moj otac?", "Gdje je njegov otac?", "Gdje je naš otac?"] },
+        { id: 6, english: "Her daughter is a student", bosnian: "Njena kći je studentica", options: ["Moja kći je studentica", "Tvoja kći je studentica", "Njena kći je studentica", "Naša kći je studentica"] },
+        { id: 7, english: "Their son works in Sarajevo", bosnian: "Njihov sin radi u Sarajevu", options: ["Moj sin radi u Sarajevu", "Tvoj sin radi u Sarajevu", "Njegov sin radi u Sarajevu", "Njihov sin radi u Sarajevu"] },
+        { id: 8, english: "This is our house", bosnian: "Ovo je naša kuća", options: ["Ovo je moja kuća", "Ovo je tvoja kuća", "Ovo je naša kuća", "Ovo je njihova kuća"] },
+        { id: 9, english: "My grandfather reads newspapers", bosnian: "Moj djed čita novine", options: ["Moj djed čita novine", "Tvoj djed čita novine", "Njegov djed čita novine", "Naš djed čita novine"] },
+        { id: 10, english: "His sister is young", bosnian: "Njegova sestra je mlada", options: ["Moja sestra je mlada", "Tvoja sestra je mlada", "Njegova sestra je mlada", "Njena sestra je mlada"] }
       ],
       writing: [
         { id: 1, english: "My mother makes pie.", bosnian: "Moja majka pravi pitu." },
@@ -2452,7 +2547,7 @@ function Lesson() {
                         let correct = 0
                         scrambleList.forEach((item, idx) => {
                           const answer = scrambleExercises.answers[idx]
-                          if (answer && answer.join('').toLowerCase() === item.bosnian.toLowerCase()) {
+                          if (answer && compareAnswers(answer.join(''), item.bosnian)) {
                             correct++
                           }
                         })
@@ -2476,14 +2571,14 @@ function Lesson() {
                             const currentShuffled = scrambleExercises.currentLetters[idx] || shuffledLetters
                             const userAnswer = scrambleExercises.answers[idx] || []
                             const usedIndices = scrambleExercises.answers[`${idx}_used`] || []
-                            const isCorrect = userAnswer.join('').toLowerCase() === item.bosnian.toLowerCase()
+                            const isCorrect = compareAnswers(userAnswer.join(''), item.bosnian)
                             const isComplete = userAnswer.length === item.bosnian.length
 
                             const handleLetterClick = (letter, letterIdx) => {
                               if (scrambleExercises.showResults || usedIndices.includes(letterIdx)) return
                               const newAnswer = [...userAnswer, letter]
                               const willBeComplete = newAnswer.length === item.bosnian.length
-                              const willBeCorrect = newAnswer.join('').toLowerCase() === item.bosnian.toLowerCase()
+                              const willBeCorrect = compareAnswers(newAnswer.join(''), item.bosnian)
                               setScrambleExercises(prev => ({
                                 ...prev,
                                 answers: {
@@ -2814,7 +2909,7 @@ function Lesson() {
 
                     const userAnswer = listenTypeExercises.answers[currentQ] || ''
                     const hasChecked = listenTypeExercises.answers[`${currentQ}_checked`]
-                    const isCorrect = userAnswer.toLowerCase().trim() === currentItem.bosnian.toLowerCase().trim()
+                    const isCorrect = compareAnswers(userAnswer, currentItem.bosnian)
 
                     const playAudio = () => {
                       speak(currentItem.bosnian)
@@ -2843,7 +2938,7 @@ function Lesson() {
                       let correct = 0
                       listenList.forEach((item, idx) => {
                         const ans = listenTypeExercises.answers[idx] || ''
-                        if (ans.toLowerCase().trim() === item.bosnian.toLowerCase().trim()) correct++
+                        if (compareAnswers(ans, item.bosnian)) correct++
                       })
                       return correct
                     }
@@ -2970,12 +3065,26 @@ function Lesson() {
 
                     const generateBlank = (text, idx) => {
                       const words = text.split(' ')
-                      if (words.length < 2) return { display: text, answer: '', hasBlank: false }
-                      const blankIdx = (idx % 3) + 1
-                      const actualIdx = Math.min(blankIdx, words.length - 1)
-                      const answer = words[actualIdx]
-                      const display = words.map((w, i) => i === actualIdx ? '_____' : w).join(' ')
-                      return { display, answer, hasBlank: true }
+                      if (words.length < 2) return { display: text, answer: [], hasBlank: false }
+                      
+                      // Number of blanks based on level: A1=1, A2=2, B1=3
+                      const blanksCount = level === 'b1' ? 3 : level === 'a2' ? 2 : 1
+                      const actualBlanks = Math.min(blanksCount, Math.floor(words.length / 2))
+                      
+                      // Select word indices to blank (spread them out)
+                      const blankIndices = []
+                      const step = Math.floor(words.length / (actualBlanks + 1))
+                      for (let i = 0; i < actualBlanks; i++) {
+                        const baseIdx = step * (i + 1)
+                        const adjustedIdx = Math.min(baseIdx, words.length - 1)
+                        if (!blankIndices.includes(adjustedIdx)) {
+                          blankIndices.push(adjustedIdx)
+                        }
+                      }
+                      
+                      const answers = blankIndices.map(i => words[i])
+                      const display = words.map((w, i) => blankIndices.includes(i) ? '_____' : w).join(' ')
+                      return { display, answer: answers.join(' '), hasBlank: true, blankCount: blankIndices.length }
                     }
 
                     const dialogueWithBlanks = dialogueLines.map((line, idx) => ({
@@ -3009,8 +3118,8 @@ function Lesson() {
                     const getScore = () => {
                       let correct = 0
                       dialogueWithBlanks.forEach((line, idx) => {
-                        const userAns = (dialogueFillExercises.answers[idx] || '').toLowerCase().trim()
-                        if (userAns === line.answer.toLowerCase().trim()) correct++
+                        const userAns = dialogueFillExercises.answers[idx] || ''
+                        if (compareAnswers(userAns, line.answer)) correct++
                       })
                       return correct
                     }
@@ -3051,7 +3160,7 @@ function Lesson() {
                           {dialogueWithBlanks.map((line, idx) => {
                             const isLeft = idx % 2 === 0
                             const userAnswer = dialogueFillExercises.answers[idx] || ''
-                            const isCorrect = userAnswer.toLowerCase().trim() === line.answer.toLowerCase().trim()
+                            const isCorrect = compareAnswers(userAnswer, line.answer)
                             const isPlaying = dialogueFillExercises.currentPlaying === idx
 
                             return (
