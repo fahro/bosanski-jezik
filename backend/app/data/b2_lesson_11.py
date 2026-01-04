@@ -124,6 +124,21 @@ B2_LESSON_11 = {
 """,
     "cultural_note": "Autobusni prijevoz je popularan u BiH. Centrotrans i Autoprevoz su poznate kompanije. Linije povezuju sve gradove. Cijene su pristupačne.",
     "cultural_note_en": "Bus transport is popular in BiH. Centrotrans and Autoprevoz are well-known companies. Lines connect all cities. Prices are affordable.",
+    "cultural_comic": {
+        "title": "Putovanje autobusom",
+        "panels": [
+            {"id": 1, "name": "Amira", "text": "Sutra idem u Mostar autobusom.", "translation": "Tomorrow I'm going to Mostar by bus."},
+            {"id": 2, "name": "Fata", "text": "Koliko traje vožnja?", "translation": "How long is the ride?"},
+            {"id": 3, "name": "Amira", "text": "Oko dva i po sata.", "translation": "About two and a half hours."},
+            {"id": 4, "name": "Fata", "text": "Je li direktna linija?", "translation": "Is it a direct line?"},
+            {"id": 5, "name": "Amira", "text": "Da, bez stajanja.", "translation": "Yes, no stops."},
+            {"id": 6, "name": "Fata", "text": "Koliko košta karta?", "translation": "How much does the ticket cost?"},
+            {"id": 7, "name": "Amira", "text": "Povratna je 35 maraka.", "translation": "Return is 35 marks."},
+            {"id": 8, "name": "Fata", "text": "Ima li autobus wifi?", "translation": "Does the bus have wifi?"},
+            {"id": 9, "name": "Amira", "text": "Neki imaju, ovisi o kompaniji.", "translation": "Some do, depends on the company."},
+            {"id": 10, "name": "Fata", "text": "Sretan put! Javi kad stigneš.", "translation": "Have a nice trip! Let me know when you arrive."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Putnik", "text": "Dobar dan. Jednu kartu za Mostar.", "translation": "Good day. One ticket to Mostar."},
         {"speaker": "Blagajnik", "text": "U jednom pravcu ili povratnu?", "translation": "One-way or return?"},

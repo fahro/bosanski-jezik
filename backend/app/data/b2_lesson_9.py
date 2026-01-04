@@ -124,6 +124,21 @@ For reporting questions, we use indirect speech:
 """,
     "cultural_note": "Državljani BiH trebaju vizu za većinu zemalja. Schengen viza omogućava putovanje u 27 evropskih zemalja. Proces aplikacije može trajati nekoliko sedmica.",
     "cultural_note_en": "BiH citizens need a visa for most countries. A Schengen visa allows travel to 27 European countries. The application process can take several weeks.",
+    "cultural_comic": {
+        "title": "Apliciranje za vizu",
+        "panels": [
+            {"id": 1, "name": "Adnan", "text": "Moram aplicirati za vizu za Njemačku.", "translation": "I need to apply for a visa for Germany."},
+            {"id": 2, "name": "Edin", "text": "Za poslovnu ili turističku?", "translation": "For business or tourist?"},
+            {"id": 3, "name": "Adnan", "text": "Turističku. Idem posjetiti brata.", "translation": "Tourist. I'm going to visit my brother."},
+            {"id": 4, "name": "Edin", "text": "Trebat će ti pozivno pismo od njega.", "translation": "You'll need an invitation letter from him."},
+            {"id": 5, "name": "Adnan", "text": "Da, i izvod iz banke.", "translation": "Yes, and a bank statement."},
+            {"id": 6, "name": "Edin", "text": "I putno osiguranje. To je obavezno.", "translation": "And travel insurance. That's mandatory."},
+            {"id": 7, "name": "Adnan", "text": "Koliko obično traje obrada zahtjeva?", "translation": "How long does processing usually take?"},
+            {"id": 8, "name": "Edin", "text": "Dvije do tri sedmice.", "translation": "Two to three weeks."},
+            {"id": 9, "name": "Adnan", "text": "Trebam li ići na intervju?", "translation": "Do I need to go for an interview?"},
+            {"id": 10, "name": "Edin", "text": "Obično da, u ambasadi.", "translation": "Usually yes, at the embassy."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Aplikant", "text": "Dobar dan. Želim aplicirati za Schengen vizu.", "translation": "Good day. I want to apply for a Schengen visa."},
         {"speaker": "Službenik", "text": "Imate li termin?", "translation": "Do you have an appointment?"},

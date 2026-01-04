@@ -130,6 +130,21 @@ For yes/no questions, we use:
 """,
     "cultural_note": "U BiH ima mnogo hotela, od luksuznih do porodičnih pansiona. Sarajevo, Mostar i Banja Luka imaju najbolji izbor smještaja. Cijene su obično povoljnije nego u zapadnoj Evropi.",
     "cultural_note_en": "BiH has many hotels, from luxury to family guesthouses. Sarajevo, Mostar and Banja Luka have the best accommodation options. Prices are usually more affordable than Western Europe.",
+    "cultural_comic": {
+        "title": "Putovanje u Mostar",
+        "panels": [
+            {"id": 1, "name": "Lamija", "text": "Idemo li ovog vikenda u Mostar?", "translation": "Are we going to Mostar this weekend?"},
+            {"id": 2, "name": "Samra", "text": "Da! Već sam rezervirala hotel.", "translation": "Yes! I've already booked the hotel."},
+            {"id": 3, "name": "Lamija", "text": "Koji hotel?", "translation": "Which hotel?"},
+            {"id": 4, "name": "Samra", "text": "Mepas, blizu Starog mosta.", "translation": "Mepas, near the Old Bridge."},
+            {"id": 5, "name": "Lamija", "text": "Odlično! Je li skup?", "translation": "Excellent! Is it expensive?"},
+            {"id": 6, "name": "Samra", "text": "80 maraka po noći sa doručkom.", "translation": "80 marks per night with breakfast."},
+            {"id": 7, "name": "Lamija", "text": "To je fer cijena za Mostar.", "translation": "That's a fair price for Mostar."},
+            {"id": 8, "name": "Samra", "text": "Ima i bazen i spa.", "translation": "It also has a pool and spa."},
+            {"id": 9, "name": "Lamija", "text": "Savršeno! Mogu li vidjeti sobu prije?", "translation": "Perfect! Can I see the room beforehand?"},
+            {"id": 10, "name": "Samra", "text": "Poslat ću ti slike s Booking.com.", "translation": "I'll send you photos from Booking.com."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Gost", "text": "Dobar dan. Imam rezervaciju.", "translation": "Good day. I have a reservation."},
         {"speaker": "Recepcioner", "text": "Na koje ime, molim?", "translation": "Under what name, please?"},

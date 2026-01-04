@@ -126,6 +126,21 @@ For describing what's included:
 """,
     "cultural_note": "Turističke agencije u BiH nude aranžmane za more (Hrvatska, Crna Gora, Turska), zimovanje i hadždž. Popularne agencije su Relax Tours i Centrotrans Eurolines.",
     "cultural_note_en": "Travel agencies in BiH offer packages for seaside (Croatia, Montenegro, Turkey), skiing, and Hajj. Popular agencies are Relax Tours and Centrotrans Eurolines.",
+    "cultural_comic": {
+        "title": "Planiranje godišnjeg odmora",
+        "panels": [
+            {"id": 1, "name": "Enis", "text": "Gdje idete na godišnji odmor?", "translation": "Where are you going on vacation?"},
+            {"id": 2, "name": "Jasmin", "text": "Razmišljamo o Turskoj.", "translation": "We're thinking about Turkey."},
+            {"id": 3, "name": "Enis", "text": "All-inclusive ili sami organizirate?", "translation": "All-inclusive or organizing yourself?"},
+            {"id": 4, "name": "Jasmin", "text": "Aranžman preko agencije. Lakše je.", "translation": "Package through an agency. It's easier."},
+            {"id": 5, "name": "Enis", "text": "Koju agenciju koristite?", "translation": "Which agency do you use?"},
+            {"id": 6, "name": "Jasmin", "text": "Relax Tours. Imaju dobre cijene.", "translation": "Relax Tours. They have good prices."},
+            {"id": 7, "name": "Enis", "text": "Koliko dana ostajete?", "translation": "How many days are you staying?"},
+            {"id": 8, "name": "Jasmin", "text": "Sedam dana, pun pansion.", "translation": "Seven days, full board."},
+            {"id": 9, "name": "Enis", "text": "Koliko to košta po osobi?", "translation": "How much does that cost per person?"},
+            {"id": 10, "name": "Jasmin", "text": "Oko 800 eura sa letom.", "translation": "About 800 euros with the flight."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Klijent", "text": "Dobar dan. Zanima me putovanje u Tursku.", "translation": "Good day. I'm interested in a trip to Turkey."},
         {"speaker": "Agent", "text": "Naravno. Za koliko osoba i kad?", "translation": "Of course. For how many people and when?"},

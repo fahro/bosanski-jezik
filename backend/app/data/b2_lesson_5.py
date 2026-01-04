@@ -138,6 +138,21 @@ For questions about price and duration, we use future tense:
 """,
     "cultural_note": "U BiH je obavezno imati registraciju i tehnički pregled vozila. Mnogi ljudi idu kod privatnih mehaničara jer su jeftiniji od službenih servisa.",
     "cultural_note_en": "In BiH, vehicle registration and inspection are mandatory. Many people go to private mechanics as they are cheaper than official service centers.",
+    "cultural_comic": {
+        "title": "Problemi s autom",
+        "panels": [
+            {"id": 1, "name": "Damir", "text": "Moj auto danas neće da upali.", "translation": "My car won't start today."},
+            {"id": 2, "name": "Kenan", "text": "Možda je akumulator prazan.", "translation": "Maybe the battery is dead."},
+            {"id": 3, "name": "Damir", "text": "Moguće. Ima već tri godine.", "translation": "Possible. It's already three years old."},
+            {"id": 4, "name": "Kenan", "text": "Znaš li nekog dobrog mehaničara?", "translation": "Do you know a good mechanic?"},
+            {"id": 5, "name": "Damir", "text": "Da, Mehmed u Vogošći je odličan.", "translation": "Yes, Mehmed in Vogošća is excellent."},
+            {"id": 6, "name": "Kenan", "text": "Je li skup?", "translation": "Is he expensive?"},
+            {"id": 7, "name": "Damir", "text": "Ne, jeftiniji je od servisa.", "translation": "No, he's cheaper than the service center."},
+            {"id": 8, "name": "Kenan", "text": "Koliko košta novi akumulator?", "translation": "How much does a new battery cost?"},
+            {"id": 9, "name": "Damir", "text": "Oko 150 do 200 maraka.", "translation": "About 150 to 200 marks."},
+            {"id": 10, "name": "Kenan", "text": "Mogu ti pomoći odvući auto do njega.", "translation": "I can help you tow the car to him."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Vozač", "text": "Dobar dan. Auto mi ne pali.", "translation": "Good day. My car won't start."},
         {"speaker": "Mehaničar", "text": "Kad se to počelo dešavati?", "translation": "When did this start happening?"},

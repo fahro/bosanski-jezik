@@ -120,6 +120,21 @@ For describing characteristics, we use genitive:
 """,
     "cultural_note": "U BiH je popularno iznajmljivanje stanova. Cijene variraju - Sarajevo je najskuplje. Uobičajeno je platiti depozit od 1-2 kirije unaprijed.",
     "cultural_note_en": "Apartment rental is popular in BiH. Prices vary - Sarajevo is most expensive. It's common to pay a deposit of 1-2 months rent upfront.",
+    "cultural_comic": {
+        "title": "Traženje stana",
+        "panels": [
+            {"id": 1, "name": "Hana", "text": "Tražim stan u centru Sarajeva.", "translation": "I'm looking for an apartment in central Sarajevo."},
+            {"id": 2, "name": "Sara", "text": "Koliki ti je budžet?", "translation": "What's your budget?"},
+            {"id": 3, "name": "Hana", "text": "Do 500 maraka mjesečno.", "translation": "Up to 500 marks monthly."},
+            {"id": 4, "name": "Sara", "text": "Za centar je to teško. Možda Grbavica?", "translation": "For the center that's tough. Maybe Grbavica?"},
+            {"id": 5, "name": "Hana", "text": "Može. Koliko soba trebam?", "translation": "Sure. How many rooms do I need?"},
+            {"id": 6, "name": "Sara", "text": "Jednosoban je dovoljan za jednu osobu.", "translation": "A one-room is enough for one person."},
+            {"id": 7, "name": "Hana", "text": "Je li grijanje uključeno u cijenu?", "translation": "Is heating included in the price?"},
+            {"id": 8, "name": "Sara", "text": "Obično nije. To je dodatni trošak.", "translation": "Usually not. That's an extra cost."},
+            {"id": 9, "name": "Hana", "text": "Koliki je prosječan račun za grijanje?", "translation": "What's the average heating bill?"},
+            {"id": 10, "name": "Sara", "text": "Oko 100-150 maraka zimi.", "translation": "Around 100-150 marks in winter."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Klijent", "text": "Dobar dan. Tražim dvosoban stan.", "translation": "Good day. I'm looking for a two-room apartment."},
         {"speaker": "Agent", "text": "U kojem dijelu grada?", "translation": "In which part of the city?"},

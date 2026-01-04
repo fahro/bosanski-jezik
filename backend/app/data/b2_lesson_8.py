@@ -128,6 +128,21 @@ For describing hairstyles, we use adjectives:
 """,
     "cultural_note": "U BiH frizerski saloni su popularni za muškarce i žene. Cijene su niže nego u zapadnoj Evropi. Napojnica nije obavezna ali se cijeni.",
     "cultural_note_en": "In BiH hair salons are popular for men and women. Prices are lower than Western Europe. Tipping is not mandatory but appreciated.",
+    "cultural_comic": {
+        "title": "Kod frizera",
+        "panels": [
+            {"id": 1, "name": "Lejla", "text": "Moram ići kod frizera, kosa mi je preduga.", "translation": "I need to go to the hairdresser, my hair is too long."},
+            {"id": 2, "name": "Naida", "text": "Kod koga ideš?", "translation": "Who do you go to?"},
+            {"id": 3, "name": "Lejla", "text": "Kod Amre u Ferhadiji. Odlična je.", "translation": "To Amra on Ferhadija. She's excellent."},
+            {"id": 4, "name": "Naida", "text": "Koliko košta šišanje?", "translation": "How much does a haircut cost?"},
+            {"id": 5, "name": "Lejla", "text": "Za žene oko 30-40 maraka.", "translation": "For women around 30-40 marks."},
+            {"id": 6, "name": "Naida", "text": "A farbanje?", "translation": "And coloring?"},
+            {"id": 7, "name": "Lejla", "text": "Ovisi o dužini kose. 50-100 maraka.", "translation": "Depends on hair length. 50-100 marks."},
+            {"id": 8, "name": "Naida", "text": "Treba li zakazati termin?", "translation": "Do you need to make an appointment?"},
+            {"id": 9, "name": "Lejla", "text": "Da, uvijek je puna. Nazovi dan ranije.", "translation": "Yes, she's always booked. Call a day before."},
+            {"id": 10, "name": "Naida", "text": "Hvala! Možda i ja probam kod nje.", "translation": "Thanks! Maybe I'll try her too."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Klijent", "text": "Dobar dan. Imam termin u 10.", "translation": "Good day. I have an appointment at 10."},
         {"speaker": "Frizerka", "text": "Na koje ime?", "translation": "Under what name?"},

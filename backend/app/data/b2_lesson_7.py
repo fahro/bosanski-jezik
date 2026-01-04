@@ -128,6 +128,21 @@ For direct objects, we use accusative:
 """,
     "cultural_note": "BH Pošta je glavna poštanska služba u Federaciji BiH. Pošte Srpske djeluje u Republici Srpskoj. Radni sati su obično 8-16h, subotom do 12h.",
     "cultural_note_en": "BH Pošta is the main postal service in the Federation of BiH. Pošte Srpske operates in Republika Srpska. Working hours are usually 8 AM-4 PM, Saturdays until noon.",
+    "cultural_comic": {
+        "title": "Slanje paketa",
+        "panels": [
+            {"id": 1, "name": "Alma", "text": "Moram poslati paket sestri u Njemačku.", "translation": "I need to send a package to my sister in Germany."},
+            {"id": 2, "name": "Amela", "text": "Ideš li na poštu ili koristiš kurirsku službu?", "translation": "Are you going to the post office or using a courier service?"},
+            {"id": 3, "name": "Alma", "text": "Pošta je jeftinija, ali sporija.", "translation": "The post office is cheaper but slower."},
+            {"id": 4, "name": "Amela", "text": "DHL i FedEx su brži, ali skuplji.", "translation": "DHL and FedEx are faster but more expensive."},
+            {"id": 5, "name": "Alma", "text": "Koliko košta obična pošta za Njemačku?", "translation": "How much does regular mail to Germany cost?"},
+            {"id": 6, "name": "Amela", "text": "Ovisi o težini. Oko 20-30 maraka.", "translation": "Depends on the weight. Around 20-30 marks."},
+            {"id": 7, "name": "Alma", "text": "A koliko dana traje?", "translation": "And how many days does it take?"},
+            {"id": 8, "name": "Amela", "text": "Obično 5-7 radnih dana.", "translation": "Usually 5-7 business days."},
+            {"id": 9, "name": "Alma", "text": "Trebam li ispuniti carinske obrasce?", "translation": "Do I need to fill out customs forms?"},
+            {"id": 10, "name": "Amela", "text": "Da, za pakete izvan BiH.", "translation": "Yes, for packages outside BiH."}
+        ]
+    },
     "dialogue": [
         {"speaker": "Mušterija", "text": "Dobar dan. Želim poslati paket u Njemačku.", "translation": "Good day. I want to send a package to Germany."},
         {"speaker": "Službenik", "text": "U redu. Stavite paket na vagu.", "translation": "Okay. Put the package on the scale."},
