@@ -178,5 +178,65 @@
     "filename": "comic___snovi_bosanske_omladine_01dda48b.png",
     "lesson_id": 12,
     "type": "ai_generated"
+  },
+  "Comic - Na Sarajevskom aerodromu": {
+    "filename": "comic___na_sarajevskom_aerodromu_67546efc.png",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "Comic - Kupovina u Bingu": {
+    "filename": "comic___kupovina_u_bingu_7073ce4b.png",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "Comic - Na benzinskoj pumpi": {
+    "filename": "comic___na_benzinskoj_pumpi_34e27a53.png",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "Comic - Razgovor o bankama": {
+    "filename": "comic___razgovor_o_bankama_a5718443.png",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "Comic - Problemi s autom": {
+    "filename": "comic___problemi_s_autom_49b09f13.png",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "Comic - Putovanje u Mostar": {
+    "filename": "comic___putovanje_u_mostar_91e048f1.png",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "Comic - Slanje paketa": {
+    "filename": "comic___slanje_paketa_9401192c.png",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "Comic - Kod frizera": {
+    "filename": "comic___kod_frizera_c0dff245.png",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "Comic - Apliciranje za vizu": {
+    "filename": "comic___apliciranje_za_vizu_db585a04.png",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "Comic - Traženje stana": {
+    "filename": "comic___traženje_stana_e6fafcbc.png",
+    "lesson_id": 10,
+    "type": "ai_generated"
+  },
+  "Comic - Putovanje autobusom": {
+    "filename": "comic___putovanje_autobusom_a77a1f3a.png",
+    "lesson_id": 11,
+    "type": "ai_generated"
+  },
+  "Comic - Planiranje godišnjeg odmora": {
+    "filename": "comic___planiranje_godišnjeg_odmora_67033013.png",
+    "lesson_id": 12,
+    "type": "ai_generated"
   }
 }
