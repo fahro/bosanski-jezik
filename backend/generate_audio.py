@@ -45,6 +45,84 @@ FEMALE_VOICE = "bs-BA-VesnaNeural"   # Bosnian female voice
 MALE_VOICE = "bs-BA-GoranNeural"     # Bosnian male voice
 DEFAULT_VOICE = "bs-BA-VesnaNeural"  # Default for vocabulary etc.
 
+# Bosnian number words for TTS
+BOSNIAN_ONES = {
+    0: 'nula', 1: 'jedan', 2: 'dva', 3: 'tri', 4: 'četiri',
+    5: 'pet', 6: 'šest', 7: 'sedam', 8: 'osam', 9: 'devet'
+}
+
+BOSNIAN_TEENS = {
+    10: 'deset', 11: 'jedanaest', 12: 'dvanaest', 13: 'trinaest',
+    14: 'četrnaest', 15: 'petnaest', 16: 'šesnaest', 17: 'sedamnaest',
+    18: 'osamnaest', 19: 'devetnaest'
+}
+
+BOSNIAN_TENS = {
+    2: 'dvadeset', 3: 'trideset', 4: 'četrdeset', 5: 'pedeset',
+    6: 'šezdeset', 7: 'sedamdeset', 8: 'osamdeset', 9: 'devedeset'
+}
+
+BOSNIAN_HUNDREDS = {
+    1: 'sto', 2: 'dvjesto', 3: 'tristo', 4: 'četiristo',
+    5: 'petsto', 6: 'šesto', 7: 'sedamsto', 8: 'osamsto', 9: 'devetsto'
+}
+
+def number_to_bosnian(n: int) -> str:
+    """Convert a number (0-9999) to Bosnian words."""
+    if n < 0:
+        return 'minus ' + number_to_bosnian(-n)
+    
+    if n < 10:
+        return BOSNIAN_ONES[n]
+    
+    if n < 20:
+        return BOSNIAN_TEENS[n]
+    
+    if n < 100:
+        tens, ones = divmod(n, 10)
+        if ones == 0:
+            return BOSNIAN_TENS[tens]
+        return f"{BOSNIAN_TENS[tens]} {BOSNIAN_ONES[ones]}"
+    
+    if n < 1000:
+        hundreds, remainder = divmod(n, 100)
+        if remainder == 0:
+            return BOSNIAN_HUNDREDS[hundreds]
+        return f"{BOSNIAN_HUNDREDS[hundreds]} {number_to_bosnian(remainder)}"
+    
+    if n < 10000:
+        thousands, remainder = divmod(n, 1000)
+        if thousands == 1:
+            thousand_word = 'hiljadu'
+        elif thousands in (2, 3, 4):
+            thousand_word = f"{BOSNIAN_ONES[thousands]} hiljade"
+        else:
+            thousand_word = f"{BOSNIAN_ONES[thousands]} hiljada"
+        
+        if remainder == 0:
+            return thousand_word
+        return f"{thousand_word} {number_to_bosnian(remainder)}"
+    
+    # For larger numbers, just return digits
+    return str(n)
+
+def convert_numbers_to_words(text: str) -> str:
+    """Convert all numeric values in text to Bosnian words for proper TTS pronunciation."""
+    def replace_number(match):
+        num_str = match.group(0)
+        try:
+            num = int(num_str)
+            if 0 <= num <= 9999:
+                return number_to_bosnian(num)
+        except ValueError:
+            pass
+        return num_str
+    
+    # Replace numbers (1-4 digits) with Bosnian words
+    # Use word boundaries to avoid partial replacements
+    result = re.sub(r'\b\d{1,4}\b', replace_number, text)
+    return result
+
 def sanitize_filename(text: str, max_length: int = 50) -> str:
     """
     Convert text to a safe filename.
@@ -132,8 +210,11 @@ def generate_audio_azure(speech_config, text: str, output_path: Path, voice: str
         # Create synthesizer
         synthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=audio_config)
         
+        # Convert numbers to words for proper pronunciation
+        text_for_speech = convert_numbers_to_words(text)
+        
         # Generate speech
-        result = synthesizer.speak_text_async(text).get()
+        result = synthesizer.speak_text_async(text_for_speech).get()
         
         if result.reason == speechsdk.ResultReason.SynthesizingAudioCompleted:
             voice_icon = "♀" if "Vesna" in voice else "♂" if "Goran" in voice else "○"
