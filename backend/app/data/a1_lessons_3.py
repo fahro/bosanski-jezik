@@ -194,7 +194,7 @@ A1_LESSONS_PART3 = [
             {"bosnian": "kupatilo", "english": "bathroom", "pronunciation": "koo-PAH-tee-loh", "example": "Kupatilo je malo.", "example_translation": "The bathroom is small.", "image_emoji": "🚿"},
             {"bosnian": "spavaća soba", "english": "bedroom", "pronunciation": "spah-VAH-chah SOH-bah", "example": "Spavaća soba je na spratu.", "example_translation": "The bedroom is upstairs.", "image_emoji": "🛏️"},
             {"bosnian": "dnevna soba", "english": "living room", "pronunciation": "DNEHV-nah SOH-bah", "example": "Dnevna soba je prostrana.", "example_translation": "The living room is spacious.", "image_emoji": "🛋️"},
-            {"bosnian": "sto", "english": "table", "pronunciation": "stoh", "example": "Sto je od drveta.", "example_translation": "The table is made of wood.", "image_emoji": "🪑"},
+            {"bosnian": "sto", "english": "table", "pronunciation": "stoh", "example": "Sto je od drveta.", "example_translation": "The table is made of wood.", "image_emoji": "🍽️"},
             {"bosnian": "stolica", "english": "chair", "pronunciation": "STOH-lee-tsah", "example": "Sjedim na stolici.", "example_translation": "I sit on the chair.", "image_emoji": "🪑"},
             {"bosnian": "krevet", "english": "bed", "pronunciation": "KREH-veht", "example": "Krevet je udoban.", "example_translation": "The bed is comfortable.", "image_emoji": "🛏️"},
             {"bosnian": "prozor", "english": "window", "pronunciation": "PROH-zohr", "example": "Prozor je otvoren.", "example_translation": "The window is open.", "image_emoji": "🪟"},

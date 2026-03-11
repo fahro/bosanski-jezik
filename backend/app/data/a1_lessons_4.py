@@ -13,7 +13,7 @@ A1_LESSONS_PART4 = [
         ],
         "vocabulary": [
             {"bosnian": "doktor", "english": "doctor", "pronunciation": "DOHK-tohr", "example": "On je doktor.", "example_translation": "He is a doctor.", "image_emoji": "👨‍⚕️"},
-            {"bosnian": "učitelj", "english": "teacher", "pronunciation": "OO-chee-tehl", "example": "Ona je učiteljica.", "example_translation": "She is a teacher.", "image_emoji": "👩‍🏫"},
+            {"bosnian": "učitelj", "english": "teacher", "pronunciation": "OO-chee-tehl", "example": "On je učitelj.", "example_translation": "He is a teacher.", "image_emoji": "👨‍🏫"},
             {"bosnian": "inženjer", "english": "engineer", "pronunciation": "een-ZHEN-yehr", "example": "Radim kao inženjer.", "example_translation": "I work as an engineer.", "image_emoji": "👷"},
             {"bosnian": "advokat", "english": "lawyer", "pronunciation": "ahd-VOH-kaht", "example": "Moj otac je advokat.", "example_translation": "My father is a lawyer.", "image_emoji": "⚖️"},
             {"bosnian": "policajac", "english": "police officer", "pronunciation": "poh-lee-TSAH-yahts", "example": "Policajac pomaže ljudima.", "example_translation": "The police officer helps people.", "image_emoji": "👮"},
@@ -148,7 +148,7 @@ A1_LESSONS_PART4 = [
             {"id": 6, "question": "Kako se kaže 'doctor' na bosanskom?", "options": ["učitelj", "doktor", "policajac", "kuhar"], "correct_answer": 1, "explanation": "'Doktor' znači 'doctor'.", "question_type": "vocabulary"},
             {"id": 7, "question": "Koja je pravilna forma: 'Ti _____ u školi' (raditi)?", "options": ["radim", "radiš", "radi", "radimo"], "correct_answer": 1, "explanation": "'Ti radiš' - druga osoba jednine.", "question_type": "grammar"},
             {"id": 8, "question": "Gdje radi kuhar?", "options": ["u bolnici", "u školi", "u restoranu", "u policiji"], "correct_answer": 2, "explanation": "Kuhar radi u restoranu.", "question_type": "context"},
-            {"id": 9, "question": "Kako se kaže 'engineer' na bosanskom?", "options": ["advokat", "inžnjer", "vozač", "student"], "correct_answer": 1, "explanation": "'Inžnjer' znači 'engineer'.", "question_type": "vocabulary"},
+            {"id": 9, "question": "Kako se kaže 'engineer' na bosanskom?", "options": ["advokat", "inženjer", "vozač", "student"], "correct_answer": 1, "explanation": "'Inženjer' znači 'engineer'.", "question_type": "vocabulary"},
             {"id": 10, "question": "Šta znači 'Radim kao učiteljica'?", "options": ["I am a student", "I work as a teacher", "I want to be a teacher", "I like teachers"], "correct_answer": 1, "explanation": "'Radim kao' = I work as.", "question_type": "translation"},
             {"id": 11, "question": "Koji je ženski oblik od 'kuhar'?", "options": ["kuhara", "kuharica", "kuharka", "kuhari"], "correct_answer": 1, "explanation": "'Kuharica' je ženski oblik od 'kuhar'.", "question_type": "grammar"},
             {"id": 12, "question": "Kako se kaže 'police officer' na bosanskom?", "options": ["vozač", "doktor", "policajac", "advokat"], "correct_answer": 2, "explanation": "'Policajac' znači 'police officer'.", "question_type": "vocabulary"},
@@ -157,7 +157,7 @@ A1_LESSONS_PART4 = [
             {"id": 15, "question": "Kako se kaže 'driver' na bosanskom?", "options": ["kuhar", "prodavač", "vozač", "student"], "correct_answer": 2, "explanation": "'Vozač' znači 'driver'.", "question_type": "vocabulary"},
             {"id": 16, "question": "Koji je ženski oblik od 'student'?", "options": ["studenta", "studentica", "studentka", "studenti"], "correct_answer": 1, "explanation": "'Studentica' je ženski oblik od 'student'.", "question_type": "grammar"},
             {"id": 17, "question": "Šta znači 'Gdje radiš?'", "options": ["Where do you live?", "Where do you work?", "What do you do?", "Who are you?"], "correct_answer": 1, "explanation": "'Gdje radiš?' = Where do you work?", "question_type": "translation"},
-            {"id": 18, "question": "Kako se kaže 'lawyer' na bosanskom?", "options": ["doktor", "advokat", "inžnjer", "policajac"], "correct_answer": 1, "explanation": "'Advokat' znači 'lawyer'.", "question_type": "vocabulary"},
+            {"id": 18, "question": "Kako se kaže 'lawyer' na bosanskom?", "options": ["doktor", "advokat", "inženjer", "policajac"], "correct_answer": 1, "explanation": "'Advokat' znači 'lawyer'.", "question_type": "vocabulary"},
             {"id": 19, "question": "Napiši na bosanskom: 'teacher'", "question_type": "writing", "correct_answer_text": "učitelj", "explanation": "'Učitelj' znači 'teacher'."},
             {"id": 20, "question": "Napiši na bosanskom: 'I work in a school'", "question_type": "writing", "correct_answer_text": "Radim u školi", "explanation": "'Radim' znači 'I work'."}
         ]
