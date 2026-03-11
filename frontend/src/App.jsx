@@ -9,6 +9,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import FinalTest from './pages/FinalTest'
+import Profile from './pages/Profile'
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/final-test" element={<FinalTest />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
         </main>
       </div>

@@ -38,6 +38,13 @@ function Navbar() {
                   <Zap className="w-4 h-4 text-bosnia-yellow" />
                   <span className="font-medium text-gray-900">{stats?.total_xp || 0} XP</span>
                 </div>
+                <Link
+                  to="/profile"
+                  title="Moj profil"
+                  className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-900 transition-colors"
+                >
+                  <User className="w-4 h-4" />
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="flex items-center gap-2 text-sm text-gray-500 hover:text-red-600 transition-colors"
@@ -98,6 +105,13 @@ function Navbar() {
                     </div>
                     <span className="text-sm text-gray-500">{stats?.total_xp || 0} XP</span>
                   </div>
+                  <Link
+                    to="/profile"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-2 text-gray-600 hover:bg-gray-50 rounded-lg"
+                  >
+                    Moj profil
+                  </Link>
                   <button
                     onClick={handleLogout}
                     className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 rounded-lg"

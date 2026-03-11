@@ -76,7 +76,7 @@ const LEVEL_INFO = {
 
 function FinalTestCard({ level, allProgress }) {
   const levelInfo = LEVEL_INFO[level]
-  const completedLessons = allProgress.filter(p => p.completed).length
+  const completedLessons = allProgress.filter(p => p.quiz_passed).length
   const canTakeTest = completedLessons >= 12
   
   const levelColors = {

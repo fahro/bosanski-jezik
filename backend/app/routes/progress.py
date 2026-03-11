@@ -105,7 +105,7 @@ async def get_user_stats(
         "total_lessons": 12,
         "quizzes_completed": quizzes_completed,
         "average_quiz_score": round(avg_score, 1),
-        "can_take_final_test": lessons_completed >= 12,
+        "can_take_final_test": sum(1 for p in progress_records if getattr(p, 'quiz_passed', False)) >= 12,
         "final_test_passed": final_passed,
         "best_final_score": round(best_final, 1) if best_final else None,
         "current_lesson_id": current_user.current_lesson_id

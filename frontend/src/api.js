@@ -54,6 +54,9 @@ export const authApi = {
   },
   getStats: async () => {
     return api.get('/api/progress/stats')
+  },
+  updateProfile: async (data) => {
+    return api.put('/api/auth/me', data)
   }
 }
 
@@ -109,6 +112,9 @@ export const finalTestApi = {
   },
   getHistory: async () => {
     return api.get('/api/final-test/history')
+  },
+  getCertificate: async (level = 'a1') => {
+    return api.get(`/api/final-test/certificate/${level}`)
   }
 }
 

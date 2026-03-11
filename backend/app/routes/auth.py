@@ -8,6 +8,7 @@ from app.auth import (
     UserCreate, UserLogin, UserResponse, Token,
     create_user, authenticate_user, create_access_token,
     get_user_by_username, get_user_by_email, get_current_user_required,
+    verify_password, get_password_hash,
     ACCESS_TOKEN_EXPIRE_MINUTES
 )
 
@@ -85,14 +86,26 @@ async def update_me(
     current_user: User = Depends(get_current_user_required),
     db: Session = Depends(get_db)
 ):
-    """Update current user info."""
+    """Update current user info (full_name and/or password)."""
     if "full_name" in update_data:
-        current_user.full_name = update_data["full_name"]
-    
+        full_name = update_data["full_name"].strip()
+        if not full_name:
+            raise HTTPException(status_code=400, detail="Ime i prezime ne može biti prazno")
+        current_user.full_name = full_name
+
+    if "new_password" in update_data:
+        current_password = update_data.get("current_password", "")
+        if not verify_password(current_password, current_user.hashed_password):
+            raise HTTPException(status_code=400, detail="Pogrešna trenutna lozinka")
+        new_password = update_data["new_password"]
+        if len(new_password) < 6:
+            raise HTTPException(status_code=400, detail="Nova lozinka mora imati najmanje 6 karaktera")
+        current_user.hashed_password = get_password_hash(new_password)
+
     current_user.last_activity = datetime.utcnow()
     db.commit()
     db.refresh(current_user)
-    
+
     return {
         "id": current_user.id,
         "username": current_user.username,

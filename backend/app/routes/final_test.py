@@ -118,13 +118,13 @@ async def check_eligibility(
     db: Session = Depends(get_db)
 ):
     """Check if user can take the final test for a specific level."""
-    # Get progress for the specific level
+    # Get progress for the specific level (quiz_passed is sufficient for final test)
     progress_records = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
         LessonProgress.level == level,
-        LessonProgress.completed == True
+        LessonProgress.quiz_passed == True
     ).all()
-    
+
     completed_lessons = [p.lesson_id for p in progress_records]
     lessons_completed = len(completed_lessons)
     
@@ -171,9 +171,9 @@ async def get_questions(
     progress_records = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
         LessonProgress.level == level,
-        LessonProgress.completed == True
+        LessonProgress.quiz_passed == True
     ).all()
-    
+
     if len(progress_records) < 12:
         raise HTTPException(
             status_code=403,
@@ -220,14 +220,14 @@ async def submit_final_test(
 ):
     """Submit the final test."""
     level = submission.level
-    
+
     # Check eligibility for this level
     progress_records = db.query(LessonProgress).filter(
         LessonProgress.user_id == current_user.id,
         LessonProgress.level == level,
-        LessonProgress.completed == True
+        LessonProgress.quiz_passed == True
     ).all()
-    
+
     if len(progress_records) < 12:
         raise HTTPException(
             status_code=403,
@@ -400,6 +400,45 @@ async def submit_final_test(
         "next_level_unlocked": next_level_unlocked,
         "first_time_pass": first_time_pass
     }
+
+@router.get("/certificate/{level}")
+async def get_certificate(
+    level: str,
+    current_user: User = Depends(get_current_user_required),
+    db: Session = Depends(get_db)
+):
+    """Get certificate data if user has passed the final test for a level."""
+    # Find the best passing attempt for this level
+    passing_attempt = db.query(FinalTestAttempt).filter(
+        FinalTestAttempt.user_id == current_user.id,
+        FinalTestAttempt.level == level,
+        FinalTestAttempt.passed == True
+    ).order_by(FinalTestAttempt.percentage.desc()).first()
+
+    if not passing_attempt:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Niste položili završni test {level.upper()} nivoa"
+        )
+
+    level_names = {
+        "a1": "A1 - Početnik",
+        "a2": "A2 - Elementarni",
+        "b1": "B1 - Srednji",
+        "b2": "B2 - Viši srednji"
+    }
+
+    return {
+        "full_name": current_user.full_name or current_user.username,
+        "level": level.upper(),
+        "level_name": level_names.get(level, level.upper()),
+        "percentage": round(passing_attempt.percentage, 1),
+        "score": passing_attempt.score,
+        "total_questions": passing_attempt.total_questions,
+        "completed_at": passing_attempt.created_at.isoformat(),
+        "certificate_id": f"{level.upper()}-{current_user.id}-{passing_attempt.id}"
+    }
+
 
 @router.get("/history")
 async def get_test_history(

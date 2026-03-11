@@ -1,11 +1,11 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { finalTestApi } from '../api'
-import { 
+import {
   Award, Clock, CheckCircle, XCircle, AlertTriangle,
   ChevronLeft, ChevronRight, Flag, Trophy, Star,
-  RotateCcw, Home, BookOpen, PenTool
+  RotateCcw, Home, BookOpen, PenTool, Printer
 } from 'lucide-react'
 
 const LEVEL_INFO = {
@@ -31,6 +31,8 @@ export default function FinalTest() {
   const [timeLeft, setTimeLeft] = useState(60 * 60) // 60 minutes in seconds
   const [startTime, setStartTime] = useState(null)
   const [result, setResult] = useState(null)
+  const [certificate, setCertificate] = useState(null)
+  const [showCertificate, setShowCertificate] = useState(false)
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
 
@@ -105,6 +107,12 @@ export default function FinalTest() {
       setResult(data)
       setStage('result')
       await refreshStats()
+      if (data.passed) {
+        try {
+          const cert = await finalTestApi.getCertificate(level)
+          setCertificate(cert)
+        } catch (_) {}
+      }
     } catch (error) {
       console.error('Failed to submit test:', error)
       alert('Greška pri slanju testa: ' + error.message)
@@ -384,6 +392,7 @@ export default function FinalTest() {
   // Result Screen
   if (stage === 'result' && result) {
     return (
+      <>
       <div className="max-w-3xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className={`p-8 text-white text-center ${
@@ -462,6 +471,15 @@ export default function FinalTest() {
                 <Home className="w-5 h-5" />
                 <span>Dashboard</span>
               </button>
+              {result.passed && certificate && (
+                <button
+                  onClick={() => setShowCertificate(true)}
+                  className="flex-1 flex items-center justify-center space-x-2 bg-gradient-to-r from-yellow-500 to-amber-500 text-white py-3 rounded-xl font-semibold hover:from-yellow-600 hover:to-amber-600 transition-all"
+                >
+                  <Award className="w-5 h-5" />
+                  <span>Certifikat</span>
+                </button>
+              )}
               {!result.passed && (
                 <button
                   onClick={() => {
@@ -480,8 +498,130 @@ export default function FinalTest() {
           </div>
         </div>
       </div>
+
+      {/* Certificate Modal */}
+      {showCertificate && certificate && (
+        <CertificateModal
+          certificate={certificate}
+          onClose={() => setShowCertificate(false)}
+        />
+      )}
+      </>
     )
   }
 
   return null
 }
+
+function CertificateModal({ certificate, onClose }) {
+  const [downloading, setDownloading] = useState(false)
+  const date = new Date(certificate.completed_at)
+  const dateStr = date.toLocaleDateString('bs-BA', { day: 'numeric', month: 'long', year: 'numeric' })
+
+  const handleDownloadPDF = async () => {
+    setDownloading(true)
+    try {
+      const { default: html2canvas } = await import('html2canvas')
+      const { default: jsPDF } = await import('jspdf')
+      const element = document.getElementById('certificate-content')
+      const canvas = await html2canvas(element, {
+        scale: 3,
+        useCORS: true,
+        backgroundColor: '#ffffff'
+      })
+      const imgData = canvas.toDataURL('image/png')
+      const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
+      const pdfWidth = pdf.internal.pageSize.getWidth()
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width
+      const yOffset = (pdf.internal.pageSize.getHeight() - pdfHeight) / 2
+      pdf.addImage(imgData, 'PNG', 0, yOffset > 0 ? yOffset : 0, pdfWidth, pdfHeight)
+      pdf.save(`certifikat-${certificate.level}-${certificate.full_name.replace(/\s+/g, '-')}.pdf`)
+    } catch (err) {
+      console.error('PDF generation failed:', err)
+      alert('Greška pri generisanju PDF-a. Pokušajte opciju štampanja.')
+    } finally {
+      setDownloading(false)
+    }
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 overflow-y-auto">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full overflow-hidden my-4">
+
+        {/* Modal header */}
+        <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-gray-100">
+          <h2 className="text-lg font-bold text-gray-800">Certifikat o završenom kursu</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={handleDownloadPDF}
+              disabled={downloading}
+              className="flex items-center gap-2 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-white px-4 py-2 rounded-lg font-medium transition-colors text-sm"
+            >
+              <Printer className="w-4 h-4" />
+              {downloading ? 'Generisanje...' : 'Preuzmi PDF'}
+            </button>
+            <button
+              onClick={onClose}
+              className="text-gray-400 hover:text-gray-600 w-9 h-9 flex items-center justify-center rounded-lg hover:bg-gray-100 transition-colors text-xl"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+
+        {/* Certificate (captured for PDF) */}
+        <div className="px-8 pb-8 pt-6">
+          <div
+            id="certificate-content"
+            className="border-8 border-double border-amber-400 rounded-xl p-10 bg-white text-center relative"
+            style={{ fontFamily: 'Georgia, serif' }}
+          >
+            {/* Corner decorations */}
+            <div className="absolute top-3 left-3 w-8 h-8 border-t-4 border-l-4 border-amber-400 rounded-tl" />
+            <div className="absolute top-3 right-3 w-8 h-8 border-t-4 border-r-4 border-amber-400 rounded-tr" />
+            <div className="absolute bottom-3 left-3 w-8 h-8 border-b-4 border-l-4 border-amber-400 rounded-bl" />
+            <div className="absolute bottom-3 right-3 w-8 h-8 border-b-4 border-r-4 border-amber-400 rounded-br" />
+
+            {/* Logo */}
+            <div className="flex items-center justify-center mb-3">
+              <div style={{ width: 56, height: 56, background: '#1d4ed8', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <span style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>BJ</span>
+              </div>
+            </div>
+            <p style={{ color: '#1e3a8a', fontWeight: 700, fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', marginBottom: 2 }}>Bosanski Jezik</p>
+            <p style={{ color: '#9ca3af', fontSize: 10, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 28 }}>easybosnian.com</p>
+
+            <p style={{ color: '#6b7280', fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', marginBottom: 8 }}>Certifikat o završenom kursu</p>
+            <div style={{ width: 80, height: 2, background: '#f59e0b', margin: '0 auto 24px' }} />
+
+            <p style={{ color: '#6b7280', fontSize: 14, marginBottom: 8 }}>Ovim se potvrđuje da je</p>
+            <p style={{ fontSize: 30, fontWeight: 700, color: '#111827', marginBottom: 8 }}>{certificate.full_name}</p>
+            <div style={{ width: 160, height: 1, background: '#d1d5db', margin: '0 auto 16px' }} />
+
+            <p style={{ color: '#6b7280', fontSize: 14, marginBottom: 8 }}>uspješno završio/la kurs</p>
+            <div style={{ display: 'inline-block', background: '#1d4ed8', color: '#fff', padding: '8px 28px', borderRadius: 9999, fontSize: 18, fontWeight: 700, marginBottom: 6 }}>
+              {certificate.level_name}
+            </div>
+            <p style={{ color: '#9ca3af', fontSize: 12, marginBottom: 24 }}>Bosanskog jezika</p>
+
+            <div style={{ display: 'flex', justifyContent: 'center', gap: 40, marginBottom: 24 }}>
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: '#d97706' }}>{certificate.percentage}%</div>
+                <div style={{ fontSize: 10, color: '#9ca3af', letterSpacing: 2, textTransform: 'uppercase' }}>Rezultat</div>
+              </div>
+              <div style={{ width: 1, background: '#e5e7eb' }} />
+              <div style={{ textAlign: 'center' }}>
+                <div style={{ fontSize: 24, fontWeight: 700, color: '#1d4ed8' }}>{certificate.score}/{certificate.total_questions}</div>
+                <div style={{ fontSize: 10, color: '#9ca3af', letterSpacing: 2, textTransform: 'uppercase' }}>Tačnih</div>
+              </div>
+            </div>
+
+            <p style={{ color: '#9ca3af', fontSize: 12 }}>Datum: <span style={{ color: '#374151', fontWeight: 600 }}>{dateStr}</span></p>
+            <p style={{ color: '#d1d5db', fontSize: 10, marginTop: 6 }}>ID: {certificate.certificate_id}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
