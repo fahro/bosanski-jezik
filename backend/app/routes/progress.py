@@ -127,10 +127,19 @@ async def get_all_lesson_progress(
     progress_dict = {p.lesson_id: p for p in progress_records}
     
     # Return progress for all 12 lessons
+    def count_exercises_done(saved_answers):
+        """Count how many exercise types have showResults=True."""
+        if not saved_answers:
+            return 0
+        types = ['grammar', 'sentence', 'matching', 'translation', 'writing',
+                 'imageQuiz', 'listenType', 'dialogueFill', 'findErrorWord', 'findErrorSentence']
+        return sum(1 for t in types if saved_answers.get(t, {}).get('showResults', False))
+
     result = []
     for lesson_id in range(1, 13):
         if lesson_id in progress_dict:
             p = progress_dict[lesson_id]
+            saved = p.saved_exercise_answers or {}
             result.append({
                 "lesson_id": lesson_id,
                 "completed": p.completed,
@@ -141,6 +150,7 @@ async def get_all_lesson_progress(
                 "exercises_completed": p.exercises_completed,
                 "exercises_passed": getattr(p, 'exercises_passed', False),
                 "best_exercise_percentage": getattr(p, 'best_exercise_percentage', 0.0),
+                "exercises_done_count": count_exercises_done(saved),
                 "quiz_completed": p.quiz_completed,
                 "quiz_passed": getattr(p, 'quiz_passed', False),
                 "best_quiz_score": p.best_quiz_score,
@@ -159,6 +169,7 @@ async def get_all_lesson_progress(
                 "exercises_completed": False,
                 "exercises_passed": False,
                 "best_exercise_percentage": 0.0,
+                "exercises_done_count": 0,
                 "quiz_completed": False,
                 "quiz_passed": False,
                 "best_quiz_score": 0,

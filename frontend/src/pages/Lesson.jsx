@@ -450,6 +450,23 @@ function Lesson() {
     saveProgressToBackend(null, null, exerciseAnswers)
   }
 
+  // Save progress with a specific exercise type marked as completed (React state is async, so we pass the override)
+  const saveExerciseShowResult = (type, extraData = {}) => {
+    const exerciseAnswers = {
+      grammar: { answers: grammarExercises.answers, showResults: type === 'grammar' || grammarExercises.showResults },
+      sentence: { answers: sentenceExercises.answers, showResults: type === 'sentence' || sentenceExercises.showResults },
+      matching: { answers: matchedPairs, showResults: type === 'matching' || matchingExercises.showResults },
+      translation: { answers: translationInputs, showResults: type === 'translation' || translationExercises.showResults },
+      writing: { answers: extraData.writingAnswers || writingExercises.answers, showResults: type === 'writing' || writingExercises.showResults, checked: extraData.writingChecked || writingExercises.checked },
+      imageQuiz: { answers: imageQuizExercises.answers, showResults: type === 'imageQuiz' || imageQuizExercises.showResults },
+      listenType: { answers: listenTypeExercises.answers, showResults: type === 'listenType' || listenTypeExercises.showResults },
+      dialogueFill: { answers: dialogueFillExercises.answers, showResults: type === 'dialogueFill' || dialogueFillExercises.showResults },
+      findErrorWord: { answers: findErrorWordExercises.answers, showResults: type === 'findErrorWord' || findErrorWordExercises.showResults },
+      findErrorSentence: { answers: findErrorSentenceExercises.answers, showResults: type === 'findErrorSentence' || findErrorSentenceExercises.showResults }
+    }
+    saveProgressToBackend(null, null, exerciseAnswers)
+  }
+
   // Handler for grammar exercise answer
   const handleGrammarAnswer = (exerciseId, option, correctAnswer, sentenceText) => {
     const newAnswers = { ...grammarExercises.answers, [exerciseId]: option }
@@ -1536,7 +1553,7 @@ function Lesson() {
 
   const checkGrammarExercises = () => {
     setGrammarExercises(prev => ({ ...prev, showResults: true }))
-    // Try to submit if all exercises are done
+    saveExerciseShowResult('grammar')
     submitAllExercisesToBackend(true, sentenceExercises.showResults, matchingExercises.showResults, translationExercises.showResults)
   }
 
@@ -1586,7 +1603,7 @@ function Lesson() {
 
   const checkSentenceExercises = () => {
     setSentenceExercises(prev => ({ ...prev, showResults: true }))
-    // Try to submit if all exercises are done
+    saveExerciseShowResult('sentence')
     submitAllExercisesToBackend(grammarExercises.showResults, true, matchingExercises.showResults, translationExercises.showResults)
   }
 
@@ -1629,7 +1646,7 @@ function Lesson() {
 
   const checkMatchingExercises = () => {
     setMatchingExercises({ answers: matchedPairs, showResults: true })
-    // Try to submit if all exercises are done
+    saveExerciseShowResult('matching')
     submitAllExercisesToBackend(grammarExercises.showResults, sentenceExercises.showResults, true, translationExercises.showResults)
   }
 
@@ -1654,7 +1671,7 @@ function Lesson() {
 
   const checkTranslationExercises = () => {
     setTranslationExercises({ answers: translationInputs, showResults: true })
-    // Try to submit if all exercises are done
+    saveExerciseShowResult('translation')
     submitAllExercisesToBackend(grammarExercises.showResults, sentenceExercises.showResults, matchingExercises.showResults, true)
   }
 
@@ -1733,15 +1750,22 @@ function Lesson() {
   const submitWritingSentence = (id) => {
     const item = writingList.find(w => w.id === id)
     if (!item) return
-    
+
     const userAnswer = writingExercises.answers[id] || ''
     const score = calculateSimilarity(userAnswer, item.bosnian)
-    
+    const newChecked = { ...writingExercises.checked, [id]: { score, submitted: true } }
+    const allDone = writingList.length > 0 && writingList.every(w => newChecked[w.id]?.submitted)
+
     setWritingExercises(prev => ({
       ...prev,
-      checked: { ...prev.checked, [id]: { score, submitted: true } }
+      checked: newChecked,
+      showResults: allDone ? true : prev.showResults
     }))
-    
+
+    if (allDone) {
+      saveExerciseShowResult('writing', { writingChecked: newChecked })
+    }
+
     // Play audio after short delay
     setTimeout(() => {
       speak(item.bosnian)
@@ -3043,7 +3067,7 @@ function Lesson() {
                           <div className="flex flex-col items-center space-y-4 mt-6">
                             {!scrambleExercises.showResults ? (
                               <button
-                                onClick={() => setScrambleExercises(prev => ({ ...prev, showResults: true }))}
+                                onClick={() => { setScrambleExercises(prev => ({ ...prev, showResults: true })); saveExerciseShowResult('scramble') }}
                                 className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition-colors"
                               >
                                 ✓ Provjeri sve
@@ -3116,6 +3140,7 @@ function Lesson() {
                         setImageQuizExercises(prev => ({ ...prev, currentQuestion: currentQ + 1 }))
                       } else {
                         setImageQuizExercises(prev => ({ ...prev, showResults: true }))
+                        saveExerciseShowResult('imageQuiz')
                       }
                     }
 
@@ -3276,6 +3301,7 @@ function Lesson() {
                         setListenTypeExercises(prev => ({ ...prev, currentQuestion: currentQ + 1 }))
                       } else {
                         setListenTypeExercises(prev => ({ ...prev, showResults: true }))
+                        saveExerciseShowResult('listenType')
                       }
                     }
 
@@ -3471,6 +3497,7 @@ function Lesson() {
 
                     const checkAnswers = () => {
                       setDialogueFillExercises(prev => ({ ...prev, showResults: true }))
+                      saveExerciseShowResult('dialogueFill')
                     }
 
                     const resetDialogueFill = () => {
@@ -3668,7 +3695,7 @@ function Lesson() {
                     <div className="flex justify-center mt-6">
                       {!findErrorWordExercises.showResults ? (
                         <button
-                          onClick={() => setFindErrorWordExercises(prev => ({ ...prev, showResults: true }))}
+                          onClick={() => { setFindErrorWordExercises(prev => ({ ...prev, showResults: true })); saveExerciseShowResult('findErrorWord') }}
                           disabled={Object.keys(findErrorWordExercises.answers).length < findErrorWordList.length}
                           className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
                         >
@@ -3752,7 +3779,7 @@ function Lesson() {
                     <div className="flex justify-center mt-6">
                       {!findErrorSentenceExercises.showResults ? (
                         <button
-                          onClick={() => setFindErrorSentenceExercises(prev => ({ ...prev, showResults: true }))}
+                          onClick={() => { setFindErrorSentenceExercises(prev => ({ ...prev, showResults: true })); saveExerciseShowResult('findErrorSentence') }}
                           disabled={Object.keys(findErrorSentenceExercises.answers).length < findErrorSentenceList.length}
                           className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
                         >

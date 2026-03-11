@@ -192,6 +192,23 @@ function LessonList() {
                         </span>
                       )}
                     </div>
+                    {(() => {
+                      const p = lessonProgress.find(pr => pr.lesson_id === lesson.id)
+                      const done = p?.exercises_done_count || 0
+                      if (done === 0) return null
+                      const pct = Math.round((done / 10) * 100)
+                      return (
+                        <div className="mt-2">
+                          <div className="flex items-center justify-between mb-1">
+                            <span className="text-xs text-gray-400">Vježbe</span>
+                            <span className={`text-xs font-medium ${done === 10 ? 'text-green-600' : 'text-blue-600'}`}>{done}/10</span>
+                          </div>
+                          <div className="w-full bg-gray-100 rounded-full h-1.5">
+                            <div className={`h-1.5 rounded-full transition-all ${done === 10 ? 'bg-green-500' : 'bg-bosnia-blue'}`} style={{ width: `${pct}%` }} />
+                          </div>
+                        </div>
+                      )
+                    })()}
                   </div>
                   <ChevronRight className="w-4 h-4 text-gray-300 shrink-0" />
                 </Link>
