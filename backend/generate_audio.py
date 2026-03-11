@@ -335,9 +335,13 @@ def main():
             if trans_text:
                 texts_to_generate.append((trans_text, None, False))
 
-            # find_error_sentence - all sentences (audio helps learners hear correct vs wrong)
-            # Skip find_error_word since it may contain intentionally misspelled words
-        
+            # find_error_sentence - collect all option sentences so learners can hear them
+            # Skip find_error_word since it contains intentionally misspelled words
+            if exercise.get("type") == "find_error_sentence":
+                for sentence in content.get("sentences", []):
+                    if sentence and isinstance(sentence, str):
+                        texts_to_generate.append((sentence, None, False))
+
         # 5. Cultural notes (no specific speaker)
         cultural_note = lesson.get("cultural_note", "")
         if cultural_note:
