@@ -29,6 +29,7 @@ from app.data.b1_lessons_2 import B1_LESSONS_PART2
 from app.data.b1_lessons_3 import B1_LESSONS_PART3
 from app.data.b2_lessons import B2_LESSONS
 from app.data.writing_exercises import WRITING_EXERCISES
+from app.data.a1_final_test import A1_FINAL_TEST_QUESTIONS
 
 # Combine all lessons (A1 + A2 + B1 + B2)
 ALL_LESSONS = A1_LESSONS + A1_LESSONS_PART2 + A1_LESSONS_PART3 + A1_LESSONS_PART4 + A2_LESSONS + A2_LESSONS_PART2 + A2_LESSONS_PART3 + A2_LESSONS_PART4 + B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3 + B2_LESSONS
@@ -328,11 +329,14 @@ def main():
             for pair in pairs:
                 if isinstance(pair, list) and len(pair) > 0:
                     texts_to_generate.append((pair[0], None, False))  # First item is usually Bosnian
-            
+
             # Translation text
             trans_text = content.get("text", "")
             if trans_text:
                 texts_to_generate.append((trans_text, None, False))
+
+            # find_error_sentence - all sentences (audio helps learners hear correct vs wrong)
+            # Skip find_error_word since it may contain intentionally misspelled words
         
         # 5. Cultural notes (no specific speaker)
         cultural_note = lesson.get("cultural_note", "")
@@ -358,7 +362,22 @@ def main():
         print(f"  Lesson {lesson_id}: {len(sentences)} writing sentences")
         for sentence in sentences:
             texts_to_generate.append((sentence, None, False))
-    
+
+    # 8. Final test audio questions
+    print("\nCollecting final test audio texts...")
+    for lesson_block in A1_FINAL_TEST_QUESTIONS:
+        for q in lesson_block.get("questions", []):
+            audio_text = q.get("audio_text", "")
+            if audio_text:
+                texts_to_generate.append((audio_text, None, False))
+            # Dialogue lines in final test questions
+            for line in q.get("dialogue", []):
+                if isinstance(line, dict):
+                    line_text = line.get("text", "")
+                    speaker = line.get("speaker", "")
+                    if line_text:
+                        texts_to_generate.append((line_text, speaker, bool(speaker)))
+
     # Remove duplicates while preserving order and keeping speaker info
     seen = {}
     unique_texts = []

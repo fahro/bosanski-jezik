@@ -149,7 +149,9 @@ A1_LESSONS_PART3 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "How much does it cost?"}, "answer": "Koliko košta?", "hint": "Pitanje o cijeni"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "The bill, please"}, "answer": "Račun, molim", "hint": "U restoranu"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "tea"}, "answer": "čaj", "hint": "Toplo piće"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "juice"}, "answer": "sok", "hint": "Od voća"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "juice"}, "answer": "sok", "hint": "Od voća"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["hljeb", "mljekok", "kafa", "čaj"]}, "answer": "mljekok", "hint": "Ispravno je 'mlijeko' — bijela tečnost"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Volim kafu.", "On pije čaj.", "Ja imam kafa.", "Mi jedemo ručak."]}, "answer": "Ja imam kafa.", "hint": "Nakon 'imam' koristimo akuzativ — ispravno je 'Ja imam kafu'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'bread' na bosanskom?", "options": ["meso", "riba", "hljeb", "voće"], "correct_answer": 2, "explanation": "'Hljeb' znači 'bread'.", "question_type": "vocabulary"},
@@ -316,7 +318,9 @@ A1_LESSONS_PART3 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "under"}, "answer": "ispod", "hint": "Prijedlog"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "next to"}, "answer": "pored", "hint": "Prijedlog"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "garden"}, "answer": "vrt", "hint": "Vani"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "apartment"}, "answer": "stan", "hint": "Gdje živimo"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "apartment"}, "answer": "stan", "hint": "Gdje živimo"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["kuća", "sooba", "kuhinja", "kupatilo"]}, "answer": "sooba", "hint": "Ispravno je 'soba' — prostorija u kući"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Moja kuća je velika.", "U sobi je krevet.", "Kuhinja su mala.", "Kupatilo je čisto."]}, "answer": "Kuhinja su mala.", "hint": "Kuhinja je jednina ženskog roda — ispravno je 'Kuhinja je mala'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'kitchen' na bosanskom?", "options": ["kupatilo", "kuhinja", "soba", "stan"], "correct_answer": 1, "explanation": "'Kuhinja' znači 'kitchen'.", "question_type": "vocabulary"},
@@ -482,7 +486,9 @@ Construction for expressing pain:
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I am fine"}, "answer": "Dobro sam", "hint": "Osjećam se dobro"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "stomach"}, "answer": "stomak", "hint": "Dio tijela"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I have a fever"}, "answer": "Imam temperaturu", "hint": "Temperatura"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "ear"}, "answer": "uho", "hint": "Slušamo"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "ear"}, "answer": "uho", "hint": "Slušamo"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["glava", "noga", "rucka", "stomak"]}, "answer": "rucka", "hint": "Ispravno je 'ruka' — ud za hvatanje"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Boli me glava.", "Imam temperaturu.", "Moja noge su umorne.", "Ljekarka pregleda pacijenta."]}, "answer": "Moja noge su umorne.", "hint": "Noge je množina ženskog roda — ispravno je 'Moje noge su umorne'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'head' na bosanskom?", "options": ["ruka", "noga", "glava", "stomak"], "correct_answer": 2, "explanation": "'Glava' znači 'head'.", "question_type": "vocabulary"},

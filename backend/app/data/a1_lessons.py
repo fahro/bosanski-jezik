@@ -152,7 +152,9 @@ In Bosnian, we have the following personal pronouns:
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "Good evening"}, "answer": "Dobro veče", "hint": "Večernji pozdrav"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I am a student"}, "answer": "Ja sam student", "hint": "Ja sam + imenica"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "Nice to meet you"}, "answer": "Drago mi je", "hint": "Kada se upoznajete"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "How are you?"}, "answer": "Kako si?", "hint": "Pitanje o stanju"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "How are you?"}, "answer": "Kako si?", "hint": "Pitanje o stanju"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["zdravo", "hvalja", "molim", "doviđenja"]}, "answer": "hvalja", "hint": "Ispravno je 'hvala' — bez slova 'j'"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Ja sam student.", "Ti si učenik.", "On sam visok.", "Mi smo prijatelji."]}, "answer": "On sam visok.", "hint": "Za 'on' koristimo 'je', ne 'sam' — ispravno je 'On je visok'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'Hello' na bosanskom?", "options": ["Doviđenja", "Zdravo", "Hvala", "Molim"], "correct_answer": 1, "explanation": "'Zdravo' je neformalni pozdrav koji se koristi kad nekoga sretnete.", "question_type": "vocabulary"},
@@ -392,7 +394,9 @@ In Bosnian, we have the following personal pronouns:
             {"id": 34, "type": "writing", "instruction": "Napišite broj riječima", "content": {"text": "3"}, "answer": "tri", "hint": "Broj tri"},
             {"id": 35, "type": "writing", "instruction": "Napišite broj riječima", "content": {"text": "8"}, "answer": "osam", "hint": "Broj osam"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "first (m.)"}, "answer": "prvi", "hint": "Redni broj za 1"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "second (f.)"}, "answer": "druga", "hint": "Redni broj za 2 (ž.r.)"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "second (f.)"}, "answer": "druga", "hint": "Redni broj za 2 (ž.r.)"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["jedan", "dva", "trea", "četiri"]}, "answer": "trea", "hint": "Broj 3 na bosanskom je 'tri', ne 'trea'"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Imam pet jabuka.", "On ima dvaa brata.", "Ona ima šest prijatelja.", "Mi imamo tri lekcije."]}, "answer": "On ima dvaa brata.", "hint": "Ispravno je 'dva' — ne postoji oblik 'dvaa' u bosanskom"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'first' na bosanskom?", "options": ["jedan", "prvi", "druga", "treći"], "correct_answer": 1, "explanation": "'Prvi' je redni broj za 'first'.", "question_type": "ordinal"},
@@ -553,7 +557,9 @@ Color adjectives change according to the gender of the noun:
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "The sky is blue"}, "answer": "Nebo je plavo", "hint": "Nebo = sky"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "The grass is green"}, "answer": "Trava je zelena", "hint": "Trava = grass"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "brown"}, "answer": "smeđa", "hint": "Boja smeđa"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "gray"}, "answer": "siva", "hint": "Boja siva"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "gray"}, "answer": "siva", "hint": "Boja siva"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["crvena", "plava", "zeelena", "žuta"]}, "answer": "zeelena", "hint": "Ispravno je 'zelena' — jedno 'e' na početku"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Nebo je plavo.", "Trava je zeleno.", "Jabuka je crvena.", "Sunce je žuto."]}, "answer": "Trava je zeleno.", "hint": "Trava je ženskog roda — ispravno je 'Trava je zelena'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'green' na bosanskom?", "options": ["plava", "crvena", "zelena", "žuta"], "correct_answer": 2, "explanation": "'Zelena' znači 'green'. Zelena trava, zeleno drvo.", "question_type": "vocabulary"},

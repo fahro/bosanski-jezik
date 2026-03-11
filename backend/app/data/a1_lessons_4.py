@@ -137,7 +137,9 @@ A1_LESSONS_PART4 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "cook (m.)"}, "answer": "kuhar", "hint": "Muški oblik"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "police officer"}, "answer": "policajac", "hint": "Čuvar reda"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "student (f.)"}, "answer": "studentica", "hint": "Ženski oblik"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "job"}, "answer": "posao", "hint": "Rad"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "job"}, "answer": "posao", "hint": "Rad"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["doktor", "nastavnicja", "advokat", "inženjer"]}, "answer": "nastavnicja", "hint": "Ispravno je 'nastavnica' — bez slova 'j'"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["On je doktor.", "Ona su nastavnica.", "Moj otac je advokat.", "Sestra je medicinska sestra."]}, "answer": "Ona su nastavnica.", "hint": "Ona je jednina — ispravno je 'Ona je nastavnica'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'teacher' (ženski rod)?", "options": ["učitelj", "učiteljica", "doktorica", "studentica"], "correct_answer": 1, "explanation": "'Učiteljica' je ženski oblik od 'učitelj'.", "question_type": "vocabulary"},
@@ -300,7 +302,9 @@ A1_LESSONS_PART4 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "late"}, "answer": "kasno", "hint": "Suprotno od rano"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "early"}, "answer": "rano", "hint": "Suprotno od kasno"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "hour"}, "answer": "sat", "hint": "60 minuta"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "minute"}, "answer": "minuta", "hint": "60 sekundi"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "minute"}, "answer": "minuta", "hint": "60 sekundi"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["sunčano", "oblačano", "kišovito", "vjetrovito"]}, "answer": "oblačano", "hint": "Ispravno je 'oblačno' — kada ima oblaka na nebu"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Danas je sunčano.", "Sutra je biti kišno.", "Koliko je sati?", "Sada je tri sata."]}, "answer": "Sutra je biti kišno.", "hint": "Za budućnost koristimo 'će biti' — ispravno je 'Sutra će biti kišno'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 8:30 na bosanskom?", "options": ["osam sati", "pola osam", "pola devet", "osam i pola"], "correct_answer": 2, "explanation": "'Pola devet' = 8:30 (half to nine).", "question_type": "time"},
@@ -472,7 +476,9 @@ A1_LESSONS_PART4 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "of course"}, "answer": "naravno", "hint": "Potvrda"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "maybe"}, "answer": "možda", "hint": "Nesigurnost"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "No problem"}, "answer": "Nema problema", "hint": "Sve u redu"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I agree"}, "answer": "Slažem se", "hint": "Slaganje"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I agree"}, "answer": "Slažem se", "hint": "Slaganje"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["izvinite", "naravnoo", "možda", "sigurno"]}, "answer": "naravnoo", "hint": "Ispravno je 'naravno' — jedno 'o' na kraju"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Oprostite, ne razumijem.", "Možete li govoriti sporije?", "Ja razumiti malo bosanski.", "Hvala na pomoći."]}, "answer": "Ja razumiti malo bosanski.", "hint": "Glagol mora biti u prezentu — ispravno je 'Ja razumijem malo bosanski'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'I don't understand'?", "options": ["Ne znam", "Ne razumijem", "Ne volim", "Ne mogu"], "correct_answer": 1, "explanation": "'Ne razumijem' = I don't understand.", "question_type": "vocabulary"},

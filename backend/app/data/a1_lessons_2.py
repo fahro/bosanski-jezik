@@ -130,7 +130,9 @@ A1_LESSONS_PART2 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "My family is big"}, "answer": "Moja porodica je velika", "hint": "Porodica = family"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I have one brother"}, "answer": "Imam jednog brata", "hint": "Jednog brata"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "son"}, "answer": "sin", "hint": "Sin"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "daughter"}, "answer": "kći", "hint": "Kći"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "daughter"}, "answer": "kći", "hint": "Kći"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["majka", "otacj", "brat", "sestra"]}, "answer": "otacj", "hint": "Ispravno je 'otac' — bez slova 'j' na kraju"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Moj brat je visok.", "Moja sestra je pametna.", "Moj majka je lijepa.", "Moje dijete je malo."]}, "answer": "Moj majka je lijepa.", "hint": "Majka je ženskog roda — ispravno je 'Moja majka je lijepa'"}
         ],
         "quiz": [
             {"id": 1, "question": "Kako se kaže 'mother' na bosanskom?", "options": ["sestra", "nana", "majka", "žena"], "correct_answer": 2, "explanation": "'Majka' znači 'mother'. Također se koristi 'mama' neformalno.", "question_type": "vocabulary"},
@@ -288,7 +290,9 @@ A1_LESSONS_PART2 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "yesterday"}, "answer": "jučer", "hint": "Prošli dan"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "weekend"}, "answer": "vikend", "hint": "Subota i nedjelja"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "What day is it today?"}, "answer": "Koji je danas dan?", "hint": "Pitanje o danu"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "Tomorrow is Friday"}, "answer": "Sutra je petak", "hint": "Sutra = tomorrow"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "Tomorrow is Friday"}, "answer": "Sutra je petak", "hint": "Sutra = tomorrow"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["ponedjeljak", "utorak", "sriijeda", "četvrtak"]}, "answer": "sriijeda", "hint": "Ispravno je 'srijeda' — jedno 'i' u sredini"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Danas je ponedjeljak.", "Sutra je utorak.", "Subota su slobodan dan.", "Petak je radni dan."]}, "answer": "Subota su slobodan dan.", "hint": "Subota je jednina — ispravno je 'Subota je slobodan dan'"}
         ],
         "quiz": [
             {"id": 1, "question": "Koji dan dolazi poslije utorka?", "options": ["ponedjeljak", "srijeda", "četvrtak", "petak"], "correct_answer": 1, "explanation": "Srijeda dolazi poslije utorka.", "question_type": "sequence"},
@@ -458,7 +462,9 @@ A1_LESSONS_PART2 = [
             {"id": 34, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "I love spring"}, "answer": "Volim proljeće", "hint": "Volim = I love"},
             {"id": 35, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "My birthday is in May"}, "answer": "Moj rođendan je u maju", "hint": "Rođendan = birthday"},
             {"id": 36, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "June"}, "answer": "juni", "hint": "Šesti mjesec"},
-            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "July"}, "answer": "juli", "hint": "Sedmi mjesec"}
+            {"id": 37, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "July"}, "answer": "juli", "hint": "Sedmi mjesec"},
+            {"id": 38, "type": "find_error_word", "instruction": "Pronađite pogrešno napisanu riječ", "content": {"words": ["januar", "februar", "marth", "april"]}, "answer": "marth", "hint": "Treći mjesec se piše 'mart', ne 'marth'"},
+            {"id": 39, "type": "find_error_sentence", "instruction": "Koja rečenica sadrži grešku?", "content": {"sentences": ["Januar je prvi mjesec.", "Februar ima 28 dana.", "Proljeće je toplo godišnje doba.", "Zima su hladno doba godine."]}, "answer": "Zima su hladno doba godine.", "hint": "Zima je jednina — ispravno je 'Zima je hladno doba godine'"}
         ],
         "quiz": [
             {"id": 1, "question": "Koji mjesec dolazi poslije maja?", "options": ["april", "juni", "juli", "mart"], "correct_answer": 1, "explanation": "Juni dolazi poslije maja.", "question_type": "sequence"},

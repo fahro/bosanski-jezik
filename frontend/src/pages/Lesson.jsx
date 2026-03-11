@@ -105,6 +105,8 @@ function Lesson() {
     showResults: false,
     currentPlaying: -1
   })
+  const [findErrorWordExercises, setFindErrorWordExercises] = useState({ answers: {}, showResults: false })
+  const [findErrorSentenceExercises, setFindErrorSentenceExercises] = useState({ answers: {}, showResults: false })
   const [showFillBlankTranslation, setShowFillBlankTranslation] = useState(false)
   const [showDialogTranslation, setShowDialogTranslation] = useState(true)
   const [dialoguePlayingIndex, setDialoguePlayingIndex] = useState(-1)
@@ -170,6 +172,8 @@ function Lesson() {
     setImageQuizExercises({ answers: {}, showResults: false, currentQuestion: 0 })
     setListenTypeExercises({ answers: {}, showResults: false, currentQuestion: 0, hasPlayed: {} })
     setDialogueFillExercises({ answers: {}, showResults: false, currentPlaying: -1 })
+    setFindErrorWordExercises({ answers: {}, showResults: false })
+    setFindErrorSentenceExercises({ answers: {}, showResults: false })
     setActiveExerciseType('fillBlank')
     setTranslationInputs({})
     setMatchedPairs({})
@@ -1303,8 +1307,26 @@ function Lesson() {
         bosnian: ex.answer,
         hint: ex.hint || ''
       }))
-    
-    return { fillBlank, sentenceOrder, matching, translation, writing }
+
+    const findErrorWord = lesson.exercises
+      .filter(ex => ex.type === 'find_error_word')
+      .map(ex => ({
+        id: ex.id,
+        words: ex.content?.words || [],
+        answer: ex.answer,
+        hint: ex.hint || ''
+      }))
+
+    const findErrorSentence = lesson.exercises
+      .filter(ex => ex.type === 'find_error_sentence')
+      .map(ex => ({
+        id: ex.id,
+        sentences: ex.content?.sentences || [],
+        answer: ex.answer,
+        hint: ex.hint || ''
+      }))
+
+    return { fillBlank, sentenceOrder, matching, translation, writing, findErrorWord, findErrorSentence }
   }, [lesson?.exercises])
   
   // Get exercises for current lesson (use API data if available, fallback to hardcoded)
@@ -1314,7 +1336,9 @@ function Lesson() {
   const matchingList = currentExercises.matching || []
   const translationList = currentExercises.translation || []
   const writingList = currentExercises.writing || []
-  
+  const findErrorWordList = currentExercises.findErrorWord || []
+  const findErrorSentenceList = currentExercises.findErrorSentence || []
+
   // Shuffled matching list for right column (stable shuffle)
   const shuffledMatchingList = useMemo(() => {
     return [...matchingList].sort(() => 0.5 - Math.random())
@@ -1754,7 +1778,9 @@ function Lesson() {
     { id: 'writing', label: 'Piši', labelEn: 'Write', icon: '✍️' },
     { id: 'imageQuiz', label: 'Prepoznaj sliku', labelEn: 'Identify the image', icon: '🖼️' },
     { id: 'listenType', label: 'Slušaj i piši', labelEn: 'Listen & type', icon: '🎧' },
-    { id: 'dialogueFill', label: 'Dopuni dijalog', labelEn: 'Complete dialogue', icon: '💬' }
+    { id: 'dialogueFill', label: 'Dopuni dijalog', labelEn: 'Complete dialogue', icon: '💬' },
+    { id: 'findErrorWord', label: 'Greška u riječi', labelEn: 'Find error in word', icon: '🔍' },
+    { id: 'findErrorSentence', label: 'Greška u rečenici', labelEn: 'Find error in sentence', icon: '❌' }
   ]
 
   return (
@@ -2024,8 +2050,10 @@ function Lesson() {
                     (type.id === 'writing' && getCompletedCount() === writingList.length && writingList.length > 0) ||
                     (type.id === 'imageQuiz' && imageQuizExercises.showResults) ||
                     (type.id === 'listenType' && listenTypeExercises.showResults) ||
-                    (type.id === 'dialogueFill' && dialogueFillExercises.showResults)
-                  
+                    (type.id === 'dialogueFill' && dialogueFillExercises.showResults) ||
+                    (type.id === 'findErrorWord' && findErrorWordExercises.showResults) ||
+                    (type.id === 'findErrorSentence' && findErrorSentenceExercises.showResults)
+
                   return (
                   <button
                     key={type.id}
@@ -3442,6 +3470,174 @@ function Lesson() {
                   })()}
                 </div>
               )}
+
+              {/* Find Error in Word Exercises */}
+              {activeExerciseType === 'findErrorWord' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">🔍 Greška u riječi</h3>
+                  <p className="text-gray-600 mb-4">Pronađite pogrešno napisanu ili pogrešno upotrebljenu riječ</p>
+                  <div className="space-y-4">
+                    {findErrorWordList.map((exercise) => {
+                      const userAnswer = findErrorWordExercises.answers[exercise.id]
+                      const isCorrect = userAnswer === exercise.answer
+                      const showResult = findErrorWordExercises.showResults
+                      return (
+                        <div key={exercise.id} className={`p-4 rounded-xl border-2 transition-all ${
+                          showResult && userAnswer
+                            ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                            : 'bg-white border-gray-200'
+                        }`}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">#{exercise.id}</span>
+                            <span className="font-medium text-gray-700">Koja je riječ pogrešna?</span>
+                          </div>
+                          <div className="flex flex-wrap gap-3">
+                            {exercise.words.map((word) => (
+                              <button
+                                key={word}
+                                onClick={() => !showResult && setFindErrorWordExercises(prev => ({
+                                  ...prev,
+                                  answers: { ...prev.answers, [exercise.id]: word }
+                                }))}
+                                disabled={showResult}
+                                className={`px-4 py-2 rounded-lg border-2 font-medium transition-all ${
+                                  userAnswer === word
+                                    ? showResult
+                                      ? isCorrect ? 'bg-green-500 text-white border-green-600' : 'bg-red-500 text-white border-red-600'
+                                      : 'bg-blue-500 text-white border-blue-600'
+                                    : showResult && word === exercise.answer
+                                      ? 'bg-green-100 border-green-400 text-green-700 font-bold'
+                                      : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 hover:border-gray-300'
+                                }`}
+                              >
+                                {word}
+                              </button>
+                            ))}
+                          </div>
+                          {showResult && (
+                            <div className={`mt-2 text-sm ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                              {isCorrect ? '✓ Tačno!' : `✗ Pogrešna riječ je: "${exercise.answer}"`}
+                              <p className="text-gray-500 mt-1">💡 {exercise.hint}</p>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                  {findErrorWordList.length > 0 && (
+                    <div className="flex justify-center mt-6">
+                      {!findErrorWordExercises.showResults ? (
+                        <button
+                          onClick={() => setFindErrorWordExercises(prev => ({ ...prev, showResults: true }))}
+                          disabled={Object.keys(findErrorWordExercises.answers).length < findErrorWordList.length}
+                          className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+                        >
+                          Provjeri odgovore
+                        </button>
+                      ) : (
+                        <div className="text-center">
+                          <div className="text-lg font-semibold mb-3">
+                            {Object.entries(findErrorWordExercises.answers).filter(([id, ans]) => {
+                              const ex = findErrorWordList.find(e => e.id === parseInt(id))
+                              return ex && ans === ex.answer
+                            }).length} / {findErrorWordList.length} tačno
+                          </div>
+                          <button
+                            onClick={() => setFindErrorWordExercises({ answers: {}, showResults: false })}
+                            className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                          >
+                            <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Find Error in Sentence Exercises */}
+              {activeExerciseType === 'findErrorSentence' && (
+                <div className="animate-fadeIn">
+                  <h3 className="text-lg font-semibold text-gray-800 mb-2">❌ Greška u rečenici</h3>
+                  <p className="text-gray-600 mb-4">Pronađite rečenicu koja sadrži gramatičku grešku</p>
+                  <div className="space-y-4">
+                    {findErrorSentenceList.map((exercise) => {
+                      const userAnswer = findErrorSentenceExercises.answers[exercise.id]
+                      const isCorrect = userAnswer === exercise.answer
+                      const showResult = findErrorSentenceExercises.showResults
+                      return (
+                        <div key={exercise.id} className={`p-4 rounded-xl border-2 transition-all ${
+                          showResult && userAnswer
+                            ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
+                            : 'bg-white border-gray-200'
+                        }`}>
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="bg-orange-500 text-white px-2 py-1 rounded text-sm font-bold">#{exercise.id}</span>
+                            <span className="font-medium text-gray-700">Koja rečenica sadrži grešku?</span>
+                          </div>
+                          <div className="space-y-2">
+                            {exercise.sentences.map((sentence, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => !showResult && setFindErrorSentenceExercises(prev => ({
+                                  ...prev,
+                                  answers: { ...prev.answers, [exercise.id]: sentence }
+                                }))}
+                                disabled={showResult}
+                                className={`w-full text-left px-4 py-3 rounded-lg border-2 font-medium transition-all ${
+                                  userAnswer === sentence
+                                    ? showResult
+                                      ? isCorrect ? 'bg-green-500 text-white border-green-600' : 'bg-red-500 text-white border-red-600'
+                                      : 'bg-blue-500 text-white border-blue-600'
+                                    : showResult && sentence === exercise.answer
+                                      ? 'bg-green-100 border-green-400 text-green-700 font-bold'
+                                      : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 hover:border-gray-300'
+                                }`}
+                              >
+                                {String.fromCharCode(65 + idx)}. {sentence}
+                              </button>
+                            ))}
+                          </div>
+                          {showResult && (
+                            <div className={`mt-2 text-sm ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
+                              {isCorrect ? '✓ Tačno!' : `✗ Pogrešna rečenica je: "${exercise.answer}"`}
+                              <p className="text-gray-500 mt-1">💡 {exercise.hint}</p>
+                            </div>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                  {findErrorSentenceList.length > 0 && (
+                    <div className="flex justify-center mt-6">
+                      {!findErrorSentenceExercises.showResults ? (
+                        <button
+                          onClick={() => setFindErrorSentenceExercises(prev => ({ ...prev, showResults: true }))}
+                          disabled={Object.keys(findErrorSentenceExercises.answers).length < findErrorSentenceList.length}
+                          className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
+                        >
+                          Provjeri odgovore
+                        </button>
+                      ) : (
+                        <div className="text-center">
+                          <div className="text-lg font-semibold mb-3">
+                            {Object.entries(findErrorSentenceExercises.answers).filter(([id, ans]) => {
+                              const ex = findErrorSentenceList.find(e => e.id === parseInt(id))
+                              return ex && ans === ex.answer
+                            }).length} / {findErrorSentenceList.length} tačno
+                          </div>
+                          <button
+                            onClick={() => setFindErrorSentenceExercises({ answers: {}, showResults: false })}
+                            className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                          >
+                            <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -4300,6 +4496,24 @@ function Lesson() {
           </button>
         )}
         {activeTab === 'exercises' && activeExerciseType === 'dialogueFill' && (
+          <button
+            onClick={() => { setActiveExerciseType('findErrorWord'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Greška u riječi</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'findErrorWord' && (
+          <button
+            onClick={() => { setActiveExerciseType('findErrorSentence'); saveCurrentPosition() }}
+            className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
+          >
+            <span>Idite na Greška u rečenici</span>
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        )}
+        {activeTab === 'exercises' && activeExerciseType === 'findErrorSentence' && (
           <button
             onClick={() => { setActiveTab('culture'); saveCurrentPosition() }}
             className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-4 py-2 rounded-lg shadow hover:shadow-md transition-shadow ml-auto"
