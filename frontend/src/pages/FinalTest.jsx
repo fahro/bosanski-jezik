@@ -669,11 +669,23 @@ function CertificateModal({ certificate, onClose }) {
       const { default: html2canvas } = await import('html2canvas')
       const { default: jsPDF } = await import('jspdf')
       const element = document.getElementById('certificate-content')
-      const canvas = await html2canvas(element, {
+
+      // Clone outside modal to avoid overflow clipping
+      const clone = element.cloneNode(true)
+      clone.style.position = 'fixed'
+      clone.style.top = '-9999px'
+      clone.style.left = '0'
+      clone.style.width = element.offsetWidth + 'px'
+      clone.style.zIndex = '-1'
+      document.body.appendChild(clone)
+
+      const canvas = await html2canvas(clone, {
         scale: 3,
         useCORS: true,
         backgroundColor: '#ffffff'
       })
+      document.body.removeChild(clone)
+
       const imgData = canvas.toDataURL('image/png')
       const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
       const pdfWidth = pdf.internal.pageSize.getWidth()
