@@ -12,6 +12,7 @@ from app.models import (
 )
 from app.auth import get_current_user_required
 from app.data.a1_lessons import A1_LESSONS
+from app.data.a1_final_test import A1_FINAL_TEST_QUESTIONS
 from app.data.a2_lessons import A2_LESSONS
 from app.data.b1_lessons import B1_LESSONS
 from app.data.b1_lessons_2 import B1_LESSONS_PART2
@@ -51,36 +52,65 @@ def check_writing_answer(user_answer: str, correct_answer: str) -> bool:
     """Check if writing answer is correct (case-insensitive, trimmed)."""
     return normalize_text(user_answer) == normalize_text(correct_answer)
 
+def get_dedicated_final_test_questions(level: str):
+    """Use hand-crafted dedicated questions for a level (currently A1)."""
+    if level == "a1":
+        source = A1_FINAL_TEST_QUESTIONS
+    else:
+        return None  # fall through to legacy generator
+
+    all_questions = []
+    for lesson_group in source:
+        lesson_id = lesson_group["lesson_id"]
+        lesson_title = lesson_group["lesson_title"]
+        for q in lesson_group["questions"]:
+            entry = {
+                "id": f"{lesson_id}_{q['id']}",
+                "lesson_id": lesson_id,
+                "lesson_title": lesson_title,
+                "question": q["question"],
+                "options": q.get("options", []),
+                "correct_answer": q.get("correct_answer"),
+                "explanation": q.get("explanation", ""),
+                "question_type": q.get("question_type", "vocabulary"),
+                # Extended fields for rich question types
+                "audio_text": q.get("audio_text"),
+                "image_emoji": q.get("image_emoji"),
+                "dialogue": q.get("dialogue"),
+                "sentence": q.get("sentence"),
+            }
+            all_questions.append(entry)
+
+    random.shuffle(all_questions)
+    return all_questions
+
+
 def get_final_test_questions(level: str = "a1"):
-    """Generate questions - 8 multiple choice + 2 writing from each of the 12 lessons."""
+    """Generate questions from lesson quizzes (legacy, used for A2/B1/B2)."""
     all_questions = []
     lessons = LEVEL_LESSONS.get(level, A1_LESSONS)
-    
+
     for lesson in lessons:
         lesson_id = lesson["id"]
         quiz = lesson.get("quiz", [])
-        
-        # Separate multiple choice and writing questions
+
         mc_questions = [q for q in quiz if q.get("question_type") != "writing"]
         writing_questions = [q for q in quiz if q.get("question_type") == "writing"]
-        
-        # Get 8 multiple choice questions
+
         if len(mc_questions) >= 8:
             selected_mc = random.sample(mc_questions, 8)
         else:
             selected_mc = mc_questions.copy()
             while len(selected_mc) < 8 and mc_questions:
                 selected_mc.append(random.choice(mc_questions))
-        
-        # Get 2 writing questions
+
         if len(writing_questions) >= 2:
             selected_writing = random.sample(writing_questions, 2)
         elif len(writing_questions) == 1:
             selected_writing = writing_questions.copy()
         else:
             selected_writing = []
-        
-        # Add multiple choice questions
+
         for q in selected_mc:
             all_questions.append({
                 "id": f"{lesson_id}_{q['id']}",
@@ -92,23 +122,20 @@ def get_final_test_questions(level: str = "a1"):
                 "explanation": q["explanation"],
                 "question_type": q.get("question_type", "vocabulary")
             })
-        
-        # Add writing questions
+
         for q in selected_writing:
             all_questions.append({
                 "id": f"{lesson_id}_{q['id']}_w",
                 "lesson_id": lesson_id,
                 "lesson_title": lesson["title"],
                 "question": q["question"],
-                "options": [],  # No options for writing
+                "options": [],
                 "correct_answer_text": q.get("correct_answer_text", ""),
                 "explanation": q["explanation"],
                 "question_type": "writing"
             })
-    
-    # Shuffle all questions
+
     random.shuffle(all_questions)
-    
     return all_questions
 
 @router.get("/check-eligibility")
@@ -180,8 +207,8 @@ async def get_questions(
             detail=f"Morate završiti sve {level.upper()} lekcije prije završnog testa"
         )
     
-    questions = get_final_test_questions(level)
-    
+    questions = get_dedicated_final_test_questions(level) or get_final_test_questions(level)
+
     # Count question types
     mc_count = sum(1 for q in questions if q["question_type"] != "writing")
     writing_count = sum(1 for q in questions if q["question_type"] == "writing")
@@ -194,14 +221,18 @@ async def get_questions(
         "time_limit_minutes": 60,
         "passing_percentage": 70,
         "questions": [
-            {
+            {k: v for k, v in {
                 "id": q["id"],
                 "lesson_id": q["lesson_id"],
                 "lesson_title": q["lesson_title"],
                 "question": q["question"],
                 "options": q["options"] if q["question_type"] != "writing" else [],
-                "question_type": q["question_type"]
-            }
+                "question_type": q["question_type"],
+                "audio_text": q.get("audio_text"),
+                "image_emoji": q.get("image_emoji"),
+                "dialogue": q.get("dialogue"),
+                "sentence": q.get("sentence"),
+            }.items() if v is not None}
             for q in questions
         ]
     }
@@ -235,7 +266,7 @@ async def submit_final_test(
         )
     
     # Generate the same questions to get correct answers
-    questions = get_final_test_questions(level)
+    questions = get_dedicated_final_test_questions(level) or get_final_test_questions(level)
     lessons = LEVEL_LESSONS.get(level, A1_LESSONS)
     
     # Build answer keys for both types

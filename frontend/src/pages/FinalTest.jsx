@@ -2,11 +2,79 @@ import { useState, useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { finalTestApi } from '../api'
+import { useSpeech } from '../hooks/useSpeech'
 import {
   Award, Clock, CheckCircle, XCircle, AlertTriangle,
   ChevronLeft, ChevronRight, Flag, Trophy, Star,
-  RotateCcw, Home, BookOpen, PenTool, Printer
+  RotateCcw, Home, BookOpen, PenTool, Printer,
+  Volume2, VolumeX
 } from 'lucide-react'
+
+// ── Question type badge ──────────────────────────────────────────────────────
+const TYPE_META = {
+  vocabulary:  { label: 'Vokabular',   color: 'bg-blue-100 text-blue-700' },
+  grammar:     { label: 'Gramatika',   color: 'bg-purple-100 text-purple-700' },
+  translation: { label: 'Prijevod',    color: 'bg-indigo-100 text-indigo-700' },
+  audio:       { label: 'Slušanje',    color: 'bg-orange-100 text-orange-700' },
+  image:       { label: 'Slika',       color: 'bg-pink-100 text-pink-700' },
+  dialogue:    { label: 'Dijalog',     color: 'bg-teal-100 text-teal-700' },
+  find_error:  { label: 'Nađi grešku', color: 'bg-red-100 text-red-700' },
+  fill_blank:  { label: 'Popuni',      color: 'bg-yellow-100 text-yellow-700' },
+  true_false:  { label: 'Tačno/Netačno', color: 'bg-green-100 text-green-700' },
+}
+
+// ── Audio player for "audio" type questions ──────────────────────────────────
+function AudioPlayer({ text }) {
+  const { speak, isSpeaking } = useSpeech()
+  return (
+    <button
+      type="button"
+      onClick={() => speak(text)}
+      className={`flex items-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all mx-auto mb-6 ${
+        isSpeaking
+          ? 'bg-orange-500 text-white animate-pulse'
+          : 'bg-orange-50 border-2 border-orange-200 text-orange-700 hover:bg-orange-100'
+      }`}
+    >
+      {isSpeaking ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+      {isSpeaking ? 'Reproducira se...' : 'Pritisni da čuješ audio'}
+    </button>
+  )
+}
+
+// ── Dialogue renderer ────────────────────────────────────────────────────────
+function DialogueBlock({ dialogue }) {
+  const { speak } = useSpeech()
+  return (
+    <div className="bg-gray-50 rounded-xl p-4 mb-5 space-y-2 border border-gray-100">
+      {dialogue.map((line, i) => (
+        <div key={i} className={`flex gap-3 ${i % 2 === 0 ? '' : 'flex-row-reverse'}`}>
+          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold shrink-0 ${
+            i % 2 === 0 ? 'bg-blue-500' : 'bg-emerald-500'
+          }`}>
+            {line.speaker?.[0] || (i % 2 === 0 ? 'A' : 'B')}
+          </div>
+          <div className={`flex-1 ${i % 2 !== 0 ? 'text-right' : ''}`}>
+            <div
+              className={`inline-block px-3 py-2 rounded-xl text-sm cursor-pointer hover:opacity-80 transition-opacity ${
+                i % 2 === 0
+                  ? 'bg-white border border-gray-200 text-gray-800'
+                  : 'bg-blue-600 text-white'
+              }`}
+              onClick={() => speak(line.text)}
+              title="Klikni da čuješ"
+            >
+              {line.text}
+            </div>
+            {line.translation && (
+              <div className="text-xs text-gray-400 mt-0.5 px-1">{line.translation}</div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
 
 const LEVEL_INFO = {
   a1: { name: 'A1 - Početnik', color: 'from-green-500 to-emerald-600', nextLevel: 'A2' },
@@ -24,7 +92,6 @@ export default function FinalTest() {
   const [stage, setStage] = useState('eligibility') // eligibility, test, result
   const [eligibility, setEligibility] = useState(null)
   const [questions, setQuestions] = useState([])
-  const [answerKey, setAnswerKey] = useState({})
   const [currentQuestion, setCurrentQuestion] = useState(0)
   const [answers, setAnswers] = useState({})
   const [writingAnswers, setWritingAnswers] = useState({})
@@ -77,7 +144,7 @@ export default function FinalTest() {
     try {
       const data = await finalTestApi.getQuestions(level)
       setQuestions(data.questions)
-      setAnswerKey(data._answer_key)
+
       setStartTime(Date.now())
       setStage('test')
     } catch (error) {
@@ -287,45 +354,76 @@ export default function FinalTest() {
         </div>
 
         {/* Question */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-6">
-          <h2 className="text-xl font-semibold text-gray-800 mb-6">
+        <div className="bg-white rounded-xl shadow-lg p-6 sm:p-8 mb-6">
+          {/* Type badge */}
+          {question?.question_type && TYPE_META[question.question_type] && (
+            <span className={`inline-block text-xs font-semibold px-2.5 py-1 rounded-full mb-3 ${TYPE_META[question.question_type].color}`}>
+              {TYPE_META[question.question_type].label}
+            </span>
+          )}
+
+          {/* Audio player */}
+          {question?.audio_text && (
+            <div className="flex justify-center mb-4">
+              <AudioPlayer text={question.audio_text} />
+            </div>
+          )}
+
+          {/* Image emoji */}
+          {question?.image_emoji && (
+            <div className="text-7xl text-center mb-4 select-none">{question.image_emoji}</div>
+          )}
+
+          {/* Dialogue */}
+          {question?.dialogue && (
+            <DialogueBlock dialogue={question.dialogue} />
+          )}
+
+          {/* Fill-blank sentence context */}
+          {question?.sentence && question.question_type === 'fill_blank' && (
+            <div className="bg-yellow-50 border border-yellow-200 rounded-xl px-4 py-3 mb-4 text-center text-base font-medium text-gray-800">
+              {question.sentence}
+            </div>
+          )}
+
+          <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-5">
             {question?.question}
           </h2>
 
           {question?.question_type === 'writing' ? (
             <div className="space-y-3">
-              <div className="flex items-center space-x-2 text-purple-600 mb-2">
+              <div className="flex items-center gap-2 text-purple-600 mb-2">
                 <PenTool className="w-5 h-5" />
-                <span className="text-sm font-medium">Pitanje za pisanje</span>
+                <span className="text-sm font-medium">Unesite odgovor pisanjem</span>
               </div>
               <textarea
                 value={writingAnswers[question.id] || ''}
                 onChange={(e) => handleWritingAnswer(question.id, e.target.value)}
                 placeholder="Unesite vaš odgovor..."
-                className="w-full p-4 rounded-xl border-2 border-gray-200 focus:border-bosnia-blue focus:ring-2 focus:ring-bosnia-blue/20 transition-all min-h-[120px] resize-none"
+                className="w-full p-4 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all min-h-[100px] resize-none field-input"
               />
             </div>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2.5">
               {question?.options.map((option, index) => (
                 <button
                   key={index}
                   onClick={() => handleAnswer(question.id, index)}
                   className={`w-full p-4 rounded-xl text-left transition-all border-2 ${
                     answers[question.id] === index
-                      ? 'border-bosnia-blue bg-blue-50 text-bosnia-blue'
-                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      ? 'border-blue-500 bg-blue-50 text-blue-700'
+                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-800'
                   }`}
                 >
-                  <div className="flex items-center space-x-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold ${
+                  <div className="flex items-center gap-3">
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
                       answers[question.id] === index
-                        ? 'bg-bosnia-blue text-white'
-                        : 'bg-gray-200 text-gray-600'
+                        ? 'bg-blue-500 text-white'
+                        : 'bg-gray-100 text-gray-600'
                     }`}>
                       {String.fromCharCode(65 + index)}
                     </div>
-                    <span className="flex-1">{option}</span>
+                    <span className="flex-1 text-sm sm:text-base">{option}</span>
                   </div>
                 </button>
               ))}
