@@ -156,6 +156,7 @@ export default function FinalTest() {
   }
 
   const handleAnswer = (questionId, answerIndex) => {
+    if (answers[questionId] !== undefined) return // already locked
     setAnswers(prev => ({ ...prev, [questionId]: answerIndex }))
   }
 
@@ -205,6 +206,7 @@ export default function FinalTest() {
   // Eligibility Check Screen
   if (stage === 'eligibility') {
     return (
+      <>
       <div className="max-w-2xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className={`bg-gradient-to-r ${levelInfo.color} p-8 text-white text-center`}>
@@ -247,12 +249,27 @@ export default function FinalTest() {
 
                 {eligibility.passed && (
                   <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4 mb-6">
-                    <div className="flex items-center space-x-3 text-yellow-700">
-                      <Trophy className="w-6 h-6" />
-                      <div>
-                        <span className="font-semibold">Već ste položili ovaj test!</span>
-                        <p className="text-sm">Najbolji rezultat: {eligibility.best_score}%</p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3 text-yellow-700">
+                        <Trophy className="w-6 h-6" />
+                        <div>
+                          <span className="font-semibold">Već ste položili ovaj test!</span>
+                          <p className="text-sm">Najbolji rezultat: {eligibility.best_score}%</p>
+                        </div>
                       </div>
+                      <button
+                        onClick={async () => {
+                          try {
+                            const cert = await finalTestApi.getCertificate(level)
+                            setCertificate(cert)
+                            setShowCertificate(true)
+                          } catch (_) {}
+                        }}
+                        className="flex items-center space-x-2 bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600 transition-colors text-sm font-medium"
+                      >
+                        <Award className="w-4 h-4" />
+                        <span>Certifikat</span>
+                      </button>
                     </div>
                   </div>
                 )}
@@ -311,6 +328,10 @@ export default function FinalTest() {
           </div>
         </div>
       </div>
+      {showCertificate && certificate && (
+        <CertificateModal certificate={certificate} onClose={() => setShowCertificate(false)} />
+      )}
+    </>
     )
   }
 
@@ -405,34 +426,56 @@ export default function FinalTest() {
             </div>
           ) : (
             <div className="space-y-2.5">
-              {question?.options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswer(question.id, index)}
-                  className={`w-full p-4 rounded-xl text-left transition-all border-2 ${
-                    answers[question.id] === index
-                      ? 'border-blue-500 bg-blue-50 text-blue-700'
-                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50 text-gray-800'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
-                      answers[question.id] === index
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-gray-100 text-gray-600'
-                    }`}>
-                      {String.fromCharCode(65 + index)}
+              {question?.options.map((option, index) => {
+                const isLocked = answers[question.id] !== undefined
+                const isSelected = answers[question.id] === index
+                const isCorrect = index === question.correct_answer
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer(question.id, index)}
+                    disabled={isLocked}
+                    className={`w-full p-4 rounded-xl text-left transition-all border-2 ${
+                      isLocked
+                        ? isCorrect
+                          ? 'border-green-500 bg-green-50 text-green-800'
+                          : isSelected
+                            ? 'border-red-500 bg-red-50 text-red-800'
+                            : 'border-gray-200 bg-gray-50 text-gray-400'
+                        : 'border-gray-200 hover:border-blue-400 hover:bg-blue-50 text-gray-800'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shrink-0 ${
+                        isLocked
+                          ? isCorrect ? 'bg-green-500 text-white' : isSelected ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-400'
+                          : 'bg-gray-100 text-gray-600'
+                      }`}>
+                        {isLocked ? (isCorrect ? '✓' : isSelected ? '✗' : String.fromCharCode(65 + index)) : String.fromCharCode(65 + index)}
+                      </div>
+                      <span className="flex-1 text-sm sm:text-base">{option}</span>
                     </div>
-                    <span className="flex-1 text-sm sm:text-base">{option}</span>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                )
+              })}
+              {answers[question.id] !== undefined && question.explanation && (
+                <div className={`mt-3 p-4 rounded-xl border-l-4 ${
+                  answers[question.id] === question.correct_answer
+                    ? 'bg-green-50 border-green-500'
+                    : 'bg-red-50 border-red-500'
+                }`}>
+                  <p className={`font-semibold text-sm mb-1 ${answers[question.id] === question.correct_answer ? 'text-green-700' : 'text-red-700'}`}>
+                    {answers[question.id] === question.correct_answer ? '✓ Tačno!' : '✗ Netačno!'}
+                  </p>
+                  <p className="text-sm text-gray-700">{question.explanation}</p>
+                </div>
+              )}
             </div>
           )}
         </div>
 
         {/* Navigation */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-4">
           <button
             onClick={() => setCurrentQuestion(prev => Math.max(0, prev - 1))}
             disabled={currentQuestion === 0}
@@ -445,7 +488,11 @@ export default function FinalTest() {
           {currentQuestion < questions.length - 1 ? (
             <button
               onClick={() => setCurrentQuestion(prev => prev + 1)}
-              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-bosnia-blue text-white hover:bg-blue-700 transition-all"
+              className={`flex items-center space-x-2 px-6 py-3 rounded-xl transition-all font-semibold ${
+                answers[question?.id] !== undefined
+                  ? 'bg-bosnia-blue text-white hover:bg-blue-700 ring-2 ring-bosnia-blue ring-offset-2'
+                  : 'bg-gray-200 text-gray-500 hover:bg-gray-300'
+              }`}
             >
               <span>Sljedeće</span>
               <ChevronRight className="w-5 h-5" />
@@ -454,7 +501,7 @@ export default function FinalTest() {
             <button
               onClick={handleSubmit}
               disabled={submitting}
-              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-green-600 text-white hover:bg-green-700 transition-all disabled:opacity-50"
+              className="flex items-center space-x-2 px-6 py-3 rounded-xl bg-green-600 text-white hover:bg-green-700 transition-all disabled:opacity-50 font-semibold"
             >
               <Flag className="w-5 h-5" />
               <span>{submitting ? 'Slanje...' : 'Završi test'}</span>

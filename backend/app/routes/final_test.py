@@ -213,7 +213,6 @@ async def get_questions(
     mc_count = sum(1 for q in questions if q["question_type"] != "writing")
     writing_count = sum(1 for q in questions if q["question_type"] == "writing")
     
-    # Return questions without correct answers
     return {
         "total_questions": len(questions),
         "multiple_choice_count": mc_count,
@@ -232,6 +231,9 @@ async def get_questions(
                 "image_emoji": q.get("image_emoji"),
                 "dialogue": q.get("dialogue"),
                 "sentence": q.get("sentence"),
+                "correct_answer": q.get("correct_answer"),
+                "correct_answer_text": q.get("correct_answer_text"),
+                "explanation": q.get("explanation", ""),
             }.items() if v is not None}
             for q in questions
         ]

@@ -2263,14 +2263,14 @@ function Lesson() {
                   <div className="space-y-4">
                     {grammarExercisesList.map((exercise) => {
                       const userAnswer = grammarExercises.answers[exercise.id]
+                      const isAnswered = userAnswer !== undefined
                       const isCorrect = userAnswer === exercise.answer
-                      const showResult = grammarExercises.showResults
 
                       return (
                         <div
                           key={exercise.id}
                           className={`p-4 rounded-xl border-2 transition-all ${
-                            showResult && userAnswer
+                            isAnswered
                               ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
                               : 'bg-white border-gray-200'
                           }`}
@@ -2281,10 +2281,8 @@ function Lesson() {
                             <span className="font-medium">
                               {exercise.sentence.split('_____')[0]}
                               <span className={`inline-block min-w-[80px] mx-1 px-3 py-1 rounded-lg border-2 text-center ${
-                                userAnswer
-                                  ? showResult
-                                    ? isCorrect ? 'bg-green-100 border-green-400 text-green-700 font-bold' : 'bg-red-100 border-red-400 text-red-700 font-bold'
-                                    : 'bg-blue-100 border-blue-400 text-blue-700 font-bold'
+                                isAnswered
+                                  ? isCorrect ? 'bg-green-100 border-green-400 text-green-700 font-bold' : 'bg-red-100 border-red-400 text-red-700 font-bold'
                                   : 'bg-gray-100 border-dashed border-gray-300 text-gray-400'
                               }`}>
                                 {userAnswer || '_____'}
@@ -2292,36 +2290,37 @@ function Lesson() {
                               {exercise.sentence.split('_____')[1]}
                             </span>
                           </div>
-                          
+
                           {/* Options */}
                           <div className="flex flex-wrap gap-2">
                             {exercise.options.map((option, idx) => (
                               <button
                                 key={idx}
-                                onClick={() => !showResult && handleGrammarAnswer(exercise.id, option, exercise.answer, exercise.sentence)}
-                                disabled={showResult}
+                                onClick={() => !isAnswered && handleGrammarAnswer(exercise.id, option, exercise.answer, exercise.sentence)}
+                                disabled={isAnswered}
                                 className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                                  showResult
+                                  isAnswered
                                     ? option === exercise.answer
                                       ? 'bg-green-500 text-white'
                                       : userAnswer === option
                                         ? 'bg-red-500 text-white'
                                         : 'bg-gray-100 text-gray-400'
-                                    : userAnswer === option
-                                      ? 'bg-bosnia-blue text-white'
-                                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:scale-105'
                                 }`}
                               >
                                 {option}
                               </button>
                             ))}
                           </div>
-                          
-                          {/* Translation */}
-                          {(userAnswer || showResult || showFillBlankTranslation) && (
-                            <div className="mt-3 text-sm">
-                              {showResult && userAnswer && !isCorrect && <span className="text-red-600">Tačan odgovor: <strong>{exercise.answer}</strong></span>}
-                              <div className="text-gray-500 italic mt-1">🌍 {exercise.translation}</div>
+
+                          {/* Immediate feedback */}
+                          {isAnswered && (
+                            <div className={`mt-3 p-3 rounded-lg border-l-4 ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'}`}>
+                              <p className={`font-semibold text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+                                {isCorrect ? '✓ Tačno!' : `✗ Netačno! Tačan odgovor: ${exercise.answer}`}
+                              </p>
+                              {exercise.hint && <p className="text-sm text-gray-600 mt-1">💡 {exercise.hint}</p>}
+                              {(showFillBlankTranslation || !isCorrect) && <p className="text-sm text-gray-500 italic mt-1">🌍 {exercise.translation}</p>}
                             </div>
                           )}
                         </div>
@@ -2331,8 +2330,12 @@ function Lesson() {
 
                   <div className="flex justify-center space-x-4 mt-6">
                     {!grammarExercises.showResults ? (
-                      <button onClick={checkGrammarExercises} className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors">
-                        Provjeri ({Object.keys(grammarExercises.answers).length}/{grammarExercisesList.length})
+                      <button
+                        onClick={checkGrammarExercises}
+                        disabled={Object.keys(grammarExercises.answers).length < grammarExercisesList.length}
+                        className="px-6 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                      >
+                        Završi ({Object.keys(grammarExercises.answers).length}/{grammarExercisesList.length})
                       </button>
                     ) : (
                       <div className="text-center">
@@ -3642,17 +3645,15 @@ function Lesson() {
               {activeExerciseType === 'findErrorWord' && (
                 <div className="animate-fadeIn">
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">🔍 Greška u riječi</h3>
-                  <p className="text-gray-600 mb-4">Pronađite pogrešno napisanu ili pogrešno upotrebljenu riječ</p>
+                  <p className="text-gray-600 mb-4">Klikni na pogrešno napisanu ili pogrešno upotrebljenu riječ</p>
                   <div className="space-y-4">
                     {findErrorWordList.map((exercise) => {
                       const userAnswer = findErrorWordExercises.answers[exercise.id]
+                      const isAnswered = userAnswer !== undefined
                       const isCorrect = userAnswer === exercise.answer
-                      const showResult = findErrorWordExercises.showResults
                       return (
                         <div key={exercise.id} className={`p-4 rounded-xl border-2 transition-all ${
-                          showResult && userAnswer
-                            ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
-                            : 'bg-white border-gray-200'
+                          isAnswered ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300' : 'bg-white border-gray-200'
                         }`}>
                           <div className="flex items-center gap-2 mb-3">
                             <span className="bg-red-500 text-white px-2 py-1 rounded text-sm font-bold">#{exercise.id}</span>
@@ -3662,61 +3663,59 @@ function Lesson() {
                             {exercise.words.map((word) => (
                               <button
                                 key={word}
-                                onClick={() => !showResult && setFindErrorWordExercises(prev => ({
-                                  ...prev,
-                                  answers: { ...prev.answers, [exercise.id]: word }
-                                }))}
-                                disabled={showResult}
+                                onClick={() => {
+                                  if (isAnswered) return
+                                  const newAnswers = { ...findErrorWordExercises.answers, [exercise.id]: word }
+                                  setFindErrorWordExercises(prev => ({ ...prev, answers: newAnswers }))
+                                  // Auto-complete when all answered
+                                  if (Object.keys(newAnswers).length === findErrorWordList.length) {
+                                    setFindErrorWordExercises(prev => ({ ...prev, answers: newAnswers, showResults: true }))
+                                    saveExerciseShowResult('findErrorWord')
+                                  }
+                                }}
+                                disabled={isAnswered}
                                 className={`px-4 py-2 rounded-lg border-2 font-medium transition-all ${
-                                  userAnswer === word
-                                    ? showResult
-                                      ? isCorrect ? 'bg-green-500 text-white border-green-600' : 'bg-red-500 text-white border-red-600'
-                                      : 'bg-blue-500 text-white border-blue-600'
-                                    : showResult && word === exercise.answer
-                                      ? 'bg-green-100 border-green-400 text-green-700 font-bold'
-                                      : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 hover:border-gray-300'
+                                  isAnswered
+                                    ? word === exercise.answer
+                                      ? 'bg-green-500 text-white border-green-600'
+                                      : userAnswer === word
+                                        ? 'bg-red-500 text-white border-red-600'
+                                        : 'bg-gray-100 text-gray-400 border-gray-200'
+                                    : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-blue-400 hover:scale-105'
                                 }`}
                               >
                                 {word}
                               </button>
                             ))}
                           </div>
-                          {showResult && (
-                            <div className={`mt-2 text-sm ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                              {isCorrect ? '✓ Tačno!' : `✗ Pogrešna riječ je: "${exercise.answer}"`}
-                              <p className="text-gray-500 mt-1">💡 {exercise.hint}</p>
+                          {isAnswered && (
+                            <div className={`mt-3 p-3 rounded-lg border-l-4 ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'}`}>
+                              <p className={`font-semibold text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+                                {isCorrect ? '✓ Tačno!' : `✗ Netačno! Pogrešna riječ je: "${exercise.answer}"`}
+                              </p>
+                              <p className="text-sm text-gray-600 mt-1">💡 {exercise.hint}</p>
                             </div>
                           )}
                         </div>
                       )
                     })}
                   </div>
-                  {findErrorWordList.length > 0 && (
+                  {findErrorWordExercises.showResults && (
                     <div className="flex justify-center mt-6">
-                      {!findErrorWordExercises.showResults ? (
-                        <button
-                          onClick={() => { setFindErrorWordExercises(prev => ({ ...prev, showResults: true })); saveExerciseShowResult('findErrorWord') }}
-                          disabled={Object.keys(findErrorWordExercises.answers).length < findErrorWordList.length}
-                          className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
-                        >
-                          Provjeri odgovore
-                        </button>
-                      ) : (
-                        <div className="text-center">
-                          <div className="text-lg font-semibold mb-3">
-                            {Object.entries(findErrorWordExercises.answers).filter(([id, ans]) => {
-                              const ex = findErrorWordList.find(e => e.id === parseInt(id))
-                              return ex && ans === ex.answer
-                            }).length} / {findErrorWordList.length} tačno
-                          </div>
-                          <button
-                            onClick={() => setFindErrorWordExercises({ answers: {}, showResults: false })}
-                            className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
-                          >
-                            <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
-                          </button>
+                      <div className="text-center">
+                        <div className="text-lg font-semibold mb-3">
+                          {Object.entries(findErrorWordExercises.answers).filter(([id, ans]) => {
+                            const ex = findErrorWordList.find(e => e.id === parseInt(id))
+                            return ex && ans === ex.answer
+                          }).length} / {findErrorWordList.length} tačno
                         </div>
-                      )}
+                        <button
+                          onClick={() => setFindErrorWordExercises({ answers: {}, showResults: false })}
+                          className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                        >
+                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -3726,17 +3725,15 @@ function Lesson() {
               {activeExerciseType === 'findErrorSentence' && (
                 <div className="animate-fadeIn">
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">❌ Greška u rečenici</h3>
-                  <p className="text-gray-600 mb-4">Pronađite rečenicu koja sadrži gramatičku grešku</p>
+                  <p className="text-gray-600 mb-4">Klikni na rečenicu koja sadrži gramatičku grešku</p>
                   <div className="space-y-4">
                     {findErrorSentenceList.map((exercise) => {
                       const userAnswer = findErrorSentenceExercises.answers[exercise.id]
+                      const isAnswered = userAnswer !== undefined
                       const isCorrect = userAnswer === exercise.answer
-                      const showResult = findErrorSentenceExercises.showResults
                       return (
                         <div key={exercise.id} className={`p-4 rounded-xl border-2 transition-all ${
-                          showResult && userAnswer
-                            ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300'
-                            : 'bg-white border-gray-200'
+                          isAnswered ? isCorrect ? 'bg-green-50 border-green-300' : 'bg-red-50 border-red-300' : 'bg-white border-gray-200'
                         }`}>
                           <div className="flex items-center gap-2 mb-3">
                             <span className="bg-orange-500 text-white px-2 py-1 rounded text-sm font-bold">#{exercise.id}</span>
@@ -3746,61 +3743,58 @@ function Lesson() {
                             {exercise.sentences.map((sentence, idx) => (
                               <button
                                 key={idx}
-                                onClick={() => !showResult && setFindErrorSentenceExercises(prev => ({
-                                  ...prev,
-                                  answers: { ...prev.answers, [exercise.id]: sentence }
-                                }))}
-                                disabled={showResult}
+                                onClick={() => {
+                                  if (isAnswered) return
+                                  const newAnswers = { ...findErrorSentenceExercises.answers, [exercise.id]: sentence }
+                                  setFindErrorSentenceExercises(prev => ({ ...prev, answers: newAnswers }))
+                                  if (Object.keys(newAnswers).length === findErrorSentenceList.length) {
+                                    setFindErrorSentenceExercises(prev => ({ ...prev, answers: newAnswers, showResults: true }))
+                                    saveExerciseShowResult('findErrorSentence')
+                                  }
+                                }}
+                                disabled={isAnswered}
                                 className={`w-full text-left px-4 py-3 rounded-lg border-2 font-medium transition-all ${
-                                  userAnswer === sentence
-                                    ? showResult
-                                      ? isCorrect ? 'bg-green-500 text-white border-green-600' : 'bg-red-500 text-white border-red-600'
-                                      : 'bg-blue-500 text-white border-blue-600'
-                                    : showResult && sentence === exercise.answer
-                                      ? 'bg-green-100 border-green-400 text-green-700 font-bold'
-                                      : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 hover:border-gray-300'
+                                  isAnswered
+                                    ? sentence === exercise.answer
+                                      ? 'bg-green-500 text-white border-green-600'
+                                      : userAnswer === sentence
+                                        ? 'bg-red-500 text-white border-red-600'
+                                        : 'bg-gray-100 text-gray-400 border-gray-200'
+                                    : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-blue-50 hover:border-blue-400'
                                 }`}
                               >
                                 {String.fromCharCode(65 + idx)}. {sentence}
                               </button>
                             ))}
                           </div>
-                          {showResult && (
-                            <div className={`mt-2 text-sm ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-                              {isCorrect ? '✓ Tačno!' : `✗ Pogrešna rečenica je: "${exercise.answer}"`}
-                              <p className="text-gray-500 mt-1">💡 {exercise.hint}</p>
+                          {isAnswered && (
+                            <div className={`mt-3 p-3 rounded-lg border-l-4 ${isCorrect ? 'bg-green-50 border-green-500' : 'bg-red-50 border-red-500'}`}>
+                              <p className={`font-semibold text-sm ${isCorrect ? 'text-green-700' : 'text-red-700'}`}>
+                                {isCorrect ? '✓ Tačno!' : `✗ Netačno! Pogrešna rečenica je: "${exercise.answer}"`}
+                              </p>
+                              <p className="text-sm text-gray-600 mt-1">💡 {exercise.hint}</p>
                             </div>
                           )}
                         </div>
                       )
                     })}
                   </div>
-                  {findErrorSentenceList.length > 0 && (
+                  {findErrorSentenceExercises.showResults && (
                     <div className="flex justify-center mt-6">
-                      {!findErrorSentenceExercises.showResults ? (
-                        <button
-                          onClick={() => { setFindErrorSentenceExercises(prev => ({ ...prev, showResults: true })); saveExerciseShowResult('findErrorSentence') }}
-                          disabled={Object.keys(findErrorSentenceExercises.answers).length < findErrorSentenceList.length}
-                          className="px-6 py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-all"
-                        >
-                          Provjeri odgovore
-                        </button>
-                      ) : (
-                        <div className="text-center">
-                          <div className="text-lg font-semibold mb-3">
-                            {Object.entries(findErrorSentenceExercises.answers).filter(([id, ans]) => {
-                              const ex = findErrorSentenceList.find(e => e.id === parseInt(id))
-                              return ex && ans === ex.answer
-                            }).length} / {findErrorSentenceList.length} tačno
-                          </div>
-                          <button
-                            onClick={() => setFindErrorSentenceExercises({ answers: {}, showResults: false })}
-                            className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
-                          >
-                            <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
-                          </button>
+                      <div className="text-center">
+                        <div className="text-lg font-semibold mb-3">
+                          {Object.entries(findErrorSentenceExercises.answers).filter(([id, ans]) => {
+                            const ex = findErrorSentenceList.find(e => e.id === parseInt(id))
+                            return ex && ans === ex.answer
+                          }).length} / {findErrorSentenceList.length} tačno
                         </div>
-                      )}
+                        <button
+                          onClick={() => setFindErrorSentenceExercises({ answers: {}, showResults: false })}
+                          className="px-6 py-3 bg-bosnia-blue text-white rounded-lg font-medium hover:bg-blue-700 transition-colors inline-flex items-center space-x-2"
+                        >
+                          <RefreshCw className="w-5 h-5" /><span>Ponovo</span>
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -4544,27 +4538,7 @@ function Lesson() {
                     const score = quizResult?.alreadyPassed
                       ? (lessonProgress?.best_quiz_score ?? quizState.score)
                       : quizState.score
-                    return percentage >= 70 ? (
-                      <div className="mb-4">
-                        <button
-                          onClick={() => setShowCertificate(true)}
-                          className="inline-flex items-center space-x-2 bg-yellow-500 text-white px-6 py-2.5 rounded-lg hover:bg-yellow-600 transition-colors font-medium"
-                        >
-                          <Printer className="w-5 h-5" />
-                          <span>Preuzmi certifikat</span>
-                        </button>
-                        {showCertificate && (
-                          <LessonCertificateModal
-                            lesson={lesson}
-                            percentage={percentage}
-                            score={score}
-                            totalQuestions={lesson.quiz.length}
-                            user={user}
-                            onClose={() => setShowCertificate(false)}
-                          />
-                        )}
-                      </div>
-                    ) : null
+                    return null
                   })()}
 
                   {/* Progress info */}
