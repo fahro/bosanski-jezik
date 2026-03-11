@@ -2,11 +2,11 @@ import { useState, useEffect, useRef, useMemo } from 'react'
 import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { 
-  ArrowLeft, BookOpen, MessageSquare, PenTool, HelpCircle, 
+import {
+  ArrowLeft, BookOpen, MessageSquare, PenTool, HelpCircle,
   Volume2, ChevronRight, ChevronLeft, CheckCircle, XCircle,
   Lightbulb, Globe, RefreshCw, Dumbbell, Shuffle, GripVertical,
-  Star, Trophy, Zap, Award
+  Star, Trophy, Zap, Award, Printer, X
 } from 'lucide-react'
 import { useProgress } from '../hooks/useProgress'
 import { useSpeech } from '../hooks/useSpeech'
@@ -32,6 +32,82 @@ const compareAnswers = (userAnswer, correctAnswer) => {
   return normalizeBosnian(userAnswer) === normalizeBosnian(correctAnswer)
 }
 
+function LessonCertificateModal({ lesson, percentage, score, totalQuestions, user, onClose }) {
+  const dateStr = new Date().toLocaleDateString('bs-BA', { year: 'numeric', month: 'long', day: 'numeric' })
+  const fullName = user?.full_name || user?.username || 'Student'
+
+  const handleDownload = async () => {
+    const { default: html2canvas } = await import('html2canvas')
+    const { default: jsPDF } = await import('jspdf')
+    const element = document.getElementById('lesson-certificate-content')
+    const canvas = await html2canvas(element, { scale: 3, useCORS: true, backgroundColor: '#ffffff' })
+    const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
+    const imgWidth = 297
+    const imgHeight = (canvas.height * imgWidth) / canvas.width
+    pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, (210 - imgHeight) / 2, imgWidth, imgHeight)
+    pdf.save(`certifikat-lekcija-${lesson.id}-${fullName.replace(/\s+/g, '_')}.pdf`)
+  }
+
+  return (
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full">
+        <div className="flex items-center justify-between p-4 border-b">
+          <h3 className="text-lg font-bold text-gray-800">Certifikat o uspješnom polaganju</h3>
+          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <X className="w-5 h-5 text-gray-600" />
+          </button>
+        </div>
+
+        {/* Certificate preview */}
+        <div id="lesson-certificate-content" className="p-8 bg-white" style={{ fontFamily: 'serif' }}>
+          <div className="border-4 border-double border-yellow-500 p-6 text-center">
+            <div className="border-2 border-yellow-400 p-4">
+              <div className="text-4xl mb-2">🎓</div>
+              <p className="text-xs tracking-widest uppercase text-gray-500 mb-1">Potvrda o završetku</p>
+              <h1 className="text-2xl font-bold text-gray-800 mb-3" style={{ fontFamily: 'Georgia, serif' }}>
+                CERTIFIKAT
+              </h1>
+              <p className="text-gray-600 mb-2">Ovim se potvrđuje da je</p>
+              <p className="text-2xl font-bold text-yellow-700 mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                {fullName}
+              </p>
+              <p className="text-gray-600 mb-1">uspješno položio/la kviz za lekciju</p>
+              <p className="text-xl font-semibold text-gray-800 mb-3">
+                Lekcija {lesson.id}: {lesson.title}
+              </p>
+              <div className="flex justify-center gap-8 mb-4">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600">{Math.round(percentage)}%</div>
+                  <div className="text-xs text-gray-500">Rezultat</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600">{score}/{totalQuestions}</div>
+                  <div className="text-xs text-gray-500">Tačnih odgovora</div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-500">{dateStr}</p>
+              <p className="text-xs text-gray-400 mt-2">LangLearn — Bosanski jezik</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-end gap-3 p-4 border-t">
+          <button onClick={onClose} className="px-4 py-2 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+            Zatvori
+          </button>
+          <button
+            onClick={handleDownload}
+            className="inline-flex items-center space-x-2 px-5 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition-colors font-medium"
+          >
+            <Printer className="w-4 h-4" />
+            <span>Preuzmi PDF</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Lesson() {
   const { lessonId } = useParams()
   const [searchParams] = useSearchParams()
@@ -40,12 +116,13 @@ function Lesson() {
   const [loading, setLoading] = useState(true)
   const { progress, saveQuizScore, getStars, getAchievementInfo } = useProgress()
   const { speak, isSpeaking } = useSpeech()
-  const { isAuthenticated, refreshStats, stats } = useAuth()
+  const { isAuthenticated, refreshStats, stats, user } = useAuth()
   const navigate = useNavigate()
   const [accessDenied, setAccessDenied] = useState(false)
   const [quizResult, setQuizResult] = useState(null)
   const [lessonProgress, setLessonProgress] = useState(null)
   const [exerciseResult, setExerciseResult] = useState(null)
+  const [showCertificate, setShowCertificate] = useState(false)
   const [allExercisesCompleted, setAllExercisesCompleted] = useState(false)
   const [activeTab, setActiveTab] = useState('vocabulary')
   const [quizState, setQuizState] = useState({
@@ -242,19 +319,42 @@ function Lesson() {
             })
           }
           // Restore saved exercise progress
-          if (data.saved_exercise_answers && !data.exercises_passed) {
+          if (data.saved_exercise_answers) {
             const saved = data.saved_exercise_answers
+            // Helper: supports both old format (direct answers obj) and new format ({answers, showResults})
+            const getAnswers = (val) => val?.answers !== undefined ? val.answers : (val || {})
+            const getShowResults = (val) => val?.showResults || false
             if (saved.grammar) {
-              setGrammarExercises(prev => ({ ...prev, answers: saved.grammar }))
+              setGrammarExercises(prev => ({ ...prev, answers: getAnswers(saved.grammar), showResults: getShowResults(saved.grammar) }))
             }
             if (saved.sentence) {
-              setSentenceExercises(prev => ({ ...prev, answers: saved.sentence }))
+              setSentenceExercises(prev => ({ ...prev, answers: getAnswers(saved.sentence), showResults: getShowResults(saved.sentence) }))
             }
             if (saved.matching) {
-              setMatchedPairs(saved.matching)
+              setMatchedPairs(getAnswers(saved.matching))
+              setMatchingExercises(prev => ({ ...prev, showResults: getShowResults(saved.matching) }))
             }
             if (saved.translation) {
-              setTranslationInputs(saved.translation)
+              setTranslationInputs(getAnswers(saved.translation))
+              setTranslationExercises(prev => ({ ...prev, showResults: getShowResults(saved.translation) }))
+            }
+            if (saved.writing) {
+              setWritingExercises(prev => ({ ...prev, answers: getAnswers(saved.writing), showResults: getShowResults(saved.writing), checked: saved.writing?.checked || {} }))
+            }
+            if (saved.imageQuiz) {
+              setImageQuizExercises(prev => ({ ...prev, answers: getAnswers(saved.imageQuiz), showResults: getShowResults(saved.imageQuiz) }))
+            }
+            if (saved.listenType) {
+              setListenTypeExercises(prev => ({ ...prev, answers: getAnswers(saved.listenType), showResults: getShowResults(saved.listenType) }))
+            }
+            if (saved.dialogueFill) {
+              setDialogueFillExercises(prev => ({ ...prev, answers: getAnswers(saved.dialogueFill), showResults: getShowResults(saved.dialogueFill) }))
+            }
+            if (saved.findErrorWord) {
+              setFindErrorWordExercises(prev => ({ ...prev, answers: getAnswers(saved.findErrorWord), showResults: getShowResults(saved.findErrorWord) }))
+            }
+            if (saved.findErrorSentence) {
+              setFindErrorSentenceExercises(prev => ({ ...prev, answers: getAnswers(saved.findErrorSentence), showResults: getShowResults(saved.findErrorSentence) }))
             }
           }
           // Directly resume from saved position without asking
@@ -336,10 +436,16 @@ function Lesson() {
   // Save all current exercise answers
   const saveExerciseProgress = (newGrammar, newSentence, newMatching, newTranslation) => {
     const exerciseAnswers = {
-      grammar: newGrammar || grammarExercises.answers,
-      sentence: newSentence || sentenceExercises.answers,
-      matching: newMatching || matchedPairs,
-      translation: newTranslation || translationInputs
+      grammar: { answers: newGrammar || grammarExercises.answers, showResults: grammarExercises.showResults },
+      sentence: { answers: newSentence || sentenceExercises.answers, showResults: sentenceExercises.showResults },
+      matching: { answers: newMatching || matchedPairs, showResults: matchingExercises.showResults },
+      translation: { answers: newTranslation || translationInputs, showResults: translationExercises.showResults },
+      writing: { answers: writingExercises.answers, showResults: writingExercises.showResults, checked: writingExercises.checked },
+      imageQuiz: { answers: imageQuizExercises.answers, showResults: imageQuizExercises.showResults },
+      listenType: { answers: listenTypeExercises.answers, showResults: listenTypeExercises.showResults },
+      dialogueFill: { answers: dialogueFillExercises.answers, showResults: dialogueFillExercises.showResults },
+      findErrorWord: { answers: findErrorWordExercises.answers, showResults: findErrorWordExercises.showResults },
+      findErrorSentence: { answers: findErrorSentenceExercises.answers, showResults: findErrorSentenceExercises.showResults }
     }
     saveProgressToBackend(null, null, exerciseAnswers)
   }
@@ -2038,6 +2144,40 @@ function Lesson() {
                 <span>Vježbajmo gramatiku!</span>
               </h2>
               
+              {/* Exercise progress indicator */}
+              {(() => {
+                const completedCount = [
+                  grammarExercises.showResults,
+                  sentenceExercises.showResults,
+                  matchingExercises.showResults,
+                  translationExercises.showResults,
+                  writingExercises.showResults,
+                  imageQuizExercises.showResults,
+                  listenTypeExercises.showResults,
+                  dialogueFillExercises.showResults,
+                  findErrorWordExercises.showResults,
+                  findErrorSentenceExercises.showResults
+                ].filter(Boolean).length
+                const total = 10
+                const pct = Math.round((completedCount / total) * 100)
+                return (
+                  <div className="mb-4 p-3 bg-white rounded-xl border border-gray-200 shadow-sm">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-gray-700">Napredak vježbi</span>
+                      <span className={`text-sm font-bold ${completedCount === total ? 'text-green-600' : 'text-bosnia-blue'}`}>
+                        {completedCount}/{total} završeno
+                      </span>
+                    </div>
+                    <div className="w-full bg-gray-100 rounded-full h-2.5">
+                      <div
+                        className={`h-2.5 rounded-full transition-all duration-500 ${completedCount === total ? 'bg-green-500' : 'bg-bosnia-blue'}`}
+                        style={{ width: `${pct}%` }}
+                      />
+                    </div>
+                  </div>
+                )
+              })()}
+
               {/* Exercise type selector - improved grid layout */}
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 p-4 bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl border border-gray-200">
                 {exerciseTypes.map(type => {
@@ -4369,6 +4509,37 @@ function Lesson() {
                     </div>
                   )}
                   
+                  {/* Certificate button for passed quiz */}
+                  {(() => {
+                    const percentage = quizResult?.alreadyPassed
+                      ? quizResult.bestPercentage
+                      : (quizState.score / lesson.quiz.length) * 100
+                    const score = quizResult?.alreadyPassed
+                      ? (lessonProgress?.best_quiz_score ?? quizState.score)
+                      : quizState.score
+                    return percentage >= 70 ? (
+                      <div className="mb-4">
+                        <button
+                          onClick={() => setShowCertificate(true)}
+                          className="inline-flex items-center space-x-2 bg-yellow-500 text-white px-6 py-2.5 rounded-lg hover:bg-yellow-600 transition-colors font-medium"
+                        >
+                          <Printer className="w-5 h-5" />
+                          <span>Preuzmi certifikat</span>
+                        </button>
+                        {showCertificate && (
+                          <LessonCertificateModal
+                            lesson={lesson}
+                            percentage={percentage}
+                            score={score}
+                            totalQuestions={lesson.quiz.length}
+                            user={user}
+                            onClose={() => setShowCertificate(false)}
+                          />
+                        )}
+                      </div>
+                    ) : null
+                  })()}
+
                   {/* Progress info */}
                   <div className="bg-gray-50 rounded-lg p-4 mb-4">
                     <div className="flex items-center justify-center space-x-4 text-sm">
@@ -4386,7 +4557,7 @@ function Lesson() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <button
                     onClick={resetQuiz}
                     className="inline-flex items-center space-x-2 bg-bosnia-blue text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
