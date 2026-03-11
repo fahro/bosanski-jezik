@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { authApi } from '../api'
-import { User, Lock, CheckCircle, AlertCircle, Eye, EyeOff } from 'lucide-react'
+import { User, Lock, CheckCircle, AlertCircle, Eye, EyeOff, ArrowRight } from 'lucide-react'
 
 export default function Profile() {
   const { user, isAuthenticated, refreshUser } = useAuth()
@@ -13,7 +13,6 @@ export default function Profile() {
     return null
   }
 
-  // Split full_name into first/last for display
   const nameParts = (user?.full_name || '').trim().split(/\s+/)
   const [firstName, setFirstName] = useState(nameParts[0] || '')
   const [lastName, setLastName] = useState(nameParts.slice(1).join(' ') || '')
@@ -25,7 +24,7 @@ export default function Profile() {
   const [showNew, setShowNew] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
 
-  const [nameStatus, setNameStatus] = useState(null) // null | 'success' | 'error'
+  const [nameStatus, setNameStatus] = useState(null)
   const [nameMessage, setNameMessage] = useState('')
   const [nameLoading, setNameLoading] = useState(false)
 
@@ -85,128 +84,128 @@ export default function Profile() {
     }
   }
 
-  return (
-    <div className="max-w-lg mx-auto px-4 py-8 space-y-6">
-      <h1 className="text-2xl font-bold text-gray-900">Moj profil</h1>
+  const StatusBanner = ({ status, message }) => status ? (
+    <div className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm ${
+      status === 'success' ? 'bg-green-50 border border-green-200 text-green-700' : 'bg-red-50 border border-red-200 text-red-700'
+    }`}>
+      {status === 'success' ? <CheckCircle className="w-4 h-4 shrink-0" /> : <AlertCircle className="w-4 h-4 shrink-0" />}
+      <span>{message}</span>
+    </div>
+  ) : null
 
-      {/* Account info (read-only) */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <div className="flex items-center gap-4 mb-4">
-          <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white text-xl font-bold">
-            {(user?.full_name || user?.username || '?').charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <p className="font-semibold text-gray-900">{user?.full_name || user?.username}</p>
-            <p className="text-sm text-gray-500">@{user?.username}</p>
-          </div>
+  const PasswordField = ({ label, value, setter, show, toggle, autoComplete }) => (
+    <div>
+      <label className="field-label">{label}</label>
+      <div className="relative">
+        <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" style={{ width: 18, height: 18 }} />
+        <input
+          type={show ? 'text' : 'password'}
+          value={value}
+          onChange={e => setter(e.target.value)}
+          className="field-input pl-11 pr-11"
+          placeholder="••••••••"
+          autoComplete={autoComplete}
+          required
+        />
+        <button
+          type="button"
+          onClick={toggle}
+          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 p-1"
+        >
+          {show ? <EyeOff style={{ width: 18, height: 18 }} /> : <Eye style={{ width: 18, height: 18 }} />}
+        </button>
+      </div>
+    </div>
+  )
+
+  return (
+    <div className="max-w-lg mx-auto px-4 py-8 space-y-5">
+      <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Moj profil</h1>
+
+      {/* Account overview */}
+      <div className="card p-5 flex items-center gap-4">
+        <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shrink-0">
+          {(user?.full_name || user?.username || '?').charAt(0).toUpperCase()}
         </div>
-        <div className="text-sm text-gray-500 space-y-1">
-          <p>Email: <span className="text-gray-700">{user?.email}</span></p>
+        <div className="min-w-0">
+          <p className="font-semibold text-gray-900 truncate">{user?.full_name || user?.username}</p>
+          <p className="text-sm text-gray-500">@{user?.username}</p>
+          <p className="text-sm text-gray-500 truncate">{user?.email}</p>
         </div>
       </div>
 
       {/* Edit name */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <div className="flex items-center gap-2 mb-4">
+      <div className="card p-6">
+        <div className="flex items-center gap-2 mb-5">
           <User className="w-5 h-5 text-blue-600" />
           <h2 className="font-semibold text-gray-900">Ime i prezime</h2>
         </div>
         <form onSubmit={handleSaveName} className="space-y-4">
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Ime</label>
+              <label className="field-label">Ime</label>
               <input
                 type="text"
                 value={firstName}
                 onChange={e => setFirstName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
-                placeholder="Ime"
+                className="field-input"
+                placeholder="Vaše ime"
+                autoComplete="given-name"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Prezime</label>
+              <label className="field-label">Prezime</label>
               <input
                 type="text"
                 value={lastName}
                 onChange={e => setLastName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
-                placeholder="Prezime"
+                className="field-input"
+                placeholder="Vaše prezime"
+                autoComplete="family-name"
               />
             </div>
           </div>
-
-          {nameStatus && (
-            <div className={`flex items-center gap-2 text-sm px-3 py-2 rounded-lg ${
-              nameStatus === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-            }`}>
-              {nameStatus === 'success'
-                ? <CheckCircle className="w-4 h-4" />
-                : <AlertCircle className="w-4 h-4" />}
-              {nameMessage}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={nameLoading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-2.5 rounded-lg font-medium text-sm transition-colors"
-          >
-            {nameLoading ? 'Čuvanje...' : 'Sačuvaj ime'}
+          <StatusBanner status={nameStatus} message={nameMessage} />
+          <button type="submit" disabled={nameLoading} className="btn-primary w-full">
+            {nameLoading ? <span className="animate-pulse">Čuvanje...</span> : <><span>Sačuvaj ime</span><ArrowRight className="w-4 h-4" /></>}
           </button>
         </form>
       </div>
 
       {/* Change password */}
-      <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <div className="flex items-center gap-2 mb-4">
+      <div className="card p-6">
+        <div className="flex items-center gap-2 mb-5">
           <Lock className="w-5 h-5 text-blue-600" />
           <h2 className="font-semibold text-gray-900">Promjena lozinke</h2>
         </div>
         <form onSubmit={handleChangePassword} className="space-y-4">
-          {[
-            { label: 'Trenutna lozinka', value: currentPassword, setter: setCurrentPassword, show: showCurrent, toggle: () => setShowCurrent(v => !v) },
-            { label: 'Nova lozinka', value: newPassword, setter: setNewPassword, show: showNew, toggle: () => setShowNew(v => !v) },
-            { label: 'Potvrdi novu lozinku', value: confirmPassword, setter: setConfirmPassword, show: showConfirm, toggle: () => setShowConfirm(v => !v) },
-          ].map(({ label, value, setter, show, toggle }) => (
-            <div key={label}>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-              <div className="relative">
-                <input
-                  type={show ? 'text' : 'password'}
-                  value={value}
-                  onChange={e => setter(e.target.value)}
-                  className="w-full px-3 py-2 pr-10 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
-                  placeholder="••••••••"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={toggle}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-                >
-                  {show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                </button>
-              </div>
-            </div>
-          ))}
-
-          {passStatus && (
-            <div className={`flex items-center gap-2 text-sm px-3 py-2 rounded-lg ${
-              passStatus === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-            }`}>
-              {passStatus === 'success'
-                ? <CheckCircle className="w-4 h-4" />
-                : <AlertCircle className="w-4 h-4" />}
-              {passMessage}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={passLoading}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-2.5 rounded-lg font-medium text-sm transition-colors"
-          >
-            {passLoading ? 'Mijenjanje...' : 'Promijeni lozinku'}
+          <PasswordField
+            label="Trenutna lozinka"
+            value={currentPassword}
+            setter={setCurrentPassword}
+            show={showCurrent}
+            toggle={() => setShowCurrent(v => !v)}
+            autoComplete="current-password"
+          />
+          <PasswordField
+            label="Nova lozinka"
+            value={newPassword}
+            setter={setNewPassword}
+            show={showNew}
+            toggle={() => setShowNew(v => !v)}
+            autoComplete="new-password"
+          />
+          <PasswordField
+            label="Potvrdi novu lozinku"
+            value={confirmPassword}
+            setter={setConfirmPassword}
+            show={showConfirm}
+            toggle={() => setShowConfirm(v => !v)}
+            autoComplete="new-password"
+          />
+          <StatusBanner status={passStatus} message={passMessage} />
+          <button type="submit" disabled={passLoading} className="btn-primary w-full">
+            {passLoading ? <span className="animate-pulse">Mijenjanje...</span> : <><span>Promijeni lozinku</span><ArrowRight className="w-4 h-4" /></>}
           </button>
         </form>
       </div>
