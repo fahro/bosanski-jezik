@@ -488,7 +488,7 @@ A1_LESSONS_PART2 = [
             {"id": 24, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["pada", "Jesen", "lišće", "u", "."]}, "answer": "U jesen lišće pada.", "hint": "In autumn leaves fall"},
             {"id": 25, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["sunca", "U", "ljeto", "najviše", "je", "."]}, "answer": "U ljeto je najviše sunca.", "hint": "In summer there is most sun"},
             {"id": 26, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["augustu", "Odmor", "u", "je", "."]}, "answer": "Odmor je u augustu.", "hint": "Vacation is in August"},
-            {"id": 27, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["zima", "Volim", "jer", "snijeg", "pada", "."]}, "answer": "Volim zimu jer pada snijeg.", "hint": "I love winter because snow falls"},
+            {"id": 27, "type": "sentence_order", "instruction": "Poredajte riječi u pravilnu rečenicu", "content": {"words": ["zimu", "Volim", "jer", "snijeg", "pada", "."]}, "answer": "Volim zimu jer pada snijeg.", "hint": "I love winter because snow falls"},
             {"id": 28, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "January"}, "answer": "januar", "hint": "Prvi mjesec"},
             {"id": 29, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "spring"}, "answer": "proljeće", "hint": "Godišnje doba"},
             {"id": 30, "type": "writing", "instruction": "Napišite na bosanskom", "content": {"text": "summer"}, "answer": "ljeto", "hint": "Toplo godišnje doba"},
