@@ -636,10 +636,48 @@ async def check_level_access(
             "requirement": f"Završite sve B1 lekcije ({b1_completed}/12)"
         }
     
-    # For other levels (C1, C2) - not yet implemented
+    # C1 requires completing all B2 lessons or passing B2 final test
+    if level == "c1":
+        # Check if user has any C1 progress
+        c1_progress = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "c1"
+        ).first()
+
+        if c1_progress:
+            return {"has_access": True, "level": level, "reason": "Završili ste B2 nivo"}
+
+        # Check if user passed B2 final test
+        passed_b2 = db.query(FinalTestAttempt).filter(
+            FinalTestAttempt.user_id == current_user.id,
+            FinalTestAttempt.level == "b2",
+            FinalTestAttempt.passed == True
+        ).first()
+
+        if passed_b2:
+            return {"has_access": True, "level": level, "reason": "Položili ste završni test B2 nivoa"}
+
+        # Check if user completed all B2 lessons
+        b2_completed = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "b2",
+            LessonProgress.completed == True
+        ).count()
+
+        if b2_completed >= 12:
+            return {"has_access": True, "level": level, "reason": "Završili ste sve B2 lekcije"}
+
+        return {
+            "has_access": False,
+            "level": level,
+            "reason": "Morate završiti sve B2 lekcije da biste otključali C1",
+            "requirement": f"Završite sve B2 lekcije ({b2_completed}/12)"
+        }
+
+    # For other levels (C2) - not yet implemented
     return {
-        "has_access": False, 
-        "level": level, 
+        "has_access": False,
+        "level": level,
         "reason": f"Nivo {level.upper()} još nije dostupan",
         "coming_soon": True
     }
