@@ -28,11 +28,12 @@ from app.data.b1_lessons import B1_LESSONS
 from app.data.b1_lessons_2 import B1_LESSONS_PART2
 from app.data.b1_lessons_3 import B1_LESSONS_PART3
 from app.data.b2_lessons import B2_LESSONS
+from app.data.c1_lessons import C1_LESSONS
 from app.data.writing_exercises import WRITING_EXERCISES
 from app.data.a1_final_test import A1_FINAL_TEST_QUESTIONS
 
-# Combine all lessons (A1 + A2 + B1 + B2)
-ALL_LESSONS = A1_LESSONS + A1_LESSONS_PART2 + A1_LESSONS_PART3 + A1_LESSONS_PART4 + A2_LESSONS + A2_LESSONS_PART2 + A2_LESSONS_PART3 + A2_LESSONS_PART4 + B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3 + B2_LESSONS
+# Combine all lessons (A1 + A2 + B1 + B2 + C1)
+ALL_LESSONS = A1_LESSONS + A1_LESSONS_PART2 + A1_LESSONS_PART3 + A1_LESSONS_PART4 + A2_LESSONS + A2_LESSONS_PART2 + A2_LESSONS_PART3 + A2_LESSONS_PART4 + B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3 + B2_LESSONS + C1_LESSONS
 
 AUDIO_DIR = Path(__file__).parent / "static" / "audio"
 MANIFEST_FILE = AUDIO_DIR / "manifest.json"
