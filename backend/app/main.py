@@ -94,6 +94,7 @@ from app.data.b1_lessons import B1_LESSONS
 from app.data.b1_lessons_2 import B1_LESSONS_PART2
 from app.data.b1_lessons_3 import B1_LESSONS_PART3
 from app.data.b2_lessons import B2_LESSONS
+from app.data.c1_lessons import C1_LESSONS
 
 # Combine B1 lessons
 B1_ALL_LESSONS = B1_LESSONS + B1_LESSONS_PART2 + B1_LESSONS_PART3
@@ -135,6 +136,8 @@ def get_lessons_by_level(level_id: str):
         return B1_ALL_LESSONS
     elif level_id == "b2":
         return B2_LESSONS
+    elif level_id == "c1":
+        return C1_LESSONS
     return []
 
 @app.get("/api/lessons/{lesson_id}")
@@ -147,6 +150,8 @@ def get_lesson(lesson_id: int, level: str = "a1"):
         lessons = B1_ALL_LESSONS
     elif level == "b2":
         lessons = B2_LESSONS
+    elif level == "c1":
+        lessons = C1_LESSONS
     else:
         lessons = []
     for lesson in lessons:
