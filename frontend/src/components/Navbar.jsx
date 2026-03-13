@@ -18,17 +18,29 @@ function Navbar() {
   const isActive = (path) => location.pathname === path
 
   return (
-    <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <nav
+      className="sticky top-0 z-50 border-b border-gray-200/50"
+      style={{
+        background: 'rgba(255, 255, 255, 0.92)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+        boxShadow: '0 1px 0 rgba(0,0,0,0.06)'
+      }}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14 sm:h-16">
 
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2.5 shrink-0">
-            <div className="w-8 h-8 sm:w-9 sm:h-9 bg-blue-700 rounded-xl flex items-center justify-center shadow-sm">
+            <div
+              className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center"
+              style={{ background: 'linear-gradient(135deg, #002395 0%, #1d4ed8 100%)', boxShadow: '0 2px 8px rgba(0,35,149,0.3)' }}
+            >
               <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             </div>
-            <span className="font-bold text-base sm:text-lg text-gray-900 hidden xs:block">
-              Bosanski Jezik
+            <span className="font-bold text-base sm:text-lg hidden xs:block">
+              <span className="text-gray-900">Bosanski </span>
+              <span className="text-blue-700">Jezik</span>
             </span>
           </Link>
 
@@ -49,9 +61,12 @@ function Navbar() {
                 </Link>
 
                 {/* XP badge */}
-                <div className="flex items-center gap-1.5 px-3 py-2 bg-yellow-50 rounded-lg">
-                  <Zap className="w-4 h-4 text-yellow-500" />
-                  <span className="text-sm font-semibold text-yellow-700">{stats?.total_xp || 0} XP</span>
+                <div
+                  className="flex items-center gap-1.5 px-3 py-2 rounded-lg"
+                  style={{ background: 'linear-gradient(135deg, #fffbeb, #fef3c7)' }}
+                >
+                  <Zap className="w-4 h-4 text-amber-500" />
+                  <span className="text-sm font-bold text-amber-700">{stats?.total_xp || 0} XP</span>
                 </div>
 
                 <Link
@@ -63,7 +78,10 @@ function Navbar() {
                   }`}
                   title="Moj profil"
                 >
-                  <div className="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-white text-xs font-bold">
+                  <div
+                    className="w-7 h-7 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                    style={{ background: 'linear-gradient(135deg, #002395, #1d4ed8)' }}
+                  >
                     {(user?.full_name || user?.username || '?').charAt(0).toUpperCase()}
                   </div>
                   <span className="hidden lg:block">{user?.full_name?.split(' ')[0] || user?.username}</span>
@@ -87,7 +105,8 @@ function Navbar() {
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-2 text-sm font-semibold bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors shadow-sm"
+                  className="px-5 py-2 text-sm font-semibold text-white rounded-xl transition-all hover:opacity-90 hover:shadow-md"
+                  style={{ background: 'linear-gradient(135deg, #002395, #1d4ed8)', boxShadow: '0 2px 8px rgba(0,35,149,0.25)' }}
                 >
                   Registracija
                 </Link>
@@ -98,9 +117,12 @@ function Navbar() {
           {/* Mobile right side */}
           <div className="md:hidden flex items-center gap-2">
             {isAuthenticated && (
-              <div className="flex items-center gap-1 bg-yellow-50 px-2.5 py-1.5 rounded-lg">
-                <Zap className="w-3.5 h-3.5 text-yellow-500" />
-                <span className="text-xs font-semibold text-yellow-700">{stats?.total_xp || 0}</span>
+              <div
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg"
+                style={{ background: 'linear-gradient(135deg, #fffbeb, #fef3c7)' }}
+              >
+                <Zap className="w-3.5 h-3.5 text-amber-500" />
+                <span className="text-xs font-bold text-amber-700">{stats?.total_xp || 0}</span>
               </div>
             )}
             <button
@@ -120,7 +142,10 @@ function Navbar() {
               <div className="space-y-0.5">
                 {/* User info */}
                 <div className="flex items-center gap-3 px-4 py-3 mb-1">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                    style={{ background: 'linear-gradient(135deg, #002395, #1d4ed8)' }}
+                  >
                     {(user?.full_name || user?.username || '?').charAt(0).toUpperCase()}
                   </div>
                   <div>
@@ -172,7 +197,8 @@ function Navbar() {
                 <Link
                   to="/register"
                   onClick={() => setMobileOpen(false)}
-                  className="block w-full text-center py-3 px-4 text-sm font-semibold bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors"
+                  className="block w-full text-center py-3 px-4 text-sm font-semibold text-white rounded-xl hover:opacity-90 transition-all"
+                  style={{ background: 'linear-gradient(135deg, #002395, #1d4ed8)' }}
                 >
                   Registracija
                 </Link>

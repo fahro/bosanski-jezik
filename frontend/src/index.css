@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,7 +16,7 @@ html {
 }
 body {
   font-family: 'Inter', sans-serif;
-  background-color: #f8fafc;
+  background-color: #f0f4ff;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -38,12 +38,13 @@ textarea {
 
 /* ── Component classes ── */
 @layer components {
+
   /* Form fields */
   .field-input {
     @apply w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white
            text-gray-900 placeholder-gray-400
            focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20
-           outline-none transition-all duration-200;
+           outline-none transition-all duration-200 shadow-sm;
     font-size: 16px !important;
   }
   .field-input-icon {
@@ -56,17 +57,18 @@ textarea {
   /* Buttons */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
-           bg-blue-600 hover:bg-blue-700 active:scale-95
+           bg-blue-600 hover:bg-blue-500 active:scale-95
            text-white font-semibold
            px-5 py-3.5 rounded-xl
-           transition-all duration-150
+           transition-all duration-150 shadow-sm hover:shadow-md
            disabled:opacity-40 disabled:cursor-not-allowed
            min-h-[48px] select-none;
     font-size: 16px;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2
-           bg-gray-100 hover:bg-gray-200 active:scale-95
+           bg-white hover:bg-gray-50 active:scale-95
+           border border-gray-200
            text-gray-700 font-semibold
            px-5 py-3.5 rounded-xl
            transition-all duration-150
@@ -75,31 +77,74 @@ textarea {
   }
   .btn-gold {
     @apply inline-flex items-center justify-center gap-2
-           bg-yellow-400 hover:bg-yellow-500 active:scale-95
-           text-blue-900 font-semibold
+           active:scale-95
+           text-blue-950 font-bold
            px-5 py-3.5 rounded-xl
-           transition-all duration-150
+           transition-all duration-200
            min-h-[48px] select-none;
+    background: linear-gradient(135deg, #FECB00 0%, #FFD700 100%);
+    box-shadow: 0 4px 20px rgba(254, 203, 0, 0.35);
     font-size: 16px;
+  }
+  .btn-gold:hover {
+    background: linear-gradient(135deg, #FFD633 0%, #FFE566 100%);
+    box-shadow: 0 6px 28px rgba(254, 203, 0, 0.5);
   }
 
   /* Cards */
   .card        { @apply bg-white rounded-2xl border border-gray-100 shadow-sm; }
-  .card-hover  { @apply card hover:shadow-md hover:border-gray-200 transition-all duration-200 cursor-pointer; }
+  .card-hover  { @apply card hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 cursor-pointer; }
+
+  /* Glass card — for use on dark backgrounds */
+  .glass-card {
+    @apply rounded-2xl transition-all duration-200;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.13);
+  }
+  .glass-card-sm {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9999px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 /* ── Gradient text ── */
 .text-gradient-blue {
-  background: linear-gradient(135deg, #002395, #2563eb);
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 .text-gradient-gold {
-  background: linear-gradient(135deg, #b45309, #FECB00);
+  background: linear-gradient(135deg, #FECB00, #f59e0b);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+.text-gradient-hero {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7cc 50%, #FECB00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Hero mesh gradient background ── */
+.mesh-bg {
+  background-color: #080d2a;
+  background-image:
+    radial-gradient(ellipse at 15% 30%, rgba(254, 203, 0, 0.10) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 10%, rgba(59, 130, 246, 0.18) 0%, transparent 45%),
+    radial-gradient(ellipse at 50% 90%, rgba(0, 35, 149, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 60%, rgba(254, 203, 0, 0.05) 0%, transparent 40%);
 }
 
 /* ── Markdown ── */
@@ -120,6 +165,18 @@ textarea {
 @keyframes fadeIn  { from { opacity:0; transform:translateY(8px); }  to { opacity:1; transform:translateY(0); } }
 @keyframes slideIn { from { opacity:0; transform:translateX(-14px); } to { opacity:1; transform:translateX(0); } }
 @keyframes scaleIn { from { opacity:0; transform:scale(0.95); }       to { opacity:1; transform:scale(1); } }
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes glow {
+  0% { box-shadow: 0 0 5px rgba(0, 35, 149, 0.5); }
+  100% { box-shadow: 0 0 20px rgba(0, 35, 149, 0.8), 0 0 30px rgba(254, 203, 0, 0.4); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
 .animate-fadeIn  { animation: fadeIn  0.3s ease-out forwards; }
 .animate-slideIn { animation: slideIn 0.3s ease-out forwards; }
 .animate-scaleIn { animation: scaleIn 0.25s ease-out forwards; }

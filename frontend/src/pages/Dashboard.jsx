@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { progressApi, api } from '../api'
-import { 
-  Trophy, Star, Zap, BookOpen, CheckCircle, Lock, 
-  ChevronRight, Award, Play, ArrowRight, Flame, Target
+import { progressApi } from '../api'
+import {
+  Trophy, Zap, BookOpen, CheckCircle, Lock,
+  Award, Play, ArrowRight, Flame, Target
 } from 'lucide-react'
 
 const A1_LESSONS = [
@@ -78,25 +78,30 @@ function FinalTestCard({ level, allProgress }) {
   const levelInfo = LEVEL_INFO[level]
   const completedLessons = allProgress.filter(p => p.quiz_passed).length
   const canTakeTest = completedLessons >= 12
-  
+
   const levelColors = {
-    a1: { bg: 'from-green-500 to-emerald-600', text: 'text-green-600', button: 'text-green-600 hover:bg-green-50' },
-    a2: { bg: 'from-blue-500 to-blue-600', text: 'text-blue-600', button: 'text-blue-600 hover:bg-blue-50' },
-    b1: { bg: 'from-purple-500 to-purple-600', text: 'text-purple-600', button: 'text-purple-600 hover:bg-purple-50' },
-    b2: { bg: 'from-amber-500 to-orange-600', text: 'text-amber-600', button: 'text-amber-600 hover:bg-amber-50' }
+    a1: { text: 'text-green-600', button: 'text-green-700 hover:bg-green-50' },
+    a2: { text: 'text-blue-600', button: 'text-blue-700 hover:bg-blue-50' },
+    b1: { text: 'text-purple-600', button: 'text-purple-700 hover:bg-purple-50' },
+    b2: { text: 'text-amber-600', button: 'text-amber-700 hover:bg-amber-50' }
   }
   const colors = levelColors[level] || levelColors.a1
 
   return (
-    <div className={`rounded-3xl p-6 ${
-      canTakeTest 
-        ? `bg-gradient-to-br ${colors.bg} text-white` 
-        : 'bg-gray-50 border border-gray-100'
-    }`}>
+    <div
+      className={`rounded-3xl p-6 transition-all ${
+        canTakeTest
+          ? 'text-white shadow-lg'
+          : 'bg-white border border-gray-100 shadow-sm'
+      }`}
+      style={canTakeTest ? {
+        background: `linear-gradient(135deg, ${levelInfo.color}, ${LEVEL_INFO[level]?.color}cc)`
+      } : {}}
+    >
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${
-            canTakeTest ? 'bg-white/20' : 'bg-gray-200'
+            canTakeTest ? 'bg-white/20' : 'bg-gray-100'
           }`}>
             <Award className={`w-7 h-7 ${canTakeTest ? 'text-white' : 'text-gray-400'}`} />
           </div>
@@ -105,13 +110,13 @@ function FinalTestCard({ level, allProgress }) {
               {level.toUpperCase()} Završni Test
             </h3>
             <p className={`text-sm ${canTakeTest ? 'text-white/80' : 'text-gray-500'}`}>
-              {canTakeTest 
-                ? '120 pitanja • Testiraj svoje znanje' 
+              {canTakeTest
+                ? '120 pitanja • Testiraj svoje znanje'
                 : `Završi sve lekcije (${completedLessons}/12)`}
             </p>
           </div>
         </div>
-        
+
         {canTakeTest ? (
           <Link
             to={`/final-test?level=${level}`}
@@ -121,7 +126,7 @@ function FinalTestCard({ level, allProgress }) {
             <span>Započni</span>
           </Link>
         ) : (
-          <div className="bg-gray-200 text-gray-400 px-5 py-3 rounded-xl font-medium flex items-center gap-2">
+          <div className="bg-gray-100 text-gray-400 px-5 py-3 rounded-xl font-medium flex items-center gap-2">
             <Lock className="w-5 h-5" />
             <span>Zaključano</span>
           </div>
@@ -157,30 +162,14 @@ export default function Dashboard() {
   const checkAvailableLevels = async () => {
     try {
       const levels = ['a1']
-      
-      // Check access to A2
       const a2Access = await progressApi.checkLevelAccess('a2')
-      if (a2Access.has_access) {
-        levels.push('a2')
-      }
-      
-      // Check access to B1
+      if (a2Access.has_access) levels.push('a2')
       const b1Access = await progressApi.checkLevelAccess('b1')
-      if (b1Access.has_access) {
-        levels.push('b1')
-      }
-      
-      // Check access to B2
+      if (b1Access.has_access) levels.push('b1')
       const b2Access = await progressApi.checkLevelAccess('b2')
-      if (b2Access.has_access) {
-        levels.push('b2')
-      }
-      
+      if (b2Access.has_access) levels.push('b2')
       setAvailableLevels(levels)
-      
-      // Set default to highest available level
-      const highestLevel = levels[levels.length - 1]
-      setSelectedLevel(highestLevel)
+      setSelectedLevel(levels[levels.length - 1])
     } catch (error) {
       console.error('Failed to check level access:', error)
     }
@@ -202,95 +191,103 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="animate-spin rounded-full h-10 w-10 border-2 border-bosnia-blue border-t-transparent"></div>
+        <div className="animate-spin rounded-full h-10 w-10 border-2 border-blue-600 border-t-transparent" />
       </div>
     )
   }
 
-  const xpProgress = stats?.xp_needed_for_next ? 
-    ((stats.xp_for_next_level - stats.xp_needed_for_next) / stats.xp_for_next_level) * 100 : 0
+  const xpProgress = stats?.xp_needed_for_next
+    ? ((stats.xp_for_next_level - stats.xp_needed_for_next) / stats.xp_for_next_level) * 100
+    : 0
 
   const currentLevelInfo = LEVEL_INFO[selectedLevel]
   const LESSONS = currentLevelInfo?.lessons || A1_LESSONS
-  
-  // Calculate current lesson for selected level based on progress
+
   const getCurrentLessonForLevel = () => {
     if (!lessonProgress || lessonProgress.length === 0) return 1
-    
-    // Find the first incomplete lesson or the next one after all completed
     const completedLessons = lessonProgress.filter(p => p.completed).map(p => p.lesson_id)
     const maxCompleted = completedLessons.length > 0 ? Math.max(...completedLessons) : 0
-    
-    // Find first lesson that's started but not completed
     const inProgressLesson = lessonProgress.find(p => p.started && !p.completed)
     if (inProgressLesson) return inProgressLesson.lesson_id
-    
-    // Otherwise return next lesson after max completed
     return Math.min(maxCompleted + 1, 12)
   }
-  
+
   const currentLessonIdForLevel = getCurrentLessonForLevel()
   const currentLessonInfo = LESSONS.find(l => l.id === currentLessonIdForLevel)
 
+  const levelGradientMap = {
+    a1: 'linear-gradient(135deg, #22c55e, #16a34a)',
+    a2: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+    b1: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
+    b2: 'linear-gradient(135deg, #f59e0b, #d97706)'
+  }
+
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6 space-y-6">
-      
+    <div className="max-w-5xl mx-auto px-4 py-6 space-y-5">
+
       {/* Welcome & Stats Header */}
-      <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          {/* Left - Welcome */}
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              Zdravo, {user?.full_name?.split(' ')[0] || user?.username}! 👋
-            </h1>
-            <p className="text-gray-500 mt-1">Nastavi učiti bosanski jezik</p>
-          </div>
-          
-          {/* Right - Level & XP */}
-          <div className="flex items-center gap-6">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-bosnia-yellow">
-                <Flame className="w-5 h-5" />
-                <span className="text-2xl font-bold text-gray-900">{stats?.current_level || 1}</span>
-              </div>
-              <span className="text-xs text-gray-500">Nivo</span>
+      <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100">
+        {/* Accent bar */}
+        <div
+          className="h-1.5"
+          style={{ background: 'linear-gradient(90deg, #002395 0%, #3b82f6 50%, #FECB00 100%)' }}
+        />
+        <div className="p-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">
+                Zdravo, {user?.full_name?.split(' ')[0] || user?.username}! 👋
+              </h1>
+              <p className="text-gray-500 mt-1 text-sm">Nastavi učiti bosanski jezik</p>
             </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-bosnia-blue">
-                <Zap className="w-5 h-5" />
-                <span className="text-2xl font-bold text-gray-900">{stats?.total_xp || 0}</span>
+
+            <div className="flex items-center gap-5">
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <Flame className="w-5 h-5 text-orange-500" />
+                  <span className="text-2xl font-extrabold text-gray-900">{stats?.current_level || 1}</span>
+                </div>
+                <span className="text-xs text-gray-500">Nivo</span>
               </div>
-              <span className="text-xs text-gray-500">XP</span>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-1 text-green-500">
-                <CheckCircle className="w-5 h-5" />
-                <span className="text-2xl font-bold text-gray-900">{stats?.lessons_completed || 0}</span>
+              <div className="w-px h-10 bg-gray-100" />
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <Zap className="w-5 h-5 text-blue-600" />
+                  <span className="text-2xl font-extrabold text-gray-900">{stats?.total_xp || 0}</span>
+                </div>
+                <span className="text-xs text-gray-500">XP</span>
               </div>
-              <span className="text-xs text-gray-500">Završeno</span>
+              <div className="w-px h-10 bg-gray-100" />
+              <div className="text-center">
+                <div className="flex items-center justify-center gap-1">
+                  <CheckCircle className="w-5 h-5 text-emerald-500" />
+                  <span className="text-2xl font-extrabold text-gray-900">{stats?.lessons_completed || 0}</span>
+                </div>
+                <span className="text-xs text-gray-500">Završeno</span>
+              </div>
             </div>
           </div>
-        </div>
-        
-        {/* XP Progress */}
-        <div className="mt-6">
-          <div className="flex justify-between text-sm text-gray-500 mb-2">
-            <span>Nivo {stats?.current_level || 1}</span>
-            <span>Nivo {(stats?.current_level || 1) + 1}</span>
+
+          {/* XP Progress */}
+          <div className="mt-6">
+            <div className="flex justify-between text-xs text-gray-500 mb-2">
+              <span className="font-semibold text-gray-700">Nivo {stats?.current_level || 1}</span>
+              <span>{stats?.xp_needed_for_next || 0} XP do Nivoa {(stats?.current_level || 1) + 1}</span>
+            </div>
+            <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                className="h-full rounded-full transition-all duration-700"
+                style={{
+                  width: `${Math.min(xpProgress, 100)}%`,
+                  background: 'linear-gradient(90deg, #002395, #3b82f6 60%, #FECB00)'
+                }}
+              />
+            </div>
           </div>
-          <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-bosnia-blue to-bosnia-yellow transition-all duration-500 rounded-full"
-              style={{ width: `${Math.min(xpProgress, 100)}%` }}
-            />
-          </div>
-          <p className="text-xs text-gray-400 mt-1 text-right">
-            {stats?.xp_needed_for_next || 0} XP do sljedećeg nivoa
-          </p>
         </div>
       </div>
 
-      {/* Level Switcher - only show if user has access to multiple levels */}
+      {/* Level Switcher */}
       {availableLevels.length > 1 && (
         <div className="bg-white rounded-2xl p-2 shadow-sm border border-gray-100 flex gap-2">
           {availableLevels.map((level) => {
@@ -300,15 +297,13 @@ export default function Dashboard() {
               <button
                 key={level}
                 onClick={() => setSelectedLevel(level)}
-                className={`flex-1 flex items-center justify-center gap-3 py-3 px-4 rounded-xl transition-all ${
-                  isActive 
-                    ? 'text-white shadow-md' 
-                    : 'bg-gray-50 text-gray-600 hover:bg-gray-100'
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl transition-all text-sm font-bold ${
+                  isActive ? 'text-white shadow-md' : 'bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-gray-700'
                 }`}
                 style={isActive ? { backgroundColor: info.color } : {}}
               >
-                <span className="font-bold text-lg">{level.toUpperCase()}</span>
-                <span className={`text-sm ${isActive ? 'text-white/80' : 'text-gray-500'}`}>
+                <span>{level.toUpperCase()}</span>
+                <span className={`hidden sm:block text-xs font-medium ${isActive ? 'text-white/80' : 'text-gray-400'}`}>
                   {info.name.split(' - ')[1]}
                 </span>
               </button>
@@ -317,19 +312,12 @@ export default function Dashboard() {
         </div>
       )}
 
-      {/* Continue Learning Card - Works for both A1 and A2 */}
+      {/* Continue Learning Card */}
       {currentLessonIdForLevel <= 12 && currentLessonInfo && (
         <Link
           to={`/lesson/${currentLessonIdForLevel}?level=${selectedLevel}`}
-          className={`block rounded-3xl p-6 text-white shadow-lg hover:shadow-xl transition-all hover:scale-[1.01] group ${
-            selectedLevel === 'a1' 
-              ? 'bg-gradient-to-br from-green-500 to-green-600' 
-              : selectedLevel === 'a2'
-              ? 'bg-gradient-to-br from-bosnia-blue to-blue-600'
-              : selectedLevel === 'b2'
-              ? 'bg-gradient-to-br from-amber-500 to-orange-600'
-              : 'bg-gradient-to-br from-purple-500 to-purple-600'
-          }`}
+          className="group block rounded-3xl p-6 text-white transition-all hover:-translate-y-0.5 hover:shadow-xl shadow-lg"
+          style={{ background: levelGradientMap[selectedLevel] }}
         >
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -344,9 +332,7 @@ export default function Dashboard() {
                 <p className="text-white/70 text-sm">{currentLessonInfo.subtitle}</p>
               </div>
             </div>
-            <div className={`p-4 rounded-2xl group-hover:scale-110 transition-transform ${
-              selectedLevel === 'a1' ? 'bg-white text-green-600' : selectedLevel === 'a2' ? 'bg-white text-bosnia-blue' : selectedLevel === 'b2' ? 'bg-white text-amber-600' : 'bg-white text-purple-600'
-            }`}>
+            <div className="bg-white/20 group-hover:bg-white/30 p-4 rounded-2xl transition-all group-hover:scale-110">
               <Play className="w-6 h-6" />
             </div>
           </div>
@@ -356,17 +342,16 @@ export default function Dashboard() {
       {/* Lessons Grid */}
       <div>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-base font-bold text-gray-900">
             {currentLevelInfo?.name || 'Lekcije'}
           </h2>
-          <span className="text-sm text-gray-500">
+          <span className="text-sm text-gray-500 bg-white px-3 py-1 rounded-full border border-gray-100 shadow-sm">
             {lessonProgress.filter(p => p.completed).length}/{LESSONS.length} završeno
           </span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
           {LESSONS.map((lesson) => {
             const progress = lessonProgress.find(p => p.lesson_id === lesson.id)
-            // For A2, check progress differently - first lesson always available, others need previous completed
             const completedCount = lessonProgress.filter(p => p.completed).length
             const isLocked = lesson.id > 1 && !progress?.started && completedCount < lesson.id - 1
             const isCurrent = lesson.id === currentLessonIdForLevel
@@ -379,48 +364,54 @@ export default function Dashboard() {
                 onClick={(e) => isLocked && e.preventDefault()}
                 className={`
                   relative bg-white rounded-2xl p-4 border-2 transition-all
-                  ${isCompleted ? 'border-green-200 bg-green-50/50' : 
-                    isCurrent ? 'border-bosnia-blue shadow-md' : 
-                    isLocked ? 'border-gray-100 opacity-50 cursor-not-allowed' : 
-                    'border-gray-100 hover:border-gray-200 hover:shadow-sm'}
+                  ${isCompleted
+                    ? 'border-emerald-200 bg-emerald-50/40 hover:shadow-md'
+                    : isCurrent
+                    ? 'border-blue-300 shadow-md hover:shadow-lg'
+                    : isLocked
+                    ? 'border-gray-100 opacity-50 cursor-not-allowed'
+                    : 'border-gray-100 hover:border-gray-200 hover:shadow-md hover:-translate-y-0.5'}
                 `}
               >
                 {/* Status badge */}
                 {isCompleted && (
-                  <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1">
-                    <CheckCircle className="w-4 h-4" />
+                  <div className="absolute -top-2 -right-2 bg-emerald-500 text-white rounded-full p-1 shadow-sm">
+                    <CheckCircle className="w-3.5 h-3.5" />
                   </div>
                 )}
                 {isLocked && (
                   <div className="absolute -top-2 -right-2 bg-gray-400 text-white rounded-full p-1">
-                    <Lock className="w-4 h-4" />
+                    <Lock className="w-3.5 h-3.5" />
                   </div>
                 )}
                 {isCurrent && !isCompleted && (
-                  <div className="absolute -top-2 -right-2 bg-bosnia-blue text-white rounded-full px-2 py-0.5 text-xs font-medium">
+                  <div
+                    className="absolute -top-2 -right-2 text-white rounded-full px-2 py-0.5 text-xs font-semibold shadow-sm"
+                    style={{ backgroundColor: currentLevelInfo?.color || '#3b82f6' }}
+                  >
                     Trenutna
                   </div>
                 )}
 
                 <div className="text-center">
                   <div className="text-3xl mb-2">{lesson.emoji}</div>
-                  <h3 className="font-semibold text-gray-900 text-sm">{lesson.title}</h3>
-                  <p className="text-xs text-gray-500">{lesson.subtitle}</p>
-                  
-                  {/* Mini progress */}
+                  <h3 className="font-semibold text-gray-900 text-sm leading-tight">{lesson.title}</h3>
+                  <p className="text-xs text-gray-500 mt-0.5">{lesson.subtitle}</p>
+
+                  {/* Mini progress dots */}
                   {progress && !isLocked && (
                     <div className="mt-3 flex justify-center gap-1">
-                      {['vocabulary_viewed', 'grammar_viewed', 'dialogue_viewed', 'culture_viewed', 'quiz_passed'].map((key, idx) => (
-                        <div 
+                      {['vocabulary_viewed', 'grammar_viewed', 'dialogue_viewed', 'culture_viewed', 'quiz_passed'].map((key) => (
+                        <div
                           key={key}
-                          className={`w-2 h-2 rounded-full ${progress[key] ? 'bg-green-500' : 'bg-gray-200'}`}
+                          className={`w-1.5 h-1.5 rounded-full ${progress[key] ? 'bg-emerald-500' : 'bg-gray-200'}`}
                         />
                       ))}
                     </div>
                   )}
-                  
+
                   {progress?.xp_earned > 0 && (
-                    <p className="text-xs text-green-600 font-medium mt-2">+{progress.xp_earned} XP</p>
+                    <p className="text-xs text-emerald-600 font-semibold mt-2">+{progress.xp_earned} XP</p>
                   )}
                 </div>
               </Link>
@@ -429,7 +420,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Final Test Card - For current level */}
+      {/* Final Test Card */}
       <FinalTestCard level={selectedLevel} allProgress={lessonProgress} />
     </div>
   )

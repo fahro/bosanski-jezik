@@ -14,9 +14,9 @@ import Profile from './pages/Profile'
 function App() {
   return (
     <AuthProvider>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-yellow-50">
+      <div className="min-h-screen" style={{ backgroundColor: '#f0f4ff' }}>
         <Navbar />
-        <main className="container mx-auto px-4 py-8">
+        <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/levels" element={<Levels />} />
