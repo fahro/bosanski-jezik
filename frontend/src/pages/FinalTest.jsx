@@ -687,11 +687,15 @@ function CertificateModal({ certificate, onClose }) {
       document.body.removeChild(clone)
 
       const imgData = canvas.toDataURL('image/png')
-      const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' })
-      const pdfWidth = pdf.internal.pageSize.getWidth()
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width
-      const yOffset = (pdf.internal.pageSize.getHeight() - pdfHeight) / 2
-      pdf.addImage(imgData, 'PNG', 0, yOffset > 0 ? yOffset : 0, pdfWidth, pdfHeight)
+      const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' })
+      const pageWidth = pdf.internal.pageSize.getWidth()
+      const pageHeight = pdf.internal.pageSize.getHeight()
+      const ratio = Math.min(pageWidth / canvas.width, pageHeight / canvas.height)
+      const imgWidth = canvas.width * ratio
+      const imgHeight = canvas.height * ratio
+      const xOffset = (pageWidth - imgWidth) / 2
+      const yOffset = (pageHeight - imgHeight) / 2
+      pdf.addImage(imgData, 'PNG', xOffset, yOffset, imgWidth, imgHeight)
       pdf.save(`certifikat-${certificate.level}-${certificate.full_name.replace(/\s+/g, '-')}.pdf`)
     } catch (err) {
       console.error('PDF generation failed:', err)

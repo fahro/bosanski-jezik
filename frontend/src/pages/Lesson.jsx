@@ -2053,14 +2053,15 @@ function Lesson() {
                     >
                       {/* Image area - takes most of the card */}
                       {word.image_url ? (
-                        <div 
-                          className="flex-1 min-h-[160px] bg-cover bg-center"
-                          style={{
-                            backgroundImage: `url(${word.image_url})`,
-                          }}
-                        >
+                        <div className="flex-1 min-h-[160px] relative overflow-hidden">
+                          <img
+                            src={word.image_url}
+                            alt={word.bosnian}
+                            className="absolute inset-0 w-full h-full object-cover"
+                            loading="lazy"
+                          />
                           {/* Audio button in top right */}
-                          <div className="p-3 flex justify-end">
+                          <div className="relative z-10 p-3 flex justify-end">
                             <button
                               onClick={(e) => {
                                 e.stopPropagation()
@@ -3200,10 +3201,11 @@ function Lesson() {
                         <div className="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-gray-100 max-w-md mx-auto">
                           <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                             {currentItem.image_url ? (
-                              <img 
-                                src={currentItem.image_url} 
-                                alt="?" 
+                              <img
+                                src={currentItem.image_url}
+                                alt="?"
                                 className="w-full h-full object-cover"
+                                loading="lazy"
                               />
                             ) : (
                               <span className="text-8xl">{currentItem.image_emoji}</span>
@@ -3357,7 +3359,7 @@ function Lesson() {
                           {hasChecked && (currentItem.image_url || currentItem.image_emoji) && (
                             <div className="mb-4">
                               {currentItem.image_url ? (
-                                <img src={currentItem.image_url} alt="" className="w-32 h-32 object-cover rounded-xl mx-auto shadow-lg" />
+                                <img src={currentItem.image_url} alt="" className="w-32 h-32 object-cover rounded-xl mx-auto shadow-lg" loading="lazy" />
                               ) : (
                                 <span className="text-6xl">{currentItem.image_emoji}</span>
                               )}
@@ -3852,17 +3854,19 @@ function Lesson() {
               </div>
               
               {/* Dialogue with Background Image */}
-              <div 
+              <div
                 className="relative rounded-xl overflow-hidden p-6 min-h-[500px]"
-                style={lesson.dialogue_image_url ? {
-                  backgroundImage: `url(${lesson.dialogue_image_url})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                } : {}}
               >
-                {/* Dark overlay for readability */}
                 {lesson.dialogue_image_url && (
-                  <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+                  <>
+                    <img
+                      src={lesson.dialogue_image_url}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+                  </>
                 )}
                 
                 <div className="relative z-10 space-y-4 max-w-2xl mx-auto">
@@ -3952,17 +3956,19 @@ function Lesson() {
               </div>
               
               {/* Culture with Background Image */}
-              <div 
+              <div
                 className="relative rounded-xl overflow-hidden min-h-[400px]"
-                style={lesson.culture_image_url ? {
-                  backgroundImage: `url(${lesson.culture_image_url})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                } : {}}
               >
-                {/* Dark overlay for readability */}
                 {lesson.culture_image_url && (
-                  <div className="absolute inset-0 bg-black/50"></div>
+                  <>
+                    <img
+                      src={lesson.culture_image_url}
+                      alt=""
+                      className="absolute inset-0 w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-black/50"></div>
+                  </>
                 )}
                 
                 <div 
@@ -4042,10 +4048,11 @@ function Lesson() {
                   <div className="relative rounded-2xl overflow-hidden shadow-xl">
                     {/* Background image - generated or fallback */}
                     <div className="absolute inset-0">
-                      <img 
-                        src={lesson.cultural_comic.generated_image || lesson.cultural_comic.image} 
+                      <img
+                        src={lesson.cultural_comic.generated_image || lesson.cultural_comic.image}
                         alt={lesson.cultural_comic.title}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                         onError={(e) => {
                           e.target.onerror = null
                           e.target.src = lesson.cultural_comic.image || 'https://images.unsplash.com/photo-1592425104520-196dedfd6277?w=800'
@@ -4069,10 +4076,11 @@ function Lesson() {
                               isPlaying ? 'border-purple-400 ring-4 ring-purple-400 scale-110' : 'border-white'
                             }`}>
                               {(panel.generated_avatar || panel.avatar) ? (
-                                <img 
-                                  src={panel.generated_avatar || panel.avatar} 
+                                <img
+                                  src={panel.generated_avatar || panel.avatar}
                                   alt={panel.name}
                                   className="w-full h-full object-cover"
+                                  loading="lazy"
                                   onError={(e) => {
                                     e.target.onerror = null
                                     if (panel.avatar && e.target.src !== panel.avatar) {
