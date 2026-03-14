@@ -3393,5 +3393,555 @@
     "filename": "osiguranje_a28fb1e7.webp",
     "lesson_id": 12,
     "type": "ai_generated"
+  },
+  "juli": {
+    "filename": "juli_4c37dbfa.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "august": {
+    "filename": "august_61a590f1.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "septembar": {
+    "filename": "septembar_74fbd83f.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "oktobar": {
+    "filename": "oktobar_259441cc.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "novembar": {
+    "filename": "novembar_8c31fecc.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "decembar": {
+    "filename": "decembar_15949e87.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "argumentacija": {
+    "filename": "argumentacija_a9525f16.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "metodologija": {
+    "filename": "metodologija_10d2b941.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "paradigma": {
+    "filename": "paradigma_caa64af8.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "epistemologija": {
+    "filename": "epistemologija_5bf4f19e.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "dihotomija": {
+    "filename": "dihotomija_2458c100.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "implikacija": {
+    "filename": "implikacija_48305910.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "empirijski": {
+    "filename": "empirijski_ad40915f.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "dedukcija": {
+    "filename": "dedukcija_d72b49a9.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "kontekstualizacija": {
+    "filename": "kontekstualizacija_eb7a9283.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "diskurs": {
+    "filename": "diskurs_38c54a54.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "sintetizirati": {
+    "filename": "sintetizirati_5eb551e3.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "koherentnost": {
+    "filename": "koherentnost_3d431497.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "retorika": {
+    "filename": "retorika_26aaf4a9.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "falsifikacija": {
+    "filename": "falsifikacija_a08eeeb0.webp",
+    "lesson_id": 1,
+    "type": "ai_generated"
+  },
+  "alegorija": {
+    "filename": "alegorija_6886609b.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "intertekstualnost": {
+    "filename": "intertekstualnost_84542723.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "pripovjedač": {
+    "filename": "pripovjedač_d12b564b.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "egzistencijalizam": {
+    "filename": "egzistencijalizam_9973c79f.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "metafora": {
+    "filename": "metafora_b32b4b7d.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "lirski subjekt": {
+    "filename": "lirski_subjekt_6ce6e9c5.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "narativna tehnika": {
+    "filename": "narativna_tehnika_a2e84a32.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "književnohistorijski kontekst": {
+    "filename": "književnohistorijski_kontekst_f65c3308.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "simbolizam": {
+    "filename": "simbolizam_1a7bad95.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "ironijamorama": {
+    "filename": "ironijamorama_6cfd7710.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "modernizam": {
+    "filename": "modernizam_4563561f.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "tematska os": {
+    "filename": "tematska_os_690f33be.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "književni lik": {
+    "filename": "književni_lik_fbe68546.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "pripovijedanje": {
+    "filename": "pripovijedanje_24a527c8.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "književni pravac": {
+    "filename": "književni_pravac_a74b2239.webp",
+    "lesson_id": 2,
+    "type": "ai_generated"
+  },
+  "kulturni identitet": {
+    "filename": "kulturni_identitet_221682b9.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "multikulturalnost": {
+    "filename": "multikulturalnost_8eb848c5.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "asimilacija": {
+    "filename": "asimilacija_6b7a9f78.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "kulturna razmjena": {
+    "filename": "kulturna_razmjena_de544e6e.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "folklor": {
+    "filename": "folklor_28462560.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "etnička pripadnost": {
+    "filename": "etnička_pripadnost_58113469.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "dijaspora": {
+    "filename": "dijaspora_8383e7df.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "autentičnost": {
+    "filename": "autentičnost_813656ab.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "globalizacija kulture": {
+    "filename": "globalizacija_kulture_e8fad611.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "kulturna baština": {
+    "filename": "kulturna_baština_97a5cd94.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "identifikacija": {
+    "filename": "identifikacija_b4de1d8a.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "kulturni relativizam": {
+    "filename": "kulturni_relativizam_3bb4acfd.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "interkulturalnost": {
+    "filename": "interkulturalnost_421a63a1.webp",
+    "lesson_id": 3,
+    "type": "ai_generated"
+  },
+  "parlamentarna rasprava": {
+    "filename": "parlamentarna_rasprava_f904d170.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "vladavina prava": {
+    "filename": "vladavina_prava_a864c045.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "konsenzus": {
+    "filename": "konsenzus_a74d5ccd.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "međustranački dijalog": {
+    "filename": "međustranački_dijalog_0aaee9fd.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "javni diskurs": {
+    "filename": "javni_diskurs_faf81bbd.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "civilno društvo": {
+    "filename": "civilno_društvo_e14e78b9.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "ustavna kriza": {
+    "filename": "ustavna_kriza_b2f778d7.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "politička polarizacija": {
+    "filename": "politička_polarizacija_09df0408.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "izborni sistem": {
+    "filename": "izborni_sistem_8e0bf7d4.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "lobiranje": {
+    "filename": "lobiranje_cf0c684d.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "zastupnik": {
+    "filename": "zastupnik_b5c8ef0e.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "prijedlog zakona": {
+    "filename": "prijedlog_zakona_ce8fe8a3.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "rezolucija": {
+    "filename": "rezolucija_cd8aeda8.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "kvoruma": {
+    "filename": "kvoruma_5be8fef6.webp",
+    "lesson_id": 4,
+    "type": "ai_generated"
+  },
+  "bruto domaći proizvod": {
+    "filename": "bruto_domaći_proizvod_e954cb6c.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "tržišno natjecanje": {
+    "filename": "tržišno_natjecanje_c854c240.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "fiskalna politika": {
+    "filename": "fiskalna_politika_aa84a624.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "monetarna politika": {
+    "filename": "monetarna_politika_4704b841.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "dioničarsko društvo": {
+    "filename": "dioničarsko_društvo_38c160eb.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "spajanje i preuzimanje": {
+    "filename": "spajanje_i_preuzimanje_00bdb323.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "likvidnost": {
+    "filename": "likvidnost_27010c7e.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "platni bilans": {
+    "filename": "platni_bilans_1c838b40.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "prihodi i rashodi": {
+    "filename": "prihodi_i_rashodi_fbe5dac2.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "ugovor o saradnji": {
+    "filename": "ugovor_o_saradnji_6e2e1d88.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "poslovni plan": {
+    "filename": "poslovni_plan_feec7d4b.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "stečaj": {
+    "filename": "stečaj_63e85e28.webp",
+    "lesson_id": 5,
+    "type": "ai_generated"
+  },
+  "pravna država": {
+    "filename": "pravna_država_9354fa6e.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "tužilac": {
+    "filename": "tužilac_36367483.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "branilac": {
+    "filename": "branilac_5b842bbb.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "sudska praksa": {
+    "filename": "sudska_praksa_3bed7be4.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "jurisprudencija": {
+    "filename": "jurisprudencija_0a1b0f15.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "precedent": {
+    "filename": "precedent_82fe367b.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "ustav": {
+    "filename": "ustav_4fe0d10e.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "krivično pravo": {
+    "filename": "krivično_pravo_6d6d0829.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "građansko pravo": {
+    "filename": "građansko_pravo_77c58748.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "osuđenik": {
+    "filename": "osuđenik_59e8a0b4.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "žalba": {
+    "filename": "žalba_9f5d87e7.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "privremena mjera": {
+    "filename": "privremena_mjera_d2fc7df5.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "pravna norma": {
+    "filename": "pravna_norma_a8807c36.webp",
+    "lesson_id": 6,
+    "type": "ai_generated"
+  },
+  "nalaz": {
+    "filename": "nalaz_a6977a8e.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "recenzija": {
+    "filename": "recenzija_3152fb05.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "publikacija": {
+    "filename": "publikacija_7c6fc010.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "grant": {
+    "filename": "grant_64fad289.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "doktorand": {
+    "filename": "doktorand_308932f6.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "replikacija": {
+    "filename": "replikacija_975a8742.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "varijabla": {
+    "filename": "varijabla_f4aa71a5.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "disertacija": {
+    "filename": "disertacija_e03e4847.webp",
+    "lesson_id": 7,
+    "type": "ai_generated"
+  },
+  "vrijednost": {
+    "filename": "vrijednost_a3e99a4f.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "ontologija": {
+    "filename": "ontologija_2a8e0f86.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "utilitarizam": {
+    "filename": "utilitarizam_5e79a6ed.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "kategorički imperativ": {
+    "filename": "kategorički_imperativ_052c5749.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "relativizam": {
+    "filename": "relativizam_11447dc4.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "apstraktan": {
+    "filename": "apstraktan_54b7558d.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "premisa": {
+    "filename": "premisa_9fa18976.webp",
+    "lesson_id": 8,
+    "type": "ai_generated"
+  },
+  "podsvijest": {
+    "filename": "podsvijest_be49d21a.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "trajna trauma": {
+    "filename": "trajna_trauma_2c771f5e.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "kognitivni": {
+    "filename": "kognitivni_9fe5dfdf.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "bihevioralni": {
+    "filename": "bihevioralni_0847dfbd.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "narcizam": {
+    "filename": "narcizam_9795449e.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "mehanizmi odbrane": {
+    "filename": "mehanizmi_odbrane_504456e0.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "introspektsija": {
+    "filename": "introspektsija_47c719d0.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
+  },
+  "psihoanaliza": {
+    "filename": "psihoanaliza_a669e504.webp",
+    "lesson_id": 9,
+    "type": "ai_generated"
   }
 }

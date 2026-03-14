@@ -67,11 +67,43 @@ const B2_LESSONS = [
   { id: 12, title: 'U turističkoj agenciji', subtitle: 'Travel Agency', emoji: '🌍' }
 ]
 
+const C1_LESSONS = [
+  { id: 1, title: 'Akademski diskurs i argumentacija', subtitle: 'Academic Discourse', emoji: '🎓' },
+  { id: 2, title: 'Književnost i analiza teksta', subtitle: 'Literature & Text Analysis', emoji: '📚' },
+  { id: 3, title: 'Kultura i kulturni identitet', subtitle: 'Culture & Identity', emoji: '🎭' },
+  { id: 4, title: 'Politika i društveni diskurs', subtitle: 'Politics & Social Discourse', emoji: '🏛️' },
+  { id: 5, title: 'Ekonomija i poslovni jezik', subtitle: 'Economics & Business', emoji: '💼' },
+  { id: 6, title: 'Pravo i pravda', subtitle: 'Law & Justice', emoji: '⚖️' },
+  { id: 7, title: 'Nauka i istraživanje', subtitle: 'Science & Research', emoji: '🔬' },
+  { id: 8, title: 'Filozofija i etika', subtitle: 'Philosophy & Ethics', emoji: '🧠' },
+  { id: 9, title: 'Psihologija i mentalno zdravlje', subtitle: 'Psychology & Mental Health', emoji: '🧘' },
+  { id: 10, title: 'Jezik i lingvistika', subtitle: 'Language & Linguistics', emoji: '🗣️' },
+  { id: 11, title: 'Ekologija i okolišna politika', subtitle: 'Ecology & Environmental Policy', emoji: '🌿' },
+  { id: 12, title: 'Globalizacija i budućnost', subtitle: 'Globalization & the Future', emoji: '🌍' }
+]
+
+const C2_LESSONS = [
+  { id: 1, title: 'Retorika i uvjeravanje', subtitle: 'Rhetoric and Persuasion', emoji: '🎙️' },
+  { id: 2, title: 'Književna teorija i kritika', subtitle: 'Literary Theory and Criticism', emoji: '📖' },
+  { id: 3, title: 'Diplomatija i međunarodni odnosi', subtitle: 'Diplomacy and International Relations', emoji: '🌐' },
+  { id: 4, title: 'Neuroznanost i kognitivne nauke', subtitle: 'Neuroscience and Cognitive Sciences', emoji: '🧬' },
+  { id: 5, title: 'Postkolonijalna teorija i identitet', subtitle: 'Postcolonial Theory and Identity', emoji: '✊' },
+  { id: 6, title: 'Kvantna fizika i filozofija nauke', subtitle: 'Quantum Physics and Philosophy of Science', emoji: '⚛️' },
+  { id: 7, title: 'Medicinska etika i bioetika', subtitle: 'Medical Ethics and Bioethics', emoji: '🏥' },
+  { id: 8, title: 'Finansijski instrumenti i tržišta', subtitle: 'Financial Instruments and Markets', emoji: '📈' },
+  { id: 9, title: 'Semiotika i teorija komunikacije', subtitle: 'Semiotics and Communication Theory', emoji: '🔣' },
+  { id: 10, title: 'Urbana sociologija i prostorno planiranje', subtitle: 'Urban Sociology and Spatial Planning', emoji: '🏙️' },
+  { id: 11, title: 'Ekološka filozofija i deep ecology', subtitle: 'Environmental Philosophy and Deep Ecology', emoji: '🌱' },
+  { id: 12, title: 'Transhumanizam i budućnost čovječanstva', subtitle: 'Transhumanism and the Future of Humanity', emoji: '🤖' }
+]
+
 const LEVEL_INFO = {
   a1: { name: 'A1 - Početnik', color: '#22c55e', lessons: A1_LESSONS, gradient: 'from-green-500 to-emerald-600' },
   a2: { name: 'A2 - Elementarni', color: '#3b82f6', lessons: A2_LESSONS, gradient: 'from-blue-500 to-blue-600' },
   b1: { name: 'B1 - Srednji', color: '#8b5cf6', lessons: B1_LESSONS, gradient: 'from-purple-500 to-purple-600' },
-  b2: { name: 'B2 - Viši srednji', color: '#f59e0b', lessons: B2_LESSONS, gradient: 'from-amber-500 to-orange-600' }
+  b2: { name: 'B2 - Viši srednji', color: '#f59e0b', lessons: B2_LESSONS, gradient: 'from-amber-500 to-orange-600' },
+  c1: { name: 'C1 - Napredni', color: '#ef4444', lessons: C1_LESSONS, gradient: 'from-red-500 to-rose-600' },
+  c2: { name: 'C2 - Profesionalni', color: '#ec4899', lessons: C2_LESSONS, gradient: 'from-pink-500 to-fuchsia-600' }
 }
 
 function FinalTestCard({ level, allProgress }) {
@@ -83,7 +115,9 @@ function FinalTestCard({ level, allProgress }) {
     a1: { text: 'text-green-600', button: 'text-green-700 hover:bg-green-50' },
     a2: { text: 'text-blue-600', button: 'text-blue-700 hover:bg-blue-50' },
     b1: { text: 'text-purple-600', button: 'text-purple-700 hover:bg-purple-50' },
-    b2: { text: 'text-amber-600', button: 'text-amber-700 hover:bg-amber-50' }
+    b2: { text: 'text-amber-600', button: 'text-amber-700 hover:bg-amber-50' },
+    c1: { text: 'text-red-600', button: 'text-red-700 hover:bg-red-50' },
+    c2: { text: 'text-pink-600', button: 'text-pink-700 hover:bg-pink-50' }
   }
   const colors = levelColors[level] || levelColors.a1
 
@@ -168,6 +202,10 @@ export default function Dashboard() {
       if (b1Access.has_access) levels.push('b1')
       const b2Access = await progressApi.checkLevelAccess('b2')
       if (b2Access.has_access) levels.push('b2')
+      const c1Access = await progressApi.checkLevelAccess('c1')
+      if (c1Access.has_access) levels.push('c1')
+      const c2Access = await progressApi.checkLevelAccess('c2')
+      if (c2Access.has_access) levels.push('c2')
       setAvailableLevels(levels)
       setSelectedLevel(levels[levels.length - 1])
     } catch (error) {
@@ -219,7 +257,9 @@ export default function Dashboard() {
     a1: 'linear-gradient(135deg, #22c55e, #16a34a)',
     a2: 'linear-gradient(135deg, #3b82f6, #2563eb)',
     b1: 'linear-gradient(135deg, #8b5cf6, #7c3aed)',
-    b2: 'linear-gradient(135deg, #f59e0b, #d97706)'
+    b2: 'linear-gradient(135deg, #f59e0b, #d97706)',
+    c1: 'linear-gradient(135deg, #ef4444, #e11d48)',
+    c2: 'linear-gradient(135deg, #ec4899, #a21caf)'
   }
 
   return (

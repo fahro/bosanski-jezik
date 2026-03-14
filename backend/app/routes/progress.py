@@ -674,7 +674,41 @@ async def check_level_access(
             "requirement": f"Završite sve B2 lekcije ({b2_completed}/12)"
         }
 
-    # For other levels (C2) - not yet implemented
+    # C2 requires completing all C1 lessons or passing C1 final test
+    if level == "c2":
+        c2_progress = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "c2"
+        ).first()
+
+        if c2_progress:
+            return {"has_access": True, "level": level, "reason": "Završili ste C1 nivo"}
+
+        passed_c1 = db.query(FinalTestAttempt).filter(
+            FinalTestAttempt.user_id == current_user.id,
+            FinalTestAttempt.level == "c1",
+            FinalTestAttempt.passed == True
+        ).first()
+
+        if passed_c1:
+            return {"has_access": True, "level": level, "reason": "Položili ste završni test C1 nivoa"}
+
+        c1_completed = db.query(LessonProgress).filter(
+            LessonProgress.user_id == current_user.id,
+            LessonProgress.level == "c1",
+            LessonProgress.completed == True
+        ).count()
+
+        if c1_completed >= 12:
+            return {"has_access": True, "level": level, "reason": "Završili ste sve C1 lekcije"}
+
+        return {
+            "has_access": False,
+            "level": level,
+            "reason": "Morate završiti sve C1 lekcije da biste otključali C2",
+            "requirement": f"Završite sve C1 lekcije ({c1_completed}/12)"
+        }
+
     return {
         "has_access": False,
         "level": level,
