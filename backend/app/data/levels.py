@@ -38,7 +38,7 @@ LEVELS = [
         "id": "c2",
         "name": "C2 - Profesionalni",
         "description": "Majstorstvo jezika: književnost, retorika, profesionalna komunikacija",
-        "total_lessons": 12,
+        "total_lessons": 24,
         "color": "#ec4899"
     }
 ]

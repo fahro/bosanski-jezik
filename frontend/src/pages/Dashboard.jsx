@@ -106,7 +106,19 @@ const C2_LESSONS = [
   { id: 9, title: 'Semiotika i teorija komunikacije', subtitle: 'Semiotics and Communication Theory', emoji: '🔣' },
   { id: 10, title: 'Urbana sociologija i prostorno planiranje', subtitle: 'Urban Sociology and Spatial Planning', emoji: '🏙️' },
   { id: 11, title: 'Ekološka filozofija i deep ecology', subtitle: 'Environmental Philosophy and Deep Ecology', emoji: '🌱' },
-  { id: 12, title: 'Transhumanizam i budućnost čovječanstva', subtitle: 'Transhumanism and the Future of Humanity', emoji: '🤖' }
+  { id: 12, title: 'Transhumanizam i budućnost čovječanstva', subtitle: 'Transhumanism and the Future of Humanity', emoji: '🤖' },
+  { id: 13, title: 'Vijesti i medijski jezik u BiH', subtitle: 'News & Media Language in BiH', emoji: '📰' },
+  { id: 14, title: 'Bosanska kuhinja i gastro kultura', subtitle: 'Bosnian Cuisine & Food Culture', emoji: '🥘' },
+  { id: 15, title: 'Film, serije i streaming', subtitle: 'Film, TV Series & Streaming', emoji: '🎬' },
+  { id: 16, title: 'Muzička scena — od sevdaha do hip-hopa', subtitle: 'Music Scene — from Sevdah to Hip-hop', emoji: '🎶' },
+  { id: 17, title: 'Sport i navijačka kultura', subtitle: 'Sports & Fan Culture', emoji: '⚽' },
+  { id: 18, title: 'Društvene mreže i digitalni život', subtitle: 'Social Media & Digital Life', emoji: '📱' },
+  { id: 19, title: 'Priroda i turizam u BiH', subtitle: 'Nature & Tourism in BiH', emoji: '🏔️' },
+  { id: 20, title: 'Kafanska kultura i bosanski humor', subtitle: 'Café Culture & Bosnian Humor', emoji: '☕' },
+  { id: 21, title: 'Knjige i čitalačka kultura', subtitle: 'Books & Reading Culture', emoji: '📚' },
+  { id: 22, title: 'Posao i karijera u modernom dobu', subtitle: 'Work & Career in the Modern Age', emoji: '💼' },
+  { id: 23, title: 'Zdravlje, sport i životni stil', subtitle: 'Health, Sport & Lifestyle', emoji: '🏃' },
+  { id: 24, title: 'Ljubav, odnosi i porodični život', subtitle: 'Love, Relationships & Family Life', emoji: '❤️' }
 ]
 
 const LEVEL_INFO = {

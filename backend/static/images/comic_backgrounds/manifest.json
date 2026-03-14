@@ -418,5 +418,65 @@
     "filename": "comic___terensko_istraživanje_c8008c29.svg",
     "lesson_id": 24,
     "type": "placeholder"
+  },
+  "Comic - Skandal dana": {
+    "filename": "comic___skandal_dana_b6b25a41.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "Comic - Burek debate": {
+    "filename": "comic___burek_debate_4e8e3072.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "Comic - Netflix i chill (bosanska verzija)": {
+    "filename": "comic___netflix_i_chill__bosanska_verzija__16281fb2.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "Comic - Svi vole sevdah (kad se mrak spusti)": {
+    "filename": "comic___svi_vole_sevdah__kad_se_mrak_spusti__89746fa9.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "Comic - Derbi dan": {
+    "filename": "comic___derbi_dan_5b0a1594.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "Comic - Digitalni detoks pokušaj": {
+    "filename": "comic___digitalni_detoks_pokušaj_d63f9acb.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "Comic - Turistička fotografija": {
+    "filename": "comic___turistička_fotografija_a3003fb1.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "Comic - Bosanska kahva — filozofija u fildžanu": {
+    "filename": "comic___bosanska_kahva___filozofija_u_fildžanu_50619ee3.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "Comic - Čitalački klub — misije nemoguće": {
+    "filename": "comic___čitalački_klub___misije_nemoguće_7e8121d0.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "Comic - Intervju za posao": {
+    "filename": "comic___intervju_za_posao_ed7b1833.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "Comic - Novi životni stil": {
+    "filename": "comic___novi_životni_stil_e5568a5a.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "Comic - Pitanje svih pitanja": {
+    "filename": "comic___pitanje_svih_pitanja_e8a825ad.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
   }
 }

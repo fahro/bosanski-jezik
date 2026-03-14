@@ -5218,5 +5218,460 @@
     "filename": "habitus_dbd7ee50.svg",
     "lesson_id": 24,
     "type": "placeholder"
+  },
+  "portal": {
+    "filename": "portal_7ee9c4f8.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "komentar": {
+    "filename": "komentar_c0e36f60.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "pristrasnost": {
+    "filename": "pristrasnost_678e37b8.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "izjava": {
+    "filename": "izjava_a393383c.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "ekskluziva": {
+    "filename": "ekskluziva_ed57de20.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "urednik": {
+    "filename": "urednik_de37d61d.png",
+    "lesson_id": 13,
+    "type": "ai_generated"
+  },
+  "kajmak": {
+    "filename": "kajmak_9e05570f.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "rakija": {
+    "filename": "rakija_64da2dcb.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "bosanski lonac": {
+    "filename": "bosanski_lonac_d588e651.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "sofra": {
+    "filename": "sofra_cf70bc8d.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "sogan-dolma": {
+    "filename": "sogan_dolma_16f22f82.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "baklava": {
+    "filename": "baklava_40b357a2.png",
+    "lesson_id": 14,
+    "type": "ai_generated"
+  },
+  "streaming": {
+    "filename": "streaming_abb0256a.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "reditelj": {
+    "filename": "reditelj_f1af376d.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "zaplet": {
+    "filename": "zaplet_2902d0f2.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "produkcija": {
+    "filename": "produkcija_dc7c37d7.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "spoiler": {
+    "filename": "spoiler_b34035bb.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "epizoda": {
+    "filename": "epizoda_23aa0a9b.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "finale": {
+    "filename": "finale_29ff056c.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "dokumentarac": {
+    "filename": "dokumentarac_8edfa302.png",
+    "lesson_id": 15,
+    "type": "ai_generated"
+  },
+  "refren": {
+    "filename": "refren_14304ba6.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "izvođač": {
+    "filename": "izvođač_2a26959f.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "album": {
+    "filename": "album_a4b2d20f.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "bend": {
+    "filename": "bend_edc68418.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "stihovi": {
+    "filename": "stihovi_d9bcccaf.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "nastup": {
+    "filename": "nastup_9aae0a1d.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "hitovi": {
+    "filename": "hitovi_163f5a8a.png",
+    "lesson_id": 16,
+    "type": "ai_generated"
+  },
+  "utakmica": {
+    "filename": "utakmica_022a6599.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "navijač": {
+    "filename": "navijač_cc70aebe.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "derbi": {
+    "filename": "derbi_ff5cd794.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "gol": {
+    "filename": "gol_b6ab66c5.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "trener": {
+    "filename": "trener_f7ed5efb.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "plasman": {
+    "filename": "plasman_b6d3c529.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "koreografija": {
+    "filename": "koreografija_f462172d.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "penalti": {
+    "filename": "penalti_9fa97a88.png",
+    "lesson_id": 17,
+    "type": "ai_generated"
+  },
+  "pratilac": {
+    "filename": "pratilac_02248b61.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "viralan": {
+    "filename": "viralan_0a30552d.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "influencer": {
+    "filename": "influencer_93374e12.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "lajkovanje": {
+    "filename": "lajkovanje_a63f5e62.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "story": {
+    "filename": "story_bec670e5.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "meme": {
+    "filename": "meme_9c2f924f.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "digitalni detoks": {
+    "filename": "digitalni_detoks_8e25a458.png",
+    "lesson_id": 18,
+    "type": "ai_generated"
+  },
+  "kanjon": {
+    "filename": "kanjon_15004839.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "vodopad": {
+    "filename": "vodopad_4764587b.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "ekoturizam": {
+    "filename": "ekoturizam_3155a8df.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "baština": {
+    "filename": "baština_31073adf.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "pješačka staza": {
+    "filename": "pješačka_staza_30b172ef.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "nacionalni park": {
+    "filename": "nacionalni_park_b1459aa1.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "panorama": {
+    "filename": "panorama_cf09357b.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "kulturno naslijeđe": {
+    "filename": "kulturno_naslijeđe_3a915df2.png",
+    "lesson_id": 19,
+    "type": "ai_generated"
+  },
+  "kahva": {
+    "filename": "kahva_dcabb6a5.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "ćejf": {
+    "filename": "ćejf_8314790b.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "šala": {
+    "filename": "šala_40624c54.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "ironija": {
+    "filename": "ironija_6f47fda1.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "kafana": {
+    "filename": "kafana_fe814ea5.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "mušterija": {
+    "filename": "mušterija_5d757cdf.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "pričati naširoko": {
+    "filename": "pričati_naširoko_a48ed78e.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "crni humor": {
+    "filename": "crni_humor_692b4ca2.png",
+    "lesson_id": 20,
+    "type": "ai_generated"
+  },
+  "likovi": {
+    "filename": "likovi_e2efdb6b.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "čitalački klub": {
+    "filename": "čitalački_klub_63a8cea9.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "pripovijetka": {
+    "filename": "pripovijetka_5461753d.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "tema": {
+    "filename": "tema_c5f3de31.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "nakladnik": {
+    "filename": "nakladnik_eb69dec5.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "književna kritika": {
+    "filename": "književna_kritika_774e7eb3.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "proza": {
+    "filename": "proza_174fa869.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "lektira": {
+    "filename": "lektira_4e33b5ac.png",
+    "lesson_id": 21,
+    "type": "ai_generated"
+  },
+  "freelancing": {
+    "filename": "freelancing_def454c2.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "startup": {
+    "filename": "startup_dd82c188.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "odlazak mozgova": {
+    "filename": "odlazak_mozgova_22cc7644.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "rad na daljinu": {
+    "filename": "rad_na_daljinu_ade2f1e9.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "plaća": {
+    "filename": "plaća_5de26b76.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "veze": {
+    "filename": "veze_32b0b6fa.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "preduzetnik": {
+    "filename": "preduzetnik_2edffc94.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "stručna sprema": {
+    "filename": "stručna_sprema_2c55a718.png",
+    "lesson_id": 22,
+    "type": "ai_generated"
+  },
+  "fitnes": {
+    "filename": "fitnes_22328e84.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "ishrana": {
+    "filename": "ishrana_6c135c69.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "prevencija": {
+    "filename": "prevencija_4141a56e.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "wellness": {
+    "filename": "wellness_79b41d1e.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "navike": {
+    "filename": "navike_3d679e66.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "burnout": {
+    "filename": "burnout_83058fab.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "ravnoteža": {
+    "filename": "ravnoteža_f218d4b7.png",
+    "lesson_id": 23,
+    "type": "ai_generated"
+  },
+  "veza": {
+    "filename": "veza_a8fb3e51.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "brak": {
+    "filename": "brak_18144a52.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "porodica": {
+    "filename": "porodica_73847193.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "generacijska razlika": {
+    "filename": "generacijska_razlika_cbc2203a.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "kohabitacija": {
+    "filename": "kohabitacija_62f80967.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "razvod": {
+    "filename": "razvod_ba78e4cf.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "povjerenje": {
+    "filename": "povjerenje_21e820fd.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "kompromis": {
+    "filename": "kompromis_dfd65faf.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "svadba": {
+    "filename": "svadba_cef9cd2f.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
+  },
+  "odgovornost": {
+    "filename": "odgovornost_4b8d82e2.png",
+    "lesson_id": 24,
+    "type": "ai_generated"
   }
 }
