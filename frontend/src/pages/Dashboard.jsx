@@ -79,7 +79,19 @@ const C1_LESSONS = [
   { id: 9, title: 'Psihologija i mentalno zdravlje', subtitle: 'Psychology & Mental Health', emoji: '🧘' },
   { id: 10, title: 'Jezik i lingvistika', subtitle: 'Language & Linguistics', emoji: '🗣️' },
   { id: 11, title: 'Ekologija i okolišna politika', subtitle: 'Ecology & Environmental Policy', emoji: '🌿' },
-  { id: 12, title: 'Globalizacija i budućnost', subtitle: 'Globalization & the Future', emoji: '🌍' }
+  { id: 12, title: 'Globalizacija i budućnost', subtitle: 'Globalization & the Future', emoji: '🌍' },
+  { id: 13, title: 'Sociologija i društvene promjene', subtitle: 'Sociology & Social Change', emoji: '👥' },
+  { id: 14, title: 'Historija i historiografija', subtitle: 'History & Historiography', emoji: '📜' },
+  { id: 15, title: 'Umjetnost i estetika', subtitle: 'Art & Aesthetics', emoji: '🎨' },
+  { id: 16, title: 'Mediji i komunikologija', subtitle: 'Media & Communication Studies', emoji: '📡' },
+  { id: 17, title: 'Tehnologija i digitalno društvo', subtitle: 'Technology & Digital Society', emoji: '💻' },
+  { id: 18, title: 'Medicina i biomedicinska etika', subtitle: 'Medicine & Biomedical Ethics', emoji: '🏥' },
+  { id: 19, title: 'Arhitektura i urbani prostor', subtitle: 'Architecture & Urban Space', emoji: '🏛️' },
+  { id: 20, title: 'Muzika i muzikologija', subtitle: 'Music & Musicology', emoji: '🎵' },
+  { id: 21, title: 'Obrazovanje i pedagoška teorija', subtitle: 'Education & Pedagogical Theory', emoji: '🎓' },
+  { id: 22, title: 'Diplomatija i međunarodni odnosi', subtitle: 'Diplomacy & International Relations', emoji: '🌐' },
+  { id: 23, title: 'Turizam i kulturno nasljeđe', subtitle: 'Tourism & Cultural Heritage', emoji: '🏰' },
+  { id: 24, title: 'Antropologija i kulturne studije', subtitle: 'Anthropology & Cultural Studies', emoji: '🌏' }
 ]
 
 const C2_LESSONS = [

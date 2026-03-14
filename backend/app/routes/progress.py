@@ -699,14 +699,14 @@ async def check_level_access(
             LessonProgress.completed == True
         ).count()
 
-        if c1_completed >= 12:
+        if c1_completed >= 24:
             return {"has_access": True, "level": level, "reason": "Završili ste sve C1 lekcije"}
 
         return {
             "has_access": False,
             "level": level,
             "reason": "Morate završiti sve C1 lekcije da biste otključali C2",
-            "requirement": f"Završite sve C1 lekcije ({c1_completed}/12)"
+            "requirement": f"Završite sve C1 lekcije ({c1_completed}/24)"
         }
 
     return {

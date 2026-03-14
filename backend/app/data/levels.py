@@ -31,7 +31,7 @@ LEVELS = [
         "id": "c1",
         "name": "C1 - Napredni",
         "description": "Kompleksni izrazi, idiomi, formalni i neformalni registar",
-        "total_lessons": 12,
+        "total_lessons": 24,
         "color": "#ef4444"
     },
     {

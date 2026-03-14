@@ -358,5 +358,65 @@
     "filename": "comic___besmrtni_chatbot_ca6d2d37.svg",
     "lesson_id": 12,
     "type": "placeholder"
+  },
+  "Comic - Na sociološkom predavanju": {
+    "filename": "comic___na_sociološkom_predavanju_0a55082f.svg",
+    "lesson_id": 13,
+    "type": "placeholder"
+  },
+  "Comic - U arhivu": {
+    "filename": "comic___u_arhivu_a54def58.svg",
+    "lesson_id": 14,
+    "type": "placeholder"
+  },
+  "Comic - U galeriji": {
+    "filename": "comic___u_galeriji_7edc8552.svg",
+    "lesson_id": 15,
+    "type": "placeholder"
+  },
+  "Comic - Redakcija": {
+    "filename": "comic___redakcija_cadf6128.svg",
+    "lesson_id": 16,
+    "type": "placeholder"
+  },
+  "Comic - Tech sastanak": {
+    "filename": "comic___tech_sastanak_af177e68.svg",
+    "lesson_id": 17,
+    "type": "placeholder"
+  },
+  "Comic - Bioetički odbor": {
+    "filename": "comic___bioetički_odbor_07ed9a78.svg",
+    "lesson_id": 18,
+    "type": "placeholder"
+  },
+  "Comic - Šetnja gradom": {
+    "filename": "comic___šetnja_gradom_f0c6578d.svg",
+    "lesson_id": 19,
+    "type": "placeholder"
+  },
+  "Comic - Večer sevdalinke": {
+    "filename": "comic___večer_sevdalinke_3a7984ee.svg",
+    "lesson_id": 20,
+    "type": "placeholder"
+  },
+  "Comic - Na nastavničkom vijeću": {
+    "filename": "comic___na_nastavničkom_vijeću_cf8946f2.svg",
+    "lesson_id": 21,
+    "type": "placeholder"
+  },
+  "Comic - U Vijeću ministara": {
+    "filename": "comic___u_vijeću_ministara_afbd3fab.svg",
+    "lesson_id": 22,
+    "type": "placeholder"
+  },
+  "Comic - Na Starom mostu": {
+    "filename": "comic___na_starom_mostu_0a58ee70.svg",
+    "lesson_id": 23,
+    "type": "placeholder"
+  },
+  "Comic - Terensko istraživanje": {
+    "filename": "comic___terensko_istraživanje_c8008c29.svg",
+    "lesson_id": 24,
+    "type": "placeholder"
   }
 }

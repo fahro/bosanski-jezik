@@ -473,5 +473,60 @@
     "filename": "kultura___transhumanizam_i_budućnost_čovječanstva_bd043d62.svg",
     "lesson_id": 12,
     "type": "placeholder"
+  },
+  "Kultura - Sociologija i društvene promjene": {
+    "filename": "kultura___sociologija_i_društvene_promjene_a8db5ec7.svg",
+    "lesson_id": 13,
+    "type": "placeholder"
+  },
+  "Kultura - Historija i historiografija": {
+    "filename": "kultura___historija_i_historiografija_d0320728.svg",
+    "lesson_id": 14,
+    "type": "placeholder"
+  },
+  "Kultura - Umjetnost i estetika": {
+    "filename": "kultura___umjetnost_i_estetika_f98f5378.svg",
+    "lesson_id": 15,
+    "type": "placeholder"
+  },
+  "Kultura - Mediji i komunikologija": {
+    "filename": "kultura___mediji_i_komunikologija_b47a18b8.svg",
+    "lesson_id": 16,
+    "type": "placeholder"
+  },
+  "Kultura - Tehnologija i digitalno društvo": {
+    "filename": "kultura___tehnologija_i_digitalno_društvo_b87a336b.svg",
+    "lesson_id": 17,
+    "type": "placeholder"
+  },
+  "Kultura - Medicina i biomedicinska etika": {
+    "filename": "kultura___medicina_i_biomedicinska_etika_52f10934.svg",
+    "lesson_id": 18,
+    "type": "placeholder"
+  },
+  "Kultura - Arhitektura i urbani prostor": {
+    "filename": "kultura___arhitektura_i_urbani_prostor_38b70ff7.svg",
+    "lesson_id": 19,
+    "type": "placeholder"
+  },
+  "Kultura - Muzika i muzikologija": {
+    "filename": "kultura___muzika_i_muzikologija_09708a34.svg",
+    "lesson_id": 20,
+    "type": "placeholder"
+  },
+  "Kultura - Obrazovanje i pedagoška teorija": {
+    "filename": "kultura___obrazovanje_i_pedagoška_teorija_a9ffcfbf.svg",
+    "lesson_id": 21,
+    "type": "placeholder"
+  },
+  "Kultura - Turizam i kulturno nasljeđe": {
+    "filename": "kultura___turizam_i_kulturno_nasljeđe_c53196ef.svg",
+    "lesson_id": 23,
+    "type": "placeholder"
+  },
+  "Kultura - Antropologija i kulturne studije": {
+    "filename": "kultura___antropologija_i_kulturne_studije_535a1ec3.svg",
+    "lesson_id": 24,
+    "type": "placeholder"
   }
 }

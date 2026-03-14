@@ -123,7 +123,7 @@ def seed_users():
                 db.add(progress)
             
             # Create progress for all C1 lessons (all passed)
-            for lesson_id in range(1, 13):
+            for lesson_id in range(1, 25):
                 progress = LessonProgress(
                     user_id=superadmin.id,
                     lesson_id=lesson_id,
@@ -250,7 +250,7 @@ def seed_users():
             ).first()
 
             if not c1_progress:
-                for lesson_id in range(1, 13):
+                for lesson_id in range(1, 25):
                     progress = LessonProgress(
                         user_id=superadmin.id,
                         lesson_id=lesson_id,
