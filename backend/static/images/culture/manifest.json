@@ -358,5 +358,120 @@
     "filename": "kultura___u_turističkoj_agenciji_3cd10808.webp",
     "lesson_id": 12,
     "type": "ai_generated"
+  },
+  "Kultura - Akademski diskurs i argumentacija": {
+    "filename": "kultura___akademski_diskurs_i_argumentacija_6bc99bb0.svg",
+    "lesson_id": 1,
+    "type": "placeholder"
+  },
+  "Kultura - Književnost i analiza teksta": {
+    "filename": "kultura___književnost_i_analiza_teksta_2d7d1d61.svg",
+    "lesson_id": 2,
+    "type": "placeholder"
+  },
+  "Kultura - Kultura i kulturni identitet": {
+    "filename": "kultura___kultura_i_kulturni_identitet_d716a7cb.svg",
+    "lesson_id": 3,
+    "type": "placeholder"
+  },
+  "Kultura - Politika i društveni diskurs": {
+    "filename": "kultura___politika_i_društveni_diskurs_82f6ecd8.svg",
+    "lesson_id": 4,
+    "type": "placeholder"
+  },
+  "Kultura - Ekonomija i poslovni jezik": {
+    "filename": "kultura___ekonomija_i_poslovni_jezik_653a27b7.svg",
+    "lesson_id": 5,
+    "type": "placeholder"
+  },
+  "Kultura - Nauka i istraživanje": {
+    "filename": "kultura___nauka_i_istraživanje_11e46d2e.svg",
+    "lesson_id": 7,
+    "type": "placeholder"
+  },
+  "Kultura - Filozofija i etika": {
+    "filename": "kultura___filozofija_i_etika_9c19d06b.svg",
+    "lesson_id": 8,
+    "type": "placeholder"
+  },
+  "Kultura - Psihologija i mentalno zdravlje": {
+    "filename": "kultura___psihologija_i_mentalno_zdravlje_2081a7b7.svg",
+    "lesson_id": 9,
+    "type": "placeholder"
+  },
+  "Kultura - Jezik i lingvistika": {
+    "filename": "kultura___jezik_i_lingvistika_56bb15d9.svg",
+    "lesson_id": 10,
+    "type": "placeholder"
+  },
+  "Kultura - Ekologija i okolišna politika": {
+    "filename": "kultura___ekologija_i_okolišna_politika_69be2821.svg",
+    "lesson_id": 11,
+    "type": "placeholder"
+  },
+  "Kultura - Globalizacija i budućnost": {
+    "filename": "kultura___globalizacija_i_budućnost_c62dcd8a.svg",
+    "lesson_id": 12,
+    "type": "placeholder"
+  },
+  "Kultura - Retorika i uvjeravanje": {
+    "filename": "kultura___retorika_i_uvjeravanje_1f8ed1ec.svg",
+    "lesson_id": 1,
+    "type": "placeholder"
+  },
+  "Kultura - Književna teorija i kritika": {
+    "filename": "kultura___književna_teorija_i_kritika_e53ce65b.svg",
+    "lesson_id": 2,
+    "type": "placeholder"
+  },
+  "Kultura - Diplomatija i međunarodni odnosi": {
+    "filename": "kultura___diplomatija_i_međunarodni_odnosi_c1e971ea.svg",
+    "lesson_id": 3,
+    "type": "placeholder"
+  },
+  "Kultura - Neuroznanost i kognitivne nauke": {
+    "filename": "kultura___neuroznanost_i_kognitivne_nauke_20eede3c.svg",
+    "lesson_id": 4,
+    "type": "placeholder"
+  },
+  "Kultura - Postkolonijalna teorija i identitet": {
+    "filename": "kultura___postkolonijalna_teorija_i_identitet_cd168373.svg",
+    "lesson_id": 5,
+    "type": "placeholder"
+  },
+  "Kultura - Kvantna fizika i filozofija nauke": {
+    "filename": "kultura___kvantna_fizika_i_filozofija_nauke_c79af585.svg",
+    "lesson_id": 6,
+    "type": "placeholder"
+  },
+  "Kultura - Medicinska etika i bioetika": {
+    "filename": "kultura___medicinska_etika_i_bioetika_f3b02b27.svg",
+    "lesson_id": 7,
+    "type": "placeholder"
+  },
+  "Kultura - Finansijski instrumenti i tržišta": {
+    "filename": "kultura___finansijski_instrumenti_i_tržišta_0e5db7cc.svg",
+    "lesson_id": 8,
+    "type": "placeholder"
+  },
+  "Kultura - Semiotika i teorija komunikacije": {
+    "filename": "kultura___semiotika_i_teorija_komunikacije_b39c85fb.svg",
+    "lesson_id": 9,
+    "type": "placeholder"
+  },
+  "Kultura - Urbana sociologija i prostorno planiranje": {
+    "filename": "kultura___urbana_sociologija_i_prostorno_planiranje_3caab886.svg",
+    "lesson_id": 10,
+    "type": "placeholder"
+  },
+  "Kultura - Ekološka filozofija i dubinska ekologija": {
+    "filename": "kultura___ekološka_filozofija_i_dubinska_ekologija_03be47c2.svg",
+    "lesson_id": 11,
+    "type": "placeholder"
+  },
+  "Kultura - Transhumanizam i budućnost čovječanstva": {
+    "filename": "kultura___transhumanizam_i_budućnost_čovječanstva_bd043d62.svg",
+    "lesson_id": 12,
+    "type": "placeholder"
   }
 }

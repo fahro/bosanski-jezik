@@ -238,5 +238,125 @@
     "filename": "comic___planiranje_godišnjeg_odmora_67033013.webp",
     "lesson_id": 12,
     "type": "ai_generated"
+  },
+  "Comic - Na Filozofskom fakultetu": {
+    "filename": "comic___na_filozofskom_fakultetu_bbec8b9c.svg",
+    "lesson_id": 1,
+    "type": "placeholder"
+  },
+  "Comic - Čas bosanske književnosti": {
+    "filename": "comic___čas_bosanske_književnosti_80dc9047.svg",
+    "lesson_id": 2,
+    "type": "placeholder"
+  },
+  "Comic - Razgovor o kulturnom identitetu": {
+    "filename": "comic___razgovor_o_kulturnom_identitetu_fd5bf8ea.svg",
+    "lesson_id": 3,
+    "type": "placeholder"
+  },
+  "Comic - Sjednica Skupštine": {
+    "filename": "comic___sjednica_skupštine_5d695ea2.svg",
+    "lesson_id": 4,
+    "type": "placeholder"
+  },
+  "Comic - Poslovni sastanak": {
+    "filename": "comic___poslovni_sastanak_b4795119.svg",
+    "lesson_id": 5,
+    "type": "placeholder"
+  },
+  "Comic - Na sudu": {
+    "filename": "comic___na_sudu_243bcd78.svg",
+    "lesson_id": 6,
+    "type": "placeholder"
+  },
+  "Comic - Na naučnoj konferenciji": {
+    "filename": "comic___na_naučnoj_konferenciji_62ed3dfc.svg",
+    "lesson_id": 7,
+    "type": "placeholder"
+  },
+  "Comic - Filozofska rasprava u kafani": {
+    "filename": "comic___filozofska_rasprava_u_kafani_4a972ae1.svg",
+    "lesson_id": 8,
+    "type": "placeholder"
+  },
+  "Comic - Kod psihologa": {
+    "filename": "comic___kod_psihologa_201bd539.svg",
+    "lesson_id": 9,
+    "type": "placeholder"
+  },
+  "Comic - Lingvistička debata": {
+    "filename": "comic___lingvistička_debata_7f68a6e1.svg",
+    "lesson_id": 10,
+    "type": "placeholder"
+  },
+  "Comic - Rasprava o klimatskim promjenama": {
+    "filename": "comic___rasprava_o_klimatskim_promjenama_fc23fdef.svg",
+    "lesson_id": 11,
+    "type": "placeholder"
+  },
+  "Comic - Diskusija o globalizaciji": {
+    "filename": "comic___diskusija_o_globalizaciji_1df77383.svg",
+    "lesson_id": 12,
+    "type": "placeholder"
+  },
+  "Comic - Veliki govor": {
+    "filename": "comic___veliki_govor_425c1c16.svg",
+    "lesson_id": 1,
+    "type": "placeholder"
+  },
+  "Comic - Smrt autora u kafani": {
+    "filename": "comic___smrt_autora_u_kafani_2a4952f9.svg",
+    "lesson_id": 2,
+    "type": "placeholder"
+  },
+  "Comic - Diplomatska večera": {
+    "filename": "comic___diplomatska_večera_bd00addf.svg",
+    "lesson_id": 3,
+    "type": "placeholder"
+  },
+  "Comic - Slobodna volja na testiranju": {
+    "filename": "comic___slobodna_volja_na_testiranju_9012869e.svg",
+    "lesson_id": 4,
+    "type": "placeholder"
+  },
+  "Comic - Treći prostor": {
+    "filename": "comic___treći_prostor_c5e342fb.svg",
+    "lesson_id": 5,
+    "type": "placeholder"
+  },
+  "Comic - Schrödingerova mačka u Sarajevu": {
+    "filename": "comic___schrödingerova_mačka_u_sarajevu_4ed4c6d5.svg",
+    "lesson_id": 6,
+    "type": "placeholder"
+  },
+  "Comic - Etički komitet": {
+    "filename": "comic___etički_komitet_0d74bcfa.svg",
+    "lesson_id": 7,
+    "type": "placeholder"
+  },
+  "Comic - Finansijska kriza u malom": {
+    "filename": "comic___finansijska_kriza_u_malom_e3a0a7f9.svg",
+    "lesson_id": 8,
+    "type": "placeholder"
+  },
+  "Comic - Znak i značenje": {
+    "filename": "comic___znak_i_značenje_c3377a74.svg",
+    "lesson_id": 9,
+    "type": "placeholder"
+  },
+  "Comic - Pravo na park": {
+    "filename": "comic___pravo_na_park_7db56d2f.svg",
+    "lesson_id": 10,
+    "type": "placeholder"
+  },
+  "Comic - Brana na rijeci": {
+    "filename": "comic___brana_na_rijeci_29f9f24c.svg",
+    "lesson_id": 11,
+    "type": "placeholder"
+  },
+  "Comic - Besmrtni chatbot": {
+    "filename": "comic___besmrtni_chatbot_ca6d2d37.svg",
+    "lesson_id": 12,
+    "type": "placeholder"
   }
 }
